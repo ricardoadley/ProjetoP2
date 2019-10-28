@@ -37,5 +37,9 @@ public class Verificador {
 		}
 
 	}
+	
+	public void verificaEmail(String email, String aviso) {
+		
+	}
 
 }
