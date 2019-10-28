@@ -21,6 +21,7 @@ public class Facade {
 		this.controlaAtividade  = new ControladorAtividade();
 		this.problemaController = new ProblemaController();
 		this.objetivoController = new ObjetivoController();
+		this.pesquisadorController = new PesquisadorController();
 	}
 
 	public void cadastraProblema(String descricao, String viabilidade) {

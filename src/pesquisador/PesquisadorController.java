@@ -72,7 +72,7 @@ public class PesquisadorController {
 	}
 	
 	public boolean pesquisadorEhAtivo(String email) {
-		if (this.mapaEmailPesquisador.get(email).getAtividade() == "Ativo") {
+		if (this.mapaEmailPesquisador.get(email).getAtividade().equals("Ativo")) {
 			return true;
 		}
 		return false;

@@ -13,6 +13,7 @@ public class Pesquisador {
 	private Verificador verificador;
 	
 	public Pesquisador(String nome, String funcao, String biografia, String email, String fotoURL) {
+		verificador = new Verificador();
 		verificador.verificaEntrada(nome, "Campo nome nao pode ser nulo ou vazio.");
 		verificador.verificaEntrada(funcao, "Campo funcao nao pode ser nulo ou vazio.");
 		verificador.verificaEntrada(biografia, "Campo biografia nao pode ser nulo ou vazio.");
