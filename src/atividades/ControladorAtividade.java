@@ -1,5 +1,6 @@
 package atividades;
 
+import java.time.Period;
 import java.util.HashMap;
 
 import sistema.Verificador;
@@ -43,7 +44,7 @@ public class ControladorAtividade {
 			throw new IllegalArgumentException("Valor invalido do nivel do risco.");
 		}
 		verifica.verificaEntrada(descricaoRisco,"Campo descricaoRisco nao pode ser nulo ou vazio.");
-		Atividade atividade = new Atividade(descricao,nivelRisco,descricaoRisco);
+		Atividade atividade = new Atividade(descricao,nivelRisco,descricaoRisco,Period.ofDays(8));
 		atividades.put("A"+codigo, atividade);
 		String retorno = "A"+codigo;
 		codigo++;
@@ -74,14 +75,14 @@ public class ControladorAtividade {
 		return capturaAtividadeNoMapa(codigo).toString();
 	}
 	public int contaItensPendentes(String codigo) {
-		verifica.verificaEntrada(codigo,"Atividade nao encontrada");
+		verifica.verificaEntrada(codigo,"Campo codigo nao pode ser nulo ou vazio.");
 		if(!existeAtividade(codigo)) {
 			throw new IllegalArgumentException("Atividade nao encontrada");
 		}
 		return capturaAtividadeNoMapa(codigo).contaItensPendentes();
 	}
 	public int contaItensRealizados(String codigo) {
-		verifica.verificaEntrada(codigo,"Atividade nao encontrada");
+		verifica.verificaEntrada(codigo,"Campo codigo nao pode ser nulo ou vazio.");
 		if(!existeAtividade(codigo)) {
 			throw new IllegalArgumentException("Atividade nao encontrada");
 		}
