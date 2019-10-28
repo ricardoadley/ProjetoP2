@@ -81,7 +81,7 @@ public class ObjetivoController {
 	/**
 	 * Remove um Objetivo do mapa de objetivos.
 	 * 
-	 * @param codigo o codigo pelo qual o objetivo e identificado automaticamente
+	 * @param codigo o codigo pelo qual o objetivo e identificado unicamente
 	 */
 	public void apagarObjetivo(String codigo) {
 
@@ -98,7 +98,7 @@ public class ObjetivoController {
 	 * Retorna a representação em String de um Objetivo, no formato "codigo - tipo -
 	 * descricao - valor(aderencia + viabilidade)".
 	 * 
-	 * @param codigo o codigo pelo qual o objetivo e identificado automaticamente.
+	 * @param codigo o codigo pelo qual o objetivo e identificado unicamente
 	 * @return a representação em String de um Objetivo
 	 */
 	public String exibeObjetivo(String codigo) {
