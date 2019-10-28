@@ -2,6 +2,7 @@ package sistema;
 
 import atividades.ControladorAtividade;
 import objetivo.ObjetivoController;
+import pesquisador.PesquisadorController;
 import problema.ProblemaController;
 
 /**
@@ -14,7 +15,8 @@ public class Facade {
 	ControladorAtividade controlaAtividade;
 	ProblemaController problemaController;
 	ObjetivoController objetivoController;
-
+	PesquisadorController pesquisadorController;
+	
 	public Facade() {
 		this.controlaAtividade  = new ControladorAtividade();
 		this.problemaController = new ProblemaController();
@@ -67,4 +69,28 @@ public class Facade {
 		return controlaAtividade.contaItensRealizados(codigo);
 	}
 	
+	// Vinícius (US2)
+	public void cadastraPesquisador(String nome, String funcao, String biografia, String email, String fotoLink) {
+		pesquisadorController.cadastraPesquisador(nome, funcao, biografia, email, fotoLink);
+	}
+	
+	public void alteraPesquisador(String email, String atributo, String novoValor) {
+		pesquisadorController.alteraPesquisador(email, atributo, novoValor);
+	}
+	
+	public String exibePesquisador(String email) {
+		return pesquisadorController.exibePesquisador(email);
+	}
+	
+	public void ativaPesquisador(String email) {
+		pesquisadorController.ativaPesquisador(email);
+	}
+
+	public void desativaPesquisador(String email) {
+		pesquisadorController.desativaPesquisador(email);
+	}
+	
+	public boolean pesquisadorEhAtivo(String email) {
+		return pesquisadorController.pesquisadorEhAtivo(email);
+	}
 }

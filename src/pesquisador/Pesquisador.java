@@ -1,5 +1,7 @@
 package pesquisador;
 
+import sistema.Verificador;
+
 public class Pesquisador {
 
 	private String email;
@@ -7,7 +9,8 @@ public class Pesquisador {
 	private String funcao;
 	private String biografia;
 	private String fotoURL;	
-	private sistema.Verificador verificador;
+	private String atividade;
+	private Verificador verificador;
 	
 	public Pesquisador(String nome, String funcao, String biografia, String email, String fotoURL) {
 		verificador.verificaEntrada(nome, "Campo nome nao pode ser nulo ou vazio.");
@@ -20,6 +23,7 @@ public class Pesquisador {
 		this.biografia = biografia;
 		this.email = email;
 		this.fotoURL = fotoURL;
+		this.atividade = "ativo";
 	}
 
 	public void setEmail(String email) {
@@ -40,6 +44,14 @@ public class Pesquisador {
 
 	public void setFotoURL(String fotoURL) {
 		this.fotoURL = fotoURL;
+	}
+
+	public String getAtividade() {
+		return atividade;
+	}
+
+	public void setAtividade(String atividade) {
+		this.atividade = atividade;
 	}
 
 	@Override
