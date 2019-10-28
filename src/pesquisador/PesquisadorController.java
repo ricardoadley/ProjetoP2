@@ -15,7 +15,6 @@ public class PesquisadorController {
 		this.mapaEmailPesquisador.put(email,  new Pesquisador(nome, funcao, biografia, email, fotoLink));
 		
 	}
-	
 	public void alteraPesquisador(String email, String atributo, String novoValor) {
 		if (atributo == "nome") {
 			this.mapaEmailPesquisador.get(email).setNome(novoValor);

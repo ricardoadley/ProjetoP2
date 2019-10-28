@@ -11,11 +11,12 @@ import problema.ProblemaController;
  */
 public class Facade {
 	
-	ControladorAtividade controlaAtividade = new ControladorAtividade();
+	ControladorAtividade controlaAtividade;
 	ProblemaController problemaController;
 	ObjetivoController objetivoController;
 
 	public Facade() {
+		this.controlaAtividade  = new ControladorAtividade();
 		this.problemaController = new ProblemaController();
 		this.objetivoController = new ObjetivoController();
 	}
@@ -43,59 +44,25 @@ public class Facade {
 	public String exibeObjetivo(String codigo) {
 		return this.objetivoController.exibeObjetivo(codigo);
 	}
-	
-	/**
-	 * 
-	 * @param descricao , a descricao da atividade 
-	 * @param nivelRisco , o nivel de risco da atividade
-	 * @param descricaoRisco ,  a descricao do risco da atividade
-	 * @return o codigo da atividade cadastrada
-	 */
 	public String cadastraAtividade(String descricao, String nivelRisco, String descricaoRisco) {
 		return controlaAtividade.cadastraAtividade(descricao, nivelRisco, descricaoRisco);
 	}
-	
-	/**
-	 * 
-	 * @param codigo
-	 */
 	public void apagaAtividade(String codigo) {
 		controlaAtividade.apagaAtividade(codigo);
 	}
-	
-	/**
-	 * 
-	 * @param codigo
-	 * @param item
-	 */
 	public void cadastraItem(String codigo, String item) {
 		controlaAtividade.cadastraItem(codigo, item);
 	}
 	
-	/**
-	 * 
-	 * @param codigo
-	 * @return
-	 */
 	public String exibeAtividade(String codigo) {
 		return controlaAtividade.exibeAtividade(codigo);
 		
 	}
 	
-	/**
-	 * 
-	 * @param codigo
-	 * @return
-	 */
 	public int contaItensPendentes(String codigo) {
 		return controlaAtividade.contaItensPendentes(codigo);
 	}
 	
-	/**
-	 * 
-	 * @param codigo
-	 * @return
-	 */
 	public int contaItensRealizados(String codigo) {
 		return controlaAtividade.contaItensRealizados(codigo);
 	}
