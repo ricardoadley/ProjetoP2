@@ -43,10 +43,14 @@ public class Atividade {
 	/**
 	 * Constroi uma nova atividade a partir dos parametros informados pelo usuario
 	 * 
-	 * @param descricao,      a descricao da atividade
-	 * @param nivelRisco,     o nivel de risco da atividade
-	 * @param descricaoRisco, a descricao do risco da atividade
-	 * @param days,           a duracao em dias da aatividade
+	 * @param descricao,
+	 *            a descricao da atividade
+	 * @param nivelRisco,
+	 *            o nivel de risco da atividade
+	 * @param descricaoRisco,
+	 *            a descricao do risco da atividade
+	 * @param days,
+	 *            a duracao em dias da aatividade
 	 */
 	public Atividade(String descricao, String nivelRisco, String descricaoRisco, Period days) {
 		// super();
@@ -59,7 +63,8 @@ public class Atividade {
 	/**
 	 * Adiciona um novo item ao mapa de itens
 	 * 
-	 * @param item, o item que sera adicionado
+	 * @param item,
+	 *            o item que sera adicionado
 	 */
 	public void adicionaItem(String item) {
 		Item it = new Item(item, ordemCadastroItem);

@@ -42,11 +42,15 @@ public class ObjetivoController {
 	/**
 	 * Cadastra um objeto do tipo Objetivo no mapa de objetivos.
 	 * 
-	 * @param tipo        o tipo do objetivo, pode ser geral ou especifico
-	 * @param descricao   a descricao do objetivo
-	 * @param aderencia   representacao quantitativa do quanto o objetivo esta
-	 *                    aderido a um problema
-	 * @param viabilidade representacao quantitativa do quanto o objetivo e viavel
+	 * @param tipo
+	 *            o tipo do objetivo, pode ser geral ou especifico
+	 * @param descricao
+	 *            a descricao do objetivo
+	 * @param aderencia
+	 *            representacao quantitativa do quanto o objetivo esta aderido a um
+	 *            problema
+	 * @param viabilidade
+	 *            representacao quantitativa do quanto o objetivo e viavel
 	 */
 	public void cadastraObjetivo(String tipo, String descricao, String aderencia, String viabilidade) {
 
@@ -81,7 +85,8 @@ public class ObjetivoController {
 	/**
 	 * Remove um Objetivo do mapa de objetivos.
 	 * 
-	 * @param codigo o codigo pelo qual o objetivo e identificado unicamente
+	 * @param codigo
+	 *            o codigo pelo qual o objetivo e identificado unicamente
 	 */
 	public void apagarObjetivo(String codigo) {
 
@@ -95,10 +100,11 @@ public class ObjetivoController {
 	}
 
 	/**
-	 * Retorna a representação em String de um Objetivo, no formato "codigo - tipo -
-	 * descricao - valor(aderencia + viabilidade)".
+	 * Retorna a representação em String de um Objetivo, no formato "codigo - tipo
+	 * - descricao - valor(aderencia + viabilidade)".
 	 * 
-	 * @param codigo o codigo pelo qual o objetivo e identificado unicamente
+	 * @param codigo
+	 *            o codigo pelo qual o objetivo e identificado unicamente
 	 * @return a representação em String de um Objetivo
 	 */
 	public String exibeObjetivo(String codigo) {

@@ -1,9 +1,9 @@
 package objetivo;
 
 /**
- * Classe que representa um objetivo.
- * Todo Objetivo possui um tipo(GERAL ou ESPECIFICO), descricao, aderencia (inteiro de 1 a 5), 
- * viabilidade (inteiro de 1 a 5) e um codigo pelo qual e identificado unicamente.
+ * Classe que representa um objetivo. Todo Objetivo possui um tipo(GERAL ou
+ * ESPECIFICO), descricao, aderencia (inteiro de 1 a 5), viabilidade (inteiro de
+ * 1 a 5) e um codigo pelo qual e identificado unicamente.
  * 
  * @author josemng
  *
@@ -11,42 +11,52 @@ package objetivo;
 public class Objetivo {
 
 	/**
-	 * Tipo do objetivo. Pode ser geral, um objetivo mais abrangente e que responde diretamente ao problema da pesquisa,
-	 * ou especifico, que delimitam alvos especificos para atingir o objetivo geral, ou seja, a uma meta bem definida.
+	 * Tipo do objetivo. Pode ser geral, um objetivo mais abrangente e que responde
+	 * diretamente ao problema da pesquisa, ou especifico, que delimitam alvos
+	 * especificos para atingir o objetivo geral, ou seja, a uma meta bem definida.
 	 */
 	private String tipo;
-	
+
 	/**
 	 * Descricao do objetivo.
 	 */
 	private String descricao;
-	
+
 	/**
-	 * Representacao quantitativa, de 1 a 5, do quanto o objetivo esta aderido a um problema.
+	 * Representacao quantitativa, de 1 a 5, do quanto o objetivo esta aderido a um
+	 * problema.
 	 */
 	private int aderencia;
-	
+
 	/**
-	 * Representacao quantitativa, em uma escala de 1 a 5, do quanto o objetivo e viavel.
+	 * Representacao quantitativa, em uma escala de 1 a 5, do quanto o objetivo e
+	 * viavel.
 	 */
 	private int viabilidade;
-	
+
 	/**
-	 * Codigo que identifica unicamente o objetivo. Tem formato "O" + id gerado automaticamente.
+	 * Codigo que identifica unicamente o objetivo. Tem formato "O" + id gerado
+	 * automaticamente.
 	 */
 	private String codigo;
-	
+
 	/**
 	 * Constroi um objeto do tipo Objetivo.
 	 * 
-	 * @param tipo o tipo do objetivo, que pode ser geral ou especifico
-	 * @param descricao a descricao do objetivo
-	 * @param aderencia representacao quantitativa do quanto o objetivo esta aderido a um problema
-	 * @param viabilidade representacao quantitativa do quanto o objetivo e viavel
-	 * @param codigo codigo que identifica unicamente o objetivo
+	 * @param tipo
+	 *            o tipo do objetivo, que pode ser geral ou especifico
+	 * @param descricao
+	 *            a descricao do objetivo
+	 * @param aderencia
+	 *            representacao quantitativa do quanto o objetivo esta aderido a um
+	 *            problema
+	 * @param viabilidade
+	 *            representacao quantitativa do quanto o objetivo e viavel
+	 * @param codigo
+	 *            codigo que identifica unicamente o objetivo
 	 */
 	public Objetivo(String tipo, String descricao, int aderencia, int viabilidade, String codigo) {
-		
+
 		this.tipo = tipo;
 		this.descricao = descricao;
 		this.aderencia = aderencia;
@@ -55,14 +65,15 @@ public class Objetivo {
 	}
 
 	/**
-	 * Retorna a representação em String do objetivo, no formato "codigo - tipo - descricao - valor(aderencia + viabilidade)".
+	 * Retorna a representação em String do objetivo, no formato "codigo - tipo -
+	 * descricao - valor(aderencia + viabilidade)".
 	 * 
 	 * @return a representação em String do objetivo
 	 */
 	public String toString() {
-		
+
 		return this.codigo + " - " + this.tipo + " - " + this.descricao + " - " + (this.aderencia + this.viabilidade);
-		
+
 	}
 
 	@Override
@@ -89,7 +100,5 @@ public class Objetivo {
 			return false;
 		return true;
 	}
-	
-	
-	
+
 }
