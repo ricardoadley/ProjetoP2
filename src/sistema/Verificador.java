@@ -1,5 +1,7 @@
 package sistema;
 
+import java.util.Map;
+
 /**
  * Classe responsavel por verificar entradas do usuario e, caso necessario,
  * lancar as excecoes correspondentes.
@@ -39,7 +41,31 @@ public class Verificador {
 	}
 	
 	public void verificaEmail(String email, String aviso) {
-		
+		String[] emailSplit = email.split("@");
+		if (emailSplit.length != 2) {
+			throw new IllegalArgumentException(aviso);
+			}
+		if (emailSplit[0].trim().isEmpty()) {
+			throw new IllegalArgumentException(aviso);
+		}
+		if (emailSplit[1].trim().isEmpty()) {
+			throw new IllegalArgumentException(aviso);
+		}
 	}
 
+	public void verificaFotoURL(String fotoURL, String aviso) {
+		if (fotoURL.length() < 7) {
+			throw new IllegalArgumentException(aviso);
+		}
+		String URL = fotoURL.substring(0, 8);
+		if (!URL.equals("https://") && !URL.substring(0, 7).equals("http://")) {
+		throw new IllegalArgumentException(aviso);
+		}
+	}
+	
+	public void existeChave(Map mapa, String chave, String aviso) {
+		if (!mapa.containsKey(chave)) {
+			throw new IllegalArgumentException(aviso);
+		}
+	}
 }
