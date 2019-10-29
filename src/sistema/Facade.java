@@ -15,7 +15,7 @@ public class Facade {
 	ControladorAtividade controlaAtividade;
 	ProblemaController problemaController;
 	ObjetivoController objetivoController;
-	PesquisadorController pesquisadorController;
+	PesquisadorController pesquisadorController; 
 	
 	public Facade() {
 		this.controlaAtividade  = new ControladorAtividade();
@@ -24,8 +24,8 @@ public class Facade {
 		this.pesquisadorController = new PesquisadorController();
 	}
 
-	public void cadastraProblema(String descricao, String viabilidade) {
-		this.problemaController.cadastraProblema(descricao, viabilidade);
+	public String cadastraProblema(String descricao, String viabilidade) {
+		return this.problemaController.cadastraProblema(descricao, viabilidade);
 	}
 
 	public void apagarProblema(String codigo) {

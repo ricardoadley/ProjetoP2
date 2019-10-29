@@ -9,7 +9,7 @@ package sistema;
  */
 public class Verificador {
 
-	public Verificador() {
+	public Verificador() { 
 	}
 
 	public void verificaEntrada(String entrada, String aviso) {
@@ -27,7 +27,7 @@ public class Verificador {
 	public void verificaFormatoNumerico(String entrada, String aviso) {
 
 		try {
-
+ 
 			int entradaInteiro = Integer.parseInt(entrada);
 
 		} catch (NumberFormatException nfe) {

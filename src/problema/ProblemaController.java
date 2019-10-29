@@ -45,21 +45,22 @@ public class ProblemaController {
 	 * @param descricao descricao do problema
 	 * @param viabilidade representacao quantitativa do quanto o problema e viavel
 	 */
-	public void cadastraProblema(String descricao, String viabilidade) {
+	public String cadastraProblema(String descricao, String viabilidade) {
 
 		verificador.verificaEntrada(descricao, "Campo descricao nao pode ser nulo ou vazio.");
 		verificador.verificaEntrada(viabilidade, "Campo viabilidade nao pode ser nulo ou vazio.");
-		verificador.verificaFormatoNumerico(viabilidade, "Valor invalido de viabilidade.");
+		verificador.verificaFormatoNumerico(viabilidade, "Valor invalido de viabilidade."); 
 
 		int viabilidadeInt = Integer.parseInt(viabilidade);
-		if (viabilidadeInt < 1 || viabilidadeInt > 5) {
+		if (viabilidadeInt < 1 || viabilidadeInt > 5) { 
 			throw new IllegalArgumentException("Valor invalido de viabilidade.");
 		}
 
 		String codigo = "P" + this.code;
 		problemas.put(codigo, new Problema(descricao, viabilidadeInt, codigo));
 		this.code++;
-	}
+		return codigo;
+	} 
 
 	/**
 	 * Remove um Problema do mapa de problemas.
@@ -70,11 +71,11 @@ public class ProblemaController {
 
 		verificador.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 
-		if (!problemas.containsKey(codigo)) {
+		if (!problemas.containsKey(codigo)) { 
 			throw new IllegalArgumentException("Problema nao encontrado");
-		}
+		} 
 
-		problemas.remove(codigo);
+		problemas.remove(codigo); 
 
 	}
 
@@ -85,7 +86,7 @@ public class ProblemaController {
 	 * @return a representacao em String de um problema
 	 */
 	public String exibeProblema(String codigo) {
-
+		verificador.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio."); //add by RASS, it's not in specification
 		if (!problemas.containsKey(codigo)) {
 			throw new IllegalArgumentException("Problema nao encontrado");
 		}
