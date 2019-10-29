@@ -23,7 +23,8 @@ public class Facade {
 		this.objetivoController = new ObjetivoController();
 		this.pesquisadorController = new PesquisadorController();
 	}
-
+	
+	//Parte Matheus, US3
 	public String cadastraProblema(String descricao, String viabilidade) {
 		return this.problemaController.cadastraProblema(descricao, viabilidade);
 	}
@@ -36,8 +37,8 @@ public class Facade {
 		return this.problemaController.exibeProblema(codigo);
 	}
 	
-	public void cadastraObjetivo(String tipo, String descricao, String aderencia, String viabilidade) {
-		this.objetivoController.cadastraObjetivo(tipo, descricao, aderencia, viabilidade);
+	public String cadastraObjetivo(String tipo, String descricao, String aderencia, String viabilidade) {
+		return this.objetivoController.cadastraObjetivo(tipo, descricao, aderencia, viabilidade);
 	}
 	
 	public void apagarObjetivo(String codigo) {

@@ -23,7 +23,7 @@ public class ControladorAtividade {
 	 */
 	HashMap<String, Atividade> atividades;
 	/**
-	 * Codigo unico de cada atividade, o codigo ja é iniciado com o valor 1
+	 * Codigo unico de cada atividade, o codigo ja eh iniciado com o valor 1
 	 */
 	int codigo = 1;
 
@@ -37,12 +37,9 @@ public class ControladorAtividade {
 	/**
 	 * Cadastra um objeto do tipo Atividade no mapa de atividades
 	 * 
-	 * @param descricao,
-	 *            a descricao da atividade que sera cadastrada
-	 * @param nivelRisco,
-	 *            o nivel de risco da atividade que sera cadastrada
-	 * @param descricaoRisco,
-	 *            a descricao do risco da atividade
+	 * @param descricao, a descricao da atividade que sera cadastrada
+	 * @param nivelRisco, o nivel de risco da atividade que sera cadastrada
+	 * @param descricaoRisco, a descricao do risco da atividade
 	 * @return retorna o codigo da atividade cadastrada
 	 */
 	public String cadastraAtividade(String descricao, String nivelRisco, String descricaoRisco) {
@@ -53,7 +50,7 @@ public class ControladorAtividade {
 			throw new IllegalArgumentException("Valor invalido do nivel do risco.");
 		}
 		verifica.verificaEntrada(descricaoRisco, "Campo descricaoRisco nao pode ser nulo ou vazio.");
-		Atividade atividade = new Atividade(descricao, nivelRisco, descricaoRisco, Period.ofDays(8));
+		Atividade atividade = new Atividade(descricao, nivelRisco, descricaoRisco, Period.ofDays(8), "A" + codigo);
 		atividades.put("A" + codigo, atividade);
 		String retorno = "A" + codigo;
 		codigo++;
@@ -63,8 +60,7 @@ public class ControladorAtividade {
 	/**
 	 * Remove um objeto do tipo atividade do mapa de atividades
 	 * 
-	 * @param codigo
-	 *            , o codigo da atividade que sera removida
+	 * @param codigo , o codigo da atividade que sera removida
 	 */
 	public void apagaAtividade(String codigo) {
 		verifica.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
@@ -78,10 +74,8 @@ public class ControladorAtividade {
 	/**
 	 * Cadastra um novo item a uma atividade presente no mapa de atividades
 	 * 
-	 * @param codigo,
-	 *            o codigo da atividade que recebera o item
-	 * @param item,
-	 *            o item que sera cadastrado na atividade
+	 * @param codigo, o codigo da atividade que recebera o item
+	 * @param item, o item que sera cadastrado na atividade
 	 */
 	public void cadastraItem(String codigo, String item) {
 		verifica.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
@@ -96,8 +90,7 @@ public class ControladorAtividade {
 	/**
 	 * Exibe uma atividade presente no mapa
 	 * 
-	 * @param codigo,
-	 *            o codigo da atividade que sera exibida
+	 * @param codigo, o codigo da atividade que sera exibida
 	 * @return retorna a representacao em string da atividade
 	 */
 	public String exibeAtividade(String codigo) {
@@ -110,8 +103,7 @@ public class ControladorAtividade {
 	/**
 	 * Conta o total de itens com status de pendente em uma atividade
 	 * 
-	 * @param codigo,
-	 *            o codigo da atividade a qual os itens pertencem
+	 * @param codigo, o codigo da atividade a qual os itens pertencem
 	 * @return retorna um inteiro representando a soma de itens com status pendente
 	 */
 	public int contaItensPendentes(String codigo) {
@@ -125,8 +117,7 @@ public class ControladorAtividade {
 	/**
 	 * Conta o total de itens com status de realizado em uma atividade
 	 * 
-	 * @param codigo,
-	 *            o codigo da atividade ao qual os itens pertencem
+	 * @param codigo, o codigo da atividade ao qual os itens pertencem
 	 * @return retorna um inteiro representando a soma dos itens com status
 	 *         realizado
 	 */
