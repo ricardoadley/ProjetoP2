@@ -52,7 +52,7 @@ public class ObjetivoController {
 	 * @param viabilidade
 	 *            representacao quantitativa do quanto o objetivo e viavel
 	 */
-	public void cadastraObjetivo(String tipo, String descricao, String aderencia, String viabilidade) {
+	public String cadastraObjetivo(String tipo, String descricao, String aderencia, String viabilidade) {
 
 		verificador.verificaEntrada(tipo, "Campo tipo nao pode ser nulo ou vazio.");
 		verificador.verificaEntrada(descricao, "Campo descricao nao pode ser nulo ou vazio.");
@@ -80,6 +80,7 @@ public class ObjetivoController {
 		String codigo = "O" + this.code;
 		this.objetivos.put(codigo, new Objetivo(tipo, descricao, aderenciaInt, viabilidadeInt, codigo));
 		this.code++;
+		return codigo;
 	}
 
 	/**

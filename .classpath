@@ -6,7 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/NT098765/Documents/PorjetosEclipse/ProjetoP2/easyaccept.jar"/>
+	<classpathentry kind="lib" path="/home/josemng/git/ProjetoP2/easyaccept.jar"/>
 	<classpathentry kind="lib" path="easyaccept.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="bin"/>

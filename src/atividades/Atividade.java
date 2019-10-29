@@ -35,36 +35,37 @@ public class Atividade {
 	 * o periodo de duracao da atividade em dias
 	 */
 	private Period days;
+	
+	private String codigo;
+	
 	/**
 	 * mapa dos itens pertencentes a atividade
 	 */
 	private Map<Integer, Item> itens = new HashMap<Integer, Item>();
 
+	
+	
 	/**
 	 * Constroi uma nova atividade a partir dos parametros informados pelo usuario
 	 * 
-	 * @param descricao,
-	 *            a descricao da atividade
-	 * @param nivelRisco,
-	 *            o nivel de risco da atividade
-	 * @param descricaoRisco,
-	 *            a descricao do risco da atividade
-	 * @param days,
-	 *            a duracao em dias da aatividade
+	 * @param descricao, a descricao da atividade
+	 * @param nivelRisco, o nivel de risco da atividade
+	 * @param descricaoRisco, a descricao do risco da atividade
+	 * @param days, a duracao em dias da atividade
 	 */
-	public Atividade(String descricao, String nivelRisco, String descricaoRisco, Period days) {
+	public Atividade(String descricao, String nivelRisco, String descricaoRisco, Period days, String codigo) {
 		// super();
 		this.descricao = descricao;
 		this.nivelRisco = nivelRisco;
 		this.descricaoRisco = descricaoRisco;
 		this.days = days;
+		this.codigo = codigo;
 	}
 
 	/**
 	 * Adiciona um novo item ao mapa de itens
 	 * 
-	 * @param item,
-	 *            o item que sera adicionado
+	 * @param item, o item que sera adicionado
 	 */
 	public void adicionaItem(String item) {
 		Item it = new Item(item, ordemCadastroItem);
@@ -155,4 +156,30 @@ public class Atividade {
 		return descricao + " (" + nivelRisco + " - " + descricaoRisco + ")" + lista;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Atividade other = (Atividade) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		return true;
+	}
+
+	
 }
