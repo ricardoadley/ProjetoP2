@@ -19,12 +19,14 @@ public class Pesquisador {
 		verificador.verificaEntrada(biografia, "Campo biografia nao pode ser nulo ou vazio.");
 		verificador.verificaEntrada(email, "Campo email nao pode ser nulo ou vazio.");
 		verificador.verificaEntrada(fotoURL, "Campo fotoURL nao pode ser nulo ou vazio.");
+		verificador.verificaEmail(email, "Formato de email invalido.");
+		verificador.verificaFotoURL(fotoURL, "Formato de foto invalido.");
 		this.nome = nome;
 		this.funcao = funcao;
 		this.biografia = biografia;
 		this.email = email;
 		this.fotoURL = fotoURL;
-		this.atividade = "ativo";
+		this.atividade = "Ativo";
 	}
 
 	public void setEmail(String email) {
