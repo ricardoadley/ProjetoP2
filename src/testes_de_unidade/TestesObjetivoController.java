@@ -13,7 +13,7 @@ class TestesObjetivoController {
 	@BeforeEach
 	void iniciar() {
 		controlador = new ObjetivoController();
-	}
+	} 
 	
 	@Test
 	void testCadastraObjetivoPerfeito() {
