@@ -68,8 +68,9 @@ public class Pesquisa {
 	public void setCampo(String campo) {
 		this.campo = campo;
 	}
-
-	public String toString(String codigo) {
+	
+	@Override
+	public String toString() {
 		return codigo + " - " + descricao + " - " + campo;
 	}
 	
