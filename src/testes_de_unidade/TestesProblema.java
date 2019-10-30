@@ -22,7 +22,7 @@ class TestesProblema {
 	void testToString() {
 		assertEquals("P1 - problema teste 1 - 5",prob1.toString());
 	}
-	@Test 
+	@Test  
 	void testEqualsObjetosIguais() {
 		assertEquals(true,prob1.equals(prob3) && prob3.equals(prob1));
 	} 
@@ -41,7 +41,7 @@ class TestesProblema {
 	@Test
 	void testHashCodeTrue() {
 		assertEquals(true,prob1.hashCode() == prob3.hashCode());
-	} 
+	}  
 	@Test
 	void testHashCodeFalse() {
 		assertEquals(false,prob1.hashCode() == prob2.hashCode());
