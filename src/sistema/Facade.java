@@ -4,6 +4,7 @@ import atividades.ControladorAtividade;
 import objetivo.ObjetivoController;
 import pesquisador.PesquisadorController;
 import problema.ProblemaController;
+import pesquisa.PesquisaController;
 
 /**
  * Facade do sistema.
@@ -15,16 +16,17 @@ public class Facade {
 	ControladorAtividade controlaAtividade;
 	ProblemaController problemaController;
 	ObjetivoController objetivoController;
-	PesquisadorController pesquisadorController; 
+	PesquisadorController pesquisadorController;
+	PesquisaController pesquisaController;
 	
 	public Facade() {
 		this.controlaAtividade  = new ControladorAtividade();
 		this.problemaController = new ProblemaController();
 		this.objetivoController = new ObjetivoController();
 		this.pesquisadorController = new PesquisadorController();
+		this.pesquisaController = new PesquisaController();
 	}
-	
-	//Parte Matheus, US3
+
 	public String cadastraProblema(String descricao, String viabilidade) {
 		return this.problemaController.cadastraProblema(descricao, viabilidade);
 	}
@@ -37,8 +39,8 @@ public class Facade {
 		return this.problemaController.exibeProblema(codigo);
 	}
 	
-	public String cadastraObjetivo(String tipo, String descricao, String aderencia, String viabilidade) {
-		return this.objetivoController.cadastraObjetivo(tipo, descricao, aderencia, viabilidade);
+	public void cadastraObjetivo(String tipo, String descricao, String aderencia, String viabilidade) {
+		this.objetivoController.cadastraObjetivo(tipo, descricao, aderencia, viabilidade);
 	}
 	
 	public void apagarObjetivo(String codigo) {
@@ -95,4 +97,29 @@ public class Facade {
 	public boolean pesquisadorEhAtivo(String email) {
 		return pesquisadorController.pesquisadorEhAtivo(email);
 	}
+	
+	//Beatriz (US1)
+		public String cadastraPesquisa(String descricao, String interesse) {
+			return pesquisaController.cadastraPesquisa(descricao, interesse);
+		}
+		
+		public void alteraPesquisa(String codigo, String alterar, String mudanca) {
+			pesquisaController.alteraPesquisa(codigo, alterar, mudanca);
+		}
+		
+		public String exibePesquisa(String codigo) {
+			return pesquisaController.exibePesquisa(codigo);
+		}
+		
+		public void ativaPesquisa(String codigo) {
+			pesquisaController.ativaPesquisa(codigo);
+		}
+
+		public void encerraPesquisa(String codigo, String motivo) {
+			pesquisaController.encerraPesquisa(codigo, motivo);
+		}
+		
+		public boolean pesquisaEhAtiva(String codigo) {
+			return pesquisaController.pesquisaEhAtiva(codigo);
+		}
 }
