@@ -74,7 +74,7 @@ public class Objetivo {
 
 		return this.codigo + " - " + this.tipo + " - " + this.descricao + " - " + (this.aderencia + this.viabilidade);
 
-	}
+	} 
 
 	@Override
 	public int hashCode() {

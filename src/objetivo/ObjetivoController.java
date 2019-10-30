@@ -72,7 +72,7 @@ public class ObjetivoController {
 		if (aderenciaInt < 1 || aderenciaInt > 5) {
 			throw new IllegalArgumentException("Valor invalido de aderencia");
 		}
-
+ 
 		if (viabilidadeInt < 1 || viabilidadeInt > 5) {
 			throw new IllegalArgumentException("Valor invalido de viabilidade.");
 		}
@@ -82,7 +82,7 @@ public class ObjetivoController {
 		this.code++;
 		return codigo;
 	}
-
+ 
 	/**
 	 * Remove um Objetivo do mapa de objetivos.
 	 * 
@@ -96,7 +96,7 @@ public class ObjetivoController {
 		if (!this.objetivos.containsKey(codigo)) {
 			throw new IllegalArgumentException("Objetivo nao encontrado");
 		}
-
+ 
 		this.objetivos.remove(codigo);
 	}
 
