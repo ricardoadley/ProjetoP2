@@ -50,34 +50,32 @@ public class PesquisadorController {
 	 */
 	public void alteraPesquisador(String email, String atributo, String novoValor) {
 		verificador.verificaEmail(email, "Formato de email invalido.");
+		verificador.verificaEntrada(atributo, "Atributo nao pode ser vazio ou nulo.");
 		verificador.existeChave(this.mapaEmailPesquisador, email, "Pesquisador nao encontrado");
 		if (!pesquisadorEhAtivo(email)) {
 			throw new IllegalArgumentException("Pesquisador inativo.");
 		}
-		if (atributo.equals("nome")) {
+		if (atributo.equals("NOME")) {
 			verificador.verificaEntrada(novoValor, "Campo nome nao pode ser nulo ou vazio.");
 			this.mapaEmailPesquisador.get(email).setNome(novoValor);
-			return;
-		}
-		if (atributo.equals("funcao")) {
+		} else if (atributo.equals("FUNCAO")) {
 			verificador.verificaEntrada(novoValor, "Campo funcao nao pode ser nulo ou vazio.");
 			this.mapaEmailPesquisador.get(email).setFuncao(novoValor);
-		}
-		if (atributo.equals("biografia")) {
+		} else if (atributo.equals("BIOGRAFIA")) {
 			verificador.verificaEntrada(novoValor, "Campo biografia nao pode ser nulo ou vazio.");
 			this.mapaEmailPesquisador.get(email).setBiografia(novoValor);
-		}
-		if (atributo.equals("email")) {
+		} else if (atributo.equals("EMAIL")) {
 			verificador.verificaEntrada(novoValor, "Campo email nao pode ser nulo ou vazio.");
 			verificador.verificaEmail(novoValor, "Formato de email invalido.");
 			this.mapaEmailPesquisador.put(novoValor, this.mapaEmailPesquisador.get(email));
 			this.mapaEmailPesquisador.get(novoValor).setEmail(novoValor);
 			this.mapaEmailPesquisador.remove(email);
-		}
-		if (atributo.equals("fotoURL")) {
+		} else if (atributo.equals("FOTO")) {
 			verificador.verificaEntrada(novoValor, "Campo fotoURL nao pode ser nulo ou vazio.");
 			verificador.verificaFotoURL(novoValor, "Formato de foto invalido.");
 			this.mapaEmailPesquisador.get(email).setFotoURL(novoValor);
+		} else {
+			throw new IllegalArgumentException("Atributo invalido.");
 		}
 	}
 	

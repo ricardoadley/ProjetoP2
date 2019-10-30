@@ -33,18 +33,12 @@ public class PesquisaController {
 		if (!pesquisaEhAtiva(codigo))
 			throw new IllegalArgumentException("Pesquisa desativada.");
 		if (conteudoASerAlterado.equals("descricao") || conteudoASerAlterado.equals("DESCRICAO")) {
-			if (novoConteudo.trim().equals("")) {
-				throw new IllegalArgumentException("Descricao nao pode ser nula ou vazia.");
-			}else {
-				this.mapaPesquisas.get(codigo).setDescricao(novoConteudo);
-			}
-		}else if (conteudoASerAlterado.equals("campo") || conteudoASerAlterado.equals("CAMPO")) {
-			if (novoConteudo.trim().equals("")) {
-				throw new IllegalArgumentException("Formato do campo de interesse invalido.");
-			}else {
-				this.mapaPesquisas.get(codigo).setCampo(novoConteudo);
-			}
-		}else {
+			verificador.verificaEntrada(novoConteudo, "Descricao nao pode ser nula ou vazia.");
+			this.mapaPesquisas.get(codigo).setDescricao(novoConteudo);
+		} else if (conteudoASerAlterado.equals("campo") || conteudoASerAlterado.equals("CAMPO")) {
+			verificador.verificaEntrada(novoConteudo, "Formato do campo de interesse invalido.");
+			this.mapaPesquisas.get(codigo).setCampo(novoConteudo);
+		} else {
 			throw new IllegalArgumentException("Nao e possivel alterar esse valor de pesquisa.");
 		}
 	}
@@ -54,7 +48,7 @@ public class PesquisaController {
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
 		if (!pesquisaEhAtiva(codigo))
 			throw new IllegalArgumentException("Pesquisa inativa.");
-		return this.mapaPesquisas.get(codigo).toString(codigo);
+		return this.mapaPesquisas.get(codigo).toString();
 	}
 	
 	public void ativaPesquisa(String codigo) {
