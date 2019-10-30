@@ -24,16 +24,14 @@ public class PesquisaController {
 		}
 		codigo = codigo + (idPesquisa+1);
 		codigo = geraId(codigo.toUpperCase());
-		this.mapaPesquisas.put(codigo, new Pesquisa(descricao, interesse));
+		this.mapaPesquisas.put(codigo, new Pesquisa(descricao, interesse, codigo));
 		return codigo;
 	}
 	public void alteraPesquisa(String codigo, String conteudoASerAlterado, String novoConteudo) {
-		if (!this.mapaPesquisas.containsKey(codigo)) {
+		if (!this.mapaPesquisas.containsKey(codigo)) 
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
-			}
-		if (!pesquisaEhAtiva(codigo)) {
+		if (!pesquisaEhAtiva(codigo))
 			throw new IllegalArgumentException("Pesquisa desativada.");
-		}		
 		if (conteudoASerAlterado.equals("descricao") || conteudoASerAlterado.equals("DESCRICAO")) {
 			if (novoConteudo.trim().equals("")) {
 				throw new IllegalArgumentException("Descricao nao pode ser nula ou vazia.");
@@ -52,42 +50,33 @@ public class PesquisaController {
 	}
 	
 	public String exibePesquisa(String codigo) {
-		if (!this.mapaPesquisas.containsKey(codigo)) {
+		if (!this.mapaPesquisas.containsKey(codigo))
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
-			}
-		if (!pesquisaEhAtiva(codigo)) {
+		if (!pesquisaEhAtiva(codigo))
 			throw new IllegalArgumentException("Pesquisa inativa.");
-		}
 		return this.mapaPesquisas.get(codigo).toString(codigo);
 	}
 	
 	public void ativaPesquisa(String codigo) {
-		if (!this.mapaPesquisas.containsKey(codigo)) {
+		if (!this.mapaPesquisas.containsKey(codigo))
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
-			}
-		if (pesquisaEhAtiva(codigo)) {
+		if (pesquisaEhAtiva(codigo))
 			throw new IllegalArgumentException("Pesquisa ja ativada.");
-		}
 		this.mapaPesquisas.get(codigo).setStatus("Ativa");
 	}
 	
 	public void encerraPesquisa(String codigo, String motivo) {
 		verificador.verificaEntrada(motivo, "Motivo nao pode ser nulo ou vazio.");
-		verificador.verificaEntrada(codigo, "Codigo nao pode ser nulo ou vazio");
-		if (!this.mapaPesquisas.containsKey(codigo)) {
+		if (!this.mapaPesquisas.containsKey(codigo))
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
-			}	
-		if (!pesquisaEhAtiva(codigo)) {
+		if (!pesquisaEhAtiva(codigo))
 			throw new IllegalArgumentException("Pesquisa desativada.");
-		}
 		this.mapaPesquisas.get(codigo).setStatus("Inativa");
 	}
 	
 	
 	public boolean pesquisaEhAtiva(String codigo) {
-		if (codigo == null || codigo.trim().equals("")) {
-			throw new IllegalArgumentException("Codigo nao pode ser nulo ou vazio.");
-		}
+		verificador.verificaEntrada(codigo, "Codigo nao pode ser nulo ou vazio.");
 		if (!this.mapaPesquisas.containsKey(codigo)) {
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
 		}else {
@@ -100,16 +89,12 @@ public class PesquisaController {
 	}
 	
 	private void verificaInteresseValido(String interesse) {
-		if (interesse == null || interesse.trim().equals("")) {
+		verificador.verificaEntrada(interesse, "Formato do campo de interesse invalido.");
+		if (interesse.length()>255 || interesse.length()<3)
 			throw new IllegalArgumentException("Formato do campo de interesse invalido.");
-		}
-		if (interesse.length()>255 || interesse.length()<3) {
-			throw new IllegalArgumentException("Formato do campo de interesse invalido.");
-		}
 		String[] interesses = interesse.split(",");
-		if (interesses.length>4) {
+		if (interesses.length>4)
 			throw new IllegalArgumentException("Formato do campo de interesse invalido.");
-		}
 		for (String i:interesses) {
 			if (i.trim().equals("")) {
 				throw new IllegalArgumentException("Formato do campo de interesse invalido.");
