@@ -6,7 +6,7 @@ import java.util.Map;
 import sistema.Verificador;
 
 /**
- * Classe responsável por controlar as informações dos problemas. Todo
+ * Classe responsavel por controlar as informacoes dos problemas. Todo
  * problemaController possui um mapa de problemas e um codigo que gera uma
  * identificacao unica para os problemas.
  * 
@@ -26,16 +26,10 @@ public class ProblemaController {
 	private int code;
 
 	/**
-	 * Instancia da classe lancadora de excecoes.
-	 */
-	Verificador verificador;
-
-	/**
 	 * Constroi um objeto do tipo ProblemaController.
 	 */
 	public ProblemaController() {
 		this.problemas = new HashMap<>();
-		this.verificador = new Verificador();
 		this.code = 1;
 	}
 
@@ -47,9 +41,9 @@ public class ProblemaController {
 	 */
 	public String cadastraProblema(String descricao, String viabilidade) {
 
-		verificador.verificaEntrada(descricao, "Campo descricao nao pode ser nulo ou vazio.");
-		verificador.verificaEntrada(viabilidade, "Campo viabilidade nao pode ser nulo ou vazio.");
-		verificador.verificaFormatoNumerico(viabilidade, "Valor invalido de viabilidade."); 
+		Verificador.verificaEntrada(descricao, "Campo descricao nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(viabilidade, "Campo viabilidade nao pode ser nulo ou vazio.");
+		Verificador.verificaFormatoNumerico(viabilidade, "Valor invalido de viabilidade.");  
 
 		int viabilidadeInt = Integer.parseInt(viabilidade);
 		if (viabilidadeInt < 1 || viabilidadeInt > 5) { 
@@ -69,7 +63,7 @@ public class ProblemaController {
 	 */
 	public void apagarProblema(String codigo) {
 
-		verificador.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 
 		if (!problemas.containsKey(codigo)) { 
 			throw new IllegalArgumentException("Problema nao encontrado");
@@ -86,7 +80,7 @@ public class ProblemaController {
 	 * @return a representacao em String de um problema
 	 */
 	public String exibeProblema(String codigo) {
-		verificador.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio."); //add by RASS, it's not in specification
+		Verificador.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio."); //add by RASS, it's not in specification
 		if (!problemas.containsKey(codigo)) {
 			throw new IllegalArgumentException("Problema nao encontrado");
 		}

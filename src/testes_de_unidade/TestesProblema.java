@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import problema.Problema;
 
-class TestesProblema {
+class TestesProblema { 
 	private Problema prob1;
 	private Problema prob2;
 	private Problema prob3;
@@ -17,6 +17,22 @@ class TestesProblema {
 		prob1 = new Problema("problema teste 1",5,"P1");
 		prob2 = new Problema("problema teste 2",3,"P2");
 		prob3 = new Problema("problema teste 1",5,"P1");
+	} 
+	@Test
+	void testConstroiProblemaDescricaoVazio() {
+		assertThrows(IllegalArgumentException.class, () -> new Problema("",5,"P1"));
+	}
+	@Test
+	void testConstroiProblemaDescricaoNull() {
+		assertThrows(NullPointerException.class, () -> new Problema(null,5,"P1"));
+	}
+	@Test
+	void testConstroiProbelmaCodigoVazio() {
+		assertThrows(IllegalArgumentException.class, () -> new Problema("muito sono",4,""));
+	}
+	@Test
+	void testConstroiProblemaCodigoNull() {
+		assertThrows(NullPointerException.class, () -> new Problema("dor nas costas",3,null));
 	}
 	@Test
 	void testToString() {

@@ -12,14 +12,10 @@ import sistema.Verificador;
  * 
  * @author Ricardo A. S. Sena
  *
- */
+ */ 
 public class ControladorAtividade {
-	/**
-	 * Instancia a classe de lancamento de excessoes
-	 */
-	Verificador verifica = new Verificador();
-	/**
-	 * Mapa de atividades do tipo <String, Atividade>
+	/*
+	 * Mapa de atividades do tipo <String, Atividade> 
 	 */
 	HashMap<String, Atividade> atividades;
 	/**
@@ -44,13 +40,13 @@ public class ControladorAtividade {
 	 * @return retorna o codigo da atividade cadastrada
 	 */
 	public String cadastraAtividade(String descricao, String nivelRisco, String descricaoRisco) {
-		verifica.verificaEntrada(descricao, "Campo Descricao nao pode ser nulo ou vazio.");
-		verifica.verificaEntrada(nivelRisco, "Campo nivelRisco nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(descricao, "Campo Descricao nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(nivelRisco, "Campo nivelRisco nao pode ser nulo ou vazio.");
 		if (!nivelRisco.equalsIgnoreCase("BAIXO") && !nivelRisco.equalsIgnoreCase("MEDIO")
 				&& !nivelRisco.equalsIgnoreCase("ALTO")) {
 			throw new IllegalArgumentException("Valor invalido do nivel do risco.");
 		}
-		verifica.verificaEntrada(descricaoRisco, "Campo descricaoRisco nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(descricaoRisco, "Campo descricaoRisco nao pode ser nulo ou vazio.");
 		Atividade atividade = new Atividade(descricao, nivelRisco, descricaoRisco, Period.ofDays(8), "A" + codigo);
 		this.atividades.put("A" + codigo, atividade);
 		String retorno = "A" + codigo;
@@ -64,7 +60,7 @@ public class ControladorAtividade {
 	 * @param codigo , o codigo da atividade que sera removida
 	 */
 	public void apagaAtividade(String codigo) {
-		verifica.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 		if (!existeAtividade(codigo)) {
 			throw new IllegalArgumentException("Atividade nao encontrada");
 		} else {
@@ -79,8 +75,8 @@ public class ControladorAtividade {
 	 * @param item,   o item que sera cadastrado na atividade
 	 */
 	public void cadastraItem(String codigo, String item) {
-		verifica.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
-		verifica.verificaEntrada(item, "Item nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(item, "Item nao pode ser nulo ou vazio.");
 		if (!existeAtividade(codigo)) {
 			throw new IllegalArgumentException("Atividade nao encontrada");
 		} else {
@@ -108,7 +104,7 @@ public class ControladorAtividade {
 	 * @return retorna um inteiro representando a soma de itens com status pendente
 	 */
 	public int contaItensPendentes(String codigo) {
-		verifica.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 		if (!existeAtividade(codigo)) {
 			throw new IllegalArgumentException("Atividade nao encontrada");
 		}
@@ -123,7 +119,7 @@ public class ControladorAtividade {
 	 *         realizado
 	 */
 	public int contaItensRealizados(String codigo) {
-		verifica.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 		if (!existeAtividade(codigo)) {
 			throw new IllegalArgumentException("Atividade nao encontrada");
 		}

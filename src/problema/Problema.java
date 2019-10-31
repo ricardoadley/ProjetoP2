@@ -1,5 +1,7 @@
 package problema;
 
+import sistema.Verificador;
+
 /**
  * Classe que representa um problema. Todo objeto do tipo Problema possui uma
  * descricao, um inteiro (de 1 a 5) que representa sua viabilidade e um codigo pelo qual e
@@ -32,11 +34,13 @@ public class Problema {
 	 * @param viabilidade a representacao quantitativa do quanto o problema e viavel
 	 * @param codigo o codigo que identifica unicamente o problema
 	 */
-	public Problema(String descricao, int viabilidade, String codigo) {
-		this.descricao = descricao;
-		this.viabilidade = viabilidade;
+	public Problema(String descricao, int viabilidade, String codigo) { 
+		Verificador.verificaEntrada(descricao, "Campo descricao nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(codigo,"Campo codigo nao pode ser nulo ou vazio"); 
+		this.descricao = descricao; 
+		this.viabilidade = viabilidade; 
 		this.codigo = codigo;
-	}
+	} 
 
 	/**
 	 * Retorna a representacao em String do Problema, no formato "codigo - descricao - viabilidade".

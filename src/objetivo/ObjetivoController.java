@@ -6,7 +6,7 @@ import java.util.Map;
 import sistema.Verificador;
 
 /**
- * Classe responsável por controlar as informações dos objetivos. Todo
+ * Classe responsavel por controlar as informacoes dos objetivos. Todo
  * ObjetivoController possui um mapa de objetivos e um codigo que gera uma
  * identificacao unica para os objetivos.
  * 
@@ -26,16 +26,10 @@ public class ObjetivoController {
 	private int code;
 
 	/**
-	 * Instancia da classe lancadora de excexoes.
-	 */
-	private Verificador verificador;
-
-	/**
-	 * Constrói um objeto do tipo ObjetivoController.
+	 * Constroi um objeto do tipo ObjetivoController.
 	 */
 	public ObjetivoController() {
 		this.objetivos = new HashMap<>();
-		this.verificador = new Verificador();
 		this.code = 1;
 	}
 
@@ -54,13 +48,13 @@ public class ObjetivoController {
 	 */
 	public String cadastraObjetivo(String tipo, String descricao, String aderencia, String viabilidade) {
 
-		verificador.verificaEntrada(tipo, "Campo tipo nao pode ser nulo ou vazio.");
-		verificador.verificaEntrada(descricao, "Campo descricao nao pode ser nulo ou vazio.");
-		verificador.verificaEntrada(aderencia, "Campo aderencia nao pode ser nulo ou vazio.");
-		verificador.verificaEntrada(viabilidade, "Campo viabilidade nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(tipo, "Campo tipo nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(descricao, "Campo descricao nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(aderencia, "Campo aderencia nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(viabilidade, "Campo viabilidade nao pode ser nulo ou vazio.");
 
-		verificador.verificaFormatoNumerico(viabilidade, "Valor invalido de viabilidade.");
-		verificador.verificaFormatoNumerico(aderencia, "Valor invalido de aderencia");
+		Verificador.verificaFormatoNumerico(viabilidade, "Valor invalido de viabilidade.");
+		Verificador.verificaFormatoNumerico(aderencia, "Valor invalido de aderencia");
 
 		if (!(tipo.equals("GERAL") || tipo.equals("ESPECIFICO"))) {
 			throw new IllegalArgumentException("Valor invalido de tipo.");
@@ -91,7 +85,7 @@ public class ObjetivoController {
 	 */
 	public void apagarObjetivo(String codigo) {
 
-		verificador.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 
 		if (!this.objetivos.containsKey(codigo)) {
 			throw new IllegalArgumentException("Objetivo nao encontrado");
@@ -101,16 +95,16 @@ public class ObjetivoController {
 	}
 
 	/**
-	 * Retorna a representação em String de um Objetivo, no formato "codigo - tipo
+	 * Retorna a representacao em String de um Objetivo, no formato "codigo - tipo
 	 * - descricao - valor(aderencia + viabilidade)".
 	 * 
 	 * @param codigo
 	 *            o codigo pelo qual o objetivo e identificado unicamente
-	 * @return a representação em String de um Objetivo
+	 * @return a representacao em String de um Objetivo
 	 */
 	public String exibeObjetivo(String codigo) {
 
-		verificador.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 
 		if (!this.objetivos.containsKey(codigo)) {
 			throw new IllegalArgumentException("Objetivo nao encontrado");

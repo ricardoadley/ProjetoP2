@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import objetivo.Objetivo;
 
+
 class TestesObjetivo {
 
 	private Objetivo obj1;
@@ -18,6 +19,22 @@ class TestesObjetivo {
 		obj1 = new Objetivo("especifico","descrito para descrever", 2,3,"O1");
 		obj2 = new Objetivo("geral","descrevi todo", 4,5,"O2");
 		obj3 = new Objetivo("especifico","descrito para descrever", 2,3,"O1");
+	}
+	@Test
+	void testConstroiObjetivoTipoVazio() {
+		assertThrows(IllegalArgumentException.class, () -> new Objetivo("","descreve ne nao",2,3,"O1"));
+	}
+	@Test
+	void testConstroiObjetivoTipoNull() {
+		assertThrows(NullPointerException.class, () -> new Objetivo(null,"descreve ne nao",2,3,"O1"));
+	}
+	@Test
+	void testConstroiObjetivoDescricaoVazio() {
+		assertThrows(IllegalArgumentException.class, () -> new Objetivo("especifico","",2,3,"O1"));
+	}
+	@Test
+	void testConstroiObjetivoDescricaoNull() {
+		assertThrows(NullPointerException.class, () -> new Objetivo("especifico",null,2,3,"O1"));
 	}
 	@Test
 	void testToString() {
