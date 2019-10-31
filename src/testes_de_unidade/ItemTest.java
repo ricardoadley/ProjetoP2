@@ -10,7 +10,7 @@ import atividades.Item;
 class ItemTest {
 
 	Item item1;
-	Item item2;
+	Item item2; 
 	Item item3;
 	Item item4;
 	
@@ -21,7 +21,14 @@ class ItemTest {
 		item3 = new Item("Guarana nem tão doce", 3);
 		item4 = new Item("Coca muito salgada", 1);
 	}
-	
+	@Test
+	void testConstroiItemDescricaoVazio() {
+		assertThrows(IllegalArgumentException.class, () -> new Item("",1));
+	}
+	@Test
+	void testConstroiItemDescricaoNull() {
+		assertThrows(NullPointerException.class, () -> new Item(null,2));
+	}
 	@Test
 	void testHashCodeIgual() {
 		

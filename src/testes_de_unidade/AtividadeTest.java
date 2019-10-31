@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import atividades.Atividade;
-import junit.framework.Assert;
+
 
 class AtividadeTest {
 
@@ -17,10 +17,35 @@ class AtividadeTest {
 	private Atividade atividade3;
 
 	@BeforeEach 
-	public void iniciaAtividades() {
+	public void iniciaAtividades() { 
 		atividade1 = new Atividade("the flash", "BAIXO", "meio descrito", Period.ofDays(8), "A1");
 		atividade2 = new Atividade("game of thrones", "MEDIO", "pouco descrito", Period.ofDays(9), "A1");
 		atividade3 = new Atividade("supernatural", "ALTO", "MUITO DESCRITO!", Period.ofDays(10), "A3");
+	}
+
+	@Test
+	void testConstroiAtividadeDescricaoVazio() {
+		assertThrows(IllegalArgumentException.class, () -> new Atividade("","MEDIO","descrevendo",Period.ofDays(8),"A1"));
+	} 
+	@Test
+	void testConstroiAtividadeDescricaoNull() {
+		assertThrows(NullPointerException.class, () -> new Atividade(null,"MEDIO","descreve aqui",Period.ofDays(8),"A2"));
+	}
+	@Test
+	void testConstroiAtividadeNivelRiscoVazio() {
+		assertThrows(IllegalArgumentException.class, () -> new Atividade("assistir boruto","","eh muito bom",Period.ofDays(8),"A3"));
+	}
+	@Test
+	void testConstroiAtividadeNivelRiscoNull() {
+		assertThrows(NullPointerException.class, () -> new Atividade("assistir naruto",null,"eh bom eu gosto",Period.ofDays(8),"A4"));
+	}
+	@Test
+	void testConstroiAtividadeDescricaoRiscoVazio() {
+		assertThrows(IllegalArgumentException.class, () -> new Atividade("maratonar pokemon","BAIXO","",Period.ofDays(8),"A5"));
+	}
+	@Test
+	void testConstroiAtividadeDescricaoRiscoNull() {
+		assertThrows(NullPointerException.class, () -> new Atividade("procurar serie nova","ALTO",null,Period.ofDays(8),"A6"));
 	}
 	
 	@Test

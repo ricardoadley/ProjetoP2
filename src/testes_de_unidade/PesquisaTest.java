@@ -19,9 +19,27 @@ class PesquisaTest {
 		this.pesquisa1 =  new Pesquisa("Alo", "meu, deus, do, ceu", "MEU1");
 		this.pesquisa2 =  new Pesquisa("Alo", "meu, deus, do, ceu", "MEU2");
 		this.pesquisa3 =  new Pesquisa("joao", "meu, deus, do, ceu", "MEU3");
-		this.pesquisa4 =  new Pesquisa("Alo", "meu, deus, do, ceu", "MEU1");
+		this.pesquisa4 =  new Pesquisa("Alo", "meu, deus, do, ceu", "MEU1"); 
 	}
-	
+//	Verificador.verificaEntrada(descricao, "Descricao nao pode ser nula ou vazia.");
+//	Verificador.verificaEntrada(campo, "Formato do campo de interesse invalido.");
+//	Verificador.verificaEntrada(codigo,"Codigo nao pode ser nulo ou vazio");
+	@Test
+	void testConstroiPesquisaDescricaoVazio() {
+		assertThrows(IllegalArgumentException.class, () -> new Pesquisa("","naruto,pokemon,java,c++","MEU1"));
+	}
+	@Test
+	void testConstroiPesquisaDescricaoNull() {
+		assertThrows(NullPointerException.class, () -> new Pesquisa(null,"naruto,pokemon,java,c++","MEU1"));
+	}
+	@Test
+	void testConstroiPesquisaCampoVazio() {
+		assertThrows(IllegalArgumentException.class, () -> new Pesquisa("assistir serie","","MEU1"));
+	}
+	@Test
+	void testConstroiPesquisaCampoNull() {
+		assertThrows(NullPointerException.class, () -> new Pesquisa("assistir borutinho",null,"MEU1"));
+	}
 	@Test
 	void testToString() {
 		//testando
@@ -56,9 +74,6 @@ class PesquisaTest {
 		
 		//testando pesquisas diferentes
 		assertFalse(pesquisa1.hashCode() == pesquisa2.hashCode());
-		
-		//testando pesquisa com codigo nulo
-		assertThrows(NullPointerException.class, () -> new Pesquisa("Alo", "meu", null).hashCode());
-		
-	}
+			
+	} 
 }

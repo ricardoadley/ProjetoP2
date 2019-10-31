@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import sistema.Verificador;
+
 /**
  * Representacao de uma atividade, especificamente de uma pesquisa cadastrada
  * por um usuario no sistema
@@ -18,7 +20,7 @@ public class Atividade {
 	/**
 	 * A ordem de cadastro dos itens da atividade
 	 */
-	private int ordemCadastroItem = 1;
+	private int ordemCadastroItem = 1; 
 	/**
 	 * a descricao da atividade criada
 	 */
@@ -51,11 +53,14 @@ public class Atividade {
 	 * @param descricao, a descricao da atividade
 	 * @param nivelRisco, o nivel de risco da atividade
 	 * @param descricaoRisco, a descricao do risco da atividade
-	 * @param days, a duracao em dias da atividade
+	 * @param days, a duracao em dias da atividade 
 	 */
 	public Atividade(String descricao, String nivelRisco, String descricaoRisco, Period days, String codigo) {
 		// super();
-		this.descricao = descricao;
+		Verificador.verificaEntrada(descricao, "Campo Descricao nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(nivelRisco, "Campo nivelRisco nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(descricaoRisco, "Campo descricaoRisco nao pode ser nulo ou vazio.");
+		this.descricao = descricao; 
 		this.nivelRisco = nivelRisco;
 		this.descricaoRisco = descricaoRisco;
 		this.days = days;

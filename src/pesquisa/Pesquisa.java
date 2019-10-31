@@ -1,29 +1,39 @@
 package pesquisa;
 
 import sistema.Verificador;
-
+/**
+ * 
+ * @author Beatriz Truta
+ *
+ */
 public class Pesquisa {
-	
+	/**
+	 * a descricao da pesquisa
+	 */
 	private String descricao;
+	/**
+	 * O campo de interesse da pesquisa
+	 */
 	private String campo;
+	/**
+	 * o status atual da pesquisa
+	 */
 	private String status;
+	/**
+	 * o codigo da pesquisa, e tambem seu identificador
+	 */
 	private String codigo;
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	private Verificador verificador;
-	
+	/**
+	 * Constroi uma nova pesquisa de acordo com os parametros informados pelo usuario
+	 * @param descricao, a descricao da pesquisa
+	 * @param campo, o campo da pesquisa
+	 * @param codigo, o codigo unico da pesquisa e tambem seu identificador
+	 */
 	public Pesquisa(String descricao, String campo, String codigo) {
-		verificador = new Verificador();
-		verificador.verificaEntrada(descricao, "Descricao nao pode ser nula ou vazia.");
-		verificador.verificaEntrada(campo, "Formato do campo de interesse invalido.");
+		Verificador.verificaEntrada(descricao, "Descricao nao pode ser nula ou vazia.");
+		Verificador.verificaEntrada(campo, "Formato do campo de interesse invalido.");
 		this.descricao = descricao;
-		this.campo = campo;	
+		this.campo = campo;	  
 		this.codigo = codigo;
 		this.status = "Ativa";
 	}
@@ -52,7 +62,13 @@ public class Pesquisa {
 			return false;
 		return true;
 	}
+	public String getStatus() {
+		return status;
+	}
 
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getDescricao() {
 		return descricao;
 	}
@@ -70,6 +86,11 @@ public class Pesquisa {
 	}
 	
 	@Override
+	/**
+	 * Retorna uma representacao em string da pesquisa no formato
+	 * CODIGO - DESCRICAO - CAMPO DA PESQUISA
+	 * @return a representacao em string da pesquisa.
+	 */
 	public String toString() {
 		return codigo + " - " + descricao + " - " + campo;
 	}

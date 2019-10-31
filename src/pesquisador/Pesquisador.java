@@ -4,7 +4,7 @@ import sistema.Verificador;
 
 /**
  * Representacao de um pesquisador
- * @author Vinícius M. V. Varjão
+ * @author Vinicius M. V. Varjao
  *
  */
 public class Pesquisador {
@@ -34,10 +34,6 @@ public class Pesquisador {
 	 * do mesmo"
 	 */
 	private String atividade;
-	/**
-	 * Instancia da classe lancadora de excecoes
-	 */
-	private Verificador verificador;
 	
 	/**
 	 * Construtor do objeto Pesquisador, que recebe seus atributos e define a atividade como "Ativo" por padrao
@@ -48,16 +44,15 @@ public class Pesquisador {
 	 * @param fotoURL a URL da foto do pesquisador
 	 */
 	public Pesquisador(String nome, String funcao, String biografia, String email, String fotoURL) {
-		verificador = new Verificador();
-		verificador.verificaEntrada(nome, "Campo nome nao pode ser nulo ou vazio.");
-		verificador.verificaEntrada(funcao, "Campo funcao nao pode ser nulo ou vazio.");
-		verificador.verificaEntrada(biografia, "Campo biografia nao pode ser nulo ou vazio.");
-		verificador.verificaEntrada(email, "Campo email nao pode ser nulo ou vazio.");
-		verificador.verificaEntrada(fotoURL, "Campo fotoURL nao pode ser nulo ou vazio.");
-		verificador.verificaEmail(email, "Formato de email invalido.");
-		verificador.verificaFotoURL(fotoURL, "Formato de foto invalido.");
+		Verificador.verificaEntrada(nome, "Campo nome nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(funcao, "Campo funcao nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(biografia, "Campo biografia nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(email, "Campo email nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(fotoURL, "Campo fotoURL nao pode ser nulo ou vazio.");
+		Verificador.verificaEmail(email, "Formato de email invalido.");
+		Verificador.verificaFotoURL(fotoURL, "Formato de foto invalido."); 
 		this.nome = nome;
-		this.funcao = funcao;
+		this.funcao = funcao; 
 		this.biografia = biografia;
 		this.email = email;
 		this.fotoURL = fotoURL;
@@ -93,7 +88,7 @@ public class Pesquisador {
 	}
 	
 	/**
-	 * Retorna a representacao em texto do pesquisador no formato "NOME (FUNÇÃO) - BIOGRAFIA - EMAIL - FOTO"
+	 * Retorna a representacao em texto do pesquisador no formato "NOME (FUNCAO) - BIOGRAFIA - EMAIL - FOTO"
 	 */
 	@Override
 	public String toString() {

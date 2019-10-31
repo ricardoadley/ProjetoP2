@@ -1,5 +1,7 @@
 package atividades;
 
+import sistema.Verificador;
+
 /**
  * 
  * @author Ricardo A. S. Sena
@@ -27,9 +29,9 @@ public class Item {
 	 * @param descricao
 	 * @param ordemCadastro
 	 */
-	public Item(String descricao, int ordemCadastro) {
-		// super();
-		realizado = false;
+	public Item(String descricao, int ordemCadastro) { 
+		Verificador.verificaEntrada(descricao,"O campo descricao nao pode ser vazio ou nulo");
+		realizado = false; 
 		this.descricao = descricao;
 	}
 

@@ -1,5 +1,7 @@
 package objetivo;
 
+import sistema.Verificador;
+
 /**
  * Classe que representa um objetivo. Todo Objetivo possui um tipo(GERAL ou
  * ESPECIFICO), descricao, aderencia (inteiro de 1 a 5), viabilidade (inteiro de
@@ -53,22 +55,23 @@ public class Objetivo {
 	 * @param viabilidade
 	 *            representacao quantitativa do quanto o objetivo e viavel
 	 * @param codigo
-	 *            codigo que identifica unicamente o objetivo
+	 *            codigo que identifica unicamente o objetivo 
 	 */
 	public Objetivo(String tipo, String descricao, int aderencia, int viabilidade, String codigo) {
-
+		Verificador.verificaEntrada(tipo, "Campo tipo nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(descricao, "Campo descricao nao pode ser nulo ou vazio.");
 		this.tipo = tipo;
 		this.descricao = descricao;
-		this.aderencia = aderencia;
+		this.aderencia = aderencia; 
 		this.viabilidade = viabilidade;
 		this.codigo = codigo;
 	}
 
 	/**
-	 * Retorna a representação em String do objetivo, no formato "codigo - tipo -
+	 * Retorna a representacao em String do objetivo, no formato "codigo - tipo -
 	 * descricao - valor(aderencia + viabilidade)".
 	 * 
-	 * @return a representação em String do objetivo
+	 * @return a representacao em String do objetivo
 	 */
 	public String toString() {
 
