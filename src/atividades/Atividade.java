@@ -148,9 +148,9 @@ public class Atividade {
 		List<Item> itens = new ArrayList<>(this.itens.values());
 		for (Item item : itens) {
 			if (item.isRealizado() == false) {
-				lista = lista + " | PENDENTE - " + item.getDescricao();
+				lista += " | PENDENTE - " + item.getDescricao();
 			} else {
-				lista = lista + " |REALIZADO - " + item.getDescricao();
+				lista += " |REALIZADO - " + item.getDescricao();
 			}
 		}
 		return descricao + " (" + nivelRisco + " - " + descricaoRisco + ")" + lista;

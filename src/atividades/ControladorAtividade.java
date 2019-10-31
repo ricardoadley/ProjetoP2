@@ -25,20 +25,21 @@ public class ControladorAtividade {
 	/**
 	 * Codigo unico de cada atividade, o codigo ja eh iniciado com o valor 1
 	 */
-	int codigo = 1;
+	int codigo;
 
 	/**
 	 * Construtor do objeto ControladorAtividade
 	 */
 	public ControladorAtividade() {
 		atividades = new HashMap<String, Atividade>();
+		this.codigo = 1;
 	}
 
 	/**
 	 * Cadastra um objeto do tipo Atividade no mapa de atividades
 	 * 
-	 * @param descricao, a descricao da atividade que sera cadastrada
-	 * @param nivelRisco, o nivel de risco da atividade que sera cadastrada
+	 * @param descricao,      a descricao da atividade que sera cadastrada
+	 * @param nivelRisco,     o nivel de risco da atividade que sera cadastrada
 	 * @param descricaoRisco, a descricao do risco da atividade
 	 * @return retorna o codigo da atividade cadastrada
 	 */
@@ -51,9 +52,9 @@ public class ControladorAtividade {
 		}
 		verifica.verificaEntrada(descricaoRisco, "Campo descricaoRisco nao pode ser nulo ou vazio.");
 		Atividade atividade = new Atividade(descricao, nivelRisco, descricaoRisco, Period.ofDays(8), "A" + codigo);
-		atividades.put("A" + codigo, atividade);
+		this.atividades.put("A" + codigo, atividade);
 		String retorno = "A" + codigo;
-		codigo++;
+		this.codigo++;
 		return retorno;
 	}
 
@@ -75,7 +76,7 @@ public class ControladorAtividade {
 	 * Cadastra um novo item a uma atividade presente no mapa de atividades
 	 * 
 	 * @param codigo, o codigo da atividade que recebera o item
-	 * @param item, o item que sera cadastrado na atividade
+	 * @param item,   o item que sera cadastrado na atividade
 	 */
 	public void cadastraItem(String codigo, String item) {
 		verifica.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
@@ -130,12 +131,12 @@ public class ControladorAtividade {
 	}
 
 	// todo o codigo abaixo se refere a acoes basicas no mapa de atividades
-	public boolean existeAtividade(String codigo) {
+	private boolean existeAtividade(String codigo) {
 		// retorna se ja existe ou nao a atividade no mapa
 		return this.atividades.containsKey(codigo);
 	}
 
-	public Atividade capturaAtividadeNoMapa(String codigo) {
+	private Atividade capturaAtividadeNoMapa(String codigo) {
 		return this.atividades.get(codigo);
 	}
 }

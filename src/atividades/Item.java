@@ -34,15 +34,33 @@ public class Item {
 	}
 
 	public int getOrdemCadastro() {
-		return ordemCadastro;
-	}
-
-	public void setOrdemCadastro(int ordemCadastro) {
-		this.ordemCadastro = ordemCadastro;
+		return this.ordemCadastro;
 	}
 
 	public String getDescricao() {
 		return descricao;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ordemCadastro;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Item other = (Item) obj;
+		if (ordemCadastro != other.ordemCadastro)
+			return false;
+		return true;
 	}
 
 	public void setDescricao(String descricao) {

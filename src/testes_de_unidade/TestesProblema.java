@@ -13,7 +13,7 @@ class TestesProblema {
 	private Problema prob3;
 	
 	@BeforeEach
-	void InstacinarObjeto() {
+	void InstanciarObjeto() {
 		prob1 = new Problema("problema teste 1",5,"P1");
 		prob2 = new Problema("problema teste 2",3,"P2");
 		prob3 = new Problema("problema teste 1",5,"P1");
@@ -34,10 +34,7 @@ class TestesProblema {
 	void testEqualsObjetoNull() {
 		assertEquals(false,prob1.equals(null)); 
 	}
-//	@Test
-//	void testEqualsCodigoNull() {
-//		assertEquals(false,prob1.getCodigo().equals(null));
-//	}
+	
 	@Test
 	void testHashCodeTrue() {
 		assertEquals(true,prob1.hashCode() == prob3.hashCode());
