@@ -52,7 +52,14 @@ public class Problema {
 		return this.codigo + " - " + this.descricao + " - " + this.viabilidade;
 
 	}
+	
+	public String getCodigo() {
+		return codigo;
+	}
 
+	public String getDescricao() {
+		return descricao;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

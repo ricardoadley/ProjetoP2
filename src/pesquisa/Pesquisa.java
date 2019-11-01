@@ -80,7 +80,9 @@ public class Pesquisa {
 	public String getCampo() {
 		return campo;
 	}
-
+	public String getCodigo() {
+		return codigo;
+	}
 	public void setCampo(String campo) {
 		this.campo = campo;
 	}

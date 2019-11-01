@@ -1,8 +1,12 @@
 package objetivo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import atividades.Atividade;
+import sistema.BuscadorPalavra;
 import sistema.Verificador;
 
 /**
@@ -113,5 +117,13 @@ public class ObjetivoController {
 		return this.objetivos.get(codigo).toString();
 
 	}
+	
+	  	public void ProcurarPalavra(String palavra) {
+		List <Objetivo> listaObjetivos = new ArrayList<>(this.objetivos.values());
+		for(Objetivo objetivo : listaObjetivos) {
+			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavra(palavra,objetivo.getCodigo()+":"+objetivo.getDescricao()));
+		}
+	}
+	 
 
 }
