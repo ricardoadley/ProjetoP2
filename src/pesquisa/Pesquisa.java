@@ -1,6 +1,8 @@
 package pesquisa;
 
+import problema.Problema;
 import sistema.Verificador;
+
 /**
  * 
  * @author Beatriz Truta
@@ -23,17 +25,22 @@ public class Pesquisa {
 	 * o codigo da pesquisa, e tambem seu identificador
 	 */
 	private String codigo;
+
+	private Problema problema;
+
 	/**
-	 * Constroi uma nova pesquisa de acordo com os parametros informados pelo usuario
+	 * Constroi uma nova pesquisa de acordo com os parametros informados pelo
+	 * usuario
+	 * 
 	 * @param descricao, a descricao da pesquisa
-	 * @param campo, o campo da pesquisa
-	 * @param codigo, o codigo unico da pesquisa e tambem seu identificador
+	 * @param campo,     o campo da pesquisa
+	 * @param codigo,    o codigo unico da pesquisa e tambem seu identificador
 	 */
 	public Pesquisa(String descricao, String campo, String codigo) {
 		Verificador.verificaEntrada(descricao, "Descricao nao pode ser nula ou vazia.");
 		Verificador.verificaEntrada(campo, "Formato do campo de interesse invalido.");
 		this.descricao = descricao;
-		this.campo = campo;	  
+		this.campo = campo;
 		this.codigo = codigo;
 		this.status = "Ativa";
 	}
@@ -62,6 +69,7 @@ public class Pesquisa {
 			return false;
 		return true;
 	}
+
 	public String getStatus() {
 		return status;
 	}
@@ -69,6 +77,7 @@ public class Pesquisa {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 	public String getDescricao() {
 		return descricao;
 	}
@@ -80,21 +89,24 @@ public class Pesquisa {
 	public String getCampo() {
 		return campo;
 	}
+
 	public String getCodigo() {
 		return codigo;
 	}
+
 	public void setCampo(String campo) {
 		this.campo = campo;
 	}
-	
+
 	@Override
 	/**
-	 * Retorna uma representacao em string da pesquisa no formato
-	 * CODIGO - DESCRICAO - CAMPO DA PESQUISA
+	 * Retorna uma representacao em string da pesquisa no formato CODIGO - DESCRICAO
+	 * - CAMPO DA PESQUISA
+	 * 
 	 * @return a representacao em string da pesquisa.
 	 */
 	public String toString() {
 		return codigo + " - " + descricao + " - " + campo;
 	}
-	
+
 }

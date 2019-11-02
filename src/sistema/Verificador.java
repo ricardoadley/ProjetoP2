@@ -8,17 +8,19 @@ import java.util.Map;
  * 
  * @author josemng, Vinicius M. V. Varjao.
  *
- */ 
+ */
 public class Verificador {
 	/**
 	 * constroi o objeto
 	 */
-	public Verificador() {  
+	public Verificador() {
 	}
+
 	/**
 	 * Verifica se uma entrada informada pelo usuario eh valida
+	 * 
 	 * @param entrada, o valor informada pelo usuario
-	 * @param aviso, o aviso que deve ser retornado caso a entrada seja invalida
+	 * @param aviso,   o aviso que deve ser retornado caso a entrada seja invalida
 	 */
 	public static void verificaEntrada(String entrada, String aviso) {
 
@@ -31,15 +33,17 @@ public class Verificador {
 		}
 
 	}
+
 	/**
 	 * Verifica se o valor informado pelo usuario eh um valor numerico valido
+	 * 
 	 * @param entrada, a entrada informada pelo usuario
-	 * @param aviso , o aviso que deve ser retornado caso a entrada seja invalida
+	 * @param aviso    , o aviso que deve ser retornado caso a entrada seja invalida
 	 */
 	public static void verificaFormatoNumerico(String entrada, String aviso) {
 
 		try {
- 
+
 			int entradaInteiro = Integer.parseInt(entrada);
 
 		} catch (NumberFormatException nfe) {
@@ -49,8 +53,10 @@ public class Verificador {
 		}
 
 	}
+
 	/**
 	 * Verifica se um email informado pelo usuario esta no formato valido
+	 * 
 	 * @param email, o email informado que sera verificado
 	 * @param aviso, o aviso que sera retornado caso o email seja invalido
 	 */
@@ -58,7 +64,7 @@ public class Verificador {
 		String[] emailSplit = email.split("@");
 		if (emailSplit.length != 2) {
 			throw new IllegalArgumentException(aviso);
-			}
+		}
 		if (emailSplit[0].trim().isEmpty()) {
 			throw new IllegalArgumentException(aviso);
 		}
@@ -66,10 +72,12 @@ public class Verificador {
 			throw new IllegalArgumentException(aviso);
 		}
 	}
+
 	/**
 	 * Verifica se o URL de um foto informado pelo usuario eh valido
+	 * 
 	 * @param fotoURL, o URL da foto informado pelo usuario
-	 * @param aviso, o aviso que sera retornado caso a URL seja invalida
+	 * @param aviso,   o aviso que sera retornado caso a URL seja invalida
 	 */
 	public static void verificaFotoURL(String fotoURL, String aviso) {
 		if (fotoURL.length() < 7) {
@@ -77,12 +85,14 @@ public class Verificador {
 		}
 		String URL = fotoURL.substring(0, 8);
 		if (!URL.equals("https://") && !URL.substring(0, 7).equals("http://")) {
-		throw new IllegalArgumentException(aviso);
+			throw new IllegalArgumentException(aviso);
 		}
 	}
+
 	/**
 	 * Verifica se existe uma chave no mapa
-	 * @param mapa, o mapa em que a chave sera pesquisada
+	 * 
+	 * @param mapa,  o mapa em que a chave sera pesquisada
 	 * @param chave, a chave que sera pesquisada
 	 * @param aviso, a mensagem que sera retornada caso a chave nao exista no mapa
 	 */

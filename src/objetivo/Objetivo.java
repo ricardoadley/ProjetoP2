@@ -45,24 +45,19 @@ public class Objetivo {
 	/**
 	 * Constroi um objeto do tipo Objetivo.
 	 * 
-	 * @param tipo
-	 *            o tipo do objetivo, que pode ser geral ou especifico
-	 * @param descricao
-	 *            a descricao do objetivo
-	 * @param aderencia
-	 *            representacao quantitativa do quanto o objetivo esta aderido a um
-	 *            problema
-	 * @param viabilidade
-	 *            representacao quantitativa do quanto o objetivo e viavel
-	 * @param codigo
-	 *            codigo que identifica unicamente o objetivo 
+	 * @param tipo        o tipo do objetivo, que pode ser geral ou especifico
+	 * @param descricao   a descricao do objetivo
+	 * @param aderencia   representacao quantitativa do quanto o objetivo esta
+	 *                    aderido a um problema
+	 * @param viabilidade representacao quantitativa do quanto o objetivo e viavel
+	 * @param codigo      codigo que identifica unicamente o objetivo
 	 */
 	public Objetivo(String tipo, String descricao, int aderencia, int viabilidade, String codigo) {
 		Verificador.verificaEntrada(tipo, "Campo tipo nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(descricao, "Campo descricao nao pode ser nulo ou vazio.");
 		this.tipo = tipo;
 		this.descricao = descricao;
-		this.aderencia = aderencia; 
+		this.aderencia = aderencia;
 		this.viabilidade = viabilidade;
 		this.codigo = codigo;
 	}
@@ -77,13 +72,16 @@ public class Objetivo {
 
 		return this.codigo + " - " + this.tipo + " - " + this.descricao + " - " + (this.aderencia + this.viabilidade);
 
-	} 
+	}
+
 	public String getCodigo() {
 		return codigo;
 	}
+
 	public String getDescricao() {
 		return descricao;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

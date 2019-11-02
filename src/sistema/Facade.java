@@ -14,46 +14,44 @@ import pesquisa.PesquisaController;
  */
 public class Facade {
 
-	ControladorAtividade controlaAtividade;
-	ProblemaController problemaController;
-	ObjetivoController objetivoController;
-	PesquisadorController pesquisadorController;
-	PesquisaController pesquisaController;
-	BuscadorPalavra buscador;
+	private ControladorAtividade controlaAtividade;
+	private PesquisadorController pesquisadorController;
+	private PesquisaController pesquisaController;
+	private BuscadorPalavra buscador;
 
 	public Facade() {
 		this.controlaAtividade = new ControladorAtividade();
-		this.problemaController = new ProblemaController();
-		this.objetivoController = new ObjetivoController();
 		this.pesquisadorController = new PesquisadorController();
 		this.pesquisaController = new PesquisaController();
 		this.buscador = new BuscadorPalavra();
 	}
-	//Jose Matheus (US3)
+	
+	// Jose Matheus (US3)
 	public String cadastraProblema(String descricao, String viabilidade) {
-		return this.problemaController.cadastraProblema(descricao, viabilidade);
+		return this.pesquisaController.cadastraProblema(descricao, viabilidade);
 	}
 
 	public void apagarProblema(String codigo) {
-		this.problemaController.apagarProblema(codigo);
+		this.pesquisaController.apagarProblema(codigo);
 	}
 
 	public String exibeProblema(String codigo) {
-		return this.problemaController.exibeProblema(codigo);
+		return this.pesquisaController.exibeProblema(codigo);
 	}
 
 	public void cadastraObjetivo(String tipo, String descricao, String aderencia, String viabilidade) {
-		this.objetivoController.cadastraObjetivo(tipo, descricao, aderencia, viabilidade);
+		this.pesquisaController.cadastraObjetivo(tipo, descricao, aderencia, viabilidade);
 	}
 
 	public void apagarObjetivo(String codigo) {
-		this.objetivoController.apagarObjetivo(codigo);
+		this.pesquisaController.apagarObjetivo(codigo);
 	}
 
 	public String exibeObjetivo(String codigo) {
-		return this.objetivoController.exibeObjetivo(codigo);
+		return this.pesquisaController.exibeObjetivo(codigo);
 	}
-	//Ricardo (US4)
+
+	// Ricardo (US4)
 	public String cadastraAtividade(String descricao, String nivelRisco, String descricaoRisco) {
 		return controlaAtividade.cadastraAtividade(descricao, nivelRisco, descricaoRisco);
 	}
@@ -128,15 +126,16 @@ public class Facade {
 	public boolean pesquisaEhAtiva(String codigo) {
 		return pesquisaController.pesquisaEhAtiva(codigo);
 	}
-	
-	// Deus no ceu e nos na terra
-	
-	public String busca( String termo, int numeroResultado) {
-		pesquisaController.ProcurarPalavra(termo);
+
+	public String busca(String termo, int numeroResultado) {
+		pesquisaController.ProcurarPalavraPesquisa(termo); //metodo ta no pesquisaController
 		controlaAtividade.ProcurarPalavra(termo);
-		problemaController.ProcurarPalavra(termo);
-		objetivoController.ProcurarPalavra(termo);
+		
+		pesquisaController.procurarPalavraProblema(termo); //metodo ta no pesquisaController que chama o do problemaController
+		pesquisaController.procurarPalavraObjetivo(termo); //metodo ta no pesquisaController que chama o do objetivoController
+		
 		pesquisadorController.ProcurarPalavra(termo);
 		return buscador.retornaEncontradas(numeroResultado);
 	}
+
 }
