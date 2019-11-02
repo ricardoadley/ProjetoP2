@@ -91,4 +91,5 @@ public class Verificador {
 			throw new IllegalArgumentException(aviso);
 		}
 	}
+
 }

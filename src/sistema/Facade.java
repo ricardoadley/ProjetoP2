@@ -19,6 +19,7 @@ public class Facade {
 	ObjetivoController objetivoController;
 	PesquisadorController pesquisadorController;
 	PesquisaController pesquisaController;
+	BuscadorPalavra buscador;
 
 	public Facade() {
 		this.controlaAtividade = new ControladorAtividade();
@@ -26,6 +27,7 @@ public class Facade {
 		this.objetivoController = new ObjetivoController();
 		this.pesquisadorController = new PesquisadorController();
 		this.pesquisaController = new PesquisaController();
+		this.buscador = new BuscadorPalavra();
 	}
 	//Jose Matheus (US3)
 	public String cadastraProblema(String descricao, String viabilidade) {
@@ -125,5 +127,16 @@ public class Facade {
 
 	public boolean pesquisaEhAtiva(String codigo) {
 		return pesquisaController.pesquisaEhAtiva(codigo);
+	}
+	
+	// Deus no ceu e nos na terra
+	
+	public String busca( String termo, int numeroResultado) {
+		pesquisaController.ProcurarPalavra(termo);
+		controlaAtividade.ProcurarPalavra(termo);
+		problemaController.ProcurarPalavra(termo);
+		objetivoController.ProcurarPalavra(termo);
+		pesquisadorController.ProcurarPalavra(termo);
+		return buscador.retornaEncontradas(numeroResultado);
 	}
 }

@@ -78,7 +78,12 @@ public class Objetivo {
 		return this.codigo + " - " + this.tipo + " - " + this.descricao + " - " + (this.aderencia + this.viabilidade);
 
 	} 
-
+	public String getCodigo() {
+		return codigo;
+	}
+	public String getDescricao() {
+		return descricao;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

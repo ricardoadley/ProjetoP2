@@ -1,8 +1,11 @@
 package atividades;
 
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import sistema.BuscadorPalavra;
 import sistema.Verificador;
 
 /**
@@ -14,6 +17,7 @@ import sistema.Verificador;
  *
  */ 
 public class ControladorAtividade {
+	
 	/*
 	 * Mapa de atividades do tipo <String, Atividade> 
 	 */
@@ -134,5 +138,13 @@ public class ControladorAtividade {
 
 	private Atividade capturaAtividadeNoMapa(String codigo) {
 		return this.atividades.get(codigo);
+	}
+	public void ProcurarPalavra(String palavra) {
+		List <Atividade> listaAtividades = new ArrayList<>(this.atividades.values());
+		for(Atividade atividade : listaAtividades) {
+			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavra(palavra,atividade.getCodigo()+":"+atividade.getDescricao()));
+			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavra(palavra,atividade.getCodigo()+":"+atividade.getDescricaoRisco()));
+			atividade.pesquisaItem(palavra);
+		}
 	}
 }

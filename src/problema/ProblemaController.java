@@ -1,8 +1,12 @@
 package problema;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import atividades.Atividade;
+import sistema.BuscadorPalavra;
 import sistema.Verificador;
 
 /**
@@ -88,4 +92,12 @@ public class ProblemaController {
 		return problemas.get(codigo).toString();
 
 	}
+	
+	  	public void ProcurarPalavra(String palavra) {
+		List <Problema> listaProblemas = new ArrayList<>(this.problemas.values());
+		for(Problema problema : listaProblemas) {
+			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavra(palavra,problema.getCodigo()+":"+problema.getDescricao()));
+		}
+	}
+	 
 }

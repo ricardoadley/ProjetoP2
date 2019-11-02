@@ -1,8 +1,11 @@
 package pesquisador;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import sistema.BuscadorPalavra;
 import sistema.Verificador;
 
 /**
@@ -135,4 +138,13 @@ public class PesquisadorController {
 		}
 		return false;
 	}
+	
+	
+	  	public void ProcurarPalavra(String palavra) {
+		List <Pesquisador> listaPesquisadores = new ArrayList<>(this.mapaEmailPesquisador.values());
+		for(Pesquisador pesquisador : listaPesquisadores) {
+			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavra(palavra,pesquisador.getEmail()+":"+pesquisador.getBiografia()));
+		}
+	}
+	 
 }

@@ -59,10 +59,15 @@ public class Pesquisador {
 		this.atividade = "Ativo";
 	}
 
+	public String getEmail() {
+		return email;
+	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	public String getBiografia() {
+		return biografia;
+	}
 	public void setNome(String nome) {
 		this.nome = nome;
 	}

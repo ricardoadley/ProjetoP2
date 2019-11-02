@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import sistema.BuscadorPalavra;
 import sistema.Verificador;
 
 /**
@@ -138,7 +139,9 @@ public class Atividade {
 	public Period getDays() {
 		return days;
 	}
-
+	public String getCodigo() {
+		return codigo;
+	}
 	public void setDays(Period days) {
 		this.days = days;
 	}
@@ -159,6 +162,13 @@ public class Atividade {
 			}
 		}
 		return descricao + " (" + nivelRisco + " - " + descricaoRisco + ")" + lista;
+	}
+	
+	public void pesquisaItem(String palavra) {
+			List <Item> listaItens = new ArrayList<>(this.itens.values());
+			for(Item Item : listaItens) {
+				BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavra(palavra,this.codigo+":"+Item.getDescricao()));
+			}
 	}
 
 	@Override

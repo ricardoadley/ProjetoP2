@@ -1,7 +1,10 @@
 package pesquisa;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import sistema.BuscadorPalavra;
 import sistema.Verificador;
 /**
  * 
@@ -145,5 +148,12 @@ public class PesquisaController {
 			return id.replace(id.charAt(id.length()-1), (char) indice);
 		}
 		return id;
+	}
+	public void ProcurarPalavra(String palavra) {
+		List <Pesquisa> listaPesquisas = new ArrayList<>(this.mapaPesquisas.values());
+		for(Pesquisa pesquisa : listaPesquisas) {
+			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavra(palavra,pesquisa.getCodigo()+":"+pesquisa.getDescricao()));
+			
+		}
 	}
 }
