@@ -26,7 +26,7 @@ public class Problema {
 	 * Codigo que identifica unicamente o Problema.
 	 */
 	private String codigo;
-	
+
 	/**
 	 * Constroi um objeto do tipo Problema.
 	 * 
@@ -61,7 +61,7 @@ public class Problema {
 	public String getDescricao() {
 		return descricao;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

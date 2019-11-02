@@ -95,6 +95,10 @@ public class ProblemaController {
 
 	}
 
+	public Problema getProblema(String idProblema) {
+		return this.problemas.get(idProblema);
+	}
+	
 	public void procurarPalavra(String palavra) {
 		List<Problema> listaProblemas = new ArrayList<>(this.problemas.values());
 		for (Problema problema : listaProblemas) {

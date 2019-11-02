@@ -138,4 +138,22 @@ public class Facade {
 		return buscador.retornaEncontradas(numeroResultado);
 	}
 
+	//Jose Matheus (US5)
+	
+	public String associaProblema(String idPesquisa, String idProblema) {
+		return this.pesquisaController.associaProblema(idPesquisa, idProblema);
+	}
+	
+	public String desassociaProblema(String idPesquisa, String idProblema) {
+		return this.pesquisaController.desassociaProblema(idPesquisa, idProblema);
+	}
+	
+	public String associaObjetivo(String idPesquisa, String idObjetivo) {
+		return this.pesquisaController.associaObjetivo(idPesquisa, idObjetivo);
+	}
+	
+	public String desassociaObjetivo(String idPesquisa, String idObjetivo) {
+		return this.pesquisaController.desassociaObjetivo(idPesquisa, idObjetivo);
+	}
+	
 }

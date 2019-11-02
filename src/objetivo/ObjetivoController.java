@@ -111,7 +111,11 @@ public class ObjetivoController {
 		return this.objetivos.get(codigo).toString();
 
 	}
-
+	
+	public Objetivo getObjetivo(String idObjetivo) {
+		return this.objetivos.get(idObjetivo);
+	}
+	
 	public void ProcurarPalavra(String palavra) {
 		List<Objetivo> listaObjetivos = new ArrayList<>(this.objetivos.values());
 		for (Objetivo objetivo : listaObjetivos) {

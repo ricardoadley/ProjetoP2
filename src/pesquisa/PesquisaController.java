@@ -27,7 +27,9 @@ public class PesquisaController {
 
 	private ObjetivoController objetivoController;
 	private ProblemaController problemaController;
-	
+
+	Verificador verificador = new Verificador();
+
 	/**
 	 * construtor da classe
 	 */
@@ -36,7 +38,7 @@ public class PesquisaController {
 		this.objetivoController = new ObjetivoController();
 		this.problemaController = new ProblemaController();
 	}
-	
+
 	/**
 	 * Adiciona uma nova pesquisa no mapa de pesquisas
 	 * 
@@ -179,39 +181,82 @@ public class PesquisaController {
 		List<Pesquisa> listaPesquisas = new ArrayList<>(this.mapaPesquisas.values());
 		for (Pesquisa pesquisa : listaPesquisas) {
 			BuscadorPalavra.adicionaEncontrado(
-				BuscadorPalavra.procuraPalavra(palavra, pesquisa.getCodigo() + ":" + pesquisa.getDescricao()));
+					BuscadorPalavra.procuraPalavra(palavra, pesquisa.getCodigo() + ":" + pesquisa.getDescricao()));
 
 		}
 	}
-	
-	//Metodos referentes as operacoes com OBJETIVOS!
-	
+
+	// Metodos referentes as operacoes com OBJETIVOS!
+
 	public String cadastraObjetivo(String tipo, String descricao, String aderencia, String viabilidade) {
 		return this.objetivoController.cadastraObjetivo(tipo, descricao, aderencia, viabilidade);
 	}
-	
+
 	public void apagarObjetivo(String codigo) {
 		this.objetivoController.apagarObjetivo(codigo);
 	}
-	
+
 	public String exibeObjetivo(String codigo) {
 		return this.objetivoController.exibeObjetivo(codigo);
 	}
-	
+
+	@SuppressWarnings("static-access")
+	public String associaObjetivo(String idPesquisa, String idObjetivo) {
+
+		verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		verificador.verificaEntrada(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
+		verificador.existeChave(mapaPesquisas, idPesquisa, "Pesquisa nao encontrada.");
+
+		if (this.mapaPesquisas.get(idPesquisa).contemObjetivo(idObjetivo)) {
+			return "false";
+		}
+
+		for (Pesquisa pesquisa : this.mapaPesquisas.values()) {
+
+			if (pesquisa.contemObjetivo(idObjetivo)) {
+				throw new IllegalArgumentException("Objetivo ja associado a uma pesquisa.");
+			}
+
+		}
+
+		this.mapaPesquisas.get(idPesquisa).adicionaObjetivo(idObjetivo,
+				this.objetivoController.getObjetivo(idObjetivo));
+		return "sucesso";
+	}
+
+	@SuppressWarnings("static-access")
+	public String desassociaObjetivo(String idPesquisa, String idObjetivo) {
+
+		verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		verificador.verificaEntrada(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
+		verificador.existeChave(mapaPesquisas, idPesquisa, "Pesquisa nao encontrada.");
+
+		if (!this.mapaPesquisas.get(idPesquisa).contemObjetivo(idObjetivo)) {
+			return "false";
+		}
+
+		if (!this.mapaPesquisas.get(idPesquisa).isAtivada()) {
+			throw new IllegalArgumentException("Pesquisa desativada.");
+		}
+		
+		this.mapaPesquisas.get(idPesquisa).removeObjetivo(idObjetivo);
+		return "sucesso";
+	}
+
 	public void procurarPalavraObjetivo(String palavra) {
 		this.objetivoController.ProcurarPalavra(palavra);
 	}
-	
-	//Metodos referentes as operacoes com PROBLEMAS!
-	
+
+	// Metodos referentes as operacoes com PROBLEMAS!
+
 	public String cadastraProblema(String descricao, String viabilidade) {
 		return this.problemaController.cadastraProblema(descricao, viabilidade);
 	}
-	
+
 	public void apagarProblema(String codigo) {
 		this.problemaController.apagarProblema(codigo);
 	}
-	
+
 	public String exibeProblema(String codigo) {
 		return this.problemaController.exibeProblema(codigo);
 	}
@@ -219,5 +264,49 @@ public class PesquisaController {
 	public void procurarPalavraProblema(String palavra) {
 		this.problemaController.procurarPalavra(palavra);
 	}
-	
+
+	@SuppressWarnings("static-access")
+	public String associaProblema(String idPesquisa, String idProblema) {
+
+		verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		verificador.verificaEntrada(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
+		verificador.existeChave(this.mapaPesquisas, idPesquisa, "Pesquisa nao encontrada.");
+
+		if (this.problemaController.getProblema(idProblema).equals(this.mapaPesquisas.get(idPesquisa).getProblema())) {
+			return "false";
+		}
+
+		if (this.mapaPesquisas.get(idPesquisa).contemProblema()) {
+			throw new IllegalArgumentException("Pesquisa ja associada a um problema.");
+		}
+
+		if (!this.mapaPesquisas.get(idPesquisa).isAtivada()) {
+			throw new IllegalArgumentException("Pesquisa desativada.");
+		}
+
+		this.mapaPesquisas.get(idPesquisa).setProblema(this.problemaController.getProblema(idProblema));
+		return "sucesso";
+
+	}
+
+	@SuppressWarnings("static-access")
+	public String desassociaProblema(String idPesquisa, String idProblema) {
+
+		verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		verificador.verificaEntrada(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
+		verificador.existeChave(this.mapaPesquisas, idPesquisa, "Pesquisa nao encontrada.");
+
+		if (!this.mapaPesquisas.get(idPesquisa).contemProblema()) {
+			return "false";
+		}
+
+		if (!this.mapaPesquisas.get(idPesquisa).isAtivada()) {
+			throw new IllegalArgumentException("Pesquisa desativada.");
+		}
+
+		this.mapaPesquisas.get(idPesquisa).setProblema(null);
+		return "sucesso";
+
+	}
+
 }
