@@ -136,11 +136,6 @@ public class Facade {
 		return buscador.retornaEncontradas();
 	}
 	public String busca(String termo, int numeroResultado) {
-//		pesquisaController.ProcurarPalavraPesquisa(termo); 
-//		controlaAtividade.ProcurarPalavra(termo);	
-//		pesquisaController.procurarPalavraProblema(termo); 
-//		pesquisaController.procurarPalavraObjetivo(termo); 		
-//		pesquisadorController.ProcurarPalavra(termo);
 		pesquisaController.ProcurarPalavraPesquisa(termo); 
 		pesquisadorController.ProcurarPalavra(termo);
 		pesquisaController.procurarPalavraProblema(termo); 
@@ -149,11 +144,6 @@ public class Facade {
 		return buscador.retornaEncontradasNumeroResultado(numeroResultado);
 	}
 	public int contaResultadosBusca(String termo) {
-//		pesquisaController.ProcurarPalavraPesquisa(termo); 
-//		controlaAtividade.ProcurarPalavra(termo);		
-//		pesquisaController.procurarPalavraProblema(termo); 
-//		pesquisaController.procurarPalavraObjetivo(termo);		
-//		pesquisadorController.ProcurarPalavra(termo);
 		pesquisaController.ProcurarPalavraPesquisa(termo); 
 		pesquisadorController.ProcurarPalavra(termo);
 		pesquisaController.procurarPalavraProblema(termo); 

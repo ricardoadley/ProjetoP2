@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 import sistema.BuscadorPalavra;
 import sistema.Verificador;
 
@@ -41,8 +40,10 @@ public class ProblemaController {
 	/**
 	 * Adiciona um objeto do tipo Problema no mapa de problemas.
 	 * 
-	 * @param descricao   descricao do problema
-	 * @param viabilidade representacao quantitativa do quanto o problema e viavel
+	 * @param descricao
+	 *            descricao do problema
+	 * @param viabilidade
+	 *            representacao quantitativa do quanto o problema e viavel
 	 */
 	public String cadastraProblema(String descricao, String viabilidade) {
 
@@ -64,7 +65,8 @@ public class ProblemaController {
 	/**
 	 * Remove um Problema do mapa de problemas.
 	 * 
-	 * @param codigo o codigo pelo qual o Problema e identificado unicamente
+	 * @param codigo
+	 *            o codigo pelo qual o Problema e identificado unicamente
 	 */
 	public void apagarProblema(String codigo) {
 
@@ -82,7 +84,8 @@ public class ProblemaController {
 	 * Retorna a representacao em String de um Problema, no formato "codigo -
 	 * descricao - viabilidade".
 	 * 
-	 * @param codigo o codigo pelo qual o Problema e identificado unicamente
+	 * @param codigo
+	 *            o codigo pelo qual o Problema e identificado unicamente
 	 * @return a representacao em String de um problema
 	 */
 	public String exibeProblema(String codigo) {
@@ -99,7 +102,14 @@ public class ProblemaController {
 	public Problema getProblema(String idProblema) {
 		return this.problemas.get(idProblema);
 	}
-	
+
+	/**
+	 * procura, nos dados da entidade Problema, por um termo informado pelo usuario
+	 * 
+	 * @param palavra,
+	 *            o termo, informado pelo usuario, que sera pesquisado nos dados da
+	 *            entidade.
+	 */
 	public void procurarPalavra(String palavra) {
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
 		List<Problema> listaProblemas = new ArrayList<>(this.problemas.values());

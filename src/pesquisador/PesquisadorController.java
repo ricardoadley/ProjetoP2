@@ -9,17 +9,20 @@ import sistema.BuscadorPalavra;
 import sistema.Verificador;
 
 /**
- * Controlador de objetos do tipo "Pesquisador", usado para armazena-los e manipula-los
+ * Controlador de objetos do tipo "Pesquisador", usado para armazena-los e
+ * manipula-los
+ * 
  * @author Vinicius M. V. Varjao
  * 
  */
 public class PesquisadorController {
 
 	/**
-	 * Mapa para armazenar os pesquisadores, com chaves do tipo String e valores do tipo Pesquisador
+	 * Mapa para armazenar os pesquisadores, com chaves do tipo String e valores do
+	 * tipo Pesquisador
 	 */
 	private Map<String, Pesquisador> mapaEmailPesquisador;
-	
+
 	/**
 	 * Constroi o controlador
 	 */
@@ -29,11 +32,17 @@ public class PesquisadorController {
 
 	/**
 	 * Cadastra um pesquisador no controlador
-	 * @param nome o nome do pesquisador que sera cadastrado
-	 * @param funcao a funcao do pesquisador que sera cadastrado
-	 * @param biografia a biografia do pesquisador que sera cadastrado
-	 * @param email o email do pesquisador que sera cadastrado
-	 * @param fotoURL a URL da foto do pesquisador que sera cadastrado
+	 * 
+	 * @param nome
+	 *            o nome do pesquisador que sera cadastrado
+	 * @param funcao
+	 *            a funcao do pesquisador que sera cadastrado
+	 * @param biografia
+	 *            a biografia do pesquisador que sera cadastrado
+	 * @param email
+	 *            o email do pesquisador que sera cadastrado
+	 * @param fotoURL
+	 *            a URL da foto do pesquisador que sera cadastrado
 	 */
 	public void cadastraPesquisador(String nome, String funcao, String biografia, String email, String fotoURL) {
 		Verificador.verificaEntrada(nome, "Campo nome nao pode ser nulo ou vazio.");
@@ -43,26 +52,30 @@ public class PesquisadorController {
 		Verificador.verificaEntrada(fotoURL, "Campo fotoURL nao pode ser nulo ou vazio.");
 		Verificador.verificaEmail(email, "Formato de email invalido.");
 		Verificador.verificaFotoURL(fotoURL, "Formato de foto invalido.");
-		this.mapaEmailPesquisador.put(email,  new Pesquisador(nome, funcao, biografia, email, fotoURL));
-		
+		this.mapaEmailPesquisador.put(email, new Pesquisador(nome, funcao, biografia, email, fotoURL));
+
 	}
-	
+
 	/**
 	 * Altera um determinado atributo de um Pesquisador ja salvo no sistema
-	 * @param email email identificador do pesquisador a ser alterado
-	 * @param atributo atributo a ser alterado
-	 * @param novoValor novo valo a ser atribuido ao atribudo a ser alterado
+	 * 
+	 * @param email
+	 *            email identificador do pesquisador a ser alterado
+	 * @param atributo
+	 *            atributo a ser alterado
+	 * @param novoValor
+	 *            novo valo a ser atribuido ao atribudo a ser alterado
 	 */
 	public void alteraPesquisador(String email, String atributo, String novoValor) {
 		Verificador.verificaEmail(email, "Formato de email invalido.");
 		Verificador.verificaEntrada(atributo, "Atributo nao pode ser vazio ou nulo.");
 		Verificador.existeChave(this.mapaEmailPesquisador, email, "Pesquisador nao encontrado");
-		if (!pesquisadorEhAtivo(email)) { 
+		if (!pesquisadorEhAtivo(email)) {
 			throw new IllegalArgumentException("Pesquisador inativo.");
-		}   
-		if (atributo.equals("NOME")) { 
+		}
+		if (atributo.equals("NOME")) {
 			Verificador.verificaEntrada(novoValor, "Campo nome nao pode ser nulo ou vazio.");
-			this.mapaEmailPesquisador.get(email).setNome(novoValor); 
+			this.mapaEmailPesquisador.get(email).setNome(novoValor);
 		} else if (atributo.equals("FUNCAO")) {
 			Verificador.verificaEntrada(novoValor, "Campo funcao nao pode ser nulo ou vazio.");
 			this.mapaEmailPesquisador.get(email).setFuncao(novoValor);
@@ -83,11 +96,14 @@ public class PesquisadorController {
 			throw new IllegalArgumentException("Atributo invalido.");
 		}
 	}
-	
+
 	/**
-	 * Retorna a representacao em texto de um Pesquisador ja cadastrado no controlador
-	 * @param email email identificador do pesquisador a ser exibido
-	 * @return representacao em texto de um Pesquisador ja cadastrado 
+	 * Retorna a representacao em texto de um Pesquisador ja cadastrado no
+	 * controlador
+	 * 
+	 * @param email
+	 *            email identificador do pesquisador a ser exibido
+	 * @return representacao em texto de um Pesquisador ja cadastrado
 	 */
 	public String exibePesquisador(String email) {
 		Verificador.verificaEmail(email, "Formato de email invalido.");
@@ -97,10 +113,12 @@ public class PesquisadorController {
 		}
 		return this.mapaEmailPesquisador.get(email).toString();
 	}
-	
+
 	/**
 	 * Ativa um pesquisador que esta atualmente inativo
-	 * @param email email identificador do pesquisador a ser ativo
+	 * 
+	 * @param email
+	 *            email identificador do pesquisador a ser ativo
 	 */
 	public void ativaPesquisador(String email) {
 		Verificador.verificaEmail(email, "Formato de email invalido.");
@@ -110,10 +128,12 @@ public class PesquisadorController {
 		}
 		this.mapaEmailPesquisador.get(email).setAtividade("Ativo");
 	}
-	
+
 	/**
 	 * Desativa um pesquisador atualmente ativo
-	 * @param email email identificador do pesquisador a ser desativado
+	 * 
+	 * @param email
+	 *            email identificador do pesquisador a ser desativado
 	 */
 	public void desativaPesquisador(String email) {
 		Verificador.verificaEmail(email, "Formato de email invalido.");
@@ -123,10 +143,13 @@ public class PesquisadorController {
 		}
 		this.mapaEmailPesquisador.get(email).setAtividade("Inativo");
 	}
-	
+
 	/**
-	 * Verifica se um pesquisador especifico esta ativo e retorna o valor booleano referente a verificacao
-	 * @param email email do pesquisador a ser verificado
+	 * Verifica se um pesquisador especifico esta ativo e retorna o valor booleano
+	 * referente a verificacao
+	 * 
+	 * @param email
+	 *            email do pesquisador a ser verificado
 	 * @return valor booleano referente a atividade do pesquisador
 	 */
 	public boolean pesquisadorEhAtivo(String email) {
@@ -138,14 +161,22 @@ public class PesquisadorController {
 		}
 		return false;
 	}
-	
-	
-	  	public void ProcurarPalavra(String palavra) {
-			Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
-		List <Pesquisador> listaPesquisadores = new ArrayList<>(this.mapaEmailPesquisador.values());
-		for(Pesquisador pesquisador : listaPesquisadores) {
-			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavraEmPesquisador(palavra,pesquisador.getBiografia(),pesquisador.getEmail()));
+
+	/**
+	 * Procura, nos dados da entidade Pesquisador, por um termo informado pelo
+	 * usuario
+	 * 
+	 * @param palavra,
+	 *            o termo, informado pelo usuario, que sera pesquisado nos dados da
+	 *            entidade
+	 */
+	public void ProcurarPalavra(String palavra) {
+		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
+		List<Pesquisador> listaPesquisadores = new ArrayList<>(this.mapaEmailPesquisador.values());
+		for (Pesquisador pesquisador : listaPesquisadores) {
+			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavraEmPesquisador(palavra,
+					pesquisador.getBiografia(), pesquisador.getEmail()));
 		}
 	}
-	 
+
 }
