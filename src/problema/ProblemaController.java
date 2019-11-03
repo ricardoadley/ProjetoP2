@@ -40,17 +40,17 @@ public class ProblemaController {
 	/**
 	 * Adiciona um objeto do tipo Problema no mapa de problemas.
 	 * 
-	 * @param descricao descricao do problema
+	 * @param descricao   descricao do problema
 	 * @param viabilidade representacao quantitativa do quanto o problema e viavel
 	 */
 	public String cadastraProblema(String descricao, String viabilidade) {
 
 		Verificador.verificaEntrada(descricao, "Campo descricao nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(viabilidade, "Campo viabilidade nao pode ser nulo ou vazio.");
-		Verificador.verificaFormatoNumerico(viabilidade, "Valor invalido de viabilidade.");  
+		Verificador.verificaFormatoNumerico(viabilidade, "Valor invalido de viabilidade.");
 
 		int viabilidadeInt = Integer.parseInt(viabilidade);
-		if (viabilidadeInt < 1 || viabilidadeInt > 5) { 
+		if (viabilidadeInt < 1 || viabilidadeInt > 5) {
 			throw new IllegalArgumentException("Valor invalido de viabilidade.");
 		}
 
@@ -58,7 +58,7 @@ public class ProblemaController {
 		problemas.put(codigo, new Problema(descricao, viabilidadeInt, codigo));
 		this.code++;
 		return codigo;
-	} 
+	}
 
 	/**
 	 * Remove um Problema do mapa de problemas.
@@ -69,22 +69,24 @@ public class ProblemaController {
 
 		Verificador.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 
-		if (!problemas.containsKey(codigo)) { 
+		if (!problemas.containsKey(codigo)) {
 			throw new IllegalArgumentException("Problema nao encontrado");
-		} 
+		}
 
-		problemas.remove(codigo); 
+		problemas.remove(codigo);
 
 	}
 
 	/**
-	 * Retorna a representacao em String de um Problema, no formato "codigo - descricao - viabilidade".
+	 * Retorna a representacao em String de um Problema, no formato "codigo -
+	 * descricao - viabilidade".
 	 * 
 	 * @param codigo o codigo pelo qual o Problema e identificado unicamente
 	 * @return a representacao em String de um problema
 	 */
 	public String exibeProblema(String codigo) {
-		Verificador.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio."); //add by RASS, it's not in specification
+		Verificador.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio."); // add by RASS, it's not in
+																							// specification
 		if (!problemas.containsKey(codigo)) {
 			throw new IllegalArgumentException("Problema nao encontrado");
 		}
@@ -92,12 +94,17 @@ public class ProblemaController {
 		return problemas.get(codigo).toString();
 
 	}
+
+	public Problema getProblema(String idProblema) {
+		return this.problemas.get(idProblema);
+	}
 	
-	  	public void ProcurarPalavra(String palavra) {
-		List <Problema> listaProblemas = new ArrayList<>(this.problemas.values());
-		for(Problema problema : listaProblemas) {
-			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavra(palavra,problema.getCodigo()+":"+problema.getDescricao()));
+	public void procurarPalavra(String palavra) {
+		List<Problema> listaProblemas = new ArrayList<>(this.problemas.values());
+		for (Problema problema : listaProblemas) {
+			BuscadorPalavra.adicionaEncontrado(
+					BuscadorPalavra.procuraPalavra(palavra, problema.getCodigo() + ":" + problema.getDescricao()));
 		}
 	}
-	 
+
 }
