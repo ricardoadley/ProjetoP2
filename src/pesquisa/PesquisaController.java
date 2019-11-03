@@ -1,6 +1,7 @@
 package pesquisa;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -172,16 +173,28 @@ public class PesquisaController {
 		if (mapaPesquisas.containsKey(id)) {
 			int indice = (int) id.charAt(id.length() - 1);
 			indice++;
-			return id.replace(id.charAt(id.length() - 1), (char) indice);
+			return id.replace(id.charAt(id.length()-1), (char) indice);
 		}
 		return id;
 	}
-
+/*
+ * 	//List<Cliente> clientes = new ArrayList<>(this.clientes.values());
+//	Collections.sort(clientes, new ComparadorDeCliente());
+//	String retorno = "";
+//	for (Cliente cliente : clientes) {
+//		retorno = retorno + cliente.toString() + " | ";
+//	}
+//	return retorno.substring(0, retorno.length() - 3);
+ */
 	public void ProcurarPalavraPesquisa(String palavra) {
+		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
 		List<Pesquisa> listaPesquisas = new ArrayList<>(this.mapaPesquisas.values());
+		Collections.sort(listaPesquisas,new ComparadorPesquisa());
 		for (Pesquisa pesquisa : listaPesquisas) {
 			BuscadorPalavra.adicionaEncontrado(
 					BuscadorPalavra.procuraPalavra(palavra, pesquisa.getCodigo() + ":" + pesquisa.getDescricao()));
+			BuscadorPalavra.adicionaEncontrado(
+					BuscadorPalavra.procuraPalavraEmPesquisa(palavra, pesquisa.getCodigo() + ":" + pesquisa.getDescricao()+pesquisa.getCampo(),pesquisa.getCampo().length()));
 
 		}
 	}

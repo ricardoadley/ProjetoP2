@@ -2,6 +2,7 @@ package atividades;
 
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -140,7 +141,9 @@ public class ControladorAtividade {
 		return this.atividades.get(codigo);
 	}
 	public void ProcurarPalavra(String palavra) {
+		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
 		List <Atividade> listaAtividades = new ArrayList<>(this.atividades.values());
+		Collections.sort(listaAtividades, new ComparadorAtividade());
 		for(Atividade atividade : listaAtividades) {
 			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavra(palavra,atividade.getCodigo()+":"+atividade.getDescricao()));
 			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavra(palavra,atividade.getCodigo()+":"+atividade.getDescricaoRisco()));

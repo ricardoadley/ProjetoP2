@@ -141,9 +141,10 @@ public class PesquisadorController {
 	
 	
 	  	public void ProcurarPalavra(String palavra) {
+			Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
 		List <Pesquisador> listaPesquisadores = new ArrayList<>(this.mapaEmailPesquisador.values());
 		for(Pesquisador pesquisador : listaPesquisadores) {
-			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavra(palavra,pesquisador.getEmail()+":"+pesquisador.getBiografia()));
+			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavraEmPesquisador(palavra,pesquisador.getBiografia(),pesquisador.getEmail()));
 		}
 	}
 	 

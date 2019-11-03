@@ -1,11 +1,12 @@
 package problema;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import atividades.Atividade;
+
 import sistema.BuscadorPalavra;
 import sistema.Verificador;
 
@@ -100,7 +101,9 @@ public class ProblemaController {
 	}
 	
 	public void procurarPalavra(String palavra) {
+		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
 		List<Problema> listaProblemas = new ArrayList<>(this.problemas.values());
+		Collections.sort(listaProblemas, new ComparadorProblema());
 		for (Problema problema : listaProblemas) {
 			BuscadorPalavra.adicionaEncontrado(
 					BuscadorPalavra.procuraPalavra(palavra, problema.getCodigo() + ":" + problema.getDescricao()));

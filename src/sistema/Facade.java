@@ -1,9 +1,9 @@
 package sistema;
 
 import atividades.ControladorAtividade;
-import objetivo.ObjetivoController;
+//import objetivo.ObjetivoController;
 import pesquisador.PesquisadorController;
-import problema.ProblemaController;
+//import problema.ProblemaController;
 import pesquisa.PesquisaController;
 
 /**
@@ -127,6 +127,14 @@ public class Facade {
 		return pesquisaController.pesquisaEhAtiva(codigo);
 	}
 
+	public String busca(String termo) {
+		pesquisaController.ProcurarPalavraPesquisa(termo); 
+		pesquisadorController.ProcurarPalavra(termo);
+		pesquisaController.procurarPalavraProblema(termo); 
+		pesquisaController.procurarPalavraObjetivo(termo);
+		controlaAtividade.ProcurarPalavra(termo);
+		return buscador.retornaEncontradas();
+	}
 	public String busca(String termo, int numeroResultado) {
 		pesquisaController.ProcurarPalavraPesquisa(termo); //metodo ta no pesquisaController
 		controlaAtividade.ProcurarPalavra(termo);
@@ -135,7 +143,18 @@ public class Facade {
 		pesquisaController.procurarPalavraObjetivo(termo); //metodo ta no pesquisaController que chama o do objetivoController
 		
 		pesquisadorController.ProcurarPalavra(termo);
-		return buscador.retornaEncontradas(numeroResultado);
+		return buscador.retornaEncontradasNumeroResultado(numeroResultado);
+	}
+	public int contaResultadosBusca(String termo) {
+		pesquisaController.ProcurarPalavraPesquisa(termo); //metodo ta no pesquisaController
+		controlaAtividade.ProcurarPalavra(termo);
+		
+		pesquisaController.procurarPalavraProblema(termo); //metodo ta no pesquisaController que chama o do problemaController
+		pesquisaController.procurarPalavraObjetivo(termo); //metodo ta no pesquisaController que chama o do objetivoController
+		
+		pesquisadorController.ProcurarPalavra(termo);
+		return buscador.retornaQuantidadeDeResultados();
+				
 	}
 
 	//Jose Matheus (US5)
