@@ -106,7 +106,7 @@ public class ProblemaController {
 		Collections.sort(listaProblemas, new ComparadorProblema());
 		for (Problema problema : listaProblemas) {
 			BuscadorPalavra.adicionaEncontrado(
-					BuscadorPalavra.procuraPalavra(palavra, problema.getCodigo() + ":" + problema.getDescricao()));
+					BuscadorPalavra.procuraPalavra(palavra, problema.getCodigo() + ": " + problema.getDescricao()));
 		}
 	}
 

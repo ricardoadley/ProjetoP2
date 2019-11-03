@@ -145,8 +145,8 @@ public class ControladorAtividade {
 		List <Atividade> listaAtividades = new ArrayList<>(this.atividades.values());
 		Collections.sort(listaAtividades, new ComparadorAtividade());
 		for(Atividade atividade : listaAtividades) {
-			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavra(palavra,atividade.getCodigo()+":"+atividade.getDescricao()));
-			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavra(palavra,atividade.getCodigo()+":"+atividade.getDescricaoRisco()));
+			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavra(palavra,atividade.getCodigo()+": "+atividade.getDescricao()));
+			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavra(palavra,atividade.getCodigo()+": "+atividade.getDescricaoRisco()));
 			atividade.pesquisaItem(palavra);
 		}
 	}

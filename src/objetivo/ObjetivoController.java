@@ -122,7 +122,7 @@ public class ObjetivoController {
 		Collections.sort(listaObjetivos, new ComparadorObjetivo());
 		for (Objetivo objetivo : listaObjetivos) {
 			BuscadorPalavra.adicionaEncontrado(
-					BuscadorPalavra.procuraPalavra(palavra, objetivo.getCodigo() + ":" + objetivo.getDescricao()));
+					BuscadorPalavra.procuraPalavra(palavra, objetivo.getCodigo() + ": " + objetivo.getDescricao()));
 		}
 	}
 

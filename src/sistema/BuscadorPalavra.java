@@ -8,6 +8,7 @@ public class BuscadorPalavra{
 
 	public BuscadorPalavra() {
 		encontradas = new ArrayList<>();
+		encontradas.clear();
 	}
 	public static String procuraPalavra(String palavra, String frase) {
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");;
@@ -51,19 +52,24 @@ public class BuscadorPalavra{
 	public String retornaEncontradasNumeroResultado(int numeroDoResultado) {
 		String retorno="";
 		if(numeroDoResultado < 0) {
+			encontradas.clear();
 			throw new IllegalArgumentException("Numero do resultado nao pode ser negativo");
 		}
 		if(numeroDoResultado > encontradas.size()) {
+			encontradas.clear();
 			throw new IllegalArgumentException("Entidade nao encontrada.");
 		}
-		retorno = encontradas.get(numeroDoResultado);
+		retorno = encontradas.get(numeroDoResultado-1);
 		encontradas.clear();
 		return retorno;
 	}
 	public int retornaQuantidadeDeResultados() {
 		int retorno;
+		if(encontradas.size() == 0) {
+			throw new IllegalArgumentException("Nenhum resultado encontrado");
+		}
 		retorno = encontradas.size();
-		encontradas.clear();
+		//encontradas.clear();
 		return retorno;
 	}
 
