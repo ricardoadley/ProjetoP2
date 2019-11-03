@@ -2,6 +2,7 @@ package atividades;
 
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,11 +16,11 @@ import sistema.Verificador;
  * 
  * @author Ricardo A. S. Sena
  *
- */ 
+ */
 public class ControladorAtividade {
-	
+
 	/*
-	 * Mapa de atividades do tipo <String, Atividade> 
+	 * Mapa de atividades do tipo <String, Atividade>
 	 */
 	HashMap<String, Atividade> atividades;
 	/**
@@ -38,9 +39,12 @@ public class ControladorAtividade {
 	/**
 	 * Cadastra um objeto do tipo Atividade no mapa de atividades
 	 * 
-	 * @param descricao,      a descricao da atividade que sera cadastrada
-	 * @param nivelRisco,     o nivel de risco da atividade que sera cadastrada
-	 * @param descricaoRisco, a descricao do risco da atividade
+	 * @param descricao,
+	 *            a descricao da atividade que sera cadastrada
+	 * @param nivelRisco,
+	 *            o nivel de risco da atividade que sera cadastrada
+	 * @param descricaoRisco,
+	 *            a descricao do risco da atividade
 	 * @return retorna o codigo da atividade cadastrada
 	 */
 	public String cadastraAtividade(String descricao, String nivelRisco, String descricaoRisco) {
@@ -61,7 +65,8 @@ public class ControladorAtividade {
 	/**
 	 * Remove um objeto do tipo atividade do mapa de atividades
 	 * 
-	 * @param codigo , o codigo da atividade que sera removida
+	 * @param codigo
+	 *            , o codigo da atividade que sera removida
 	 */
 	public void apagaAtividade(String codigo) {
 		Verificador.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
@@ -75,8 +80,10 @@ public class ControladorAtividade {
 	/**
 	 * Cadastra um novo item a uma atividade presente no mapa de atividades
 	 * 
-	 * @param codigo, o codigo da atividade que recebera o item
-	 * @param item,   o item que sera cadastrado na atividade
+	 * @param codigo,
+	 *            o codigo da atividade que recebera o item
+	 * @param item,
+	 *            o item que sera cadastrado na atividade
 	 */
 	public void cadastraItem(String codigo, String item) {
 		Verificador.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
@@ -91,7 +98,8 @@ public class ControladorAtividade {
 	/**
 	 * Exibe uma atividade presente no mapa
 	 * 
-	 * @param codigo, o codigo da atividade que sera exibida
+	 * @param codigo,
+	 *            o codigo da atividade que sera exibida
 	 * @return retorna a representacao em string da atividade
 	 */
 	public String exibeAtividade(String codigo) {
@@ -104,7 +112,8 @@ public class ControladorAtividade {
 	/**
 	 * Conta o total de itens com status de pendente em uma atividade
 	 * 
-	 * @param codigo, o codigo da atividade a qual os itens pertencem
+	 * @param codigo,
+	 *            o codigo da atividade a qual os itens pertencem
 	 * @return retorna um inteiro representando a soma de itens com status pendente
 	 */
 	public int contaItensPendentes(String codigo) {
@@ -118,7 +127,8 @@ public class ControladorAtividade {
 	/**
 	 * Conta o total de itens com status de realizado em uma atividade
 	 * 
-	 * @param codigo, o codigo da atividade ao qual os itens pertencem
+	 * @param codigo,
+	 *            o codigo da atividade ao qual os itens pertencem
 	 * @return retorna um inteiro representando a soma dos itens com status
 	 *         realizado
 	 */
@@ -139,11 +149,22 @@ public class ControladorAtividade {
 	private Atividade capturaAtividadeNoMapa(String codigo) {
 		return this.atividades.get(codigo);
 	}
+
+	/**
+	 * Pesquisa,nos dados da entidade Atividade, por um termo informado pelo usuario
+	 * 
+	 * @param palavra,
+	 *            o termo informado pelo usuario
+	 */
 	public void ProcurarPalavra(String palavra) {
-		List <Atividade> listaAtividades = new ArrayList<>(this.atividades.values());
-		for(Atividade atividade : listaAtividades) {
-			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavra(palavra,atividade.getCodigo()+":"+atividade.getDescricao()));
-			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavra(palavra,atividade.getCodigo()+":"+atividade.getDescricaoRisco()));
+		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
+		List<Atividade> listaAtividades = new ArrayList<>(this.atividades.values());
+		Collections.sort(listaAtividades, new ComparadorAtividade());
+		for (Atividade atividade : listaAtividades) {
+			BuscadorPalavra.adicionaEncontrado(
+					BuscadorPalavra.procuraPalavra(palavra, atividade.getCodigo() + ": " + atividade.getDescricao()));
+			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavra(palavra,
+					atividade.getCodigo() + ": " + atividade.getDescricaoRisco()));
 			atividade.pesquisaItem(palavra);
 		}
 	}
