@@ -136,23 +136,29 @@ public class Facade {
 		return buscador.retornaEncontradas();
 	}
 	public String busca(String termo, int numeroResultado) {
-		pesquisaController.ProcurarPalavraPesquisa(termo); //metodo ta no pesquisaController
-		controlaAtividade.ProcurarPalavra(termo);
-		
-		pesquisaController.procurarPalavraProblema(termo); //metodo ta no pesquisaController que chama o do problemaController
-		pesquisaController.procurarPalavraObjetivo(termo); //metodo ta no pesquisaController que chama o do objetivoController
-		
+//		pesquisaController.ProcurarPalavraPesquisa(termo); 
+//		controlaAtividade.ProcurarPalavra(termo);	
+//		pesquisaController.procurarPalavraProblema(termo); 
+//		pesquisaController.procurarPalavraObjetivo(termo); 		
+//		pesquisadorController.ProcurarPalavra(termo);
+		pesquisaController.ProcurarPalavraPesquisa(termo); 
 		pesquisadorController.ProcurarPalavra(termo);
+		pesquisaController.procurarPalavraProblema(termo); 
+		pesquisaController.procurarPalavraObjetivo(termo);
+		controlaAtividade.ProcurarPalavra(termo);
 		return buscador.retornaEncontradasNumeroResultado(numeroResultado);
 	}
 	public int contaResultadosBusca(String termo) {
-		pesquisaController.ProcurarPalavraPesquisa(termo); //metodo ta no pesquisaController
-		controlaAtividade.ProcurarPalavra(termo);
-		
-		pesquisaController.procurarPalavraProblema(termo); //metodo ta no pesquisaController que chama o do problemaController
-		pesquisaController.procurarPalavraObjetivo(termo); //metodo ta no pesquisaController que chama o do objetivoController
-		
+//		pesquisaController.ProcurarPalavraPesquisa(termo); 
+//		controlaAtividade.ProcurarPalavra(termo);		
+//		pesquisaController.procurarPalavraProblema(termo); 
+//		pesquisaController.procurarPalavraObjetivo(termo);		
+//		pesquisadorController.ProcurarPalavra(termo);
+		pesquisaController.ProcurarPalavraPesquisa(termo); 
 		pesquisadorController.ProcurarPalavra(termo);
+		pesquisaController.procurarPalavraProblema(termo); 
+		pesquisaController.procurarPalavraObjetivo(termo);
+		controlaAtividade.ProcurarPalavra(termo);
 		return buscador.retornaQuantidadeDeResultados();
 				
 	}
