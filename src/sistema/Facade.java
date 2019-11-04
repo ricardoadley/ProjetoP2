@@ -127,6 +127,10 @@ public class Facade {
 		return pesquisaController.pesquisaEhAtiva(codigo);
 	}
 
+	public String listaPesquisas(String ordem) {
+		return pesquisaController.listaPesquisar(ordem);
+	}
+	
 	public String busca(String termo) {
 		pesquisaController.ProcurarPalavraPesquisa(termo); 
 		pesquisadorController.ProcurarPalavra(termo);
@@ -170,5 +174,7 @@ public class Facade {
 	public String desassociaObjetivo(String idPesquisa, String idObjetivo) {
 		return this.pesquisaController.desassociaObjetivo(idPesquisa, idObjetivo);
 	}
+	
+	
 	
 }

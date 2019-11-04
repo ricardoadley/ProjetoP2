@@ -2,6 +2,8 @@ package sistema;
 
 import java.util.Map;
 
+import pesquisa.Pesquisa;
+
 /**
  * Classe responsavel por verificar entradas do usuario e, caso necessario,
  * lancar as excecoes correspondentes.
@@ -102,4 +104,10 @@ public class Verificador {
 		}
 	}
 
+	public static void verificaEhAtiva(Map<String, Pesquisa> pesquisas, String codigo, String aviso) {
+		if(!pesquisas.get(codigo).isAtivada()) {
+			throw new IllegalArgumentException(aviso);
+		}
+	}
+	
 }
