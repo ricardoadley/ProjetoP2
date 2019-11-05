@@ -87,11 +87,11 @@ public class Pesquisa {
 	public void adicionaObjetivo(String idObjetivo, Objetivo objetivo) {
 		this.objetivos.put(idObjetivo, objetivo);
 	}
-	
+
 	public void removeObjetivo(String idObjetivo) {
 		this.objetivos.remove(idObjetivo);
 	}
-	
+
 	public boolean contemProblema() {
 
 		if (this.problema == null) {
@@ -103,21 +103,21 @@ public class Pesquisa {
 	}
 
 	public boolean contemObjetivo(String idObjetivo) {
-		
+
 		if (this.objetivos.containsKey(idObjetivo)) {
 			return true;
 		}
-		
+
 		else {
 			return false;
 		}
-		
+
 	}
-	
+
 	public Problema getProblema() {
 		return this.problema;
 	}
-	
+
 	public boolean isAtivada() {
 		if (this.status.equalsIgnoreCase("Ativa")) {
 			return true;
