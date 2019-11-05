@@ -5,9 +5,10 @@ import java.util.Comparator;
 public class PesquisaProblemaComparator implements Comparator<Pesquisa>{
 
 	@Override
-	public int compare(Pesquisa arg0, Pesquisa arg1) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int compare(Pesquisa pesquisa, Pesquisa outraPesquisa) {
+		
+		return pesquisa.getProblema().getCodigo().compareTo(outraPesquisa.getProblema().getCodigo());
+		
 	}
 
 }
