@@ -190,9 +190,8 @@ public class PesquisaController {
 		for (Pesquisa pesquisa : listaPesquisas) {
 			BuscadorPalavra.adicionaEncontrado(
 					BuscadorPalavra.procuraPalavra(palavra, pesquisa.getCodigo() + ": " + pesquisa.getDescricao()));
-			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavraEmPesquisa(palavra,
-					pesquisa.getCodigo() + ": " + pesquisa.getDescricao() + pesquisa.getCampo(),
-					pesquisa.getCampo().length()));
+			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavra(palavra,
+					pesquisa.getCodigo() + ": "+pesquisa.getCampo()));
 
 		}
 	}

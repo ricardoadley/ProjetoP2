@@ -50,22 +50,6 @@ public class BuscadorPalavra{
 		}
 	}
 	/**
-	 * Procura, na entidade pesquisa, por um termo informado pelo usuario
-	 * @param palavra, o termo que sera pesquisado
-	 * @param frase, a frase em que o termo srra pesquisado
-	 * @param tcampo, o tamanho da string referente a campo de interesse para que o mesmo seja removido da exibicao
-	 * @return retorna a frase referente a descricao da pesquisa, caso o termo pesquisado
-	 * esteja na descricao ou no campo de interesse da pesquisa
-	 */
-	public static String procuraPalavraEmPesquisa(String palavra, String frase, int tcampo) {
-		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");;
-		if(frase.toLowerCase().contains(palavra.toLowerCase())) {
-			return frase.substring(0,frase.length() - tcampo);
-		}else {
-			return "";
-		}
-	}
-	/**
 	 * Adiciona a frase com o termo pesquisado encontrada durante as pesquisas nas entidades
 	 * em uma lista de frases encontradas
 	 * @param frase , a frase contendo o termo encontrado
