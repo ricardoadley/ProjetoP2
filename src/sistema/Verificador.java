@@ -110,4 +110,25 @@ public class Verificador {
 		}
 	}
 	
+	public static void verificaSemestre(int semestre, String aviso) {
+		if (semestre < 1) {
+			throw new IllegalArgumentException(aviso);
+		}
+	}
+	
+	public static void verificaIEA(double iea, String aviso) {
+		if (iea < 0.0 || iea > 10.0) {
+			throw new IllegalArgumentException(aviso);
+		}
+	}
+	
+	public static void verificaData(String data, String aviso) {
+		if (data.length() < 10) {
+			throw new IllegalArgumentException(aviso);
+		}
+		if (!data.contains("/")) {
+			throw new IllegalArgumentException(aviso);
+		}
+	}
+	
 }

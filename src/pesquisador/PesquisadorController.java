@@ -92,7 +92,19 @@ public class PesquisadorController {
 			Verificador.verificaEntrada(novoValor, "Campo fotoURL nao pode ser nulo ou vazio.");
 			Verificador.verificaFotoURL(novoValor, "Formato de foto invalido.");
 			this.mapaEmailPesquisador.get(email).setFotoURL(novoValor);
-		} else {
+		} else if (atributo.equals("SEMESTRE")){
+			Verificador.verificaEntrada(novoValor, "Campo semestre nao pode ser nulo ou vazio.");
+			Verificador.verificaSemestre(novoValor, "Atributo semestre com formato invalido.");
+		} else if (atributo.equals("IEA")){
+			Verificador.verificaEntrada(novoValor, "Campo iea nao pode ser nulo ou vazio.");
+		} else if (atributo.equals("FORMACAO")){
+			Verificador.verificaEntrada(novoValor, "Campo formacao nao pode ser nulo ou vazio.");
+		} else if (atributo.equals("UNIDADE")){
+			Verificador.verificaEntrada(novoValor, "Campo unidade nao pode ser nulo ou vazio.");
+		} else if (atributo.equals("DATA")){
+			Verificador.verificaEntrada(novoValor, "Campo data nao pode ser nulo ou vazio.");
+			Verificador.verificaData(novoValor, "Atributo data ncom formato invalido.");
+		}else {
 			throw new IllegalArgumentException("Atributo invalido.");
 		}
 	}
@@ -178,5 +190,23 @@ public class PesquisadorController {
 					pesquisador.getBiografia(), pesquisador.getEmail()));
 		}
 	}
+		
+	private void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
+		Professor p = (Professor) mapaEmailPesquisador.get(email);
+		p.setFormacao(formacao);
+		p.setUnidade(unidade);
+		p.setData(data);
+	}
+	
+	private void cadastraEspecialidadeAluno(String email, int semestre, double iea)	{
+		Aluno a = (Aluno) mapaEmailPesquisador.get(email);
+		a.setSemestre(semestre);
+		a.setIea(iea);
+	}
+	 
+	private String listaPesquisadores(String tipo) {
+		return "";
+	}
+	
 
 }
