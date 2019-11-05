@@ -128,7 +128,7 @@ public class Facade {
 	}
 
 	public String listaPesquisas(String ordem) {
-		return pesquisaController.listaPesquisar(ordem);
+		return pesquisaController.listaPesquisas(ordem);
 	}
 	
 	public String busca(String termo) {

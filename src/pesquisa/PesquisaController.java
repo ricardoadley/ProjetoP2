@@ -227,7 +227,7 @@ public class PesquisaController {
 		verificador.verificaEntrada(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
 		verificador.existeChave(mapaPesquisas, idPesquisa, "Pesquisa nao encontrada.");
 		verificador.verificaEhAtiva(this.mapaPesquisas, idPesquisa, "Pesquisa desativada.");
-		
+
 		if (this.mapaPesquisas.get(idPesquisa).contemObjetivo(idObjetivo)) {
 			return "false";
 		}
@@ -259,7 +259,7 @@ public class PesquisaController {
 		verificador.verificaEntrada(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
 		verificador.existeChave(mapaPesquisas, idPesquisa, "Pesquisa nao encontrada.");
 		verificador.verificaEhAtiva(this.mapaPesquisas, idPesquisa, "Pesquisa desativada.");
-		
+
 		if (!this.mapaPesquisas.get(idPesquisa).contemObjetivo(idObjetivo)) {
 			return "false";
 		}
@@ -306,7 +306,7 @@ public class PesquisaController {
 		verificador.verificaEntrada(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
 		verificador.existeChave(this.mapaPesquisas, idPesquisa, "Pesquisa nao encontrada.");
 		verificador.verificaEhAtiva(this.mapaPesquisas, idPesquisa, "Pesquisa desativada.");
-		
+
 		if (this.problemaController.getProblema(idProblema).equals(this.mapaPesquisas.get(idPesquisa).getProblema())) {
 			return "false";
 		}
@@ -338,7 +338,7 @@ public class PesquisaController {
 		verificador.verificaEntrada(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
 		verificador.existeChave(this.mapaPesquisas, idPesquisa, "Pesquisa nao encontrada.");
 		verificador.verificaEhAtiva(this.mapaPesquisas, idPesquisa, "Pesquisa desativada.");
-		
+
 		if (!this.mapaPesquisas.get(idPesquisa).contemProblema()) {
 			return "false";
 		}
@@ -348,12 +348,40 @@ public class PesquisaController {
 
 	}
 
-	public String listaPesquisar(String ordem) {
+	/**
+	 * Lista pesquisas de acordo com o tipo de ordenacao desejada.
+	 * 
+	 * @param ordem a ordem com que se deseja listar as pesquisas
+	 * @return retorna a String correspondente as informacoes de todas as pesquisas
+	 */
+	public String listaPesquisas(String ordem) {
+
+		if (!(ordem.equalsIgnoreCase("PROBLEMA") || ordem.equalsIgnoreCase("OBJETIVOS")
+				|| ordem.equalsIgnoreCase("PESQUISA"))) {
+			throw new IllegalArgumentException("Valor invalido da ordem");
+		}
+
+		ArrayList<Pesquisa> valores = new ArrayList<>(this.mapaPesquisas.values());
+		String valoresOrdenados = "";
+
+		if (ordem.equalsIgnoreCase("PESQUISA")) {
+
+			Collections.sort(valores, new ComparadorPesquisa());
+			
+			for (int i = 0; i < valores.size(); i++) {
+
+				valoresOrdenados += valores.get(i).toString() + " | ";
+
+			}
+
+			return valoresOrdenados.substring(0, valoresOrdenados.length() - 3);
+
+		}
 		
-		return "a";
-		
+		else {
+			return "a";
+		}
+
 	}
 
-	
-	
 }
