@@ -7,30 +7,21 @@ public class PesquisaProblemaComparator implements Comparator<Pesquisa> {
 	@Override
 	public int compare(Pesquisa pesquisa, Pesquisa outraPesquisa) {
 
-		if (pesquisa.contemProblema() && pesquisa.contemProblema()) {
-
-			return ((pesquisa.verificaProblema() + pesquisa.getCodigo() + pesquisa.getProblema().getCodigo())
-					.compareTo(outraPesquisa.verificaProblema() + outraPesquisa.getCodigo()
-							+ outraPesquisa.getProblema().getCodigo()));
+		if (Integer.parseInt(
+				pesquisa.getProblema().getCodigo().substring(pesquisa.getProblema().getCodigo().length() - 1)) < Integer
+						.parseInt(outraPesquisa.getProblema().getCodigo()
+								.substring(outraPesquisa.getProblema().getCodigo().length() - 1))) {
+			return 1;
 		}
 
-		if (pesquisa.contemProblema() && !pesquisa.contemProblema()) {
-			return ((pesquisa.verificaProblema() + pesquisa.getCodigo() + pesquisa.getProblema().getCodigo())
-					.compareTo(outraPesquisa.verificaProblema() + outraPesquisa.getCodigo()));
+		if (Integer.parseInt(
+				pesquisa.getProblema().getCodigo().substring(pesquisa.getProblema().getCodigo().length() - 1)) > Integer
+						.parseInt(outraPesquisa.getProblema().getCodigo()
+								.substring(outraPesquisa.getProblema().getCodigo().length() - 1))) {
+			return -1;
 		}
 
-		if (!pesquisa.contemProblema() && pesquisa.contemProblema()) {
-
-			return (pesquisa.verificaProblema() + pesquisa.getCodigo().compareTo(outraPesquisa.verificaProblema()
-					+ outraPesquisa.getCodigo() + outraPesquisa.getProblema().getCodigo()));
-
-		}
-
-		else {
-			return (pesquisa.verificaProblema() + pesquisa.getCodigo())
-					.compareTo(outraPesquisa.verificaProblema() + outraPesquisa.getCodigo());
-		}
-
+		return 0;
 	}
 
 }

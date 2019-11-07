@@ -48,7 +48,6 @@ public class Pesquisa {
 		this.campo = campo;
 		this.codigo = codigo;
 		this.status = "Ativa";
-		this.problema = null;
 		this.objetivos = new HashMap<>();
 	}
 
@@ -114,6 +113,21 @@ public class Pesquisa {
 
 	}
 
+	public boolean contemObjetivos() {
+		if (this.objetivos.size() == 0) {
+			return false;
+		}
+
+		return true;
+
+	}
+
+	public int getQtdObjetivos() {
+
+		return this.objetivos.size();
+
+	}
+
 	public Problema getProblema() {
 		return this.problema;
 	}
@@ -126,16 +140,6 @@ public class Pesquisa {
 		else {
 			return false;
 		}
-
-	}
-
-	public int verificaProblema() {
-
-		if (this.problema == null) {
-			return 1;
-		}
-
-		return 0;
 
 	}
 
