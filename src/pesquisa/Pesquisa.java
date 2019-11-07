@@ -129,6 +129,16 @@ public class Pesquisa {
 
 	}
 
+	public int verificaProblema() {
+
+		if (this.problema == null) {
+			return 1;
+		}
+
+		return 0;
+
+	}
+
 	@Override
 	/**
 	 * Retorna uma representacao em string da pesquisa no formato CODIGO - DESCRICAO

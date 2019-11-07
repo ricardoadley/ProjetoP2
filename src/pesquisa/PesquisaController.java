@@ -190,8 +190,8 @@ public class PesquisaController {
 		for (Pesquisa pesquisa : listaPesquisas) {
 			BuscadorPalavra.adicionaEncontrado(
 					BuscadorPalavra.procuraPalavra(palavra, pesquisa.getCodigo() + ": " + pesquisa.getDescricao()));
-			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavra(palavra,
-					pesquisa.getCodigo() + ": "+pesquisa.getCampo()));
+			BuscadorPalavra.adicionaEncontrado(
+					BuscadorPalavra.procuraPalavra(palavra, pesquisa.getCodigo() + ": " + pesquisa.getCampo()));
 
 		}
 	}
@@ -220,7 +220,7 @@ public class PesquisaController {
 	 * @return return a String correspondente ao sucesso ou nao da operacao
 	 */
 	@SuppressWarnings("static-access")
-	public String associaObjetivo(String idPesquisa, String idObjetivo) {
+	public boolean associaObjetivo(String idPesquisa, String idObjetivo) {
 
 		verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		verificador.verificaEntrada(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
@@ -228,7 +228,7 @@ public class PesquisaController {
 		verificador.verificaEhAtiva(this.mapaPesquisas, idPesquisa, "Pesquisa desativada.");
 
 		if (this.mapaPesquisas.get(idPesquisa).contemObjetivo(idObjetivo)) {
-			return "false";
+			return false;
 		}
 
 		for (Pesquisa pesquisa : this.mapaPesquisas.values()) {
@@ -241,7 +241,7 @@ public class PesquisaController {
 
 		this.mapaPesquisas.get(idPesquisa).adicionaObjetivo(idObjetivo,
 				this.objetivoController.getObjetivo(idObjetivo));
-		return "sucesso";
+		return true;
 	}
 
 	/**
@@ -252,7 +252,7 @@ public class PesquisaController {
 	 * @return return a String correspondente ao sucesso ou nao da operacao
 	 */
 	@SuppressWarnings("static-access")
-	public String desassociaObjetivo(String idPesquisa, String idObjetivo) {
+	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
 
 		verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		verificador.verificaEntrada(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
@@ -260,11 +260,11 @@ public class PesquisaController {
 		verificador.verificaEhAtiva(this.mapaPesquisas, idPesquisa, "Pesquisa desativada.");
 
 		if (!this.mapaPesquisas.get(idPesquisa).contemObjetivo(idObjetivo)) {
-			return "false";
+			return false;
 		}
 
 		this.mapaPesquisas.get(idPesquisa).removeObjetivo(idObjetivo);
-		return "sucesso";
+		return true;
 	}
 
 	public void procurarPalavraObjetivo(String palavra) {
@@ -299,7 +299,7 @@ public class PesquisaController {
 	 * @return return a String correspondente ao sucesso ou nao da operacao
 	 */
 	@SuppressWarnings("static-access")
-	public String associaProblema(String idPesquisa, String idProblema) {
+	public boolean associaProblema(String idPesquisa, String idProblema) {
 
 		verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		verificador.verificaEntrada(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
@@ -307,7 +307,7 @@ public class PesquisaController {
 		verificador.verificaEhAtiva(this.mapaPesquisas, idPesquisa, "Pesquisa desativada.");
 
 		if (this.problemaController.getProblema(idProblema).equals(this.mapaPesquisas.get(idPesquisa).getProblema())) {
-			return "false";
+			return false;
 		}
 
 		if (this.mapaPesquisas.get(idPesquisa).contemProblema()) {
@@ -319,7 +319,7 @@ public class PesquisaController {
 		}
 
 		this.mapaPesquisas.get(idPesquisa).setProblema(this.problemaController.getProblema(idProblema));
-		return "sucesso";
+		return true;
 
 	}
 
@@ -331,7 +331,7 @@ public class PesquisaController {
 	 * @return return a String correspondente ao sucesso ou nao da operacao
 	 */
 	@SuppressWarnings("static-access")
-	public String desassociaProblema(String idPesquisa, String idProblema) {
+	public boolean desassociaProblema(String idPesquisa, String idProblema) {
 
 		verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		verificador.verificaEntrada(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
@@ -339,11 +339,11 @@ public class PesquisaController {
 		verificador.verificaEhAtiva(this.mapaPesquisas, idPesquisa, "Pesquisa desativada.");
 
 		if (!this.mapaPesquisas.get(idPesquisa).contemProblema()) {
-			return "false";
+			return false;
 		}
 
 		this.mapaPesquisas.get(idPesquisa).setProblema(null);
-		return "sucesso";
+		return true;
 
 	}
 
@@ -360,13 +360,14 @@ public class PesquisaController {
 			throw new IllegalArgumentException("Valor invalido da ordem");
 		}
 
-		ArrayList<Pesquisa> valores = new ArrayList<>(this.mapaPesquisas.values());
+		ArrayList<Pesquisa> valores = new ArrayList<Pesquisa>(this.mapaPesquisas.values());
 		String valoresOrdenados = "";
 
 		if (ordem.equalsIgnoreCase("PESQUISA")) {
 
-			Collections.sort(valores, new ComparadorPesquisa());
-			
+			Collections.sort(valores, new PesquisaIDComparator());
+			Collections.reverse(valores);
+
 			for (int i = 0; i < valores.size(); i++) {
 
 				valoresOrdenados += valores.get(i).toString() + " | ";
@@ -376,7 +377,21 @@ public class PesquisaController {
 			return valoresOrdenados.substring(0, valoresOrdenados.length() - 3);
 
 		}
-		
+
+		if (ordem.equalsIgnoreCase("PROBLEMA")) {
+
+			Collections.sort(valores, new PesquisaProblemaComparator());
+
+			for (int i = 0; i < valores.size(); i++) {
+
+				valoresOrdenados += valores.get(i).toString() + " | ";
+
+			}
+
+			return valoresOrdenados.substring(0, valoresOrdenados.length() - 3);
+
+		}
+
 		else {
 			return "a";
 		}

@@ -159,19 +159,19 @@ public class Facade {
 
 	//Jose Matheus (US5)
 	
-	public String associaProblema(String idPesquisa, String idProblema) {
+	public boolean associaProblema(String idPesquisa, String idProblema) {
 		return this.pesquisaController.associaProblema(idPesquisa, idProblema);
 	}
 	
-	public String desassociaProblema(String idPesquisa, String idProblema) {
+	public boolean desassociaProblema(String idPesquisa, String idProblema) {
 		return this.pesquisaController.desassociaProblema(idPesquisa, idProblema);
 	}
 	
-	public String associaObjetivo(String idPesquisa, String idObjetivo) {
+	public boolean associaObjetivo(String idPesquisa, String idObjetivo) {
 		return this.pesquisaController.associaObjetivo(idPesquisa, idObjetivo);
 	}
 	
-	public String desassociaObjetivo(String idPesquisa, String idObjetivo) {
+	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
 		return this.pesquisaController.desassociaObjetivo(idPesquisa, idObjetivo);
 	}
 	
