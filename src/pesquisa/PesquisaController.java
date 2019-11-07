@@ -363,6 +363,8 @@ public class PesquisaController {
 		ArrayList<Pesquisa> valores = new ArrayList<Pesquisa>(this.mapaPesquisas.values());
 		String valoresOrdenados = "";
 
+		ArrayList<Pesquisa> geral = new ArrayList<Pesquisa>();
+
 		if (ordem.equalsIgnoreCase("PESQUISA")) {
 
 			Collections.sort(valores, new PesquisaIDComparator());
@@ -380,11 +382,31 @@ public class PesquisaController {
 
 		if (ordem.equalsIgnoreCase("PROBLEMA")) {
 
-			Collections.sort(valores, new PesquisaProblemaComparator());
+			ArrayList<Pesquisa> pesquisasComProblema = new ArrayList<>();
+			ArrayList<Pesquisa> pesquisasSemProblema = new ArrayList<>();
 
-			for (int i = 0; i < valores.size(); i++) {
+			for (Pesquisa pesquisa : this.mapaPesquisas.values()) {
 
-				valoresOrdenados += valores.get(i).toString() + " | ";
+				if (pesquisa.contemProblema()) {
+					pesquisasComProblema.add(pesquisa);
+				}
+
+				else {
+					pesquisasSemProblema.add(pesquisa);
+				}
+
+			}
+
+			Collections.sort(pesquisasComProblema, new PesquisaProblemaComparator());
+			Collections.sort(pesquisasSemProblema, new PesquisaIDComparator());
+			Collections.reverse(pesquisasSemProblema);
+
+			geral.addAll(pesquisasComProblema);
+			geral.addAll(pesquisasSemProblema);
+
+			for (int i = 0; i < geral.size(); i++) {
+
+				valoresOrdenados += geral.get(i).toString() + " | ";
 
 			}
 
@@ -393,7 +415,37 @@ public class PesquisaController {
 		}
 
 		else {
-			return "a";
+
+			ArrayList<Pesquisa> pesquisasComObjetivos = new ArrayList<>();
+			ArrayList<Pesquisa> pesquisasSemObjetivos = new ArrayList<>();
+
+			for (Pesquisa pesquisa : this.mapaPesquisas.values()) {
+
+				if (pesquisa.contemObjetivos()) {
+					pesquisasComObjetivos.add(pesquisa);
+				}
+
+				else {
+					pesquisasSemObjetivos.add(pesquisa);
+				}
+
+			}
+
+			Collections.sort(pesquisasComObjetivos, new PesquisaObjetivosComparator());
+			Collections.sort(pesquisasSemObjetivos, new PesquisaIDComparator());
+			Collections.reverse(pesquisasSemObjetivos);
+			
+			geral.addAll(pesquisasComObjetivos);
+			geral.addAll(pesquisasSemObjetivos);
+
+			for (int i = 0; i < geral.size(); i++) {
+
+				valoresOrdenados += geral.get(i).toString() + " | ";
+
+			}
+
+			return valoresOrdenados.substring(0, valoresOrdenados.length() - 3);
+
 		}
 
 	}
