@@ -65,6 +65,9 @@ public class BuscadorPalavra{
 	 */
 	public String retornaEncontradas() {
 		String retorno = "";
+		if(encontradas.size() == 0) {
+			return retorno;
+		}
 		for(int i=0;i<encontradas.size();i++) {
 				retorno = retorno + encontradas.get(i)+" | ";
 		}
