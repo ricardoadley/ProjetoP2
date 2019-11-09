@@ -8,8 +8,12 @@ import problema.Problema;
 import sistema.Verificador;
 
 /**
+ * Classe que representa uma Pesquisa. Toda Pesquisa possui uma descricao, um
+ * campo, um status (ativada ou desativada), um codigo pelo qual e identificada
+ * unicamente. Alem disso, tambem pode estar ou nao associada a um Problema ou a
+ * um ou mais Objetivos.
  * 
- * @author Beatriz Truta
+ * @author Beatriz Truta, José Matheus do N. Gama
  *
  */
 public class Pesquisa {
@@ -30,7 +34,13 @@ public class Pesquisa {
 	 */
 	private String codigo;
 
+	/**
+	 * Problema ao qual a pesquisa esta associada.
+	 */
 	private Problema problema;
+	/**
+	 * Mapa de Objetivos associados a Pesquisa.
+	 */
 	private Map<String, Objetivo> objetivos;
 
 	/**
@@ -51,46 +61,102 @@ public class Pesquisa {
 		this.objetivos = new HashMap<>();
 	}
 
+	/**
+	 * Retorna a String que representa o status (ativada ou desativada) da Pesquisa
+	 * 
+	 * @return a String que representa o status (ativada ou desativada) da Pesquisa
+	 */
 	public String getStatus() {
 		return status;
 	}
 
+	/**
+	 * Modifica o status da Pesquisa para ativada ou desativada
+	 * 
+	 * @param a String que representa o novo status da Pesquisa
+	 */
 	public void setStatus(String status) {
 		this.status = status;
 	}
 
+	/**
+	 * Retorna a String que representa a descricao da Pesquisa
+	 * 
+	 * @return a String que representa a descricao da Pesquisa
+	 */
 	public String getDescricao() {
 		return descricao;
 	}
 
+	/**
+	 * Modifica a descricao da Pesquisa.
+	 * 
+	 * @param descricao a String que representa a nova descricao da Pesquisa.
+	 */
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
 
+	/**
+	 * Retorna a String que representa o campo de atuacao da Pesquisa
+	 * 
+	 * @return a String que representa o campo de atuacao da Pesquisa
+	 */
 	public String getCampo() {
 		return campo;
 	}
 
+	/**
+	 * Retorna a String que representa o identificador unico da Pesquisa
+	 * 
+	 * @returna String que representa o identificador unico da Pesquisa
+	 */
 	public String getCodigo() {
 		return codigo;
 	}
 
+	/**
+	 * Modifica o campo de atuacao da Pesquisa
+	 * 
+	 * @param campo o novo campo de atuacao da Pesquisa
+	 */
 	public void setCampo(String campo) {
 		this.campo = campo;
 	}
 
+	/**
+	 * Adiciona um novo ou modifica o Problema atual associado a Pesquisa
+	 * 
+	 * @param problema o Problema o qual se deseja associar a Pesquisa
+	 */
 	public void setProblema(Problema problema) {
 		this.problema = problema;
 	}
 
+	/**
+	 * Adiciona um Objetivo no mapa de objetivos
+	 * 
+	 * @param idObjetivo o ID unico do objetivo
+	 * @param objetivo   um objeto do tipo Objetivo
+	 */
 	public void adicionaObjetivo(String idObjetivo, Objetivo objetivo) {
 		this.objetivos.put(idObjetivo, objetivo);
 	}
 
+	/**
+	 * Remove um Objetivo do mapa de objetivos
+	 * 
+	 * @param idObjetivo o ID unico do objetivo
+	 */
 	public void removeObjetivo(String idObjetivo) {
 		this.objetivos.remove(idObjetivo);
 	}
 
+	/**
+	 * Verifica se a pesquisa contem um Problema associado
+	 * 
+	 * @return retorna o boolean que representa a associacao ou nao do problema
+	 */
 	public boolean contemProblema() {
 
 		if (this.problema == null) {
@@ -101,6 +167,12 @@ public class Pesquisa {
 
 	}
 
+	/**
+	 * Verifica se existe tal Objetivo no mapa de objetivos
+	 * 
+	 * @param idObjetivo o ID unico do objetivo
+	 * @return retorna o boolean que representa a associacao ou nao do objetivo
+	 */
 	public boolean contemObjetivo(String idObjetivo) {
 
 		if (this.objetivos.containsKey(idObjetivo)) {
@@ -113,6 +185,12 @@ public class Pesquisa {
 
 	}
 
+	/**
+	 * Verifica se a Pesquisa contem quaisquer objetivos associados
+	 * 
+	 * @return retorna o boolean que representa a associacao ou nao de algum
+	 *         objetivo
+	 */
 	public boolean contemObjetivos() {
 		if (this.objetivos.size() == 0) {
 			return false;
@@ -122,16 +200,32 @@ public class Pesquisa {
 
 	}
 
+	/**
+	 * Retorna o inteiro que representa a quantidade de objetivos associados.
+	 * 
+	 * @return retorna o inteiro que representa a quantidade de objetivos
+	 *         associados.
+	 */
 	public int getQtdObjetivos() {
 
 		return this.objetivos.size();
 
 	}
 
+	/**
+	 * Retorna o objeto do tipo Problema que esta associado a Pesquisa
+	 * 
+	 * @return o objeto do tipo Problema que esta associado a Pesquisa
+	 */
 	public Problema getProblema() {
 		return this.problema;
 	}
 
+	/**
+	 * Verifica se a pesquisa esta ativada (true) ou desativada (false)
+	 * 
+	 * @return retorna o boolean que representa o estado de ativacao da pesquisa
+	 */
 	public boolean isAtivada() {
 		if (this.status.equalsIgnoreCase("Ativa")) {
 			return true;

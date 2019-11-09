@@ -14,7 +14,7 @@ import sistema.Verificador;
  * problemaController possui um mapa de problemas e um codigo que gera uma
  * identificacao unica para os problemas.
  * 
- * @author josemng
+ * @author José Matheus do N. Gama
  *
  */
 public class ProblemaController {
@@ -40,10 +40,8 @@ public class ProblemaController {
 	/**
 	 * Adiciona um objeto do tipo Problema no mapa de problemas.
 	 * 
-	 * @param descricao
-	 *            descricao do problema
-	 * @param viabilidade
-	 *            representacao quantitativa do quanto o problema e viavel
+	 * @param descricao   descricao do problema
+	 * @param viabilidade representacao quantitativa do quanto o problema e viavel
 	 */
 	public String cadastraProblema(String descricao, String viabilidade) {
 
@@ -65,8 +63,7 @@ public class ProblemaController {
 	/**
 	 * Remove um Problema do mapa de problemas.
 	 * 
-	 * @param codigo
-	 *            o codigo pelo qual o Problema e identificado unicamente
+	 * @param codigo o codigo pelo qual o Problema e identificado unicamente
 	 */
 	public void apagarProblema(String codigo) {
 
@@ -84,8 +81,7 @@ public class ProblemaController {
 	 * Retorna a representacao em String de um Problema, no formato "codigo -
 	 * descricao - viabilidade".
 	 * 
-	 * @param codigo
-	 *            o codigo pelo qual o Problema e identificado unicamente
+	 * @param codigo o codigo pelo qual o Problema e identificado unicamente
 	 * @return a representacao em String de um problema
 	 */
 	public String exibeProblema(String codigo) {
@@ -99,6 +95,12 @@ public class ProblemaController {
 
 	}
 
+	/**
+	 * Retorna o Problema que possui o identificador unico passado como parametro
+	 * 
+	 * @param idProblema o identificador unico do Problema o qual se deseja retornar
+	 * @return o Problema que possui o identificador unico passado como parametro
+	 */
 	public Problema getProblema(String idProblema) {
 		return this.problemas.get(idProblema);
 	}
@@ -106,9 +108,8 @@ public class ProblemaController {
 	/**
 	 * procura, nos dados da entidade Problema, por um termo informado pelo usuario
 	 * 
-	 * @param palavra,
-	 *            o termo, informado pelo usuario, que sera pesquisado nos dados da
-	 *            entidade.
+	 * @param palavra, o termo, informado pelo usuario, que sera pesquisado nos
+	 *                 dados da entidade.
 	 */
 	public void procurarPalavra(String palavra) {
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");

@@ -14,7 +14,7 @@ import sistema.Verificador;
  * ObjetivoController possui um mapa de objetivos e um codigo que gera uma
  * identificacao unica para os objetivos.
  * 
- * @author josemng
+ * @author José Matheus do N. Gama
  *
  */
 public class ObjetivoController {
@@ -40,15 +40,11 @@ public class ObjetivoController {
 	/**
 	 * Cadastra um objeto do tipo Objetivo no mapa de objetivos.
 	 * 
-	 * @param tipo
-	 *            o tipo do objetivo, pode ser geral ou especifico
-	 * @param descricao
-	 *            a descricao do objetivo
-	 * @param aderencia
-	 *            representacao quantitativa do quanto o objetivo esta aderido a um
-	 *            problema
-	 * @param viabilidade
-	 *            representacao quantitativa do quanto o objetivo e viavel
+	 * @param tipo        o tipo do objetivo, pode ser geral ou especifico
+	 * @param descricao   a descricao do objetivo
+	 * @param aderencia   representacao quantitativa do quanto o objetivo esta
+	 *                    aderido a um problema
+	 * @param viabilidade representacao quantitativa do quanto o objetivo e viavel
 	 */
 	public String cadastraObjetivo(String tipo, String descricao, String aderencia, String viabilidade) {
 
@@ -84,8 +80,7 @@ public class ObjetivoController {
 	/**
 	 * Remove um Objetivo do mapa de objetivos.
 	 * 
-	 * @param codigo
-	 *            o codigo pelo qual o objetivo e identificado unicamente
+	 * @param codigo o codigo pelo qual o objetivo e identificado unicamente
 	 */
 	public void apagarObjetivo(String codigo) {
 
@@ -102,8 +97,7 @@ public class ObjetivoController {
 	 * Retorna a representacao em String de um Objetivo, no formato "codigo - tipo -
 	 * descricao - valor(aderencia + viabilidade)".
 	 * 
-	 * @param codigo
-	 *            o codigo pelo qual o objetivo e identificado unicamente
+	 * @param codigo o codigo pelo qual o objetivo e identificado unicamente
 	 * @return a representacao em String de um Objetivo
 	 */
 	public String exibeObjetivo(String codigo) {
@@ -118,6 +112,12 @@ public class ObjetivoController {
 
 	}
 
+	/**
+	 * Retorna o Objetivo que possui o identificador unico passado como parametro
+	 * 
+	 * @param idObjetivo o identificador unico do Objetivo o qual se deseja retornar
+	 * @return o Objetivo que possui o identificador unico passado como parametro
+	 */
 	public Objetivo getObjetivo(String idObjetivo) {
 		return this.objetivos.get(idObjetivo);
 	}
@@ -125,8 +125,7 @@ public class ObjetivoController {
 	/**
 	 * procura, nos dados da entidade objetivo, por um termo informado pelo usuario
 	 * 
-	 * @param palavra,
-	 *            o termo, que sera pesquisado, informado pelo usuario.
+	 * @param palavra, o termo, que sera pesquisado, informado pelo usuario.
 	 */
 	public void ProcurarPalavra(String palavra) {
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");

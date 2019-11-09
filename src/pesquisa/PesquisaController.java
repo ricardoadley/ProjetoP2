@@ -12,8 +12,9 @@ import sistema.BuscadorPalavra;
 import sistema.Verificador;
 
 /**
+ * Classe controladora de Pesquisas.
  * 
- * @author Beatriz Truta
+ * @author Beatriz Truta, José Matheus do N. Gama
  *
  */
 public class PesquisaController {
@@ -26,13 +27,24 @@ public class PesquisaController {
 	 */
 	private int idPesquisa = 0;
 
+	/**
+	 * Instancia da classe controladora de Objetivos.
+	 */
 	private ObjetivoController objetivoController;
+
+	/**
+	 * Instancia da classe controladora de Objetivos.
+	 */
 	private ProblemaController problemaController;
 
+	/**
+	 * Instancia da classe verificadora de entradas, a qual lanca as excessoes
+	 * necessarias.
+	 */
 	Verificador verificador = new Verificador();
 
 	/**
-	 * construtor da classe
+	 * Construtor de Pesquisa
 	 */
 	public PesquisaController() {
 		this.mapaPesquisas = new HashMap<>();
@@ -145,7 +157,7 @@ public class PesquisaController {
 	}
 
 	/**
-	 * Verifica se o campo interessa da pesquisa segue os requisitos de criacao
+	 * Verifica se o campo interesse da pesquisa segue os requisitos de criacao
 	 * 
 	 * @param interesse , o campo de interesse da pesquisa
 	 */
@@ -198,14 +210,36 @@ public class PesquisaController {
 
 	// Metodos referentes as operacoes com OBJETIVOS!
 
+	/**
+	 * Cadastra um objeto do tipo Objetivo no mapa de objetivos em
+	 * objetivoController.
+	 * 
+	 * @param tipo        o tipo do objetivo, pode ser geral ou especifico
+	 * @param descricao   a descricao do objetivo
+	 * @param aderencia   representacao quantitativa do quanto o objetivo esta
+	 *                    aderido a um problema
+	 * @param viabilidade representacao quantitativa do quanto o objetivo e viavel
+	 */
 	public String cadastraObjetivo(String tipo, String descricao, String aderencia, String viabilidade) {
 		return this.objetivoController.cadastraObjetivo(tipo, descricao, aderencia, viabilidade);
 	}
 
+	/**
+	 * Remove um Objetivo do mapa de objetivos em objetivoController
+	 * 
+	 * @param codigo o codigo pelo qual o objetivo e identificado unicamente
+	 */
 	public void apagarObjetivo(String codigo) {
 		this.objetivoController.apagarObjetivo(codigo);
 	}
 
+	/**
+	 * Retorna a representacao em String de um Objetivo, no formato "codigo - tipo -
+	 * descricao - valor(aderencia + viabilidade)".
+	 * 
+	 * @param codigo o codigo pelo qual o objetivo e identificado unicamente
+	 * @return a representacao em String de um Objetivo
+	 */
 	public String exibeObjetivo(String codigo) {
 		return this.objetivoController.exibeObjetivo(codigo);
 	}
@@ -267,24 +301,55 @@ public class PesquisaController {
 		return true;
 	}
 
+	/**
+	 * Busca um objetivo que contenha tal palavra passada como parametro.
+	 * 
+	 * @param palavra a palavra a qual se deseja procurar um Objetivo que contenha a
+	 *                mesma
+	 */
 	public void procurarPalavraObjetivo(String palavra) {
 		this.objetivoController.ProcurarPalavra(palavra);
 	}
 
 	// Metodos referentes as operacoes com PROBLEMAS!
 
+	/**
+	 * Adiciona um objeto do tipo Problema no mapa de problemas em
+	 * problemaController
+	 * 
+	 * @param descricao   descricao do problema
+	 * @param viabilidade representacao quantitativa do quanto o problema e viavel
+	 */
 	public String cadastraProblema(String descricao, String viabilidade) {
 		return this.problemaController.cadastraProblema(descricao, viabilidade);
 	}
 
+	/**
+	 * Remove um Problema do mapa de problemas em problemaController
+	 * 
+	 * @param codigo o codigo pelo qual o Problema e identificado unicamente
+	 */
 	public void apagarProblema(String codigo) {
 		this.problemaController.apagarProblema(codigo);
 	}
 
+	/**
+	 * Retorna a representacao em String de um Problema, no formato "codigo -
+	 * descricao - viabilidade".
+	 * 
+	 * @param codigo o codigo pelo qual o Problema e identificado unicamente
+	 * @return a representacao em String de um problema
+	 */
 	public String exibeProblema(String codigo) {
 		return this.problemaController.exibeProblema(codigo);
 	}
 
+	/**
+	 * Procura um Problema que possua a palavra passada como parametro
+	 * 
+	 * @param palavra palavra a palavra a qual se deseja procurar um Problema que
+	 *                contenha a mesma
+	 */
 	public void procurarPalavraProblema(String palavra) {
 		this.problemaController.procurarPalavra(palavra);
 	}
@@ -331,10 +396,9 @@ public class PesquisaController {
 	 * @return return a String correspondente ao sucesso ou nao da operacao
 	 */
 	@SuppressWarnings("static-access")
-	public boolean desassociaProblema(String idPesquisa, String idProblema) {
+	public boolean desassociaProblema(String idPesquisa) {
 
 		verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
-		verificador.verificaEntrada(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
 		verificador.existeChave(this.mapaPesquisas, idPesquisa, "Pesquisa nao encontrada.");
 		verificador.verificaEhAtiva(this.mapaPesquisas, idPesquisa, "Pesquisa desativada.");
 
@@ -353,6 +417,7 @@ public class PesquisaController {
 	 * @param ordem a ordem com que se deseja listar as pesquisas
 	 * @return retorna a String correspondente as informacoes de todas as pesquisas
 	 */
+	@SuppressWarnings("static-access")
 	public String listaPesquisas(String ordem) {
 
 		if (!(ordem.equalsIgnoreCase("PROBLEMA") || ordem.equalsIgnoreCase("OBJETIVOS")
@@ -434,7 +499,7 @@ public class PesquisaController {
 			Collections.sort(pesquisasComObjetivos, new PesquisaObjetivosComparator());
 			Collections.sort(pesquisasSemObjetivos, new PesquisaIDComparator());
 			Collections.reverse(pesquisasSemObjetivos);
-			
+
 			geral.addAll(pesquisasComObjetivos);
 			geral.addAll(pesquisasSemObjetivos);
 
