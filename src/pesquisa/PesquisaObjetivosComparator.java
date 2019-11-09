@@ -29,15 +29,7 @@ public class PesquisaObjetivosComparator implements Comparator<Pesquisa> {
 
 		else {
 
-			if (pesquisa1.getCodigo().compareTo(pesquisa2.getCodigo()) == 1) {
-				return -1;
-			}
-
-			if (pesquisa1.getCodigo().compareTo(pesquisa2.getCodigo()) == -1) {
-				return 1;
-			}
-
-			return 0;
+			return (pesquisa1.getCodigo().compareTo(pesquisa2.getCodigo()) * -1);
 
 		}
 
