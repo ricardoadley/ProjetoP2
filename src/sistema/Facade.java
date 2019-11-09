@@ -9,7 +9,8 @@ import pesquisa.PesquisaController;
 /**
  * Facade do sistema.
  * 
- * @author josemng , Ricardo A. S. Sena, Vinicius M. V. Varjao, Beatriz Truta
+ * @author Jose Matheus do N.Gama , Ricardo A. S. Sena, Vinicius M. V. Varjao,
+ *         Beatriz Truta
  *
  */
 public class Facade {
@@ -25,7 +26,7 @@ public class Facade {
 		this.pesquisaController = new PesquisaController();
 		this.buscador = new BuscadorPalavra();
 	}
-	
+
 	// Jose Matheus (US3)
 	public String cadastraProblema(String descricao, String viabilidade) {
 		return this.pesquisaController.cadastraProblema(descricao, viabilidade);
@@ -130,51 +131,51 @@ public class Facade {
 	public String listaPesquisas(String ordem) {
 		return pesquisaController.listaPesquisas(ordem);
 	}
-	
+
 	public String busca(String termo) {
-		pesquisaController.ProcurarPalavraPesquisa(termo); 
+		pesquisaController.ProcurarPalavraPesquisa(termo);
 		pesquisadorController.ProcurarPalavra(termo);
-		pesquisaController.procurarPalavraProblema(termo); 
+		pesquisaController.procurarPalavraProblema(termo);
 		pesquisaController.procurarPalavraObjetivo(termo);
 		controlaAtividade.ProcurarPalavra(termo);
 		return buscador.retornaEncontradas();
 	}
+
 	public String busca(String termo, int numeroResultado) {
-		pesquisaController.ProcurarPalavraPesquisa(termo); 
+		pesquisaController.ProcurarPalavraPesquisa(termo);
 		pesquisadorController.ProcurarPalavra(termo);
-		pesquisaController.procurarPalavraProblema(termo); 
+		pesquisaController.procurarPalavraProblema(termo);
 		pesquisaController.procurarPalavraObjetivo(termo);
 		controlaAtividade.ProcurarPalavra(termo);
 		return buscador.retornaEncontradasNumeroResultado(numeroResultado);
 	}
+
 	public int contaResultadosBusca(String termo) {
-		pesquisaController.ProcurarPalavraPesquisa(termo); 
+		pesquisaController.ProcurarPalavraPesquisa(termo);
 		pesquisadorController.ProcurarPalavra(termo);
-		pesquisaController.procurarPalavraProblema(termo); 
+		pesquisaController.procurarPalavraProblema(termo);
 		pesquisaController.procurarPalavraObjetivo(termo);
 		controlaAtividade.ProcurarPalavra(termo);
 		return buscador.retornaQuantidadeDeResultados();
-				
+
 	}
 
-	//Jose Matheus (US5)
-	
+	// Jose Matheus (US5)
+
 	public boolean associaProblema(String idPesquisa, String idProblema) {
 		return this.pesquisaController.associaProblema(idPesquisa, idProblema);
 	}
-	
-	public boolean desassociaProblema(String idPesquisa, String idProblema) {
-		return this.pesquisaController.desassociaProblema(idPesquisa, idProblema);
+
+	public boolean desassociaProblema(String idPesquisa) {
+		return this.pesquisaController.desassociaProblema(idPesquisa);
 	}
-	
+
 	public boolean associaObjetivo(String idPesquisa, String idObjetivo) {
 		return this.pesquisaController.associaObjetivo(idPesquisa, idObjetivo);
 	}
-	
+
 	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
 		return this.pesquisaController.desassociaObjetivo(idPesquisa, idObjetivo);
 	}
-	
-	
-	
+
 }

@@ -7,7 +7,7 @@ import sistema.Verificador;
  * ESPECIFICO), descricao, aderencia (inteiro de 1 a 5), viabilidade (inteiro de
  * 1 a 5) e um codigo pelo qual e identificado unicamente.
  * 
- * @author josemng
+ * @author José Matheus do N. Gama
  *
  */
 public class Objetivo {
@@ -74,10 +74,20 @@ public class Objetivo {
 
 	}
 
+	/**
+	 * Retorna o codigo do objetivo
+	 * 
+	 * @return a String que representa o identificador unico do objetivo
+	 */
 	public String getCodigo() {
 		return codigo;
 	}
 
+	/**
+	 * Retorna a descricao do objetivo
+	 * 
+	 * @return a String que representa a descricao do objetivo
+	 */
 	public String getDescricao() {
 		return descricao;
 	}

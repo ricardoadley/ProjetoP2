@@ -7,7 +7,7 @@ import sistema.Verificador;
  * descricao, um inteiro (de 1 a 5) que representa sua viabilidade e um codigo
  * pelo qual e identificado unicamente.
  * 
- * @author josemng
+ * @author Jose Matheus do N. Gama
  *
  */
 public class Problema {
