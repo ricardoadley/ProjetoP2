@@ -417,99 +417,55 @@ public class PesquisaController {
 	 * @param ordem a ordem com que se deseja listar as pesquisas
 	 * @return retorna a String correspondente as informacoes de todas as pesquisas
 	 */
-	@SuppressWarnings("static-access")
 	public String listaPesquisas(String ordem) {
 
 		if (!(ordem.equalsIgnoreCase("PROBLEMA") || ordem.equalsIgnoreCase("OBJETIVOS")
-				|| ordem.equalsIgnoreCase("PESQUISA"))) {
+				|| ordem.equalsIgnoreCase("PESQUISA")) || ordem == null) {
 			throw new IllegalArgumentException("Valor invalido da ordem");
 		}
 
 		ArrayList<Pesquisa> valores = new ArrayList<Pesquisa>(this.mapaPesquisas.values());
-		String valoresOrdenados = "";
-
-		ArrayList<Pesquisa> geral = new ArrayList<Pesquisa>();
+		String pesquisasOrdenadas = "";
 
 		if (ordem.equalsIgnoreCase("PESQUISA")) {
 
 			Collections.sort(valores, new PesquisaIDComparator());
-			Collections.reverse(valores);
 
 			for (int i = 0; i < valores.size(); i++) {
 
-				valoresOrdenados += valores.get(i).toString() + " | ";
+				pesquisasOrdenadas += valores.get(i).toString() + " | ";
 
 			}
 
-			return valoresOrdenados.substring(0, valoresOrdenados.length() - 3);
+			return pesquisasOrdenadas.substring(0, pesquisasOrdenadas.length() - 3);
 
 		}
 
 		if (ordem.equalsIgnoreCase("PROBLEMA")) {
 
-			ArrayList<Pesquisa> pesquisasComProblema = new ArrayList<>();
-			ArrayList<Pesquisa> pesquisasSemProblema = new ArrayList<>();
+			Collections.sort(valores, new PesquisaProblemaComparator());
 
-			for (Pesquisa pesquisa : this.mapaPesquisas.values()) {
+			for (int i = 0; i < valores.size(); i++) {
 
-				if (pesquisa.contemProblema()) {
-					pesquisasComProblema.add(pesquisa);
-				}
-
-				else {
-					pesquisasSemProblema.add(pesquisa);
-				}
+				pesquisasOrdenadas += valores.get(i).toString() + " | ";
 
 			}
 
-			Collections.sort(pesquisasComProblema, new PesquisaProblemaComparator());
-			Collections.sort(pesquisasSemProblema, new PesquisaIDComparator());
-			Collections.reverse(pesquisasSemProblema);
-
-			geral.addAll(pesquisasComProblema);
-			geral.addAll(pesquisasSemProblema);
-
-			for (int i = 0; i < geral.size(); i++) {
-
-				valoresOrdenados += geral.get(i).toString() + " | ";
-
-			}
-
-			return valoresOrdenados.substring(0, valoresOrdenados.length() - 3);
+			return pesquisasOrdenadas.substring(0, pesquisasOrdenadas.length() - 3);
 
 		}
 
 		else {
 
-			ArrayList<Pesquisa> pesquisasComObjetivos = new ArrayList<>();
-			ArrayList<Pesquisa> pesquisasSemObjetivos = new ArrayList<>();
+			Collections.sort(valores, new PesquisaObjetivosComparator());
 
-			for (Pesquisa pesquisa : this.mapaPesquisas.values()) {
+			for (int i = 0; i < valores.size(); i++) {
 
-				if (pesquisa.contemObjetivos()) {
-					pesquisasComObjetivos.add(pesquisa);
-				}
-
-				else {
-					pesquisasSemObjetivos.add(pesquisa);
-				}
+				pesquisasOrdenadas += valores.get(i).toString() + " | ";
 
 			}
 
-			Collections.sort(pesquisasComObjetivos, new PesquisaObjetivosComparator());
-			Collections.sort(pesquisasSemObjetivos, new PesquisaIDComparator());
-			Collections.reverse(pesquisasSemObjetivos);
-
-			geral.addAll(pesquisasComObjetivos);
-			geral.addAll(pesquisasSemObjetivos);
-
-			for (int i = 0; i < geral.size(); i++) {
-
-				valoresOrdenados += geral.get(i).toString() + " | ";
-
-			}
-
-			return valoresOrdenados.substring(0, valoresOrdenados.length() - 3);
+			return pesquisasOrdenadas.substring(0, pesquisasOrdenadas.length() - 3);
 
 		}
 
