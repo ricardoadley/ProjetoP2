@@ -7,6 +7,7 @@ import java.util.Map;
 
 import sistema.BuscadorPalavra;
 import sistema.Verificador;
+import pesquisa.PesquisaController;
 
 /**
  * Controlador de objetos do tipo "Pesquisador", usado para armazena-los e
@@ -22,12 +23,16 @@ public class PesquisadorController {
 	 * tipo Pesquisador
 	 */
 	private Map<String, Pesquisador> mapaEmailPesquisador;
+	private PesquisaController pesquisaController;
+	private Funcao funcao;
+	Verificador verificador = new Verificador();
 
 	/**
 	 * Constroi o controlador
 	 */
 	public PesquisadorController() {
 		this.mapaEmailPesquisador = new HashMap<>();
+		this.pesquisaController = new PesquisaController();
 	}
 
 	/**
@@ -124,6 +129,7 @@ public class PesquisadorController {
 			throw new IllegalArgumentException("Pesquisador inativo.");
 		}
 		return this.mapaEmailPesquisador.get(email).toString();
+		
 	}
 
 	/**
@@ -191,22 +197,65 @@ public class PesquisadorController {
 		}
 	}
 		
-	private void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
-		Professor p = (Professor) mapaEmailPesquisador.get(email);
-		p.setFormacao(formacao);
-		p.setUnidade(unidade);
-		p.setData(data);
+	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
+		Verificador.verificaEntrada(email, "Email nao pode ser vazio ou nulo.");
+		Verificador.verificaEntrada(formacao, "Formacao nao pode ser vazio ou nulo.");
+		Verificador.verificaEntrada(unidade, "Unidade nao pode ser vazio ou nulo.");
+		Verificador.verificaEntrada(data, "Data nao pode ser vazio ou nulo.");
+		this.mapaEmailPesquisador.put(email, (Pesquisador) (this.funcao = new Professor(formacao, unidade, data)));
 	}
 	
-	private void cadastraEspecialidadeAluno(String email, int semestre, double iea)	{
-		Aluno a = (Aluno) mapaEmailPesquisador.get(email);
-		a.setSemestre(semestre);
-		a.setIea(iea);
+	public void cadastraEspecialidadeAluno(String email, int semestre, double IEA) {
+		Verificador.verificaEntrada(email, "Email nao pode ser vazio ou nulo.");
+		Verificador.verificaEntrada(String.valueOf(semestre), "Semestre nao pode ser vazio ou nulo.");
+		Verificador.verificaEntrada(String.valueOf(IEA), "IEA nao pode ser vazio ou nulo.");
+		this.mapaEmailPesquisador.put(email, (Pesquisador) (this.funcao = new Aluno(semestre, IEA)));
 	}
 	 
 	private String listaPesquisadores(String tipo) {
 		return "";
 	}
 	
+	@SuppressWarnings("static-access")
+	public boolean associaProblema(String idPesquisa, String emailPesquisador) {
+
+		verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		verificador.verificaEntrada(emailPesquisador, "Campo emailPesquisador nao pode ser nulo ou vazio.");
+		verificador.existeChave(pesquisaController.mapaPesquisas, idPesquisa, "Pesquisa nao encontrada.");
+		verificador.verificaEhAtiva(pesquisaController.mapaPesquisas, idPesquisa, "Pesquisa desativada.");
+
+		if (this.pesquisaController.getPesquisa(idPesquisa).equals(this.mapaEmailPesquisador.get(emailPesquisador).contemPesquisa())) {
+			return false;
+		}
+
+		if (this.mapaEmailPesquisador.get(emailPesquisador).contemPesquisa()) {
+			throw new IllegalArgumentException("Pesquisador ja associado a uma pesquisa.");
+		}
+
+		if (!this.mapaEmailPesquisador.get(emailPesquisador).ehAtivo()) {
+			throw new IllegalArgumentException("Pesquisador inativo.");
+		}
+
+		this.mapaEmailPesquisador.get(emailPesquisador).setPesquisa(this.pesquisaController.getPesquisa(idPesquisa));
+		return true;
+
+	}
+	
+	@SuppressWarnings("static-access")
+	public boolean desassociaProblema(String idPesquisa, String emailPesquisador) {
+
+		verificador.verificaEntrada(emailPesquisador, "Campo emailPesquisador nao pode ser nulo ou vazio.");
+		verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		verificador.existeChave(pesquisaController.mapaPesquisas, idPesquisa, "Pesquisa nao encontrada.");
+		verificador.verificaEhAtiva(pesquisaController.mapaPesquisas, idPesquisa, "Pesquisa desativada.");
+
+		if (!this.mapaEmailPesquisador.get(emailPesquisador).contemPesquisa()) {
+			return false;
+		}
+
+		this.mapaEmailPesquisador.get(emailPesquisador).setPesquisa(null);
+		return true;
+
+	}
 
 }
