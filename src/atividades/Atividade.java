@@ -1,6 +1,5 @@
 package atividades;
 
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +36,15 @@ public class Atividade {
 	/**
 	 * o periodo de duracao da atividade em dias
 	 */
-	private Period days;
+	private int duracao;
+	/**
+	 * Resultados da atividade
+	 */
+	private Map<Integer, String> resultados;
+	/**
+	 * 
+	 */
+	private int ultimoResultado;
 	
 	private String codigo;
 	
@@ -45,8 +52,10 @@ public class Atividade {
 	 * mapa dos itens pertencentes a atividade
 	 */
 	private Map<Integer, Item> itens = new HashMap<Integer, Item>();
-
-	
+	/**
+	 * Lista com o nome das pesquisas associadas a atividade
+	 */
+	private List<String> pesquisasAssociadas;
 	
 	/**
 	 * Constroi uma nova atividade a partir dos parametros informados pelo usuario
@@ -56,7 +65,7 @@ public class Atividade {
 	 * @param descricaoRisco, a descricao do risco da atividade
 	 * @param days, a duracao em dias da atividade 
 	 */
-	public Atividade(String descricao, String nivelRisco, String descricaoRisco, Period days, String codigo) {
+	public Atividade(String descricao, String nivelRisco, String descricaoRisco, int duracao, String codigo) {
 		// super();
 		Verificador.verificaEntrada(descricao, "Campo Descricao nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(nivelRisco, "Campo nivelRisco nao pode ser nulo ou vazio.");
@@ -64,8 +73,11 @@ public class Atividade {
 		this.descricao = descricao; 
 		this.nivelRisco = nivelRisco;
 		this.descricaoRisco = descricaoRisco;
-		this.days = days;
+		this.duracao = duracao;
 		this.codigo = codigo;
+		this.resultados = new HashMap<>();
+		this.ultimoResultado = 0;
+		this.pesquisasAssociadas = new ArrayList<String>();
 	}
 
 	/**
@@ -136,14 +148,14 @@ public class Atividade {
 		this.descricaoRisco = descricaoRisco;
 	}
 
-	public Period getDays() {
-		return days;
+	public int getduracao() {
+		return duracao;
 	}
 	public String getCodigo() {
 		return codigo;
 	}
-	public void setDays(Period days) {
-		this.days = days;
+	public void setduracao(int duracao) {
+		this.duracao = duracao;
 	}
 
 	@Override
@@ -195,6 +207,71 @@ public class Atividade {
 			return false;
 		return true;
 	}
-
 	
+	/**
+	 * Executa a atividade, realizando um dos itens e incremetando a duracao
+	 * @param item item a ser realizado
+	 * @param duracao duracao a ser incrementada
+	 */
+	public void executaAtividade(int item, int duracao) {
+		Verificador.existeChave(itens, item, "Item nao encontrado.");
+		if (pesquisasAssociadas.isEmpty()) {
+			throw new IllegalArgumentException("Atividade sem associacoes com pesquisas.");
+		}
+		if (itens.get(item).getRealizado()) {
+			throw new IllegalArgumentException("Item ja executado.");
+		}
+		this.itens.get(item).setRealizado(true);
+		this.duracao += duracao;
+	}
+
+	/**
+	 * Cadastra um resultado na atividade.
+	 * @param resultado resultado a ser cadastrado
+	 * @return o ID do resultado cadastrado
+	 */
+	public int cadastraResultado(String resultado) {
+		 this.ultimoResultado ++;
+		 this.resultados.put(ultimoResultado, resultado);
+		 return this.ultimoResultado;
+	}
+
+	/**
+	 * Remove um resultado cadastrado anteriormente
+	 * @param numeroResultado numero do resultado
+	 * @return true
+	 */
+	public boolean removeResultado(int numeroResultado) {
+		Verificador.existeChave(resultados, numeroResultado, "Resultado nao encontrado.");
+		this.resultados.remove(numeroResultado);
+		return true;
+	}
+	
+	/**
+	 * Retorna uma representacao em texto dos resultados cadastrados
+	 * @return representacao em texto dos resultados
+	 */
+	public String listaResultados() {
+		String resultadosListados = "";
+		for (String resultado : resultados.values()) {
+			resultadosListados += resultado + " | ";
+		}
+		return resultadosListados.substring(0, resultadosListados.length() - 3);
+	}
+
+	/**
+	 * Armazena o codigo de uma pesquisa em uma lista
+	 * @param codigoPesquisa codigo da pesquisa a ser armazenado
+	 */
+	public void associaPesquisa(String codigoPesquisa) {
+		this.pesquisasAssociadas.add(codigoPesquisa);
+	}
+
+	/**
+	 * Remove o codigo de uma pesquisa em da lista de pesquisas
+	 * @param codigoPesquisa codigo da pesquisa a ser removida
+	 */
+	public void desassociaPesquisa(String codigoPesquisa) {
+		this.pesquisasAssociadas.remove(codigoPesquisa);
+	}
 }

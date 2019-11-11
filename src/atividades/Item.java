@@ -77,4 +77,8 @@ public class Item {
 		this.realizado = realizado;
 	}
 
+	public boolean getRealizado() {
+		return this.realizado;
+	}
 }
+
