@@ -310,6 +310,11 @@ public class Pesquisa {
 		return true;
 	}
 
+	/**
+	 * Remove o codigo de uma ativadade associada da lista de atividades
+	 * @param codigoAtividade codigo da atividade a ser removido
+	 * @return false caso a desassociacao nao ocorra, true caso contrario
+	 */
 	public boolean desassociaAtividade(String codigoAtividade) {
 		if (!this.atividadesAssociadas.contains(codigoAtividade)) {
 			return false;

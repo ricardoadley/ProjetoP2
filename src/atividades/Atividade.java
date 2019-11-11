@@ -207,7 +207,12 @@ public class Atividade {
 			return false;
 		return true;
 	}
-
+	
+	/**
+	 * Executa a atividade, realizando um dos itens e incremetando a duracao
+	 * @param item item a ser realizado
+	 * @param duracao duracao a ser incrementada
+	 */
 	public void executaAtividade(int item, int duracao) {
 		Verificador.existeChave(itens, item, "Item nao encontrado.");
 		if (pesquisasAssociadas.isEmpty()) {
@@ -218,21 +223,34 @@ public class Atividade {
 		}
 		this.itens.get(item).setRealizado(true);
 		this.duracao += duracao;
-
 	}
 
+	/**
+	 * Cadastra um resultado na atividade.
+	 * @param resultado resultado a ser cadastrado
+	 * @return o ID do resultado cadastrado
+	 */
 	public int cadastraResultado(String resultado) {
 		 this.ultimoResultado ++;
 		 this.resultados.put(ultimoResultado, resultado);
 		 return this.ultimoResultado;
 	}
 
+	/**
+	 * Remove um resultado cadastrado anteriormente
+	 * @param numeroResultado numero do resultado
+	 * @return true
+	 */
 	public boolean removeResultado(int numeroResultado) {
 		Verificador.existeChave(resultados, numeroResultado, "Resultado nao encontrado.");
 		this.resultados.remove(numeroResultado);
 		return true;
 	}
-
+	
+	/**
+	 * Retorna uma representacao em texto dos resultados cadastrados
+	 * @return representacao em texto dos resultados
+	 */
 	public String listaResultados() {
 		String resultadosListados = "";
 		for (String resultado : resultados.values()) {
@@ -241,10 +259,18 @@ public class Atividade {
 		return resultadosListados.substring(0, resultadosListados.length() - 3);
 	}
 
+	/**
+	 * Armazena o codigo de uma pesquisa em uma lista
+	 * @param codigoPesquisa codigo da pesquisa a ser armazenado
+	 */
 	public void associaPesquisa(String codigoPesquisa) {
 		this.pesquisasAssociadas.add(codigoPesquisa);
 	}
-	
+
+	/**
+	 * Remove o codigo de uma pesquisa em da lista de pesquisas
+	 * @param codigoPesquisa codigo da pesquisa a ser removida
+	 */
 	public void desassociaPesquisa(String codigoPesquisa) {
 		this.pesquisasAssociadas.remove(codigoPesquisa);
 	}

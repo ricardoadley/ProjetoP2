@@ -1,6 +1,5 @@
 package atividades;
 
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -169,6 +168,12 @@ public class ControladorAtividade {
 		}
 	}
 	
+	/**
+	 * Executa um item de uma atividade
+	 * @param codigoAtividade codigo da atividade que possui o item
+	 * @param item item a ser realizado
+	 * @param duracao duracao a ser incrementada
+	 */
 	public void executaAtividade(String codigoAtividade, int item, int duracao) {
 		Verificador.verificaEntrada(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
 		Verificador.verificaInteiroPositivo(duracao, "Duracao nao pode ser nula ou negativa.");
@@ -176,12 +181,24 @@ public class ControladorAtividade {
 		this.capturaAtividadeNoMapa(codigoAtividade).executaAtividade(item, duracao);
 	}
 
+	/**
+	 * Cadastra o resultado de uma atividade
+	 * @param codigoAtividade codigo da atividade a receber o resultado
+	 * @param resultado resultado a ser cadastrado
+	 * @return o codigo do resultado que foi cadastrado
+	 */
 	public int cadastraResultado(String codigoAtividade, String resultado) {
 		Verificador.verificaEntrada(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(resultado, "Resultado nao pode ser nulo ou vazio.");
 		return this.capturaAtividadeNoMapa(codigoAtividade).cadastraResultado(resultado);
 	}
 
+	/**
+	 * Remove um resultado cadastrado em uma atividade
+	 * @param codigoAtividade codigo da atividade que possui o resultado
+	 * @param numeroResultado codigo do resultado a ser removido
+	 * @return true
+	 */
 	public boolean removeResultado(String codigoAtividade, int numeroResultado) {
 		Verificador.verificaEntrada(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
 		Verificador.verificaInteiroPositivo(numeroResultado, "numeroResultado nao pode ser nulo ou negativo.");
@@ -189,22 +206,42 @@ public class ControladorAtividade {
 		return this.capturaAtividadeNoMapa(codigoAtividade).removeResultado(numeroResultado);
 	}
 
+	/**
+	 * Retorna a representacao em texto dos restulados cadastrados em uma atividade
+	 * @param codigoAtividade codigo da atividade que possui os resultados
+	 * @return a representacao em texto dos restulados cadastrados da atividade
+	 */
 	public String listaResultados(String codigoAtividade) {
 		Verificador.verificaEntrada(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
 		Verificador.existeChave(atividades, codigoAtividade, "Atividade nao encontrada");
 		return this.capturaAtividadeNoMapa(codigoAtividade).listaResultados();
 	}
 
+	/**
+	 * Retorna a duracao da atividade
+	 * @param codigoAtividade codigo da atividade que possui a duracao
+	 * @return a duracao da atividade
+	 */
 	public int getDuracao(String codigoAtividade) {
 		Verificador.verificaEntrada(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
 		Verificador.existeChave(atividades, codigoAtividade, "Atividade nao encontrada");
 		return this.capturaAtividadeNoMapa(codigoAtividade).getduracao();
 	}
 
+	/**
+	 * Armazena em uma pesquisa o codigo de uma atividade, representando uma associacao
+	 * @param codigoPesquisa codigo da pesquisa a receber o codigo da atividade
+	 * @param codigoAtividade codigo atividade a ser recebido pela pesquisa
+	 */
 	public void associaPesquisa(String codigoPesquisa, String codigoAtividade) {
 		this.capturaAtividadeNoMapa(codigoAtividade).associaPesquisa(codigoPesquisa);	
 	}
 	
+	/**
+	 * Remove a associal de uma atividade com a pesquisa
+	 * @param codigoPesquisa codigo da pesquisa que possui a atividade
+	 * @param codigoAtividade codigo da atividade a ser removido
+	 */
 	public void desassociaPesquisa(String codigoPesquisa, String codigoAtividade) {
 		this.capturaAtividadeNoMapa(codigoAtividade).desassociaPesquisa(codigoPesquisa);	
 	}

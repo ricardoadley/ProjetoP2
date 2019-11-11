@@ -494,6 +494,12 @@ public class PesquisaController {
 		return this.mapaPesquisas.get(codigoPesquisa).associaAtividade(codigoAtividade);
 	}
 
+	/**
+	 * Remove o codigo de uma ativadade associada da lista de atividades
+	 * @param codigoPesquisa codigo da pesquisa a ter a atividade desassociada
+	 * @param codigoAtividade codigo da atividade a ser removido
+	 * @return false caso a desassociacao nao ocorra, true caso contrario
+	 */
 	public boolean desassociaAtividade(String codigoPesquisa, String codigoAtividade) {
 		Verificador.verificaEntrada(codigoPesquisa, "Campo codigoPesquisa nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
