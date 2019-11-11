@@ -200,4 +200,12 @@ public class ControladorAtividade {
 		Verificador.existeChave(atividades, codigoAtividade, "Atividade nao encontrada");
 		return this.capturaAtividadeNoMapa(codigoAtividade).getduracao();
 	}
+
+	public void associaPesquisa(String codigoPesquisa, String codigoAtividade) {
+		this.capturaAtividadeNoMapa(codigoAtividade).associaPesquisa(codigoPesquisa);	
+	}
+	
+	public void desassociaPesquisa(String codigoPesquisa, String codigoAtividade) {
+		this.capturaAtividadeNoMapa(codigoAtividade).desassociaPesquisa(codigoPesquisa);	
+	}
 }

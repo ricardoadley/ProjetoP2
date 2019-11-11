@@ -368,13 +368,11 @@ public class PesquisaController {
 	 * @param idProblema o identificador unico do problema
 	 * @return return a String correspondente ao sucesso ou nao da operacao
 	 */
-	@SuppressWarnings("static-access")
 	public boolean associaProblema(String idPesquisa, String idProblema) {
-
-		verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
-		verificador.verificaEntrada(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
-		verificador.existeChave(this.mapaPesquisas, idPesquisa, "Pesquisa nao encontrada.");
-		verificador.verificaEhAtiva(this.mapaPesquisas, idPesquisa, "Pesquisa desativada.");
+		Verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
+		Verificador.existeChave(this.mapaPesquisas, idPesquisa, "Pesquisa nao encontrada.");
+		Verificador.verificaEhAtiva(this.mapaPesquisas, idPesquisa, "Pesquisa desativada.");
 
 		if (this.problemaController.getProblema(idProblema).equals(this.mapaPesquisas.get(idPesquisa).getProblema())) {
 			return false;
@@ -492,6 +490,7 @@ public class PesquisaController {
 		if (!this.pesquisaEhAtiva(codigoPesquisa)) {
 			throw new IllegalArgumentException("Pesquisa desativada.");
 		}
+		this.atividadeController.associaPesquisa(codigoPesquisa, codigoAtividade);
 		return this.mapaPesquisas.get(codigoPesquisa).associaAtividade(codigoAtividade);
 	}
 
@@ -505,6 +504,7 @@ public class PesquisaController {
 		if (!this.pesquisaEhAtiva(codigoPesquisa)) {
 			throw new IllegalArgumentException("Pesquisa desativada.");
 		}
+		this.atividadeController.desassociaPesquisa(codigoPesquisa, codigoAtividade);
 		return this.mapaPesquisas.get(codigoPesquisa).desassociaAtividade(codigoAtividade);
 	}
 }

@@ -52,8 +52,10 @@ public class Atividade {
 	 * mapa dos itens pertencentes a atividade
 	 */
 	private Map<Integer, Item> itens = new HashMap<Integer, Item>();
-
-	
+	/**
+	 * Lista com o nome das pesquisas associadas a atividade
+	 */
+	private List<String> pesquisasAssociadas;
 	
 	/**
 	 * Constroi uma nova atividade a partir dos parametros informados pelo usuario
@@ -75,6 +77,7 @@ public class Atividade {
 		this.codigo = codigo;
 		this.resultados = new HashMap<>();
 		this.ultimoResultado = 0;
+		this.pesquisasAssociadas = new ArrayList<String>();
 	}
 
 	/**
@@ -207,6 +210,9 @@ public class Atividade {
 
 	public void executaAtividade(int item, int duracao) {
 		Verificador.existeChave(itens, item, "Item nao encontrado.");
+		if (pesquisasAssociadas.isEmpty()) {
+			throw new IllegalArgumentException("Atividade sem associacoes com pesquisas.");
+		}
 		if (itens.get(item).getRealizado()) {
 			throw new IllegalArgumentException("Item ja executado.");
 		}
@@ -233,5 +239,13 @@ public class Atividade {
 			resultadosListados += resultado + " | ";
 		}
 		return resultadosListados.substring(0, resultadosListados.length() - 3);
+	}
+
+	public void associaPesquisa(String codigoPesquisa) {
+		this.pesquisasAssociadas.add(codigoPesquisa);
+	}
+	
+	public void desassociaPesquisa(String codigoPesquisa) {
+		this.pesquisasAssociadas.remove(codigoPesquisa);
 	}
 }
