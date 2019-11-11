@@ -1,6 +1,5 @@
 package atividades;
 
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +36,15 @@ public class Atividade {
 	/**
 	 * o periodo de duracao da atividade em dias
 	 */
-	private Period days;
+	private int duracao;
+	/**
+	 * Resultados da atividade
+	 */
+	private Map<Integer, String> resultados;
+	/**
+	 * 
+	 */
+	private int ultimoResultado;
 	
 	private String codigo;
 	
@@ -56,7 +63,7 @@ public class Atividade {
 	 * @param descricaoRisco, a descricao do risco da atividade
 	 * @param days, a duracao em dias da atividade 
 	 */
-	public Atividade(String descricao, String nivelRisco, String descricaoRisco, Period days, String codigo) {
+	public Atividade(String descricao, String nivelRisco, String descricaoRisco, int duracao, String codigo) {
 		// super();
 		Verificador.verificaEntrada(descricao, "Campo Descricao nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(nivelRisco, "Campo nivelRisco nao pode ser nulo ou vazio.");
@@ -64,8 +71,10 @@ public class Atividade {
 		this.descricao = descricao; 
 		this.nivelRisco = nivelRisco;
 		this.descricaoRisco = descricaoRisco;
-		this.days = days;
+		this.duracao = duracao;
 		this.codigo = codigo;
+		this.resultados = new HashMap<>();
+		this.ultimoResultado = 0;
 	}
 
 	/**
@@ -136,14 +145,14 @@ public class Atividade {
 		this.descricaoRisco = descricaoRisco;
 	}
 
-	public Period getDays() {
-		return days;
+	public int getduracao() {
+		return duracao;
 	}
 	public String getCodigo() {
 		return codigo;
 	}
-	public void setDays(Period days) {
-		this.days = days;
+	public void setduracao(int duracao) {
+		this.duracao = duracao;
 	}
 
 	@Override
@@ -196,5 +205,33 @@ public class Atividade {
 		return true;
 	}
 
-	
+	public void executaAtividade(int item, int duracao) {
+		Verificador.existeChave(itens, item, "Item nao encontrado.");
+		if (itens.get(item).getRealizado()) {
+			throw new IllegalArgumentException("Item ja executado.");
+		}
+		this.itens.get(item).setRealizado(true);
+		this.duracao += duracao;
+
+	}
+
+	public int cadastraResultado(String resultado) {
+		 this.ultimoResultado ++;
+		 this.resultados.put(ultimoResultado, resultado);
+		 return this.ultimoResultado;
+	}
+
+	public boolean removeResultado(int numeroResultado) {
+		Verificador.existeChave(resultados, numeroResultado, "Resultado nao encontrado.");
+		this.resultados.remove(numeroResultado);
+		return true;
+	}
+
+	public String listaResultados() {
+		String resultadosListados = "";
+		for (String resultado : resultados.values()) {
+			resultadosListados += resultado + " | ";
+		}
+		return resultadosListados.substring(0, resultadosListados.length() - 3);
+	}
 }

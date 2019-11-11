@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import atividades.ControladorAtividade;
 import pesquisa.PesquisaController;
 
 class PesquisaControllerTest {
@@ -13,7 +14,7 @@ class PesquisaControllerTest {
 	
 	@BeforeEach
 	void iniciar() {	
-	pesquisaController = new PesquisaController();
+	pesquisaController = new PesquisaController(new ControladorAtividade());
 	}
 	
 	@Test

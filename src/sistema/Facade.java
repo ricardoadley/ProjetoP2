@@ -23,7 +23,7 @@ public class Facade {
 	public Facade() {
 		this.controlaAtividade = new ControladorAtividade();
 		this.pesquisadorController = new PesquisadorController();
-		this.pesquisaController = new PesquisaController();
+		this.pesquisaController = new PesquisaController(controlaAtividade);
 		this.buscador = new BuscadorPalavra();
 	}
 
@@ -177,5 +177,33 @@ public class Facade {
 	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
 		return this.pesquisaController.desassociaObjetivo(idPesquisa, idObjetivo);
 	}
+	
+	//Vinicius (US7)
+	public boolean associaAtividade(String codigoPesquisa, String codigoAtividade) {
+		return this.pesquisaController.associaAtividade(codigoPesquisa, codigoAtividade);
+	}
 
+	public boolean desassociaAtividade(String codigoPesquisa, String codigoAtividade) {
+		return this.pesquisaController.desassociaAtividade(codigoPesquisa, codigoAtividade);
+	}
+
+	public void executaAtividade(String codigoAtividade, int item, int duracao) {	
+		this.controlaAtividade.executaAtividade(codigoAtividade, item, duracao);
+	}
+
+	public int cadastraResultado(String codigoAtividade, String resultado) {
+		return this.controlaAtividade.cadastraResultado(codigoAtividade, resultado);
+	}
+
+	public boolean removeResultado(String codigoAtividade, int numeroResultado) {
+		return this.controlaAtividade.removeResultado(codigoAtividade, numeroResultado);
+	}
+
+	public String listaResultados(String codigoAtividade) {
+		return this.controlaAtividade.listaResultados(codigoAtividade);
+	}
+
+	public int getDuracao(String codigoAtividade) {
+		return this.controlaAtividade.getDuracao(codigoAtividade);
+	}
 }

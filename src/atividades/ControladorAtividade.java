@@ -55,7 +55,7 @@ public class ControladorAtividade {
 			throw new IllegalArgumentException("Valor invalido do nivel do risco.");
 		}
 		Verificador.verificaEntrada(descricaoRisco, "Campo descricaoRisco nao pode ser nulo ou vazio.");
-		Atividade atividade = new Atividade(descricao, nivelRisco, descricaoRisco, Period.ofDays(8), "A" + codigo);
+		Atividade atividade = new Atividade(descricao, nivelRisco, descricaoRisco, 0, "A" + codigo);
 		this.atividades.put("A" + codigo, atividade);
 		String retorno = "A" + codigo;
 		this.codigo++;
@@ -141,7 +141,7 @@ public class ControladorAtividade {
 	}
 
 	// todo o codigo abaixo se refere a acoes basicas no mapa de atividades
-	private boolean existeAtividade(String codigo) {
+	public boolean existeAtividade(String codigo) {
 		// retorna se ja existe ou nao a atividade no mapa
 		return this.atividades.containsKey(codigo);
 	}
@@ -167,5 +167,37 @@ public class ControladorAtividade {
 					atividade.getCodigo() + ": " + atividade.getDescricaoRisco()));
 			atividade.pesquisaItem(palavra);
 		}
+	}
+	
+	public void executaAtividade(String codigoAtividade, int item, int duracao) {
+		Verificador.verificaEntrada(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
+		Verificador.verificaInteiroPositivo(duracao, "Duracao nao pode ser nula ou negativa.");
+		Verificador.verificaInteiroPositivo(item, "Item nao pode ser nulo ou negativo.");
+		this.capturaAtividadeNoMapa(codigoAtividade).executaAtividade(item, duracao);
+	}
+
+	public int cadastraResultado(String codigoAtividade, String resultado) {
+		Verificador.verificaEntrada(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(resultado, "Resultado nao pode ser nulo ou vazio.");
+		return this.capturaAtividadeNoMapa(codigoAtividade).cadastraResultado(resultado);
+	}
+
+	public boolean removeResultado(String codigoAtividade, int numeroResultado) {
+		Verificador.verificaEntrada(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
+		Verificador.verificaInteiroPositivo(numeroResultado, "numeroResultado nao pode ser nulo ou negativo.");
+		Verificador.existeChave(atividades, codigoAtividade, "Atividade nao encontrada");
+		return this.capturaAtividadeNoMapa(codigoAtividade).removeResultado(numeroResultado);
+	}
+
+	public String listaResultados(String codigoAtividade) {
+		Verificador.verificaEntrada(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
+		Verificador.existeChave(atividades, codigoAtividade, "Atividade nao encontrada");
+		return this.capturaAtividadeNoMapa(codigoAtividade).listaResultados();
+	}
+
+	public int getDuracao(String codigoAtividade) {
+		Verificador.verificaEntrada(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
+		Verificador.existeChave(atividades, codigoAtividade, "Atividade nao encontrada");
+		return this.capturaAtividadeNoMapa(codigoAtividade).getduracao();
 	}
 }

@@ -1,7 +1,10 @@
 package pesquisa;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
 
 import objetivo.Objetivo;
 import problema.Problema;
@@ -33,7 +36,10 @@ public class Pesquisa {
 	 * o codigo da pesquisa, e tambem seu identificador
 	 */
 	private String codigo;
-
+	/**
+	 * Lista da atividades associadas a pesquisa
+	 */
+	private List<String> atividadesAssociadas;
 	/**
 	 * Problema ao qual a pesquisa esta associada.
 	 */
@@ -59,6 +65,7 @@ public class Pesquisa {
 		this.codigo = codigo;
 		this.status = "Ativa";
 		this.objetivos = new HashMap<>();
+		this.atividadesAssociadas = new ArrayList<>();
 	}
 
 	/**
@@ -287,6 +294,27 @@ public class Pesquisa {
 				return false;
 		} else if (!codigo.equals(other.codigo))
 			return false;
+		return true;
+	}
+
+	/**
+	 * Armazena o codigo de uma atividade
+	 * @param codigoAtividade codigo da atividade a ser armazenado
+	 * @return false caso a associacao nao ocorra, true caso contrario
+	 */
+	public boolean associaAtividade(String codigoAtividade) {
+		if (this.atividadesAssociadas.contains(codigoAtividade)) {
+			return false;
+		}
+		this.atividadesAssociadas.add(codigoAtividade);
+		return true;
+	}
+
+	public boolean desassociaAtividade(String codigoAtividade) {
+		if (!this.atividadesAssociadas.contains(codigoAtividade)) {
+			return false;
+		}
+		this.atividadesAssociadas.remove(codigoAtividade);
 		return true;
 	}
 

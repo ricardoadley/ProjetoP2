@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import atividades.ControladorAtividade;
 import objetivo.ObjetivoController;
 import problema.ProblemaController;
 import sistema.BuscadorPalavra;
@@ -36,7 +37,10 @@ public class PesquisaController {
 	 * Instancia da classe controladora de Objetivos.
 	 */
 	private ProblemaController problemaController;
-
+	/**
+	 * Instancia da classe controladora de Atividades.
+	 */
+	private ControladorAtividade atividadeController;
 	/**
 	 * Instancia da classe verificadora de entradas, a qual lanca as excessoes
 	 * necessarias.
@@ -46,8 +50,9 @@ public class PesquisaController {
 	/**
 	 * Construtor de Pesquisa
 	 */
-	public PesquisaController() {
+	public PesquisaController(ControladorAtividade controlaAtividade) {
 		this.mapaPesquisas = new HashMap<>();
+		this.atividadeController = controlaAtividade;
 		this.objetivoController = new ObjetivoController();
 		this.problemaController = new ProblemaController();
 	}
@@ -471,4 +476,35 @@ public class PesquisaController {
 
 	}
 
+	/**
+	 * Armazena o código de uma atividade associada à uma Pesquisa na mesma.
+	 * @param codigoPesquisa codigo da pesquisa que vai receber a associacao
+	 * @param codigoAtividade codigo da atividade a ser associada
+	 * @return false caso a associacao nao ocorra, true caso contrario
+	 */
+	public boolean associaAtividade(String codigoPesquisa, String codigoAtividade) {
+		Verificador.verificaEntrada(codigoPesquisa, "Campo codigoPesquisa nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
+		Verificador.existeChave(mapaPesquisas, codigoPesquisa, "Pesquisa nao encontrada.");
+		if (!this.atividadeController.existeAtividade(codigoAtividade)) {
+			throw new IllegalArgumentException("Atividade nao encontrada");
+		}
+		if (!this.pesquisaEhAtiva(codigoPesquisa)) {
+			throw new IllegalArgumentException("Pesquisa desativada.");
+		}
+		return this.mapaPesquisas.get(codigoPesquisa).associaAtividade(codigoAtividade);
+	}
+
+	public boolean desassociaAtividade(String codigoPesquisa, String codigoAtividade) {
+		Verificador.verificaEntrada(codigoPesquisa, "Campo codigoPesquisa nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
+		Verificador.existeChave(mapaPesquisas, codigoPesquisa, "Pesquisa nao encontrada.");
+		if (!this.atividadeController.existeAtividade(codigoAtividade)) {
+			throw new IllegalArgumentException("Atividade nao encontrada");
+		}
+		if (!this.pesquisaEhAtiva(codigoPesquisa)) {
+			throw new IllegalArgumentException("Pesquisa desativada.");
+		}
+		return this.mapaPesquisas.get(codigoPesquisa).desassociaAtividade(codigoAtividade);
+	}
 }

@@ -18,34 +18,34 @@ class AtividadeTest {
 
 	@BeforeEach 
 	public void iniciaAtividades() { 
-		atividade1 = new Atividade("the flash", "BAIXO", "meio descrito", Period.ofDays(8), "A1");
-		atividade2 = new Atividade("game of thrones", "MEDIO", "pouco descrito", Period.ofDays(9), "A1");
-		atividade3 = new Atividade("supernatural", "ALTO", "MUITO DESCRITO!", Period.ofDays(10), "A3");
+		atividade1 = new Atividade("the flash", "BAIXO", "meio descrito", 0, "A1");
+		atividade2 = new Atividade("game of thrones", "MEDIO", "pouco descrito", 1, "A1");
+		atividade3 = new Atividade("supernatural", "ALTO", "MUITO DESCRITO!", 2, "A3");
 	}
 
 	@Test
 	void testConstroiAtividadeDescricaoVazio() {
-		assertThrows(IllegalArgumentException.class, () -> new Atividade("","MEDIO","descrevendo",Period.ofDays(8),"A1"));
+	assertThrows(IllegalArgumentException.class, () -> new Atividade("","MEDIO","descrevendo",0,"A1"));
 	} 
 	@Test
 	void testConstroiAtividadeDescricaoNull() {
-		assertThrows(NullPointerException.class, () -> new Atividade(null,"MEDIO","descreve aqui",Period.ofDays(8),"A2"));
+		assertThrows(NullPointerException.class, () -> new Atividade(null,"MEDIO","descreve aqui",0,"A2"));
 	}
 	@Test
 	void testConstroiAtividadeNivelRiscoVazio() {
-		assertThrows(IllegalArgumentException.class, () -> new Atividade("assistir boruto","","eh muito bom",Period.ofDays(8),"A3"));
+		assertThrows(IllegalArgumentException.class, () -> new Atividade("assistir boruto","","eh muito bom",0,"A3"));
 	}
 	@Test
 	void testConstroiAtividadeNivelRiscoNull() {
-		assertThrows(NullPointerException.class, () -> new Atividade("assistir naruto",null,"eh bom eu gosto",Period.ofDays(8),"A4"));
+		assertThrows(NullPointerException.class, () -> new Atividade("assistir naruto",null,"eh bom eu gosto",0,"A4"));
 	}
 	@Test
 	void testConstroiAtividadeDescricaoRiscoVazio() {
-		assertThrows(IllegalArgumentException.class, () -> new Atividade("maratonar pokemon","BAIXO","",Period.ofDays(8),"A5"));
+		assertThrows(IllegalArgumentException.class, () -> new Atividade("maratonar pokemon","BAIXO","",0,"A5"));
 	}
 	@Test
 	void testConstroiAtividadeDescricaoRiscoNull() {
-		assertThrows(NullPointerException.class, () -> new Atividade("procurar serie nova","ALTO",null,Period.ofDays(8),"A6"));
+		assertThrows(NullPointerException.class, () -> new Atividade("procurar serie nova","ALTO",null,0,"A6"));
 	}
 	
 	@Test
@@ -101,25 +101,22 @@ class AtividadeTest {
 
 	@Test
 	void testEqualsCodigoNull() {
-		
-		Atividade atividade4 = new Atividade("the flash", "BAIXO", "meio descrito", Period.ofDays(8), null);
+		Atividade atividade4 = new Atividade("the flash", "BAIXO", "meio descrito", 0, null);
 		assertFalse(atividade1.equals(atividade4));
 		
 	}
 	
 	@Test
 	void testEqualsCodigoNull2() {
-		
-		Atividade atividade4 = new Atividade("the flash", "BAIXO", "meio descrito", Period.ofDays(8), null);
+		Atividade atividade4 = new Atividade("the flash", "BAIXO", "meio descrito", 0, null);
 		assertFalse(atividade4.equals(atividade1));
 		
 	}
 	
 	@Test
 	void testEqualsCodigoNull3() {
-		
-		Atividade atividade5 = new Atividade("supergirl", "ALTO", "descritissimo", Period.ofDays(8), null);
-		Atividade atividade4 = new Atividade("the flash", "BAIXO", "meio descrito", Period.ofDays(8), null);
+		Atividade atividade5 = new Atividade("supergirl", "ALTO", "descritissimo", 0, null);
+		Atividade atividade4 = new Atividade("the flash", "BAIXO", "meio descrito", 0, null);
 		
 		assertTrue(atividade4.equals(atividade5));
 		

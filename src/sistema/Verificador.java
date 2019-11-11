@@ -2,6 +2,7 @@ package sistema;
 
 import java.util.Map;
 
+import atividades.Item;
 import pesquisa.Pesquisa;
 
 /**
@@ -98,7 +99,7 @@ public class Verificador {
 	 * @param chave, a chave que sera pesquisada
 	 * @param aviso, a mensagem que sera retornada caso a chave nao exista no mapa
 	 */
-	public static void existeChave(Map mapa, String chave, String aviso) {
+	public static void existeChave(Map mapa, Object chave, String aviso) {
 		if (!mapa.containsKey(chave)) {
 			throw new IllegalArgumentException(aviso);
 		}
@@ -110,4 +111,10 @@ public class Verificador {
 		}
 	}
 	
+	public static void verificaInteiroPositivo(int duracao, String aviso) {
+		if (duracao < 1) {
+			throw new IllegalArgumentException(aviso);
+
+		}
+	}
 }
