@@ -175,23 +175,6 @@ public class Pesquisa {
 	}
 
 	/**
-	 * Retorna "99" se a Pesquisa nao tem Problema associado ou o codigo do Problema
-	 * se tiver. Serve para fins de ordenacao.
-	 * 
-	 * @return retorna "99" se a Pesquisa nao tem Problema associado ou o codigo do
-	 *         Problema se tiver
-	 */
-	public String getStringProblema() {
-
-		if (this.problema == null) {
-			return "99";
-		}
-
-		return this.problema.getCodigo();
-
-	}
-
-	/**
 	 * Verifica se existe tal Objetivo no mapa de objetivos
 	 * 
 	 * @param idObjetivo o ID unico do objetivo
