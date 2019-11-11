@@ -69,7 +69,7 @@ public class PesquisadorController {
 	public void alteraPesquisador(String email, String atributo, String novoValor) {
 		Verificador.verificaEmail(email, "Formato de email invalido.");
 		Verificador.verificaEntrada(atributo, "Atributo nao pode ser vazio ou nulo.");
-		Verificador.existeChave(this.mapaEmailPesquisador, email, "Pesquisador nao encontrado");
+		Verificador.existeChaveString(this.mapaEmailPesquisador, email, "Pesquisador nao encontrado");
 		if (!pesquisadorEhAtivo(email)) {
 			throw new IllegalArgumentException("Pesquisador inativo.");
 		}
@@ -107,7 +107,7 @@ public class PesquisadorController {
 	 */
 	public String exibePesquisador(String email) {
 		Verificador.verificaEmail(email, "Formato de email invalido.");
-		Verificador.existeChave(this.mapaEmailPesquisador, email, "Pesquisador nao encontrado");
+		Verificador.existeChaveString(this.mapaEmailPesquisador, email, "Pesquisador nao encontrado");
 		if (!pesquisadorEhAtivo(email)) {
 			throw new IllegalArgumentException("Pesquisador inativo.");
 		}
@@ -122,7 +122,7 @@ public class PesquisadorController {
 	 */
 	public void ativaPesquisador(String email) {
 		Verificador.verificaEmail(email, "Formato de email invalido.");
-		Verificador.existeChave(this.mapaEmailPesquisador, email, "Pesquisador nao encontrado");
+		Verificador.existeChaveString(this.mapaEmailPesquisador, email, "Pesquisador nao encontrado");
 		if (pesquisadorEhAtivo(email)) {
 			throw new IllegalArgumentException("Pesquisador ja ativado.");
 		}
@@ -137,7 +137,7 @@ public class PesquisadorController {
 	 */
 	public void desativaPesquisador(String email) {
 		Verificador.verificaEmail(email, "Formato de email invalido.");
-		Verificador.existeChave(this.mapaEmailPesquisador, email, "Pesquisador nao encontrado");
+		Verificador.existeChaveString(this.mapaEmailPesquisador, email, "Pesquisador nao encontrado");
 		if (!pesquisadorEhAtivo(email)) {
 			throw new IllegalArgumentException("Pesquisador inativo.");
 		}
@@ -155,7 +155,7 @@ public class PesquisadorController {
 	public boolean pesquisadorEhAtivo(String email) {
 		Verificador.verificaEntrada(email, "Email nao pode ser vazio ou nulo.");
 		Verificador.verificaEmail(email, "Formato de email invalido.");
-		Verificador.existeChave(this.mapaEmailPesquisador, email, "Pesquisador nao encontrado");
+		Verificador.existeChaveString(this.mapaEmailPesquisador, email, "Pesquisador nao encontrado");
 		if (this.mapaEmailPesquisador.get(email).getAtividade().equals("Ativo")) {
 			return true;
 		}

@@ -103,6 +103,11 @@ public class Verificador {
 			throw new IllegalArgumentException(aviso);
 		}
 	}
+	public static void existeChaveString(Map mapa, String chave, String aviso) {
+		if (!mapa.containsKey(chave)) {
+			throw new IllegalArgumentException(aviso);
+		}
+	}
 
 	/**
 	 * Verifica se uma pesquisa esta ativada
