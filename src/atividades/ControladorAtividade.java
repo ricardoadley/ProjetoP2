@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
-import sistema.BuscadorPalavra;
 import sistema.Verificador;
 
 /**
@@ -21,15 +19,18 @@ public class ControladorAtividade {
 	/*
 	 * Mapa de atividades do tipo <String, Atividade>
 	 */
-	HashMap<String, Atividade> atividades;
+	private HashMap<String, Atividade> atividades;
 	/**
 	 * Codigo unico de cada atividade, o codigo ja eh iniciado com o valor 1
 	 */
-	int codigo;
+	private int codigo;
 
 	/**
 	 * Construtor do objeto ControladorAtividade
 	 */
+	// private BuscadorPalavra buscador = new BuscadorPalavra();
+	private List<String> resultados;
+
 	public ControladorAtividade() {
 		atividades = new HashMap<String, Atividade>();
 		this.codigo = 1;
@@ -155,24 +156,36 @@ public class ControladorAtividade {
 	 * @param palavra,
 	 *            o termo informado pelo usuario
 	 */
-	public void ProcurarPalavra(String palavra) {
+	public List<String> procuraPalavra(String palavra) {
+		String fraseDescricao = "";
+		String fraseDescricaoRisco = "";
+		resultados= null;
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
 		List<Atividade> listaAtividades = new ArrayList<>(this.atividades.values());
 		Collections.sort(listaAtividades, new ComparadorAtividade());
 		for (Atividade atividade : listaAtividades) {
-			BuscadorPalavra.adicionaEncontrado(
-					BuscadorPalavra.procuraPalavra(palavra, atividade.getCodigo() + ": " + atividade.getDescricao()));
-			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavra(palavra,
-					atividade.getCodigo() + ": " + atividade.getDescricaoRisco()));
-			atividade.pesquisaItem(palavra);
+			fraseDescricao = atividade.getCodigo() + ": " + atividade.getDescricao();
+			fraseDescricaoRisco = atividade.getCodigo() + ": " + atividade.getDescricaoRisco();
+			if (fraseDescricao.toLowerCase().contains(palavra.toLowerCase())) {
+				resultados.add(fraseDescricao);
+			}
+			if (fraseDescricaoRisco.toLowerCase().contains(palavra.toLowerCase())) {
+				resultados.add(fraseDescricaoRisco);
+			}
+			resultados.addAll(atividade.pesquisaItem(palavra));
 		}
+		return resultados;
 	}
-	
+
 	/**
 	 * Executa um item de uma atividade
-	 * @param codigoAtividade codigo da atividade que possui o item
-	 * @param item item a ser realizado
-	 * @param duracao duracao a ser incrementada
+	 * 
+	 * @param codigoAtividade
+	 *            codigo da atividade que possui o item
+	 * @param item
+	 *            item a ser realizado
+	 * @param duracao
+	 *            duracao a ser incrementada
 	 */
 	public void executaAtividade(String codigoAtividade, int item, int duracao) {
 		Verificador.verificaEntrada(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
@@ -183,8 +196,11 @@ public class ControladorAtividade {
 
 	/**
 	 * Cadastra o resultado de uma atividade
-	 * @param codigoAtividade codigo da atividade a receber o resultado
-	 * @param resultado resultado a ser cadastrado
+	 * 
+	 * @param codigoAtividade
+	 *            codigo da atividade a receber o resultado
+	 * @param resultado
+	 *            resultado a ser cadastrado
 	 * @return o codigo do resultado que foi cadastrado
 	 */
 	public int cadastraResultado(String codigoAtividade, String resultado) {
@@ -195,8 +211,11 @@ public class ControladorAtividade {
 
 	/**
 	 * Remove um resultado cadastrado em uma atividade
-	 * @param codigoAtividade codigo da atividade que possui o resultado
-	 * @param numeroResultado codigo do resultado a ser removido
+	 * 
+	 * @param codigoAtividade
+	 *            codigo da atividade que possui o resultado
+	 * @param numeroResultado
+	 *            codigo do resultado a ser removido
 	 * @return true
 	 */
 	public boolean removeResultado(String codigoAtividade, int numeroResultado) {
@@ -208,7 +227,9 @@ public class ControladorAtividade {
 
 	/**
 	 * Retorna a representacao em texto dos restulados cadastrados em uma atividade
-	 * @param codigoAtividade codigo da atividade que possui os resultados
+	 * 
+	 * @param codigoAtividade
+	 *            codigo da atividade que possui os resultados
 	 * @return a representacao em texto dos restulados cadastrados da atividade
 	 */
 	public String listaResultados(String codigoAtividade) {
@@ -219,7 +240,9 @@ public class ControladorAtividade {
 
 	/**
 	 * Retorna a duracao da atividade
-	 * @param codigoAtividade codigo da atividade que possui a duracao
+	 * 
+	 * @param codigoAtividade
+	 *            codigo da atividade que possui a duracao
 	 * @return a duracao da atividade
 	 */
 	public int getDuracao(String codigoAtividade) {
@@ -229,20 +252,27 @@ public class ControladorAtividade {
 	}
 
 	/**
-	 * Armazena em uma pesquisa o codigo de uma atividade, representando uma associacao
-	 * @param codigoPesquisa codigo da pesquisa a receber o codigo da atividade
-	 * @param codigoAtividade codigo atividade a ser recebido pela pesquisa
+	 * Armazena em uma pesquisa o codigo de uma atividade, representando uma
+	 * associacao
+	 * 
+	 * @param codigoPesquisa
+	 *            codigo da pesquisa a receber o codigo da atividade
+	 * @param codigoAtividade
+	 *            codigo atividade a ser recebido pela pesquisa
 	 */
 	public void associaPesquisa(String codigoPesquisa, String codigoAtividade) {
-		this.capturaAtividadeNoMapa(codigoAtividade).associaPesquisa(codigoPesquisa);	
+		this.capturaAtividadeNoMapa(codigoAtividade).associaPesquisa(codigoPesquisa);
 	}
-	
+
 	/**
 	 * Remove a associal de uma atividade com a pesquisa
-	 * @param codigoPesquisa codigo da pesquisa que possui a atividade
-	 * @param codigoAtividade codigo da atividade a ser removido
+	 * 
+	 * @param codigoPesquisa
+	 *            codigo da pesquisa que possui a atividade
+	 * @param codigoAtividade
+	 *            codigo da atividade a ser removido
 	 */
 	public void desassociaPesquisa(String codigoPesquisa, String codigoAtividade) {
-		this.capturaAtividadeNoMapa(codigoAtividade).desassociaPesquisa(codigoPesquisa);	
+		this.capturaAtividadeNoMapa(codigoAtividade).desassociaPesquisa(codigoPesquisa);
 	}
 }

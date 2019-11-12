@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import atividades.Atividade;
+import atividades.ComparadorAtividade;
 import atividades.ControladorAtividade;
 import objetivo.ObjetivoController;
 import problema.ProblemaController;
@@ -46,7 +48,7 @@ public class PesquisaController {
 	 * necessarias.
 	 */
 	Verificador verificador = new Verificador();
-
+	private List<String> encontradas;
 	/**
 	 * Construtor de Pesquisa
 	 */
@@ -200,17 +202,24 @@ public class PesquisaController {
 	 * 
 	 * @param palavra, o termo que o usuario deseja pesquisar
 	 */
-	public void ProcurarPalavraPesquisa(String palavra) {
+	public List<String> procuraPalavra(String palavra) {
+		encontradas = null;
+		String fraseDescricao = "";
+		String fraseCampo = "";
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
 		List<Pesquisa> listaPesquisas = new ArrayList<>(this.mapaPesquisas.values());
 		Collections.sort(listaPesquisas, new ComparadorPesquisa());
 		for (Pesquisa pesquisa : listaPesquisas) {
-			BuscadorPalavra.adicionaEncontrado(
-					BuscadorPalavra.procuraPalavra(palavra, pesquisa.getCodigo() + ": " + pesquisa.getDescricao()));
-			BuscadorPalavra.adicionaEncontrado(
-					BuscadorPalavra.procuraPalavra(palavra, pesquisa.getCodigo() + ": " + pesquisa.getCampo()));
-
+			fraseDescricao = pesquisa.getCodigo() + ": " + pesquisa.getDescricao();
+			fraseCampo = pesquisa.getCodigo() + ": " + pesquisa.getCampo();
+			if(fraseDescricao.toLowerCase().contains(palavra)) {
+				encontradas.add(fraseDescricao);
+			}
+			if(fraseCampo.toLowerCase().contains(palavra)) {
+				encontradas.add(fraseCampo);
+			}
 		}
+		return encontradas;
 	}
 
 	// Metodos referentes as operacoes com OBJETIVOS!
@@ -312,8 +321,8 @@ public class PesquisaController {
 	 * @param palavra a palavra a qual se deseja procurar um Objetivo que contenha a
 	 *                mesma
 	 */
-	public void procurarPalavraObjetivo(String palavra) {
-		this.objetivoController.ProcurarPalavra(palavra);
+	public List<String> procuraPalavraObjetivo(String palavra) {
+		return this.objetivoController.procuraPalavra(palavra);
 	}
 
 	// Metodos referentes as operacoes com PROBLEMAS!
@@ -355,8 +364,8 @@ public class PesquisaController {
 	 * @param palavra palavra a palavra a qual se deseja procurar um Problema que
 	 *                contenha a mesma
 	 */
-	public void procurarPalavraProblema(String palavra) {
-		this.problemaController.procurarPalavra(palavra);
+	public List<String> procuraPalavraProblema(String palavra) {
+		return this.problemaController.procuraPalavra(palavra);
 	}
 
 	/**

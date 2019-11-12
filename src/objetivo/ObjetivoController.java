@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import atividades.Atividade;
+import atividades.ComparadorAtividade;
 import sistema.BuscadorPalavra;
 import sistema.Verificador;
 
@@ -28,10 +30,10 @@ public class ObjetivoController {
 	 * Codigo que gera uma identificacao unica para os objetivos.
 	 */
 	private int code;
-
 	/**
 	 * Constroi um objeto do tipo ObjetivoController.
 	 */
+	private List<String> resultados;
 	public ObjetivoController() {
 		this.objetivos = new HashMap<>();
 		this.code = 1;
@@ -127,14 +129,20 @@ public class ObjetivoController {
 	 * 
 	 * @param palavra, o termo, que sera pesquisado, informado pelo usuario.
 	 */
-	public void ProcurarPalavra(String palavra) {
+	public List<String> procuraPalavra(String palavra) {
+		resultados = null;
+		String frase = "";
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
 		List<Objetivo> listaObjetivos = new ArrayList<>(this.objetivos.values());
 		Collections.sort(listaObjetivos, new ComparadorObjetivo());
 		for (Objetivo objetivo : listaObjetivos) {
-			BuscadorPalavra.adicionaEncontrado(
-					BuscadorPalavra.procuraPalavra(palavra, objetivo.getCodigo() + ": " + objetivo.getDescricao()));
+			frase = objetivo.getCodigo()+": "+objetivo.getDescricao();
+			if(frase.toLowerCase().contains(palavra)) {
+				resultados.add(frase);
+			}
 		}
+		return resultados;
 	}
+	
 
 }

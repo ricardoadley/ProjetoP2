@@ -32,6 +32,7 @@ public class ProblemaController {
 	/**
 	 * Constroi um objeto do tipo ProblemaController.
 	 */
+	private List<String> encontradas;
 	public ProblemaController() {
 		this.problemas = new HashMap<>();
 		this.code = 1;
@@ -111,14 +112,44 @@ public class ProblemaController {
 	 * @param palavra, o termo, informado pelo usuario, que sera pesquisado nos
 	 *                 dados da entidade.
 	 */
-	public void procurarPalavra(String palavra) {
+	
+	/**
+	 * 
+	 * 	/**
+	 * 
+	 * 	public List<String> procuraPalavra(String palavra) {
+		String fraseDescricao = "";
+		String fraseDescricaoRisco = "";
+		resultados = null;
+		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
+		List<Atividade> listaAtividades = new ArrayList<>(this.atividades.values());
+		Collections.sort(listaAtividades, new ComparadorAtividade());
+		for (Atividade atividade : listaAtividades) {
+			fraseDescricao = atividade.getCodigo() + ": " + atividade.getDescricao();
+			fraseDescricaoRisco = atividade.getCodigo() + ": " + atividade.getDescricaoRisco();
+			if (fraseDescricao.toLowerCase().contains(palavra.toLowerCase())) {
+				resultados.add(fraseDescricao);
+			}
+			if (fraseDescricaoRisco.toLowerCase().contains(palavra.toLowerCase())) {
+				resultados.add(fraseDescricaoRisco);
+			}
+		}
+		return resultados;
+	}
+	 */
+	public List<String> procuraPalavra(String palavra) {
+		encontradas = null;
+		String frase = "";
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
 		List<Problema> listaProblemas = new ArrayList<>(this.problemas.values());
 		Collections.sort(listaProblemas, new ComparadorProblema());
 		for (Problema problema : listaProblemas) {
-			BuscadorPalavra.adicionaEncontrado(
-					BuscadorPalavra.procuraPalavra(palavra, problema.getCodigo() + ": " + problema.getDescricao()));
+			frase = problema.getCodigo() + ": " + problema.getDescricao();
+			if(frase.toLowerCase().contains(palavra)) {
+				encontradas.add(frase);
+			}
 		}
+		return encontradas;
 	}
 
 }
