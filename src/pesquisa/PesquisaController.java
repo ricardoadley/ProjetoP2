@@ -198,8 +198,9 @@ public class PesquisaController {
 	 * 
 	 * @param palavra, o termo que o usuario deseja pesquisar
 	 */
-	public List<String> procuraPalavra(String palavra) {
+	public String procuraPalavra(String palavra) {
 		//encontradas = null;
+		String retorno = "";
 		String fraseDescricao = "";
 		String fraseCampo = "";
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
@@ -209,13 +210,13 @@ public class PesquisaController {
 			fraseDescricao = pesquisa.getCodigo() + ": " + pesquisa.getDescricao();
 			fraseCampo = pesquisa.getCodigo() + ": " + pesquisa.getCampo();
 			if(fraseDescricao.toLowerCase().contains(palavra)) {
-				encontradas.add(fraseDescricao);
+				retorno = retorno + fraseDescricao + " | ";
 			}
 			if(fraseCampo.toLowerCase().contains(palavra)) {
-				encontradas.add(fraseCampo);
+				retorno = retorno + fraseCampo + " | ";
 			}
 		}
-		return encontradas;
+		return retorno;
 	}
 
 	// Metodos referentes as operacoes com OBJETIVOS!
@@ -317,7 +318,7 @@ public class PesquisaController {
 	 * @param palavra a palavra a qual se deseja procurar um Objetivo que contenha a
 	 *                mesma
 	 */
-	public List<String> procuraPalavraObjetivo(String palavra) {
+	public String procuraPalavraObjetivo(String palavra) {
 		return this.objetivoController.procuraPalavra(palavra);
 	}
 
@@ -360,7 +361,7 @@ public class PesquisaController {
 	 * @param palavra palavra a palavra a qual se deseja procurar um Problema que
 	 *                contenha a mesma
 	 */
-	public List<String> procuraPalavraProblema(String palavra) {
+	public String procuraPalavraProblema(String palavra) {
 		return this.problemaController.procuraPalavra(palavra);
 	}
 

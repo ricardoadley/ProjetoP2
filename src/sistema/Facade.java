@@ -1,5 +1,7 @@
 package sistema;
 
+import java.util.List;
+
 import atividades.ControladorAtividade;
 //import objetivo.ObjetivoController;
 import pesquisador.PesquisadorController;

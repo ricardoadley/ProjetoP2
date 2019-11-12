@@ -1,6 +1,5 @@
 package sistema;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import atividades.ControladorAtividade;
@@ -17,7 +16,7 @@ public class BuscadorPalavra {
 	/**
 	 * Lista com dados que conferem com a busca do usuario
 	 */
-	private List<String> encontradas;
+	private String[] encontradas;
 
 	/**
 	 * construtor do objeto
@@ -27,16 +26,24 @@ public class BuscadorPalavra {
 	private PesquisadorController controlePesquisador = new PesquisadorController();
 
 	public BuscadorPalavra() {
-		encontradas = new ArrayList<String>();
+	//	encontradas = new ArrayList<String>();
+
 		// encontradas.clear();
 	}
 
-	private void fazABusca(String termo) {
-		encontradas.addAll(controleAtividade.procuraPalavra(termo));
-		encontradas.addAll(controlePesquisa.procuraPalavraObjetivo(termo));
-		encontradas.addAll(controlePesquisa.procuraPalavra(termo));
-		encontradas.addAll(controlePesquisa.procuraPalavraProblema(termo));
-		encontradas.addAll(controlePesquisador.procuraPalavra(termo));
+	private String fazABusca(String termo) {
+		String oquetem = "";
+//		tudao = controleAtividade.procuraPalavra(termo) +controlePesquisa.procuraPalavraObjetivo(termo) +controlePesquisa.procuraPalavra(termo)+
+//				controlePesquisa.procuraPalavraProblema(termo)+controlePesquisador.procuraPalavra(termo);
+		//encontradas.addAll(controleAtividade.procuraPalavra(termo));
+//		encontradas.addAll(controlePesquisa.procuraPalavraObjetivo(termo));
+//		encontradas.addAll(controlePesquisa.procuraPalavra(termo));
+//		encontradas.addAll(controlePesquisa.procuraPalavraProblema(termo));
+//		encontradas.addAll(controlePesquisador.procuraPalavra(termo));
+		oquetem = controleAtividade.procuraPalavra(termo) + controlePesquisa.procuraPalavraObjetivo(termo) + controlePesquisa.procuraPalavra(termo)+
+				controlePesquisa.procuraPalavraProblema(termo) + controlePesquisador.procuraPalavra(termo);	
+		return oquetem;
+		
 	}
 	/**
 	 * Retorna todas as frases encontradas com o termo pesquisado pelo usuario
@@ -45,13 +52,13 @@ public class BuscadorPalavra {
 	 *         pelo termo informado
 	 */
 	public String retornaEncontradas(String termo) {
-		fazABusca(termo);
+		encontradas = fazABusca(termo).split("");
 		String retorno = "";
-		if (encontradas.size() == 0) {
+		if (encontradas.length == 0) {
 			return retorno;
 		}
-		for (int i = 0; i < encontradas.size(); i++) {
-			retorno = retorno + encontradas.get(i) + " | ";
+		for (int i = 0; i < encontradas.length; i++) {
+			retorno = retorno + encontradas[i] + " | ";
 		}
 		return retorno;
 
@@ -65,18 +72,18 @@ public class BuscadorPalavra {
 	 *            , a ordem em que o resultado foi encontrado
 	 * @return a string representando o resultado na posicao informada
 	 */
-	public String retornaEncontradasNumeroResultado(String termo,int numeroDoResultado) {
-			fazABusca(termo);
-		String retorno = "";
-		if (numeroDoResultado < 0) {
-			throw new IllegalArgumentException("Numero do resultado nao pode ser negativo");
-		}
-		if (numeroDoResultado > encontradas.size()) {
-			throw new IllegalArgumentException("Entidade nao encontrada.");
-		}
-		retorno = encontradas.get(numeroDoResultado - 1);
-		return retorno;
-	}
+//	public String retornaEncontradasNumeroResultado(String termo,int numeroDoResultado) {
+//			fazABusca(termo);
+//		String retorno = "";
+//		if (numeroDoResultado < 0) {
+//			throw new IllegalArgumentException("Numero do resultado nao pode ser negativo");
+//		}
+//		if (numeroDoResultado > encontradas.size()) {
+//			throw new IllegalArgumentException("Entidade nao encontrada.");
+//		}
+//		retorno = encontradas.get(numeroDoResultado - 1);
+//		return retorno;
+//	}
 
 	/**
 	 * Retorna a quantidade de resultados que foram encontrados ao pesquisar nas
@@ -84,14 +91,14 @@ public class BuscadorPalavra {
 	 * 
 	 * @return a quantidade de resultados encontrados
 	 */
-	public int retornaQuantidadeDeResultados(String termo) {
-		fazABusca(termo);
-		int retorno;
-		if (encontradas.size() == 0) {
-			throw new IllegalArgumentException("Nenhum resultado encontrado");
-		}
-		retorno = encontradas.size();
-		return retorno;
-	}
+//	public int retornaQuantidadeDeResultados(String termo) {
+//		fazABusca(termo);
+//		int retorno;
+//		if (encontradas.size() == 0) {
+//			throw new IllegalArgumentException("Nenhum resultado encontrado");
+//		}
+//		retorno = encontradas.size();
+//		return retorno;
+//	}
 
 }

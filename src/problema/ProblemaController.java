@@ -111,8 +111,9 @@ public class ProblemaController {
 	 * @param palavra, o termo, informado pelo usuario, que sera pesquisado nos
 	 *                 dados da entidade.
 	 */
-	public List<String> procuraPalavra(String palavra) {
+	public String procuraPalavra(String palavra) {
 		//encontradas = null;
+		String retorno = "";
 		String frase = "";
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
 		List<Problema> listaProblemas = new ArrayList<>(this.problemas.values());
@@ -120,10 +121,14 @@ public class ProblemaController {
 		for (Problema problema : listaProblemas) {
 			frase = problema.getCodigo() + ": " + problema.getDescricao();
 			if(frase.toLowerCase().contains(palavra)) {
-				encontradas.add(frase);
+				retorno = retorno + frase + " | ";
+			//	encontradas.add(frase);
 			}
 		}
-		return encontradas;
+//		for(int i=0;i<encontradas.size();i++) {
+//			retorno = retorno + encontradas.get(i)+" | ";
+//		}
+		return retorno;
 	}
 
 }

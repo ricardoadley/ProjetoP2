@@ -24,12 +24,13 @@ public class ControladorAtividade {
 	 * Codigo unico de cada atividade, o codigo ja eh iniciado com o valor 1
 	 */
 	private int codigo;
+	private List<String> resultados;
 
 	/**
 	 * Construtor do objeto ControladorAtividade
 	 */
 	// private BuscadorPalavra buscador = new BuscadorPalavra();
-	private List<String> resultados;
+
 
 	public ControladorAtividade() {
 		atividades = new HashMap<String, Atividade>();
@@ -156,10 +157,11 @@ public class ControladorAtividade {
 	 * @param palavra,
 	 *            o termo informado pelo usuario
 	 */
-	public List<String> procuraPalavra(String palavra) {
+	public String procuraPalavra(String palavra) {
+		//resultados = null;
+		String retorno = "";
 		String fraseDescricao = "";
 		String fraseDescricaoRisco = "";
-		//resultados= null;
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
 		List<Atividade> listaAtividades = new ArrayList<>(this.atividades.values());
 		Collections.sort(listaAtividades, new ComparadorAtividade());
@@ -167,14 +169,14 @@ public class ControladorAtividade {
 			fraseDescricao = atividade.getCodigo() + ": " + atividade.getDescricao();
 			fraseDescricaoRisco = atividade.getCodigo() + ": " + atividade.getDescricaoRisco();
 			if (fraseDescricao.toLowerCase().contains(palavra.toLowerCase())) {
-				resultados.add(fraseDescricao);
+				retorno = retorno + fraseDescricao + " | ";
 			}
 			if (fraseDescricaoRisco.toLowerCase().contains(palavra.toLowerCase())) {
-				resultados.add(fraseDescricaoRisco);
+				retorno = retorno + fraseDescricaoRisco + " | ";
 			}
-			resultados.addAll(atividade.pesquisaItem(palavra));
+			retorno = retorno + atividade.pesquisaItem(palavra);
 		}
-		return resultados;
+		return retorno;
 	}
 
 	/**

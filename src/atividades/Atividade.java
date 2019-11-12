@@ -174,17 +174,21 @@ public class Atividade {
 		return descricao + " (" + nivelRisco + " - " + descricaoRisco + ")" + lista;
 	}
 
-	public List<String> pesquisaItem(String palavra) {
+	public String pesquisaItem(String palavra) {
 			List <Item> listaItens = new ArrayList<>(this.itens.values());
 			String frase = "";
+			String retorno = "";
 			//encontrados = null;
 			for(Item Item : listaItens) {
 				frase = this.codigo+": "+Item.getDescricao();
 				if(frase.toLowerCase().contains(palavra)) {
-					encontrados.add(frase);
+					retorno = retorno + frase;
 				}
 			}
-			return encontrados;
+//			for(int i =0;i<encontrados.size();i++) {
+//				retorno = retorno + encontrados.get(i)+" | ";
+//			}
+			return retorno;
 	}
 
 	@Override

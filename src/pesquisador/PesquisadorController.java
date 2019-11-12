@@ -169,17 +169,18 @@ public class PesquisadorController {
 	 *            o termo, informado pelo usuario, que sera pesquisado nos dados da
 	 *            entidade
 	 */
-	public List<String> procuraPalavra(String palavra) {
+	public String procuraPalavra(String palavra) {
 
 		//encontradas = null;
+		String retorno = "";
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
 		List<Pesquisador> listaPesquisadores = new ArrayList<>(this.mapaEmailPesquisador.values());
 		for (Pesquisador pesquisador : listaPesquisadores) {
 			if (pesquisador.getBiografia().toLowerCase().contains(palavra)) {
-				encontradas.add(pesquisador.getEmail() + ": " + pesquisador.getBiografia());
+				retorno = retorno + pesquisador.getEmail() + ": " + pesquisador.getBiografia() + " | ";
 			}
 		}
-		return encontradas;
+		return retorno;
 	}
 
 }
