@@ -159,7 +159,7 @@ public class ControladorAtividade {
 	public List<String> procuraPalavra(String palavra) {
 		String fraseDescricao = "";
 		String fraseDescricaoRisco = "";
-		resultados= null;
+		//resultados= null;
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
 		List<Atividade> listaAtividades = new ArrayList<>(this.atividades.values());
 		Collections.sort(listaAtividades, new ComparadorAtividade());

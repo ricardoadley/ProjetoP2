@@ -1,14 +1,9 @@
 package pesquisador;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import pesquisa.ComparadorPesquisa;
-import pesquisa.Pesquisa;
-import sistema.BuscadorPalavra;
 import sistema.Verificador;
 
 /**
@@ -176,7 +171,7 @@ public class PesquisadorController {
 	 */
 	public List<String> procuraPalavra(String palavra) {
 
-		encontradas = null;
+		//encontradas = null;
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
 		List<Pesquisador> listaPesquisadores = new ArrayList<>(this.mapaEmailPesquisador.values());
 		for (Pesquisador pesquisador : listaPesquisadores) {

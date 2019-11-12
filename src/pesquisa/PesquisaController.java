@@ -5,13 +5,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import atividades.Atividade;
-import atividades.ComparadorAtividade;
 import atividades.ControladorAtividade;
 import objetivo.ObjetivoController;
 import problema.ProblemaController;
-import sistema.BuscadorPalavra;
 import sistema.Verificador;
 
 /**
@@ -203,7 +199,7 @@ public class PesquisaController {
 	 * @param palavra, o termo que o usuario deseja pesquisar
 	 */
 	public List<String> procuraPalavra(String palavra) {
-		encontradas = null;
+		//encontradas = null;
 		String fraseDescricao = "";
 		String fraseCampo = "";
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");

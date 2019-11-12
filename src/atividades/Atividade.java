@@ -1,12 +1,9 @@
 package atividades;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import sistema.BuscadorPalavra;
 import sistema.Verificador;
 
 /**
@@ -176,31 +173,11 @@ public class Atividade {
 		}
 		return descricao + " (" + nivelRisco + " - " + descricaoRisco + ")" + lista;
 	}
-	/*
-	 * 	public List<String> procuraPalavra(String palavra) {
-		String fraseDescricao = "";
-		String fraseDescricaoRisco = "";
-		resultados = null;
-		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
-		List<Atividade> listaAtividades = new ArrayList<>(this.atividades.values());
-		Collections.sort(listaAtividades, new ComparadorAtividade());
-		for (Atividade atividade : listaAtividades) {
-			fraseDescricao = atividade.getCodigo() + ": " + atividade.getDescricao();
-			fraseDescricaoRisco = atividade.getCodigo() + ": " + atividade.getDescricaoRisco();
-			if (fraseDescricao.toLowerCase().contains(palavra.toLowerCase())) {
-				resultados.add(fraseDescricao);
-			}
-			if (fraseDescricaoRisco.toLowerCase().contains(palavra.toLowerCase())) {
-				resultados.add(fraseDescricaoRisco);
-			}
-		}
-		return resultados;
-	}
-	 */
+
 	public List<String> pesquisaItem(String palavra) {
 			List <Item> listaItens = new ArrayList<>(this.itens.values());
 			String frase = "";
-			encontrados = null;
+			//encontrados = null;
 			for(Item Item : listaItens) {
 				frase = this.codigo+": "+Item.getDescricao();
 				if(frase.toLowerCase().contains(palavra)) {
