@@ -175,6 +175,15 @@ public class Facade {
 		return this.pesquisaController.desassociaObjetivo(idPesquisa, idObjetivo);
 	}
 	
+	//Ana Beatriz Truta (US6)
+	
+	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
+		pesquisadorController.cadastraEspecialidadeProfessor(email, formacao, unidade, data);
+	}
+	
+	public void cadastraEspecialidadeAluno(String email, int semestre, double IEA) {
+		pesquisadorController.cadastraEspecialidadeAluno(email, semestre, IEA);
+	}
 	
 	
 }

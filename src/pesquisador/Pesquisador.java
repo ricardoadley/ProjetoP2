@@ -1,6 +1,7 @@
 package pesquisador;
 
 import sistema.Verificador;
+import pesquisa.Pesquisa;
 
 /**
  * Representacao de um pesquisador
@@ -34,6 +35,7 @@ public class Pesquisador {
 	 * do mesmo"
 	 */
 	private String atividade;
+	private Pesquisa pesquisa;
 	
 	/**
 	 * Construtor do objeto Pesquisador, que recebe seus atributos e define a atividade como "Ativo" por padrao
@@ -90,6 +92,27 @@ public class Pesquisador {
 
 	public void setAtividade(String atividade) {
 		this.atividade = atividade;
+	}
+	
+	public boolean contemPesquisa() {
+
+		if (this.pesquisa == null) {
+			return false;
+		}
+
+		return true;
+
+	}
+	
+	public boolean ehAtivo() {
+		if (this.atividade.equalsIgnoreCase("Ativo")) {
+			return true;
+		}
+
+		else {
+			return false;
+		}
+
 	}
 	
 	/**

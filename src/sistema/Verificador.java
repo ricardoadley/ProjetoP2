@@ -1,5 +1,9 @@
 package sistema;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Map;
 
 import pesquisa.Pesquisa;
@@ -110,7 +114,8 @@ public class Verificador {
 		}
 	}
 	
-	public static void verificaSemestre(int semestre, String aviso) {
+	public static void verificaSemestre(String novoValor, String aviso) {
+		int semestre = Integer.parseInt(novoValor);
 		if (semestre < 1) {
 			throw new IllegalArgumentException(aviso);
 		}
@@ -123,12 +128,22 @@ public class Verificador {
 	}
 	
 	public static void verificaData(String data, String aviso) {
-		if (data.length() < 10) {
-			throw new IllegalArgumentException(aviso);
-		}
-		if (!data.contains("/")) {
+		if (isDateValid(data) != true) {
 			throw new IllegalArgumentException(aviso);
 		}
 	}
 	
+	private static boolean isDateValid(String strDate) {
+	    String dateFormat = "dd/MM/uuuu";
+
+	    DateTimeFormatter dateTimeFormatter = DateTimeFormatter
+	    .ofPattern(dateFormat)
+	    .withResolverStyle(ResolverStyle.STRICT);
+	    try {
+	        LocalDate date = LocalDate.parse(strDate, dateTimeFormatter);
+	        return true;
+	    } catch (DateTimeParseException e) {
+	       return false;
+	    } 
+	}
 }

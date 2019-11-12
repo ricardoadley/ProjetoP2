@@ -20,7 +20,7 @@ public class PesquisaController {
 	/**
 	 * mapa de pesquisas cadastradas no sistema
 	 */
-	private Map<String, Pesquisa> mapaPesquisas;
+	public Map<String, Pesquisa> mapaPesquisas;
 	/**
 	 * identificador unico da pesquisa
 	 */
@@ -352,6 +352,10 @@ public class PesquisaController {
 		
 		return "a";
 		
+	}
+	
+	public Pesquisa getPesquisa(String idPesquisa) {
+		return this.mapaPesquisas.get(idPesquisa);
 	}
 
 	

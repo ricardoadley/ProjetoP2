@@ -198,10 +198,12 @@ public class PesquisadorController {
 	}
 		
 	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
-		Verificador.verificaEntrada(email, "Email nao pode ser vazio ou nulo.");
-		Verificador.verificaEntrada(formacao, "Formacao nao pode ser vazio ou nulo.");
-		Verificador.verificaEntrada(unidade, "Unidade nao pode ser vazio ou nulo.");
-		Verificador.verificaEntrada(data, "Data nao pode ser vazio ou nulo.");
+		Verificador.verificaEntrada(email, "Campo email nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(formacao, "Campo formacao nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(unidade, "Campo unidade nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(data, "Campo  data nao pode ser nulo ou vazio.");
+		Verificador.verificaEmail(email, "Atributo email com o formato invalido.");
+		Verificador.verificaData(data, "Atributo data com formato invalido.");
 		this.mapaEmailPesquisador.put(email, (Pesquisador) (this.funcao = new Professor(formacao, unidade, data)));
 	}
 	
@@ -209,6 +211,8 @@ public class PesquisadorController {
 		Verificador.verificaEntrada(email, "Email nao pode ser vazio ou nulo.");
 		Verificador.verificaEntrada(String.valueOf(semestre), "Semestre nao pode ser vazio ou nulo.");
 		Verificador.verificaEntrada(String.valueOf(IEA), "IEA nao pode ser vazio ou nulo.");
+		Verificador.verificaIEA(IEA, "Atributo IEA com formato invalido.");
+		Verificador.verificaEmail(email, "Atributo eamil com formato invalido.");
 		this.mapaEmailPesquisador.put(email, (Pesquisador) (this.funcao = new Aluno(semestre, IEA)));
 	}
 	 
