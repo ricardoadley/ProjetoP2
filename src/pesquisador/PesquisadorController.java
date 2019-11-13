@@ -22,7 +22,7 @@ public class PesquisadorController {
 	 */
 	private Map<String, Pesquisador> mapaEmailPesquisador;
 	private PesquisaController pesquisaController;
-	private Funcao funcao;
+	private Especialidade especialidade;
 	/**
 	 * Constroi o controlador
 	 */
@@ -206,8 +206,12 @@ public class PesquisadorController {
 		Verificador.verificaEntrada(data, "Campo data nao pode ser nulo ou vazio.");
 		Verificador.verificaEmail(email, "Atributo email com o formato invalido.");
 		Verificador.verificaData(data, "Atributo data com formato invalido.");
-
-		this.mapaEmailPesquisador.put(email, (Pesquisador) (this.funcao = new Professor(formacao, unidade, data)));
+		Verificador.existeChave(this.mapaEmailPesquisador, email, "Pesquisadora nao encontrada.");
+		if (this.mapaEmailPesquisador.get(email).getFuncao().equals("professor")) {	
+			this.mapaEmailPesquisador.put(email, (Pesquisador) (this.especialidade = new Professor(formacao, unidade, data)));
+		} else {
+			throw new IllegalArgumentException("Pesquisador nao compativel com a especialidade.");
+		}
 	}
 
 	public void cadastraEspecialidadeAluno(String email, int semestre, double IEA) {
@@ -215,9 +219,14 @@ public class PesquisadorController {
 		Verificador.verificaEntrada(String.valueOf(semestre), "Semestre nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(String.valueOf(IEA), "IEA nao pode ser nulo ou vazio.");
 		Verificador.verificaIEA(IEA, "Atributo IEA com formato invalido.");
-		Verificador.verificaEmail(email, "Atributo eamil com formato invalido.");
-		//if(mapaEmailPesquisador.containsKey(email).)
-		this.mapaEmailPesquisador.put(email, (Pesquisador) (this.funcao = new Aluno(semestre, IEA)));
+		Verificador.verificaInteiroPositivo(semestre, "Atributo semestre com formato invalido.");
+		Verificador.verificaEmail(email, "Atributo email com formato invalido.");
+		Verificador.existeChave(this.mapaEmailPesquisador, email, "Pesquisadora nao encontrada.");
+		if (this.mapaEmailPesquisador.get(email).getFuncao().equals("estudante")) {	
+			this.mapaEmailPesquisador.put(email, (Pesquisador) (this.especialidade = new Aluno(semestre, IEA)));
+		}else {
+			throw new IllegalArgumentException("Pesquisador nao compativel com a especialidade.");
+		}
 	}
 
 	public String listaPesquisadores(String tipo) {
@@ -236,10 +245,9 @@ public class PesquisadorController {
 		Verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(emailPesquisador, "Campo emailPesquisador nao pode ser nulo ou vazio.");
 		Verificador.verificaEmail(emailPesquisador, "Atributo email com formato invalido.");
+		Verificador.existeChave(pesquisaController.getMapaPesquisas(), idPesquisa, "Pesquisa nao encontrada.");
 		Verificador.verificaEhAtiva(pesquisaController.getMapaPesquisas(), idPesquisa, "Pesquisa desativada.");
-		if (!this.pesquisaController.existePesquisa(idPesquisa)) {
-			throw new IllegalArgumentException("Pesquisa nao encontrada");
-		}
+		
 		return this.capturaPesquisaNoMapa(emailPesquisador).associaPesquisador(idPesquisa);
 	}
 
@@ -247,10 +255,9 @@ public class PesquisadorController {
 		Verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(emailPesquisador, "Campo emailPesquisador nao pode ser nulo ou vazio.");
 		Verificador.verificaEmail(emailPesquisador, "Atributo email com formato invalido.");
+		Verificador.existeChave(pesquisaController.getMapaPesquisas(), idPesquisa, "Pesquisa nao encontrada.");
 		Verificador.verificaEhAtiva(pesquisaController.getMapaPesquisas(), idPesquisa, "Pesquisa desativada.");
-		if (!this.pesquisaController.existePesquisa(idPesquisa)) {
-			throw new IllegalArgumentException("Pesquisa nao encontrada");
-		}
+		
 		return this.capturaPesquisaNoMapa(emailPesquisador).desassociaPesquisador(idPesquisa);
 	}
 		

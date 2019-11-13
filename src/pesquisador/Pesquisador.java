@@ -39,6 +39,7 @@ public class Pesquisador {
 	 */
 	private String atividade;
 	private Pesquisa pesquisa;
+	private Especialidade especialidade;
 	private ArrayList<String> pesquisasAssociadas;
 	
 	/**
@@ -64,7 +65,7 @@ public class Pesquisador {
 		this.fotoURL = fotoURL;
 		this.atividade = "Ativo";
 		this.pesquisasAssociadas = new ArrayList<String>();
-		}
+	}
 
 	public String getFuncao() {
 		return funcao;
@@ -104,24 +105,18 @@ public class Pesquisador {
 	}
 	
 	public boolean contemPesquisa() {
-
 		if (this.pesquisa == null) {
 			return false;
 		}
-
 		return true;
-
 	}
 
 	public boolean ehAtivo() {
 		if (this.atividade.equalsIgnoreCase("Ativo")) {
 			return true;
-		}
-
-		else {
+		} else {
 			return false;
 		}
-
 	}
 	
 	/**

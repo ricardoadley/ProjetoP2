@@ -573,7 +573,9 @@ public class PesquisaController {
 	}
 	
 	public boolean existePesquisa(String codigo) {
-		// retorna se ja existe ou nao a atividade no mapa
+		if(!this.mapaPesquisas.containsKey(codigo)) {
+			throw new IllegalArgumentException("Pesquisa nao encontrada.");
+		}
 		return this.mapaPesquisas.containsKey(codigo);
 	}
 

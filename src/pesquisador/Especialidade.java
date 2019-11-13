@@ -1,12 +1,11 @@
 package pesquisador;
 
-public interface Funcao {
+public interface Especialidade {
 
 	@Override
 	public String toString();
 
-	public String getFuncao();
+	public String getEspecialidade();
 
 	public void setAtributo(String atributo, String novo);
-
 }

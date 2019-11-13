@@ -1,6 +1,6 @@
 package pesquisador;
 
-public class Professor implements Funcao{
+public class Professor implements Especialidade{
 
 	private String formacao;
 	private String unidade;
@@ -38,12 +38,6 @@ public class Professor implements Funcao{
 	}
 
 	@Override
-	public String getFuncao() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void setAtributo(String atributo, String novo) {
 		// TODO Auto-generated method stub
 
@@ -52,6 +46,12 @@ public class Professor implements Funcao{
 	@Override
 	public String toString() {
 		return formacao + " - " + unidade + " - " + data;
+	}
+
+	@Override
+	public String getEspecialidade() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
