@@ -44,7 +44,7 @@ public class PesquisaController {
 	 * necessarias.
 	 */
 	Verificador verificador = new Verificador();
-	private List<String> encontradas;
+
 	/**
 	 * Construtor de Pesquisa
 	 */
@@ -58,8 +58,10 @@ public class PesquisaController {
 	/**
 	 * Adiciona uma nova pesquisa no mapa de pesquisas
 	 * 
-	 * @param descricao, a descricao da pesquisa
-	 * @param interesse, o campo de interesse da pesquisa
+	 * @param descricao,
+	 *            a descricao da pesquisa
+	 * @param interesse,
+	 *            o campo de interesse da pesquisa
 	 * @return retornar o codigo de cadastro da pesquisa
 	 */
 	public String cadastraPesquisa(String descricao, String interesse) {
@@ -78,9 +80,12 @@ public class PesquisaController {
 	/**
 	 * Altera algum dado especifico de uma pesquisa ja cadastrada
 	 * 
-	 * @param codigo,              o codigo da pesquisa que sera alterada
-	 * @param conteudoASerAlterado , o parametro que sera alterado
-	 * @param novoConteudo,        o novo valor que o parametro alterado recebera
+	 * @param codigo,
+	 *            o codigo da pesquisa que sera alterada
+	 * @param conteudoASerAlterado
+	 *            , o parametro que sera alterado
+	 * @param novoConteudo,
+	 *            o novo valor que o parametro alterado recebera
 	 */
 	public void alteraPesquisa(String codigo, String conteudoASerAlterado, String novoConteudo) {
 		if (!this.mapaPesquisas.containsKey(codigo))
@@ -101,7 +106,8 @@ public class PesquisaController {
 	/**
 	 * Exibe como string uma pesquisa solicitada
 	 * 
-	 * @param codigo , o codigo da pesquisa que sera exibido
+	 * @param codigo
+	 *            , o codigo da pesquisa que sera exibido
 	 * @return a representacao em string da pesquisa
 	 */
 	public String exibePesquisa(String codigo) {
@@ -115,7 +121,8 @@ public class PesquisaController {
 	/**
 	 * Altera o status de uma pesquisa cadastrada para ativado
 	 * 
-	 * @param codigo, o codigo da pesquisa que sera ativada
+	 * @param codigo,
+	 *            o codigo da pesquisa que sera ativada
 	 */
 	public void ativaPesquisa(String codigo) {
 		if (!this.mapaPesquisas.containsKey(codigo))
@@ -128,8 +135,10 @@ public class PesquisaController {
 	/**
 	 * Altera o status de uma pesquisa para encerrado
 	 * 
-	 * @param codigo, o codigo da pesquisa que sera encerrada
-	 * @param motivo, o motivo do encerramento da pesquisa
+	 * @param codigo,
+	 *            o codigo da pesquisa que sera encerrada
+	 * @param motivo,
+	 *            o motivo do encerramento da pesquisa
 	 */
 	public void encerraPesquisa(String codigo, String motivo) {
 		Verificador.verificaEntrada(motivo, "Motivo nao pode ser nulo ou vazio.");
@@ -143,7 +152,8 @@ public class PesquisaController {
 	/**
 	 * Verifica se uma pesquisa esta ativa
 	 * 
-	 * @param codigo, o codigo da pesquisa que sera verificado
+	 * @param codigo,
+	 *            o codigo da pesquisa que sera verificado
 	 * @return retorna true ou false de acordo com o status da pesquisa
 	 */
 	public boolean pesquisaEhAtiva(String codigo) {
@@ -162,7 +172,8 @@ public class PesquisaController {
 	/**
 	 * Verifica se o campo interesse da pesquisa segue os requisitos de criacao
 	 * 
-	 * @param interesse , o campo de interesse da pesquisa
+	 * @param interesse
+	 *            , o campo de interesse da pesquisa
 	 */
 	private void verificaInteresseValido(String interesse) {
 		Verificador.verificaEntrada(interesse, "Formato do campo de interesse invalido.");
@@ -181,7 +192,8 @@ public class PesquisaController {
 	/**
 	 * Gera um id unico para a pesquisa
 	 * 
-	 * @param id, o id da pesquisa
+	 * @param id,
+	 *            o id da pesquisa
 	 * @return retorna o id da pesquisa
 	 */
 	private String geraId(String id) {
@@ -194,12 +206,14 @@ public class PesquisaController {
 	}
 
 	/**
-	 * Procura, nos dados da entidade, por um termo informado pelo usuario
+	 * Procura, na entidade Pesquisa, por um termo informado pelo usuario
 	 * 
-	 * @param palavra, o termo que o usuario deseja pesquisar
+	 * @param palavra,
+	 *            o termo que o usuario deseja que seja procurado
+	 * @return uma string contendo todos os resultados da procura
 	 */
 	public String procuraPalavra(String palavra) {
-		//encontradas = null;
+		// encontradas = null;
 		String retorno = "";
 		String fraseDescricao = "";
 		String fraseCampo = "";
@@ -209,10 +223,10 @@ public class PesquisaController {
 		for (Pesquisa pesquisa : listaPesquisas) {
 			fraseDescricao = pesquisa.getCodigo() + ": " + pesquisa.getDescricao();
 			fraseCampo = pesquisa.getCodigo() + ": " + pesquisa.getCampo();
-			if(fraseDescricao.toLowerCase().contains(palavra)) {
+			if (fraseDescricao.toLowerCase().contains(palavra)) {
 				retorno = retorno + fraseDescricao + " | ";
 			}
-			if(fraseCampo.toLowerCase().contains(palavra)) {
+			if (fraseCampo.toLowerCase().contains(palavra)) {
 				retorno = retorno + fraseCampo + " | ";
 			}
 		}
@@ -225,11 +239,15 @@ public class PesquisaController {
 	 * Cadastra um objeto do tipo Objetivo no mapa de objetivos em
 	 * objetivoController.
 	 * 
-	 * @param tipo        o tipo do objetivo, pode ser geral ou especifico
-	 * @param descricao   a descricao do objetivo
-	 * @param aderencia   representacao quantitativa do quanto o objetivo esta
-	 *                    aderido a um problema
-	 * @param viabilidade representacao quantitativa do quanto o objetivo e viavel
+	 * @param tipo
+	 *            o tipo do objetivo, pode ser geral ou especifico
+	 * @param descricao
+	 *            a descricao do objetivo
+	 * @param aderencia
+	 *            representacao quantitativa do quanto o objetivo esta aderido a um
+	 *            problema
+	 * @param viabilidade
+	 *            representacao quantitativa do quanto o objetivo e viavel
 	 */
 	public String cadastraObjetivo(String tipo, String descricao, String aderencia, String viabilidade) {
 		return this.objetivoController.cadastraObjetivo(tipo, descricao, aderencia, viabilidade);
@@ -238,7 +256,8 @@ public class PesquisaController {
 	/**
 	 * Remove um Objetivo do mapa de objetivos em objetivoController
 	 * 
-	 * @param codigo o codigo pelo qual o objetivo e identificado unicamente
+	 * @param codigo
+	 *            o codigo pelo qual o objetivo e identificado unicamente
 	 */
 	public void apagarObjetivo(String codigo) {
 		this.objetivoController.apagarObjetivo(codigo);
@@ -248,7 +267,8 @@ public class PesquisaController {
 	 * Retorna a representacao em String de um Objetivo, no formato "codigo - tipo -
 	 * descricao - valor(aderencia + viabilidade)".
 	 * 
-	 * @param codigo o codigo pelo qual o objetivo e identificado unicamente
+	 * @param codigo
+	 *            o codigo pelo qual o objetivo e identificado unicamente
 	 * @return a representacao em String de um Objetivo
 	 */
 	public String exibeObjetivo(String codigo) {
@@ -260,8 +280,10 @@ public class PesquisaController {
 	 * vários objetivos, entretanto, cada objetivo só pode estar associado a uma
 	 * única pesquisa.
 	 * 
-	 * @param idPesquisa o identificador unico da Pesquisa
-	 * @param idObjetivo o identificador unico do Objetivo
+	 * @param idPesquisa
+	 *            o identificador unico da Pesquisa
+	 * @param idObjetivo
+	 *            o identificador unico do Objetivo
 	 * @return return a String correspondente ao sucesso ou nao da operacao
 	 */
 	@SuppressWarnings("static-access")
@@ -292,8 +314,10 @@ public class PesquisaController {
 	/**
 	 * Retira a associacao entre um Objetivo e uma Pesquisa.
 	 * 
-	 * @param idPesquisa o identificador unico da Pesquisa
-	 * @param idObjetivo o identificador unico do Objetivo
+	 * @param idPesquisa
+	 *            o identificador unico da Pesquisa
+	 * @param idObjetivo
+	 *            o identificador unico do Objetivo
 	 * @return return a String correspondente ao sucesso ou nao da operacao
 	 */
 	@SuppressWarnings("static-access")
@@ -315,8 +339,9 @@ public class PesquisaController {
 	/**
 	 * Busca um objetivo que contenha tal palavra passada como parametro.
 	 * 
-	 * @param palavra a palavra a qual se deseja procurar um Objetivo que contenha a
-	 *                mesma
+	 * @param palavra
+	 *            a palavra a qual se deseja procurar um Objetivo que contenha a
+	 *            mesma
 	 */
 	public String procuraPalavraObjetivo(String palavra) {
 		return this.objetivoController.procuraPalavra(palavra);
@@ -328,8 +353,10 @@ public class PesquisaController {
 	 * Adiciona um objeto do tipo Problema no mapa de problemas em
 	 * problemaController
 	 * 
-	 * @param descricao   descricao do problema
-	 * @param viabilidade representacao quantitativa do quanto o problema e viavel
+	 * @param descricao
+	 *            descricao do problema
+	 * @param viabilidade
+	 *            representacao quantitativa do quanto o problema e viavel
 	 */
 	public String cadastraProblema(String descricao, String viabilidade) {
 		return this.problemaController.cadastraProblema(descricao, viabilidade);
@@ -338,7 +365,8 @@ public class PesquisaController {
 	/**
 	 * Remove um Problema do mapa de problemas em problemaController
 	 * 
-	 * @param codigo o codigo pelo qual o Problema e identificado unicamente
+	 * @param codigo
+	 *            o codigo pelo qual o Problema e identificado unicamente
 	 */
 	public void apagarProblema(String codigo) {
 		this.problemaController.apagarProblema(codigo);
@@ -348,7 +376,8 @@ public class PesquisaController {
 	 * Retorna a representacao em String de um Problema, no formato "codigo -
 	 * descricao - viabilidade".
 	 * 
-	 * @param codigo o codigo pelo qual o Problema e identificado unicamente
+	 * @param codigo
+	 *            o codigo pelo qual o Problema e identificado unicamente
 	 * @return a representacao em String de um problema
 	 */
 	public String exibeProblema(String codigo) {
@@ -358,8 +387,9 @@ public class PesquisaController {
 	/**
 	 * Procura um Problema que possua a palavra passada como parametro
 	 * 
-	 * @param palavra palavra a palavra a qual se deseja procurar um Problema que
-	 *                contenha a mesma
+	 * @param palavra
+	 *            palavra a palavra a qual se deseja procurar um Problema que
+	 *            contenha a mesma
 	 */
 	public String procuraPalavraProblema(String palavra) {
 		return this.problemaController.procuraPalavra(palavra);
@@ -370,8 +400,10 @@ public class PesquisaController {
 	 * sucesso ou nao da operacao. Uma pesquisa pode estar associada a um único
 	 * problema. Mas o mesmo problema pode estar associado a várias pesquisas.
 	 * 
-	 * @param idPesquisa o identificador unico da pesquisa
-	 * @param idProblema o identificador unico do problema
+	 * @param idPesquisa
+	 *            o identificador unico da pesquisa
+	 * @param idProblema
+	 *            o identificador unico do problema
 	 * @return return a String correspondente ao sucesso ou nao da operacao
 	 */
 	public boolean associaProblema(String idPesquisa, String idProblema) {
@@ -400,8 +432,10 @@ public class PesquisaController {
 	/**
 	 * Retira a associação entre um Problema e uma Pesquisa
 	 * 
-	 * @param idPesquisa o identificador unico da Pesquisa
-	 * @param idProblema o identificador unico do Problema
+	 * @param idPesquisa
+	 *            o identificador unico da Pesquisa
+	 * @param idProblema
+	 *            o identificador unico do Problema
 	 * @return return a String correspondente ao sucesso ou nao da operacao
 	 */
 	@SuppressWarnings("static-access")
@@ -423,7 +457,8 @@ public class PesquisaController {
 	/**
 	 * Lista pesquisas de acordo com o tipo de ordenacao desejada.
 	 * 
-	 * @param ordem a ordem com que se deseja listar as pesquisas
+	 * @param ordem
+	 *            a ordem com que se deseja listar as pesquisas
 	 * @return retorna a String correspondente as informacoes de todas as pesquisas
 	 */
 	public String listaPesquisas(String ordem) {
@@ -482,8 +517,11 @@ public class PesquisaController {
 
 	/**
 	 * Armazena o código de uma atividade associada à uma Pesquisa na mesma.
-	 * @param codigoPesquisa codigo da pesquisa que vai receber a associacao
-	 * @param codigoAtividade codigo da atividade a ser associada
+	 * 
+	 * @param codigoPesquisa
+	 *            codigo da pesquisa que vai receber a associacao
+	 * @param codigoAtividade
+	 *            codigo da atividade a ser associada
 	 * @return false caso a associacao nao ocorra, true caso contrario
 	 */
 	public boolean associaAtividade(String codigoPesquisa, String codigoAtividade) {
@@ -502,8 +540,11 @@ public class PesquisaController {
 
 	/**
 	 * Remove o codigo de uma ativadade associada da lista de atividades
-	 * @param codigoPesquisa codigo da pesquisa a ter a atividade desassociada
-	 * @param codigoAtividade codigo da atividade a ser removido
+	 * 
+	 * @param codigoPesquisa
+	 *            codigo da pesquisa a ter a atividade desassociada
+	 * @param codigoAtividade
+	 *            codigo da atividade a ser removido
 	 * @return false caso a desassociacao nao ocorra, true caso contrario
 	 */
 	public boolean desassociaAtividade(String codigoPesquisa, String codigoAtividade) {

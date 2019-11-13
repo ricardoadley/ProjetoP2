@@ -31,7 +31,6 @@ public class ProblemaController {
 	/**
 	 * Constroi um objeto do tipo ProblemaController.
 	 */
-	private List<String> encontradas;
 	public ProblemaController() {
 		this.problemas = new HashMap<>();
 		this.code = 1;
@@ -40,8 +39,10 @@ public class ProblemaController {
 	/**
 	 * Adiciona um objeto do tipo Problema no mapa de problemas.
 	 * 
-	 * @param descricao   descricao do problema
-	 * @param viabilidade representacao quantitativa do quanto o problema e viavel
+	 * @param descricao
+	 *            descricao do problema
+	 * @param viabilidade
+	 *            representacao quantitativa do quanto o problema e viavel
 	 */
 	public String cadastraProblema(String descricao, String viabilidade) {
 
@@ -63,7 +64,8 @@ public class ProblemaController {
 	/**
 	 * Remove um Problema do mapa de problemas.
 	 * 
-	 * @param codigo o codigo pelo qual o Problema e identificado unicamente
+	 * @param codigo
+	 *            o codigo pelo qual o Problema e identificado unicamente
 	 */
 	public void apagarProblema(String codigo) {
 
@@ -81,7 +83,8 @@ public class ProblemaController {
 	 * Retorna a representacao em String de um Problema, no formato "codigo -
 	 * descricao - viabilidade".
 	 * 
-	 * @param codigo o codigo pelo qual o Problema e identificado unicamente
+	 * @param codigo
+	 *            o codigo pelo qual o Problema e identificado unicamente
 	 * @return a representacao em String de um problema
 	 */
 	public String exibeProblema(String codigo) {
@@ -98,7 +101,8 @@ public class ProblemaController {
 	/**
 	 * Retorna o Problema que possui o identificador unico passado como parametro
 	 * 
-	 * @param idProblema o identificador unico do Problema o qual se deseja retornar
+	 * @param idProblema
+	 *            o identificador unico do Problema o qual se deseja retornar
 	 * @return o Problema que possui o identificador unico passado como parametro
 	 */
 	public Problema getProblema(String idProblema) {
@@ -106,13 +110,14 @@ public class ProblemaController {
 	}
 
 	/**
-	 * procura, nos dados da entidade Problema, por um termo informado pelo usuario
+	 * Procura, nos dados da entidade Problema, por um termo informado pelo usuario
 	 * 
-	 * @param palavra, o termo, informado pelo usuario, que sera pesquisado nos
-	 *                 dados da entidade.
+	 * @param palavra,
+	 *            o termo que o usuario deseja pesquisar
+	 * @return retorna uma string com todos os resultados encontrados
 	 */
 	public String procuraPalavra(String palavra) {
-		//encontradas = null;
+		// encontradas = null;
 		String retorno = "";
 		String frase = "";
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
@@ -120,14 +125,10 @@ public class ProblemaController {
 		Collections.sort(listaProblemas, new ComparadorProblema());
 		for (Problema problema : listaProblemas) {
 			frase = problema.getCodigo() + ": " + problema.getDescricao();
-			if(frase.toLowerCase().contains(palavra)) {
+			if (frase.toLowerCase().contains(palavra)) {
 				retorno = retorno + frase + " | ";
-			//	encontradas.add(frase);
 			}
 		}
-//		for(int i=0;i<encontradas.size();i++) {
-//			retorno = retorno + encontradas.get(i)+" | ";
-//		}
 		return retorno;
 	}
 

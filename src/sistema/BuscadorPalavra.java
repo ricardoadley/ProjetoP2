@@ -1,13 +1,11 @@
 package sistema;
 
-import java.util.List;
-
 import atividades.ControladorAtividade;
 import pesquisa.PesquisaController;
 import pesquisador.PesquisadorController;
 
 /**
- * Armazena e faz a busca por termos em todas as entidades do programa
+ * Armazena e controla as buscas por termos no sistema
  * 
  * @author Ricardo A. S. Sena
  *
@@ -17,50 +15,70 @@ public class BuscadorPalavra {
 	 * Lista com dados que conferem com a busca do usuario
 	 */
 	private String[] encontradas;
-
 	/**
-	 * construtor do objeto
+	 * Armazena os resultados da busca pelo termo
 	 */
-	private ControladorAtividade controleAtividade = new ControladorAtividade();;
-	private PesquisaController controlePesquisa = new PesquisaController(controleAtividade);
-	private PesquisadorController controlePesquisador = new PesquisadorController();
-
-	public BuscadorPalavra() {
-	//	encontradas = new ArrayList<String>();
-
-		// encontradas.clear();
-	}
-
-	private String fazABusca(String termo) {
-		String oquetem = "";
-//		tudao = controleAtividade.procuraPalavra(termo) +controlePesquisa.procuraPalavraObjetivo(termo) +controlePesquisa.procuraPalavra(termo)+
-//				controlePesquisa.procuraPalavraProblema(termo)+controlePesquisador.procuraPalavra(termo);
-		//encontradas.addAll(controleAtividade.procuraPalavra(termo));
-//		encontradas.addAll(controlePesquisa.procuraPalavraObjetivo(termo));
-//		encontradas.addAll(controlePesquisa.procuraPalavra(termo));
-//		encontradas.addAll(controlePesquisa.procuraPalavraProblema(termo));
-//		encontradas.addAll(controlePesquisador.procuraPalavra(termo));
-		oquetem = controleAtividade.procuraPalavra(termo) + controlePesquisa.procuraPalavraObjetivo(termo) + controlePesquisa.procuraPalavra(termo)+
-				controlePesquisa.procuraPalavraProblema(termo) + controlePesquisador.procuraPalavra(termo);	
-		return oquetem;
-		
-	}
+	private String resultadoDaBusca = "";
 	/**
-	 * Retorna todas as frases encontradas com o termo pesquisado pelo usuario
+	 * define o controladorAtividade
+	 */
+	private ControladorAtividade controleAtividade;
+	/**
+	 * define o PesquisaController
+	 */
+	private PesquisaController controlePesquisa;
+	/**
+	 * define o PesquisadorController
+	 */
+	private PesquisadorController controlePesquisador;
+
+	/**
+	 * Construtor do objeto Buscador, todo buscador eh iniciado com os controladores
+	 * do sistema como parametro
 	 * 
-	 * @return a represrntacao em string de todas as frases encontradas na busca
-	 *         pelo termo informado
+	 * @param cAtividade,
+	 *            o controlador de atividade
+	 * @param cPesquisa,
+	 *            o controlador de pesquisa
+	 * @param cPesquisador,
+	 *            o controlador de pesquisador
+	 */
+	public BuscadorPalavra(ControladorAtividade cAtividade, PesquisaController cPesquisa,
+			PesquisadorController cPesquisador) {
+		this.controleAtividade = cAtividade;
+		this.controlePesquisa = cPesquisa;
+		this.controlePesquisador = cPesquisador;
+	}
+
+	/**
+	 * Organiza todos os dados referentes da busca no sistema em uma unica variavel
+	 * 
+	 * @param termo,
+	 *            o termo que sera buscado
+	 * @return retorna uma string contendo o resultado da busca pelo termo em todo o
+	 *         sistema
+	 */
+	public String dadosDaBusca(String termo) {
+		resultadoDaBusca = controlePesquisa.procuraPalavra(termo) + controlePesquisador.procuraPalavra(termo)
+				+ controlePesquisa.procuraPalavraProblema(termo) + controlePesquisa.procuraPalavraObjetivo(termo)
+				+ controleAtividade.procuraPalavra(termo);
+		return resultadoDaBusca;
+
+	}
+
+	/**
+	 * Retorna uma representacao em string do resultado da busca
+	 * 
+	 * @param termo,
+	 *            o termo que sera pesquisado
+	 * @return uma representacao em string da pesquisa pelo termo no sistema
 	 */
 	public String retornaEncontradas(String termo) {
-		encontradas = fazABusca(termo).split("");
-		String retorno = "";
-		if (encontradas.length == 0) {
-			return retorno;
+		String retorno = dadosDaBusca(termo);
+		if (retorno.length() == 0) {
+			return "";
 		}
-		for (int i = 0; i < encontradas.length; i++) {
-			retorno = retorno + encontradas[i] + " | ";
-		}
-		return retorno;
+		return retorno.substring(0, retorno.length() - 3);
 
 	}
 
@@ -72,18 +90,18 @@ public class BuscadorPalavra {
 	 *            , a ordem em que o resultado foi encontrado
 	 * @return a string representando o resultado na posicao informada
 	 */
-//	public String retornaEncontradasNumeroResultado(String termo,int numeroDoResultado) {
-//			fazABusca(termo);
-//		String retorno = "";
-//		if (numeroDoResultado < 0) {
-//			throw new IllegalArgumentException("Numero do resultado nao pode ser negativo");
-//		}
-//		if (numeroDoResultado > encontradas.size()) {
-//			throw new IllegalArgumentException("Entidade nao encontrada.");
-//		}
-//		retorno = encontradas.get(numeroDoResultado - 1);
-//		return retorno;
-//	}
+	public String retornaEncontradasNumeroResultado(String termo, int numeroDoResultado) {
+		encontradas = dadosDaBusca(termo).split("\\|");
+		String retorno = "";
+		if (numeroDoResultado < 0) {
+			throw new IllegalArgumentException("Numero do resultado nao pode ser negativo");
+		}
+		if (numeroDoResultado > encontradas.length) {
+			throw new IllegalArgumentException("Entidade nao encontrada.");
+		}
+		retorno = encontradas[numeroDoResultado - 1];
+		return retorno.substring(1, retorno.length() - 1);
+	}
 
 	/**
 	 * Retorna a quantidade de resultados que foram encontrados ao pesquisar nas
@@ -91,14 +109,14 @@ public class BuscadorPalavra {
 	 * 
 	 * @return a quantidade de resultados encontrados
 	 */
-//	public int retornaQuantidadeDeResultados(String termo) {
-//		fazABusca(termo);
-//		int retorno;
-//		if (encontradas.size() == 0) {
-//			throw new IllegalArgumentException("Nenhum resultado encontrado");
-//		}
-//		retorno = encontradas.size();
-//		return retorno;
-//	}
+	public int retornaQuantidadeDeResultados(String termo) {
+		encontradas = dadosDaBusca(termo).split("\\|");
+		int retorno;
+		if (encontradas.length - 1 == 0) {
+			throw new IllegalArgumentException("Nenhum resultado encontrado");
+		}
+		retorno = encontradas.length - 1;
+		return retorno;
+	}
 
 }

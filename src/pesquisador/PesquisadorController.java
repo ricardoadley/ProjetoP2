@@ -20,7 +20,6 @@ public class PesquisadorController {
 	 * tipo Pesquisador
 	 */
 	private Map<String, Pesquisador> mapaEmailPesquisador;
-	private List<String> encontradas;
 
 	/**
 	 * Constroi o controlador
@@ -166,12 +165,10 @@ public class PesquisadorController {
 	 * usuario
 	 * 
 	 * @param palavra,
-	 *            o termo, informado pelo usuario, que sera pesquisado nos dados da
-	 *            entidade
+	 *            o termo que o usuario deseja pesquisar
+	 * @return retorna uma string com todos os resultados encontrados
 	 */
 	public String procuraPalavra(String palavra) {
-
-		//encontradas = null;
 		String retorno = "";
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
 		List<Pesquisador> listaPesquisadores = new ArrayList<>(this.mapaEmailPesquisador.values());

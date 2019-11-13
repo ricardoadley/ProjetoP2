@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import sistema.Verificador;
 
 /**
@@ -14,26 +15,25 @@ import sistema.Verificador;
  * @author Ricardo A. S. Sena
  *
  */
-public class ControladorAtividade {
+public class ControladorAtividade{
 
 	/*
 	 * Mapa de atividades do tipo <String, Atividade>
 	 */
-	private HashMap<String, Atividade> atividades;
+	private Map<String, Atividade> atividades;
 	/**
 	 * Codigo unico de cada atividade, o codigo ja eh iniciado com o valor 1
 	 */
 	private int codigo;
-	private List<String> resultados;
+	//private List<String> resultados;
 
 	/**
 	 * Construtor do objeto ControladorAtividade
 	 */
-	// private BuscadorPalavra buscador = new BuscadorPalavra();
 
 
 	public ControladorAtividade() {
-		atividades = new HashMap<String, Atividade>();
+		this.atividades = new HashMap<>();
 		this.codigo = 1;
 	}
 
@@ -176,7 +176,7 @@ public class ControladorAtividade {
 			}
 			retorno = retorno + atividade.pesquisaItem(palavra);
 		}
-		return retorno;
+		 return retorno;
 	}
 
 	/**
