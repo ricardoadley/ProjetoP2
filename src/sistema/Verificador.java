@@ -4,6 +4,10 @@ import java.util.Map;
 
 import atividades.Item;
 import pesquisa.Pesquisa;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * Classe responsavel por verificar entradas do usuario e, caso necessario,
@@ -130,5 +134,44 @@ public class Verificador {
 		if (inteiro < 1) {
 			throw new IllegalArgumentException(aviso);
 		}
+	}
+	
+	public static void verificaSemestre(String novoValor, String aviso) {
+		int semestre = Integer.parseInt(novoValor);
+		if (semestre < 1) {
+			throw new IllegalArgumentException(aviso);
+		}
+	}
+
+	public static void verificaIEA(double iea, String aviso) {
+		if (iea < 0.0 || iea > 10.0) {
+			throw new IllegalArgumentException(aviso);
+		}
+	}
+
+	public static void verificaData(String data, String aviso) {
+		if (isDateValid(data) != true) {
+			throw new IllegalArgumentException(aviso);
+		}
+	}
+
+	public static void verificaTipo(String tipo, String aviso) {
+		if (!tipo.equals("EXTERNO") && !tipo.equals("ESTUDANTE") && !tipo.equals("PROFESSOR")) {
+			throw new IllegalArgumentException(aviso);
+		}
+	}
+
+	private static boolean isDateValid(String strDate) {
+	    String dateFormat = "dd/MM/uuuu";
+
+	    DateTimeFormatter dateTimeFormatter = DateTimeFormatter
+	    .ofPattern(dateFormat)
+	    .withResolverStyle(ResolverStyle.STRICT);
+	    try {
+	        LocalDate date = LocalDate.parse(strDate, dateTimeFormatter);
+	        return true;
+	    } catch (DateTimeParseException e) {
+	       return false;
+	    } 
 	}
 }

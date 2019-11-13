@@ -560,4 +560,15 @@ public class PesquisaController {
 		this.atividadeController.desassociaPesquisa(codigoPesquisa, codigoAtividade);
 		return this.mapaPesquisas.get(codigoPesquisa).desassociaAtividade(codigoAtividade);
 	}
+	
+
+	public Pesquisa getPesquisa(String idPesquisa) {
+		return this.mapaPesquisas.get(idPesquisa);
+	}
+
+	public Map<String, Pesquisa> getMapaPesquisas() {
+		return mapaPesquisas;
+	}
+	
+	
 }

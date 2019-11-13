@@ -20,8 +20,8 @@ public class Facade {
 
 	public Facade() {
 		this.controlaAtividade = new ControladorAtividade();
-		this.pesquisadorController = new PesquisadorController();
 		this.pesquisaController = new PesquisaController(controlaAtividade);
+		this.pesquisadorController = new PesquisadorController(pesquisaController);
 		this.buscador = new BuscadorPalavra(controlaAtividade,pesquisaController,pesquisadorController);
 	}
 
@@ -158,6 +158,28 @@ public class Facade {
 	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
 		return this.pesquisaController.desassociaObjetivo(idPesquisa, idObjetivo);
 	}
+	
+	//Ana Beatriz Truta (US6)
+
+	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
+		pesquisadorController.cadastraEspecialidadeProfessor(email, formacao, unidade, data);
+		}
+
+	public void cadastraEspecialidadeAluno(String email, int semestre, double IEA) {
+		pesquisadorController.cadastraEspecialidadeAluno(email, semestre, IEA);
+	}
+
+	public String listaPesquisadores(String tipo) {
+		return pesquisadorController.listaPesquisadores(tipo);
+	}
+
+	public boolean associaPesquisador(String idPesquisa, String emailPesquisador) {
+		return pesquisadorController.associaPesquisador(idPesquisa, emailPesquisador);
+	}
+
+	public boolean desassociaPesquisador(String idPesquisa, String emailPesquisador) {
+		return pesquisadorController.desassociaPesquisador(idPesquisa, emailPesquisador);
+	}	
 	
 	//Vinicius (US7)
 	public boolean associaAtividade(String codigoPesquisa, String codigoAtividade) {

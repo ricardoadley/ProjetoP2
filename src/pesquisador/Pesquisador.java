@@ -1,6 +1,10 @@
 package pesquisador;
 
 import sistema.Verificador;
+import java.util.ArrayList;
+import pesquisa.Pesquisa;
+
+
 
 /**
  * Representacao de um pesquisador
@@ -34,6 +38,8 @@ public class Pesquisador {
 	 * do mesmo"
 	 */
 	private String atividade;
+	private Pesquisa pesquisa;
+	private ArrayList<String> pesquisasAssociadas;
 	
 	/**
 	 * Construtor do objeto Pesquisador, que recebe seus atributos e define a atividade como "Ativo" por padrao
@@ -57,8 +63,13 @@ public class Pesquisador {
 		this.email = email;
 		this.fotoURL = fotoURL;
 		this.atividade = "Ativo";
-	}
+		this.pesquisasAssociadas = new ArrayList<String>();
+		}
 
+	public String getFuncao() {
+		return funcao;
+	}
+	
 	public String getEmail() {
 		return email;
 	}
@@ -90,6 +101,27 @@ public class Pesquisador {
 
 	public void setAtividade(String atividade) {
 		this.atividade = atividade;
+	}
+	
+	public boolean contemPesquisa() {
+
+		if (this.pesquisa == null) {
+			return false;
+		}
+
+		return true;
+
+	}
+
+	public boolean ehAtivo() {
+		if (this.atividade.equalsIgnoreCase("Ativo")) {
+			return true;
+		}
+
+		else {
+			return false;
+		}
+
 	}
 	
 	/**
@@ -124,5 +156,13 @@ public class Pesquisador {
 		} else if (!email.equals(other.email))
 			return false;
 		return true;
+	}
+	
+	public void associaPesquisador(String idPesquisa) {
+		this.pesquisasAssociadas.add(idPesquisa);
+	}
+
+	public void desassociaPesquisador(String idPesquisa) {
+		this.pesquisasAssociadas.remove(idPesquisa);
 	}
 }
