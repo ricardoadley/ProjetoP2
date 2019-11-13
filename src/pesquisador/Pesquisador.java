@@ -158,11 +158,19 @@ public class Pesquisador {
 		return true;
 	}
 	
-	public void associaPesquisador(String idPesquisa) {
+	public boolean associaPesquisador(String idPesquisa) {
+		if (this.pesquisasAssociadas.contains(idPesquisa)) {
+			return false;
+		}
 		this.pesquisasAssociadas.add(idPesquisa);
+		return true;
 	}
 
-	public void desassociaPesquisador(String idPesquisa) {
+	public boolean desassociaPesquisador(String idPesquisa) {
+		if (!this.pesquisasAssociadas.contains(idPesquisa)) {
+			return false;
+		}
 		this.pesquisasAssociadas.remove(idPesquisa);
+		return true;
 	}
 }

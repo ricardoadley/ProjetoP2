@@ -237,22 +237,21 @@ public class PesquisadorController {
 		Verificador.verificaEntrada(emailPesquisador, "Campo emailPesquisador nao pode ser nulo ou vazio.");
 		Verificador.verificaEmail(emailPesquisador, "Atributo email com formato invalido.");
 		Verificador.verificaEhAtiva(pesquisaController.getMapaPesquisas(), idPesquisa, "Pesquisa desativada.");
-		Verificador.existeChave(pesquisaController.getMapaPesquisas(), idPesquisa, "");
-		this.capturaPesquisaNoMapa(emailPesquisador).associaPesquisador(idPesquisa);
-		return true;
+		if (!this.pesquisaController.existePesquisa(idPesquisa)) {
+			throw new IllegalArgumentException("Pesquisa nao encontrada");
+		}
+		return this.capturaPesquisaNoMapa(emailPesquisador).associaPesquisador(idPesquisa);
 	}
 
 	public boolean desassociaPesquisador(String idPesquisa, String emailPesquisador) {
 		Verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(emailPesquisador, "Campo emailPesquisador nao pode ser nulo ou vazio.");
 		Verificador.verificaEmail(emailPesquisador, "Atributo email com formato invalido.");
-		if (!pesquisaController.getMapaPesquisas().containsKey(idPesquisa)) {
-			throw new IllegalArgumentException("Pesquisa nao encontrada.");
+		Verificador.verificaEhAtiva(pesquisaController.getMapaPesquisas(), idPesquisa, "Pesquisa desativada.");
+		if (!this.pesquisaController.existePesquisa(idPesquisa)) {
+			throw new IllegalArgumentException("Pesquisa nao encontrada");
 		}
-		if(!pesquisaController.pesquisaEhAtiva(idPesquisa)) {
-			throw new IllegalArgumentException("Pesquisa desativada.");
-		}
-		this.capturaPesquisaNoMapa(emailPesquisador).desassociaPesquisador(idPesquisa);
-		return true;	
-		}
+		return this.capturaPesquisaNoMapa(emailPesquisador).desassociaPesquisador(idPesquisa);
+	}
+		
 } 
