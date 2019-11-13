@@ -2,7 +2,6 @@ package testes_de_unidade;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.Period;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

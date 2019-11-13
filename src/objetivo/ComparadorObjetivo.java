@@ -2,6 +2,12 @@ package objetivo;
 
 import java.util.Comparator;
 
+/**
+ * Compara os objetivos de acordo com seu identificador unico
+ * 
+ * @author Ricardo A. S. Sena
+ *
+ */
 public class ComparadorObjetivo implements Comparator<Objetivo> {
 
 	@Override
