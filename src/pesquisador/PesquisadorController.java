@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import sistema.BuscadorPalavra;
 import sistema.Verificador;
 
 /**
@@ -167,16 +165,19 @@ public class PesquisadorController {
 	 * usuario
 	 * 
 	 * @param palavra,
-	 *            o termo, informado pelo usuario, que sera pesquisado nos dados da
-	 *            entidade
+	 *            o termo que o usuario deseja pesquisar
+	 * @return retorna uma string com todos os resultados encontrados
 	 */
-	public void ProcurarPalavra(String palavra) {
+	public String procuraPalavra(String palavra) {
+		String retorno = "";
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
 		List<Pesquisador> listaPesquisadores = new ArrayList<>(this.mapaEmailPesquisador.values());
 		for (Pesquisador pesquisador : listaPesquisadores) {
-			BuscadorPalavra.adicionaEncontrado(BuscadorPalavra.procuraPalavraEmPesquisador(palavra,
-					pesquisador.getBiografia(), pesquisador.getEmail()));
+			if (pesquisador.getBiografia().toLowerCase().contains(palavra)) {
+				retorno = retorno + pesquisador.getEmail() + ": " + pesquisador.getBiografia() + " | ";
+			}
 		}
+		return retorno;
 	}
 
 }

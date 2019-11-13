@@ -1,9 +1,7 @@
 package sistema;
 
 import atividades.ControladorAtividade;
-//import objetivo.ObjetivoController;
 import pesquisador.PesquisadorController;
-//import problema.ProblemaController;
 import pesquisa.PesquisaController;
 
 /**
@@ -24,7 +22,7 @@ public class Facade {
 		this.controlaAtividade = new ControladorAtividade();
 		this.pesquisadorController = new PesquisadorController();
 		this.pesquisaController = new PesquisaController(controlaAtividade);
-		this.buscador = new BuscadorPalavra();
+		this.buscador = new BuscadorPalavra(controlaAtividade,pesquisaController,pesquisadorController);
 	}
 
 	// Jose Matheus (US3)
@@ -131,32 +129,15 @@ public class Facade {
 	public String listaPesquisas(String ordem) {
 		return pesquisaController.listaPesquisas(ordem);
 	}
-
 	public String busca(String termo) {
-		pesquisaController.ProcurarPalavraPesquisa(termo);
-		pesquisadorController.ProcurarPalavra(termo);
-		pesquisaController.procurarPalavraProblema(termo);
-		pesquisaController.procurarPalavraObjetivo(termo);
-		controlaAtividade.ProcurarPalavra(termo);
-		return buscador.retornaEncontradas();
+		return buscador.retornaEncontradas(termo);
 	}
 
 	public String busca(String termo, int numeroResultado) {
-		pesquisaController.ProcurarPalavraPesquisa(termo);
-		pesquisadorController.ProcurarPalavra(termo);
-		pesquisaController.procurarPalavraProblema(termo);
-		pesquisaController.procurarPalavraObjetivo(termo);
-		controlaAtividade.ProcurarPalavra(termo);
-		return buscador.retornaEncontradasNumeroResultado(numeroResultado);
+		return buscador.retornaEncontradasNumeroResultado(termo,numeroResultado);
 	}
-
 	public int contaResultadosBusca(String termo) {
-		pesquisaController.ProcurarPalavraPesquisa(termo);
-		pesquisadorController.ProcurarPalavra(termo);
-		pesquisaController.procurarPalavraProblema(termo);
-		pesquisaController.procurarPalavraObjetivo(termo);
-		controlaAtividade.ProcurarPalavra(termo);
-		return buscador.retornaQuantidadeDeResultados();
+		return buscador.retornaQuantidadeDeResultados(termo);
 
 	}
 

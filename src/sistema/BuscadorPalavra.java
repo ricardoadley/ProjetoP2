@@ -1,111 +1,121 @@
 package sistema;
 
-import java.util.ArrayList;
-import java.util.List;
+import atividades.ControladorAtividade;
+import pesquisa.PesquisaController;
+import pesquisador.PesquisadorController;
+
 /**
- * Armazena e faz a busca por termos em todas as entidades do programa
+ * Armazena e controla as buscas por termos no sistema
+ * 
  * @author Ricardo A. S. Sena
  *
  */
-public class BuscadorPalavra{
+public class BuscadorPalavra {
 	/**
 	 * Lista com dados que conferem com a busca do usuario
 	 */
-	private static List<String> encontradas;
-/**
- * construtor do objeto 
- */
-	public BuscadorPalavra() {
-		encontradas = new ArrayList<>();
-		encontradas.clear();
-	}
+	private String[] encontradas;
 	/**
-	 * Faz a busca nos dados da entidade por um termo informado pelo usuario e retorna a string que corresponde a
-	 * esses dados
-	 * @param palavra , a palavra que esta sendo pesquisada
-	 * @param frase , a frase em que a palavra sera pesquisada
-	 * @return retorna a frase caso o termo esteja nela , caso nao esteja retorna uma string vazia
+	 * Armazena os resultados da busca pelo termo
 	 */
-	public static String procuraPalavra(String palavra, String frase) {
-		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");;
-		if(frase.toLowerCase().contains(palavra.toLowerCase())) {
-			return frase;
-		}else {
+	private String resultadoDaBusca = "";
+	/**
+	 * define o controladorAtividade
+	 */
+	private ControladorAtividade controleAtividade;
+	/**
+	 * define o PesquisaController
+	 */
+	private PesquisaController controlePesquisa;
+	/**
+	 * define o PesquisadorController
+	 */
+	private PesquisadorController controlePesquisador;
+
+	/**
+	 * Construtor do objeto Buscador, todo buscador eh iniciado com os controladores
+	 * do sistema como parametro
+	 * 
+	 * @param cAtividade,
+	 *            o controlador de atividade
+	 * @param cPesquisa,
+	 *            o controlador de pesquisa
+	 * @param cPesquisador,
+	 *            o controlador de pesquisador
+	 */
+	public BuscadorPalavra(ControladorAtividade cAtividade, PesquisaController cPesquisa,
+			PesquisadorController cPesquisador) {
+		this.controleAtividade = cAtividade;
+		this.controlePesquisa = cPesquisa;
+		this.controlePesquisador = cPesquisador;
+	}
+
+	/**
+	 * Organiza todos os dados referentes da busca no sistema em uma unica variavel
+	 * 
+	 * @param termo,
+	 *            o termo que sera buscado
+	 * @return retorna uma string contendo o resultado da busca pelo termo em todo o
+	 *         sistema
+	 */
+	public String dadosDaBusca(String termo) {
+		resultadoDaBusca = controlePesquisa.procuraPalavra(termo) + controlePesquisador.procuraPalavra(termo)
+				+ controlePesquisa.procuraPalavraProblema(termo) + controlePesquisa.procuraPalavraObjetivo(termo)
+				+ controleAtividade.procuraPalavra(termo);
+		return resultadoDaBusca;
+
+	}
+
+	/**
+	 * Retorna uma representacao em string do resultado da busca
+	 * 
+	 * @param termo,
+	 *            o termo que sera pesquisado
+	 * @return uma representacao em string da pesquisa pelo termo no sistema
+	 */
+	public String retornaEncontradas(String termo) {
+		String retorno = dadosDaBusca(termo);
+		if (retorno.length() == 0) {
 			return "";
 		}
+		return retorno.substring(0, retorno.length() - 3);
+
 	}
+
 	/**
-	 * Procura nos dados da entidade pesquisador por um termo informado pelo usuario
-	 * @param palavra , o termo que sera pesquisado
-	 * @param frase , a frase em que o termo sera pesquisado
-	 * @param email , o email do pesquisador em que esta sendo pesquisado a frase no momento
-	 * @return retorna o email do pesquisado concatenado com a frase caso o termo seja encontrado, caso nao, retorna uma string vazia
-	 */
-	public static String procuraPalavraEmPesquisador(String palavra, String frase, String email) {
-		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");;
-		if(frase.toLowerCase().contains(palavra.toLowerCase())) {
-			return email +": "+frase;
-		}else {
-			return "";
-		}
-	}
-	/**
-	 * Adiciona a frase com o termo pesquisado encontrada durante as pesquisas nas entidades
-	 * em uma lista de frases encontradas
-	 * @param frase , a frase contendo o termo encontrado
-	 */
-	public static void adicionaEncontrado(String frase) {
-		if(!frase.equals("")) {
-			encontradas.add(frase);
-		}
-	}
-	/**
-	 * Retorna todas as frases encontradas com o termo pesquisado pelo usuario
-	 * @return a represrntacao em string de todas as frases encontradas na busca pelo termo informado
-	 */
-	public String retornaEncontradas() {
-		String retorno = "";
-		if(encontradas.size() == 0) {
-			return retorno;
-		}
-		for(int i=0;i<encontradas.size();i++) {
-				retorno = retorno + encontradas.get(i)+" | ";
-		}
-		encontradas.clear();
-		return retorno.substring(0,retorno.length()-3);
-		
-	}
-	/**
-	 * Retorna um resultado especifico encontrado durante a pesquisa de acordo com a sua ordem no resultado
-	 * @param numeroDoResultado , a ordem em que o resultado foi encontrado
+	 * Retorna um resultado especifico encontrado durante a pesquisa de acordo com a
+	 * sua ordem no resultado
+	 * 
+	 * @param numeroDoResultado
+	 *            , a ordem em que o resultado foi encontrado
 	 * @return a string representando o resultado na posicao informada
 	 */
-	public String retornaEncontradasNumeroResultado(int numeroDoResultado) {
-		String retorno="";
-		if(numeroDoResultado < 0) {
-			encontradas.clear();
+	public String retornaEncontradasNumeroResultado(String termo, int numeroDoResultado) {
+		encontradas = dadosDaBusca(termo).split("\\|");
+		String retorno = "";
+		if (numeroDoResultado < 0) {
 			throw new IllegalArgumentException("Numero do resultado nao pode ser negativo");
 		}
-		if(numeroDoResultado > encontradas.size()) {
-			encontradas.clear();
+		if (numeroDoResultado > encontradas.length) {
 			throw new IllegalArgumentException("Entidade nao encontrada.");
 		}
-		retorno = encontradas.get(numeroDoResultado-1);
-		encontradas.clear();
-		return retorno;
+		retorno = encontradas[numeroDoResultado - 1];
+		return retorno.substring(1, retorno.length() - 1);
 	}
+
 	/**
-	 * Retorna a quantidade de resultados que foram encontrados ao pesquisar nas entidades
-	 * pelo termo informado
+	 * Retorna a quantidade de resultados que foram encontrados ao pesquisar nas
+	 * entidades pelo termo informado
+	 * 
 	 * @return a quantidade de resultados encontrados
 	 */
-	public int retornaQuantidadeDeResultados() {
+	public int retornaQuantidadeDeResultados(String termo) {
+		encontradas = dadosDaBusca(termo).split("\\|");
 		int retorno;
-		if(encontradas.size() == 0) {
+		if (encontradas.length - 1 == 0) {
 			throw new IllegalArgumentException("Nenhum resultado encontrado");
 		}
-		retorno = encontradas.size();
-		//encontradas.clear();
+		retorno = encontradas.length - 1;
 		return retorno;
 	}
 
