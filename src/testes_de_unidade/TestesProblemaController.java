@@ -15,7 +15,6 @@ class TestesProblemaController {
 	void iniciar() {
 		controladorproblemas = new ProblemaController();
 	}
-	// assertThrows(NullPointerException.class, () -> new Fornecedor(null, "ricardo@email.com", "80808080"));
 	@Test
 	void testCadastraProblemaPerfeito() {
 		assertEquals("P1",controladorproblemas.cadastraProblema("muito que bem descrito", "4"));

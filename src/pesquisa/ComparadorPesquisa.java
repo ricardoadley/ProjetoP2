@@ -2,6 +2,12 @@ package pesquisa;
 
 import java.util.Comparator;
 
+/**
+ * Compara as pesquisas de acordo com o seu identificador unico
+ * 
+ * @author Ricardo A. S. Sena
+ *
+ */
 public class ComparadorPesquisa implements Comparator<Pesquisa> {
 
 	@Override
@@ -15,7 +21,6 @@ public class ComparadorPesquisa implements Comparator<Pesquisa> {
 			return -1;
 		}
 		return 0;
-		// return p1.getCodigo().compareTo(p2.getCodigo());
 	}
 
 }
