@@ -29,7 +29,7 @@ public class Aluno implements Especialidade{
 
 	@Override
 	public void setAtributo(String atributo, String novo) {
-
+		
 	}
 
 	@Override
@@ -39,8 +39,7 @@ public class Aluno implements Especialidade{
 
 	@Override
 	public String getEspecialidade() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Aluno";
 	}	
 
 }
