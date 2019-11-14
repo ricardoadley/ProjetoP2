@@ -124,4 +124,5 @@ class ControladorAtividadeTest {
 		assertThrows(IllegalArgumentException.class, () -> controlAtividadeTest.contaItensRealizados("A1929192"));
 		
 	}
+	
 }

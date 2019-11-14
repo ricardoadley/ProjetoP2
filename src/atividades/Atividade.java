@@ -189,18 +189,17 @@ public class Atividade {
 	 *            , a palavra, informada pelo usuario, que sera procurada
 	 * @return retorna a string com os resultados encontrados
 	 */
-	public String pesquisaItem(String palavra) {
+	public List<String> pesquisaItem(String palavra) {
 		List<Item> listaItens = new ArrayList<>(this.itens.values());
 		String frase = "";
-		String retorno = "";
-		// encontrados = null;
+		List<String> resultado = new ArrayList<String>();
 		for (Item Item : listaItens) {
 			frase = this.codigo + ": " + Item.getDescricao();
 			if (frase.toLowerCase().contains(palavra)) {
-				retorno = retorno + frase;
+				resultado.add(frase);
 			}
 		}
-		return retorno;
+		return resultado;
 	}
 
 	@Override

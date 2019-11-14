@@ -1,5 +1,8 @@
 package sistema;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import atividades.ControladorAtividade;
 import pesquisa.PesquisaController;
 import pesquisador.PesquisadorController;
@@ -12,13 +15,9 @@ import pesquisador.PesquisadorController;
  */
 public class BuscadorPalavra {
 	/**
-	 * Lista com dados que conferem com a busca do usuario
-	 */
-	private String[] encontradas;
-	/**
 	 * Armazena os resultados da busca pelo termo
 	 */
-	private String resultadoDaBusca = "";
+	List<String> resultadosDaBusca;
 	/**
 	 * define o controladorAtividade
 	 */
@@ -48,6 +47,7 @@ public class BuscadorPalavra {
 		this.controleAtividade = cAtividade;
 		this.controlePesquisa = cPesquisa;
 		this.controlePesquisador = cPesquisador;
+		this.resultadosDaBusca = new ArrayList<String>();
 	}
 
 	/**
@@ -58,12 +58,18 @@ public class BuscadorPalavra {
 	 * @return retorna uma string contendo o resultado da busca pelo termo em todo o
 	 *         sistema
 	 */
-	public String dadosDaBusca(String termo) {
-		resultadoDaBusca = controlePesquisa.procuraPalavra(termo) + controlePesquisador.procuraPalavra(termo)
-				+ controlePesquisa.procuraPalavraProblema(termo) + controlePesquisa.procuraPalavraObjetivo(termo)
-				+ controleAtividade.procuraPalavra(termo);
-		return resultadoDaBusca;
+	private List<String> dadosDaBusca(String termo) {
+		resultadosDaBusca.addAll(controlePesquisa.procuraPalavra(termo));
+		resultadosDaBusca.addAll(controlePesquisador.procuraPalavra(termo));
+		resultadosDaBusca.addAll(controlePesquisa.procuraPalavraProblema(termo));
+		resultadosDaBusca.addAll(controlePesquisa.procuraPalavraObjetivo(termo));
+		resultadosDaBusca.addAll(controleAtividade.procuraPalavra(termo));
+		return resultadosDaBusca;
 
+	}
+
+	private void limpaResultados() {
+		resultadosDaBusca.clear();
 	}
 
 	/**
@@ -74,9 +80,15 @@ public class BuscadorPalavra {
 	 * @return uma representacao em string da pesquisa pelo termo no sistema
 	 */
 	public String retornaEncontradas(String termo) {
-		String retorno = dadosDaBusca(termo);
-		if (retorno.length() == 0) {
+		List<String> todosOsResultados = new ArrayList<String>();
+		todosOsResultados.addAll(dadosDaBusca(termo));
+		limpaResultados();
+		String retorno = "";
+		if (todosOsResultados.size() == 0) {
 			return "";
+		}
+		for (int i = 0; i < todosOsResultados.size(); i++) {
+			retorno = retorno + todosOsResultados.get(i) + " | ";
 		}
 		return retorno.substring(0, retorno.length() - 3);
 
@@ -91,16 +103,17 @@ public class BuscadorPalavra {
 	 * @return a string representando o resultado na posicao informada
 	 */
 	public String retornaEncontradasNumeroResultado(String termo, int numeroDoResultado) {
-		encontradas = dadosDaBusca(termo).split("\\|");
-		String retorno = "";
+		// encontradas = dadosDaBusca(termo).split("\\|");
+		List<String> todosOsResultados = new ArrayList<String>();
+		todosOsResultados.addAll(dadosDaBusca(termo));
+		limpaResultados();
 		if (numeroDoResultado < 0) {
 			throw new IllegalArgumentException("Numero do resultado nao pode ser negativo");
 		}
-		if (numeroDoResultado > encontradas.length) {
+		if (numeroDoResultado > todosOsResultados.size()) {
 			throw new IllegalArgumentException("Entidade nao encontrada.");
 		}
-		retorno = encontradas[numeroDoResultado - 1];
-		return retorno.substring(1, retorno.length() - 1);
+		return todosOsResultados.get(numeroDoResultado - 1);
 	}
 
 	/**
@@ -110,13 +123,13 @@ public class BuscadorPalavra {
 	 * @return a quantidade de resultados encontrados
 	 */
 	public int retornaQuantidadeDeResultados(String termo) {
-		encontradas = dadosDaBusca(termo).split("\\|");
-		int retorno;
-		if (encontradas.length - 1 == 0) {
+		List<String> todosOsResultados = new ArrayList<String>();
+		todosOsResultados.addAll(dadosDaBusca(termo));
+		limpaResultados();
+		if (todosOsResultados.size() == 0) {
 			throw new IllegalArgumentException("Nenhum resultado encontrado");
 		}
-		retorno = encontradas.length - 1;
-		return retorno;
+		return todosOsResultados.size();
 	}
 
 }

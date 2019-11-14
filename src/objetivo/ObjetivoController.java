@@ -135,9 +135,9 @@ public class ObjetivoController {
 	 *            o termo que o usuario deseja procurar
 	 * @return retorna uma string contendo todos os resultados da procura
 	 */
-	public String procuraPalavra(String palavra) {
-		// resultados = null;
-		String retorno = "";
+	public List<String> procuraPalavra(String palavra) {
+
+		List <String> resultados = new ArrayList<String>();
 		String frase = "";
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
 		List<Objetivo> listaObjetivos = new ArrayList<>(this.objetivos.values());
@@ -145,10 +145,10 @@ public class ObjetivoController {
 		for (Objetivo objetivo : listaObjetivos) {
 			frase = objetivo.getCodigo() + ": " + objetivo.getDescricao();
 			if (frase.toLowerCase().contains(palavra)) {
-				retorno = retorno + frase + " | ";
+				resultados.add(frase);
 			}
 		}
-		return retorno;
+		return resultados;
 	}
 
 }

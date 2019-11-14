@@ -15,7 +15,7 @@ import sistema.Verificador;
 /**
  * Classe controladora de Pesquisas.
  * 
- * @author Beatriz Truta, José Matheus do N. Gama
+ * @author Beatriz Truta, Jose Matheus do N. Gama
  *
  */
 public class PesquisaController {
@@ -214,9 +214,10 @@ public class PesquisaController {
 	 *            o termo que o usuario deseja que seja procurado
 	 * @return uma string contendo todos os resultados da procura
 	 */
-	public String procuraPalavra(String palavra) {
+	public List<String> procuraPalavra(String palavra) {
 		// encontradas = null;
-		String retorno = "";
+		List<String> resultados = new ArrayList<String>();
+		//String retorno = "";
 		String fraseDescricao = "";
 		String fraseCampo = "";
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
@@ -226,13 +227,15 @@ public class PesquisaController {
 			fraseDescricao = pesquisa.getCodigo() + ": " + pesquisa.getDescricao();
 			fraseCampo = pesquisa.getCodigo() + ": " + pesquisa.getCampo();
 			if (fraseDescricao.toLowerCase().contains(palavra)) {
-				retorno = retorno + fraseDescricao + " | ";
+				//retorno = retorno + fraseDescricao + " | ";
+				resultados.add(fraseDescricao);
 			}
 			if (fraseCampo.toLowerCase().contains(palavra)) {
-				retorno = retorno + fraseCampo + " | ";
+				//retorno = retorno + fraseCampo + " | ";
+				resultados.add(fraseCampo);
 			}
 		}
-		return retorno;
+		return resultados;
 	}
 
 	// Metodos referentes as operacoes com OBJETIVOS!
@@ -345,7 +348,7 @@ public class PesquisaController {
 	 *            a palavra a qual se deseja procurar um Objetivo que contenha a
 	 *            mesma
 	 */
-	public String procuraPalavraObjetivo(String palavra) {
+	public List<String> procuraPalavraObjetivo(String palavra) {
 		return this.objetivoController.procuraPalavra(palavra);
 	}
 
@@ -393,7 +396,7 @@ public class PesquisaController {
 	 *            palavra a palavra a qual se deseja procurar um Problema que
 	 *            contenha a mesma
 	 */
-	public String procuraPalavraProblema(String palavra) {
+	public List<String> procuraPalavraProblema(String palavra) {
 		return this.problemaController.procuraPalavra(palavra);
 	}
 

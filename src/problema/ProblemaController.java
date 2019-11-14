@@ -116,20 +116,19 @@ public class ProblemaController {
 	 *            o termo que o usuario deseja pesquisar
 	 * @return retorna uma string com todos os resultados encontrados
 	 */
-	public String procuraPalavra(String palavra) {
-		// encontradas = null;
-		String retorno = "";
+	public List<String> procuraPalavra(String palavra) {
 		String frase = "";
+		List<String> resultados = new ArrayList<String>();
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
 		List<Problema> listaProblemas = new ArrayList<>(this.problemas.values());
 		Collections.sort(listaProblemas, new ComparadorProblema());
 		for (Problema problema : listaProblemas) {
 			frase = problema.getCodigo() + ": " + problema.getDescricao();
 			if (frase.toLowerCase().contains(palavra)) {
-				retorno = retorno + frase + " | ";
+				resultados.add(frase);
 			}
 		}
-		return retorno;
+		return resultados;
 	}
 
 }
