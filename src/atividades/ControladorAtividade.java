@@ -157,9 +157,8 @@ public class ControladorAtividade{
 	 * @param palavra,
 	 *            o termo informado pelo usuario
 	 */
-	public String procuraPalavra(String palavra) {
-		//resultados = null;
-		String retorno = "";
+	public List<String> procuraPalavra(String palavra) {
+		List<String> resultados = new ArrayList<String> ();
 		String fraseDescricao = "";
 		String fraseDescricaoRisco = "";
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
@@ -169,14 +168,14 @@ public class ControladorAtividade{
 			fraseDescricao = atividade.getCodigo() + ": " + atividade.getDescricao();
 			fraseDescricaoRisco = atividade.getCodigo() + ": " + atividade.getDescricaoRisco();
 			if (fraseDescricao.toLowerCase().contains(palavra.toLowerCase())) {
-				retorno = retorno + fraseDescricao + " | ";
+				resultados.add(fraseDescricao);
 			}
 			if (fraseDescricaoRisco.toLowerCase().contains(palavra.toLowerCase())) {
-				retorno = retorno + fraseDescricaoRisco + " | ";
+				resultados.add(fraseDescricaoRisco);
 			}
-			retorno = retorno + atividade.pesquisaItem(palavra);
+			resultados.addAll(atividade.pesquisaItem(palavra));
 		}
-		 return retorno;
+		 return resultados;
 	}
 
 	/**

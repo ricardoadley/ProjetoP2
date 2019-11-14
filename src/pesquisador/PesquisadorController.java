@@ -192,16 +192,17 @@ public class PesquisadorController {
 	 *            o termo que o usuario deseja pesquisar
 	 * @return retorna uma string com todos os resultados encontrados
 	 */
-	public String procuraPalavra(String palavra) {
-		String retorno = "";
+	public List<String> procuraPalavra(String palavra) {
+
+		List<String> resultados = new ArrayList<String>();
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
 		List<Pesquisador> listaPesquisadores = new ArrayList<>(this.mapaEmailPesquisador.values());
 		for (Pesquisador pesquisador : listaPesquisadores) {
 			if (pesquisador.getBiografia().toLowerCase().contains(palavra)) {
-				retorno = retorno + pesquisador.getEmail() + ": " + pesquisador.getBiografia() + " | ";
+				resultados.add(pesquisador.getEmail() + ": " + pesquisador.getBiografia());
 			}
 		}
-		return retorno;
+		return resultados;
 	}
 	private Pesquisador capturaPesquisaNoMapa(String email) {
 		return this.mapaEmailPesquisador.get(email);
