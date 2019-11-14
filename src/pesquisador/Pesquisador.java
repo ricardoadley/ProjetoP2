@@ -65,6 +65,7 @@ public class Pesquisador {
 		this.fotoURL = fotoURL;
 		this.atividade = "Ativo";
 		this.pesquisasAssociadas = new ArrayList<String>();
+		this.especialidade = null;
 	}
 
 	public String getFuncao() {
@@ -119,12 +120,25 @@ public class Pesquisador {
 		}
 	}
 	
+	
+	public Especialidade getEspecialidade() {
+		return especialidade;
+	}
+
+	public void setEspecialidade(Especialidade especialidade) {
+		this.especialidade = especialidade;
+	}
+
 	/**
 	 * Retorna a representacao em texto do pesquisador no formato "NOME (FUNCAO) - BIOGRAFIA - EMAIL - FOTO"
 	 */
 	@Override
 	public String toString() {
 		return this.nome + " (" + this.funcao + ") - " + this.biografia + " - " + this.email + " - " + this.fotoURL;
+	}
+	
+	public String toStringEspecialidade() {
+		return this.nome + " (" + this.funcao + ") - " + this.biografia + " - " + this.email + " - " + this.fotoURL + " - " + getEspecialidade().toString();
 	}
 
 	

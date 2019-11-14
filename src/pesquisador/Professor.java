@@ -50,8 +50,7 @@ public class Professor implements Especialidade{
 
 	@Override
 	public String getEspecialidade() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Professor";
 	}
 
 }

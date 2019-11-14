@@ -22,7 +22,7 @@ public class PesquisadorController {
 	 */
 	private Map<String, Pesquisador> mapaEmailPesquisador;
 	private PesquisaController pesquisaController;
-	private Especialidade especialidade;
+
 	/**
 	 * Constroi o controlador
 	 */
@@ -96,15 +96,20 @@ public class PesquisadorController {
 		} else if (atributo.equals("SEMESTRE")){
 			Verificador.verificaEntrada(novoValor, "Campo semestre nao pode ser nulo ou vazio.");
 			Verificador.verificaSemestre(novoValor, "Atributo semestre com formato invalido.");
+			((Aluno) this.mapaEmailPesquisador.get(email).getEspecialidade()).setSemestre(Integer.parseInt(novoValor));
 		} else if (atributo.equals("IEA")){
 			Verificador.verificaEntrada(novoValor, "Campo iea nao pode ser nulo ou vazio.");
+			((Aluno) this.mapaEmailPesquisador.get(email).getEspecialidade()).setIea(Double.parseDouble(novoValor));
 		} else if (atributo.equals("FORMACAO")){
 			Verificador.verificaEntrada(novoValor, "Campo formacao nao pode ser nulo ou vazio.");
+			((Professor) this.mapaEmailPesquisador.get(email).getEspecialidade()).setFormacao(novoValor);
 		} else if (atributo.equals("UNIDADE")){
 			Verificador.verificaEntrada(novoValor, "Campo unidade nao pode ser nulo ou vazio.");
+			((Professor) this.mapaEmailPesquisador.get(email).getEspecialidade()).setUnidade(novoValor);
 		} else if (atributo.equals("DATA")){
 			Verificador.verificaEntrada(novoValor, "Campo data nao pode ser nulo ou vazio.");
 			Verificador.verificaData(novoValor, "Atributo data com formato invalido.");
+			((Professor) this.mapaEmailPesquisador.get(email).getEspecialidade()).setData(novoValor);
 		}else {
 			throw new IllegalArgumentException("Atributo invalido.");
 		}
@@ -124,8 +129,11 @@ public class PesquisadorController {
 		Verificador.existeChaveString(this.mapaEmailPesquisador, email, "Pesquisador nao encontrado");
 		if (!pesquisadorEhAtivo(email)) {
 			throw new IllegalArgumentException("Pesquisador inativo.");
+		} 
+		if (mapaEmailPesquisador.get(email).getEspecialidade() == null) {
+			return this.mapaEmailPesquisador.get(email).toString();
 		}
-		return this.mapaEmailPesquisador.get(email).toString();
+		return this.mapaEmailPesquisador.get(email).toStringEspecialidade();
 	}
 
 	/**
@@ -208,7 +216,8 @@ public class PesquisadorController {
 		Verificador.verificaData(data, "Atributo data com formato invalido.");
 		Verificador.existeChave(this.mapaEmailPesquisador, email, "Pesquisadora nao encontrada.");
 		if (this.mapaEmailPesquisador.get(email).getFuncao().equals("professor")) {	
-			this.mapaEmailPesquisador.put(email, (Pesquisador) (this.especialidade = new Professor(formacao, unidade, data)));
+			Professor especialidade = new Professor(formacao, unidade, data);
+			this.mapaEmailPesquisador.get(email).setEspecialidade(especialidade);
 		} else {
 			throw new IllegalArgumentException("Pesquisador nao compativel com a especialidade.");
 		}
@@ -222,8 +231,8 @@ public class PesquisadorController {
 		Verificador.verificaInteiroPositivo(semestre, "Atributo semestre com formato invalido.");
 		Verificador.verificaEmail(email, "Atributo email com formato invalido.");
 		Verificador.existeChave(this.mapaEmailPesquisador, email, "Pesquisadora nao encontrada.");
-		if (this.mapaEmailPesquisador.get(email).getFuncao().equals("estudante")) {	
-			this.mapaEmailPesquisador.put(email, (Pesquisador) (this.especialidade = new Aluno(semestre, IEA)));
+		if (this.mapaEmailPesquisador.get(email).getFuncao().equals("estudante")) {		
+			this.mapaEmailPesquisador.get(email).setEspecialidade(new Aluno(semestre, IEA));
 		}else {
 			throw new IllegalArgumentException("Pesquisador nao compativel com a especialidade.");
 		}
