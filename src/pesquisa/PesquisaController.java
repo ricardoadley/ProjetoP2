@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import atividades.Atividade;
 import atividades.ControladorAtividade;
 import objetivo.ObjetivoController;
 import problema.ProblemaController;
@@ -570,5 +572,14 @@ public class PesquisaController {
 		return mapaPesquisas;
 	}
 	
-	
+	public boolean existePesquisa(String codigo) {
+		if(!this.mapaPesquisas.containsKey(codigo)) {
+			throw new IllegalArgumentException("Pesquisa nao encontrada.");
+		}
+		return this.mapaPesquisas.containsKey(codigo);
+	}
+
+//	private Pesquisa capturaPesquisaNoMapa(String codigo) {
+//		return this.mapaPesquisas.get(codigo);
+//	}
 }

@@ -1,6 +1,6 @@
 package pesquisador;
 
-public class Aluno implements Funcao{
+public class Aluno implements Especialidade{
 
 	private int semestre;
 	private double iea;
@@ -28,20 +28,19 @@ public class Aluno implements Funcao{
 	}
 
 	@Override
-	public String getFuncao() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void setAtributo(String atributo, String novo) {
-
 
 	}
 
 	@Override
 	public String toString() {
 		return semestre + "o SEMESTRE - " + iea;
+	}
+
+	@Override
+	public String getEspecialidade() {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 
 }
