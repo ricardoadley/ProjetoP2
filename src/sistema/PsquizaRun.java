@@ -11,7 +11,7 @@ public class PsquizaRun {
 			"testes_de_aceitacao/use_case_6.txt", "testes_de_aceitacao/use_case_7.txt", "testes_de_aceitacao/use_case_8.txt"}; 
 			EasyAccept.main(args);
 	}
-} 
+}
 
 
 
