@@ -10,7 +10,7 @@ import pesquisa.Pesquisa;
  * @author Vinicius M. V. Varjao
  *
  */
-public class Pesquisador {
+public class Pesquisador implements Comparable<Pesquisador> {
 
 	/**
 	 * O email do pesquisador, o qual vai ser usado para identifica-lo
@@ -37,9 +37,7 @@ public class Pesquisador {
 	 * define a possibilidade de manipulacai do mesmo"
 	 */
 	private String atividade;
-	private Pesquisa pesquisa;
 	private Especialidade especialidade;
-	private ArrayList<String> pesquisasAssociadas;
 
 	/**
 	 * Construtor do objeto Pesquisador, que recebe seus atributos e define a
@@ -65,7 +63,6 @@ public class Pesquisador {
 		this.email = email;
 		this.fotoURL = fotoURL;
 		this.atividade = "Ativo";
-		this.pesquisasAssociadas = new ArrayList<String>();
 		this.especialidade = null;
 	}
 
@@ -107,13 +104,6 @@ public class Pesquisador {
 
 	public void setAtividade(String atividade) {
 		this.atividade = atividade;
-	}
-
-	public boolean contemPesquisa() {
-		if (this.pesquisa == null) {
-			return false;
-		}
-		return true;
 	}
 
 	public boolean ehAtivo() {
@@ -171,19 +161,11 @@ public class Pesquisador {
 		return true;
 	}
 
-	public boolean associaPesquisador(String idPesquisa) {
-		if (this.pesquisasAssociadas.contains(idPesquisa)) {
-			return false;
-		}
-		this.pesquisasAssociadas.add(idPesquisa);
-		return true;
+	@Override
+	public int compareTo(Pesquisador pesquisador) {
+
+		return this.email.compareTo(pesquisador.getEmail());
+
 	}
 
-	public boolean desassociaPesquisador(String idPesquisa) {
-		if (!this.pesquisasAssociadas.contains(idPesquisa)) {
-			return false;
-		}
-		this.pesquisasAssociadas.remove(idPesquisa);
-		return true;
-	}
 }

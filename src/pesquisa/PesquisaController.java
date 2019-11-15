@@ -1,5 +1,9 @@
 package pesquisa;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -26,7 +30,7 @@ public class PesquisaController {
 	/**
 	 * identificador unico da pesquisa
 	 */
-	private int idPesquisa = 0;
+	private int idPesquisa;
 
 	/**
 	 * Instancia da classe controladora de Objetivos.
@@ -42,19 +46,24 @@ public class PesquisaController {
 	 */
 	private ControladorAtividade atividadeController;
 
+	/**
+	 * Instancia da classe controladora de Pesquisadores.
+	 */
 	private PesquisadorController pesquisadorController;
 
 	/**
-	 * Construtor de PesquisaController
+	 * Construtor de PesquisaController.
 	 * 
+	 * @param objetivoController
+	 * @param problemaController
 	 * @param pesquisadorController
-	 * @param problemaController2
-	 * @param objetivoController2
+	 * @param atividadeController
 	 */
 	public PesquisaController(ObjetivoController objetivoController, ProblemaController problemaController,
-			PesquisadorController pesquisadorController, ControladorAtividade controlaAtividade) {
+			PesquisadorController pesquisadorController, ControladorAtividade atividadeController) {
 		this.mapaPesquisas = new HashMap<>();
-		this.atividadeController = controlaAtividade;
+		this.idPesquisa = 1;
+		this.atividadeController = atividadeController;
 		this.objetivoController = objetivoController;
 		this.problemaController = problemaController;
 		this.pesquisadorController = pesquisadorController;
@@ -74,7 +83,7 @@ public class PesquisaController {
 		for (int i = 0; i < 3; i++) {
 			codigo += interesse.charAt(i);
 		}
-		codigo = codigo + (idPesquisa + 1);
+		codigo += (idPesquisa);
 		codigo = geraId(codigo.toUpperCase());
 		this.mapaPesquisas.put(codigo, new Pesquisa(descricao, interesse, codigo));
 		return codigo;
@@ -190,12 +199,21 @@ public class PesquisaController {
 	 * @return retorna o id da pesquisa
 	 */
 	private String geraId(String id) {
-		if (mapaPesquisas.containsKey(id)) {
-			int indice = (int) id.charAt(id.length() - 1);
-			indice++;
-			return id.replace(id.charAt(id.length() - 1), (char) indice);
+
+		int aux = 1;
+
+		for (String pesquisa : this.mapaPesquisas.keySet()) {
+
+			String codigo = mapaPesquisas.get(pesquisa).getCodigo();
+
+			if (codigo.substring(0, codigo.length() - 1).equals(id.substring(0, id.length() - 1))) {
+				aux++;
+			}
+
 		}
-		return id;
+
+		return id.substring(0, id.length() - 1) + aux;
+
 	}
 
 	/**
@@ -481,11 +499,38 @@ public class PesquisaController {
 	}
 
 	public void gravarResumo(String codigoPesquisa) {
-		
+		Verificador.verificaEntrada(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
+		Verificador.existeChave(this.mapaPesquisas, codigoPesquisa, "Pesquisa nao encontrada.");
+
+		try {
+
+			// Cria arquivo
+			File file = new File("./easyaccept/" + codigoPesquisa + ".txt");
+
+			// Se o arquivo nao existir, ele gera
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+
+			// Prepara para escrever no arquivo
+			FileWriter escritorDeArquivo = new FileWriter(file.getAbsoluteFile());
+			BufferedWriter buffWrite = new BufferedWriter(escritorDeArquivo);
+
+			// Escreve e fecha arquivo
+			buffWrite.write(this.mapaPesquisas.get(codigoPesquisa).getResumo());
+			buffWrite.flush();
+			buffWrite.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public void gravarResultados(String codigoPesquisa) {
-		
+		Verificador.verificaEntrada(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
+		Verificador.existeChave(this.mapaPesquisas, codigoPesquisa, "Pesquisa nao encontrada.");
+
 	}
 
 }
