@@ -5,16 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 import objetivo.Objetivo;
+import pesquisador.Pesquisador;
 import problema.Problema;
 import sistema.Verificador;
 
 /**
  * Classe que representa uma Pesquisa. Toda Pesquisa possui uma descricao, um
- * campo, um status (ativada ou desativada), um codigo pelo qual e identificada
- * unicamente. Alem disso, tambem pode estar ou nao associada a um Problema ou a
- * um ou mais Objetivos.
+ * campo, um status (ativada ou desativada) e um codigo pelo qual e identificada
+ * unicamente. Alem disso, tambem pode estar ou nao associada a um Problema ou
+ * Objetivos.
  * 
  * @author Beatriz Truta, José Matheus do N. Gama
  *
@@ -43,11 +43,16 @@ public class Pesquisa {
 	/**
 	 * Problema ao qual a pesquisa esta associada.
 	 */
-	private Problema problema;
+	private Problema problemaAssociado;
 	/**
 	 * Mapa de Objetivos associados a Pesquisa.
 	 */
-	private Map<String, Objetivo> objetivos;
+	private Map<String, Objetivo> objetivosAssociados;
+
+	/**
+	 * Mapa de Pesquisadores associados a Pesquisa.
+	 */
+	private Map<String, Pesquisador> pesquisadoresAssociados;
 
 	/**
 	 * Constroi uma nova pesquisa de acordo com os parametros informados pelo
@@ -64,8 +69,9 @@ public class Pesquisa {
 		this.campo = campo;
 		this.codigo = codigo;
 		this.status = "Ativa";
-		this.objetivos = new HashMap<>();
+		this.objetivosAssociados = new HashMap<>();
 		this.atividadesAssociadas = new ArrayList<>();
+		this.pesquisadoresAssociados = new HashMap<>();
 	}
 
 	/**
@@ -137,7 +143,7 @@ public class Pesquisa {
 	 * @param problema o Problema o qual se deseja associar a Pesquisa
 	 */
 	public void setProblema(Problema problema) {
-		this.problema = problema;
+		this.problemaAssociado = problema;
 	}
 
 	/**
@@ -147,7 +153,7 @@ public class Pesquisa {
 	 * @param objetivo   um objeto do tipo Objetivo
 	 */
 	public void adicionaObjetivo(String idObjetivo, Objetivo objetivo) {
-		this.objetivos.put(idObjetivo, objetivo);
+		this.objetivosAssociados.put(idObjetivo, objetivo);
 	}
 
 	/**
@@ -156,7 +162,7 @@ public class Pesquisa {
 	 * @param idObjetivo o ID unico do objetivo
 	 */
 	public void removeObjetivo(String idObjetivo) {
-		this.objetivos.remove(idObjetivo);
+		this.objetivosAssociados.remove(idObjetivo);
 	}
 
 	/**
@@ -166,7 +172,7 @@ public class Pesquisa {
 	 */
 	public boolean contemProblema() {
 
-		if (this.problema == null) {
+		if (this.problemaAssociado == null) {
 			return false;
 		}
 
@@ -182,7 +188,7 @@ public class Pesquisa {
 	 */
 	public boolean contemObjetivo(String idObjetivo) {
 
-		if (this.objetivos.containsKey(idObjetivo)) {
+		if (this.objetivosAssociados.containsKey(idObjetivo)) {
 			return true;
 		}
 
@@ -199,7 +205,7 @@ public class Pesquisa {
 	 *         objetivo
 	 */
 	public boolean contemObjetivos() {
-		if (this.objetivos.size() == 0) {
+		if (this.objetivosAssociados.size() == 0) {
 			return false;
 		}
 
@@ -215,7 +221,7 @@ public class Pesquisa {
 	 */
 	public int getQtdObjetivos() {
 
-		return this.objetivos.size();
+		return this.objetivosAssociados.size();
 
 	}
 
@@ -225,7 +231,7 @@ public class Pesquisa {
 	 * @return o objeto do tipo Problema que esta associado a Pesquisa
 	 */
 	public Problema getProblema() {
-		return this.problema;
+		return this.problemaAssociado;
 	}
 
 	/**
@@ -282,6 +288,7 @@ public class Pesquisa {
 
 	/**
 	 * Armazena o codigo de uma atividade
+	 * 
 	 * @param codigoAtividade codigo da atividade a ser armazenado
 	 * @return false caso a associacao nao ocorra, true caso contrario
 	 */
@@ -294,7 +301,8 @@ public class Pesquisa {
 	}
 
 	/**
-	 * Remove o codigo de uma ativadade associada da lista de atividades
+	 * Remove o codigo de uma atividade associada da lista de atividades
+	 * 
 	 * @param codigoAtividade codigo da atividade a ser removido
 	 * @return false caso a desassociacao nao ocorra, true caso contrario
 	 */
@@ -306,4 +314,29 @@ public class Pesquisa {
 		return true;
 	}
 
+	public void addPesquisadorAssociado() {
+		
+	}
+
+	public boolean associaPesquisador(String emailPesquisador, Pesquisador pesquisador) {
+		
+		if (this.pesquisadoresAssociados.containsKey(emailPesquisador)) {
+			return false;
+		}
+		
+		this.pesquisadoresAssociados.put(emailPesquisador, pesquisador);
+		return true;
+	}
+	
+	public boolean desassociaPesquisador(String emailPesquisador) {
+		
+		if (!this.pesquisadoresAssociados.containsKey(emailPesquisador)) {
+			return false;
+		}
+		
+		this.pesquisadoresAssociados.remove(emailPesquisador);
+		return true;
+		
+	}
+	
 }

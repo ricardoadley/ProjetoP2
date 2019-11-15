@@ -6,17 +6,27 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import atividades.ControladorAtividade;
+import objetivo.ObjetivoController;
 import pesquisa.PesquisaController;
+import pesquisador.PesquisadorController;
+import problema.ProblemaController;
 
 class PesquisaControllerTest {
 
 	private PesquisaController pesquisaController;
 	private ControladorAtividade controladorAtividade;
+	private ProblemaController problemaController;
+	private ObjetivoController objetivoController;
+	private PesquisadorController pesquisadorController;
 	
 	@BeforeEach
 	void iniciar() {	
 	controladorAtividade = new ControladorAtividade();
-	pesquisaController = new PesquisaController(controladorAtividade);
+	problemaController = new ProblemaController();
+	objetivoController = new ObjetivoController();
+	pesquisadorController = new PesquisadorController();
+	
+	pesquisaController = new PesquisaController(objetivoController, problemaController, pesquisadorController, controladorAtividade);
 	controladorAtividade.cadastraAtividade("Atividade de teste","MEDIO", "eh um risco arriscado");
 	pesquisaController.cadastraPesquisa("Pesquisa Teste Certo","testes,certo");
 	}
