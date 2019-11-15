@@ -1,6 +1,7 @@
 package pesquisa;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -314,29 +315,76 @@ public class Pesquisa {
 		return true;
 	}
 
-	public void addPesquisadorAssociado() {
-		
-	}
-
 	public boolean associaPesquisador(String emailPesquisador, Pesquisador pesquisador) {
-		
+
 		if (this.pesquisadoresAssociados.containsKey(emailPesquisador)) {
 			return false;
 		}
-		
+
 		this.pesquisadoresAssociados.put(emailPesquisador, pesquisador);
 		return true;
 	}
-	
+
 	public boolean desassociaPesquisador(String emailPesquisador) {
-		
+
 		if (!this.pesquisadoresAssociados.containsKey(emailPesquisador)) {
 			return false;
 		}
-		
+
 		this.pesquisadoresAssociados.remove(emailPesquisador);
 		return true;
-		
+
 	}
-	
+
+	public String getResumo() {
+
+		String resumoGeral = "";
+
+		if (this.pesquisadoresAssociados.size() > 0) {
+
+			resumoGeral += "    - Pesquisadores:\n";
+
+			ArrayList<Pesquisador> pesquisadoresOrdenados = new ArrayList(this.pesquisadoresAssociados.values());
+			Collections.sort(pesquisadoresOrdenados);
+
+			for (int i = 0; i < pesquisadoresOrdenados.size(); i++) {
+				resumoGeral += "        - " + pesquisadoresOrdenados.get(i).toString() + "\n";
+			}
+		}
+
+		if (this.problemaAssociado != null) {
+
+			resumoGeral += "    - Problema:\n        - " + this.problemaAssociado.toString() + "\n";
+
+		}
+
+		if (this.objetivosAssociados.size() > 0) {
+
+			resumoGeral += "    - Objetivo:\n";
+
+			ArrayList<Objetivo> objetivosOrdenados = new ArrayList(this.objetivosAssociados.values());
+			Collections.sort(objetivosOrdenados);
+
+			for (int i = 0; i < objetivosOrdenados.size(); i++) {
+				resumoGeral += "        - " + objetivosOrdenados.get(i).toString() + "\n";
+			}
+
+		}
+
+		if (this.atividadesAssociadas.size() > 0) {
+			
+			resumoGeral += "    - Atividades:\n";
+			
+			Collections.sort(atividadesAssociadas);
+			
+			for (int i = 0; i < atividadesAssociadas.size(); i++) {
+				resumoGeral += "        - " + atividadesAssociadas.get(i).toString() + "\n";
+			}
+			
+		}
+		
+		return "Pesquisa: " + this.toString() + "\n" + resumoGeral;
+
+	}
+
 }

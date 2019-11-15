@@ -14,7 +14,7 @@ import sistema.Verificador;
  *
  */
 
-public class Atividade {
+public class Atividade implements Comparable<Atividade> {
 	/**
 	 * A ordem de cadastro dos itens da atividade
 	 */
@@ -58,14 +58,10 @@ public class Atividade {
 	/**
 	 * Constroi uma nova atividade a partir dos parametros informados pelo usuario
 	 * 
-	 * @param descricao,
-	 *            a descricao da atividade
-	 * @param nivelRisco,
-	 *            o nivel de risco da atividade
-	 * @param descricaoRisco,
-	 *            a descricao do risco da atividade
-	 * @param days,
-	 *            a duracao em dias da atividade
+	 * @param descricao,      a descricao da atividade
+	 * @param nivelRisco,     o nivel de risco da atividade
+	 * @param descricaoRisco, a descricao do risco da atividade
+	 * @param days,           a duracao em dias da atividade
 	 */
 	public Atividade(String descricao, String nivelRisco, String descricaoRisco, int duracao, String codigo) {
 		// super();
@@ -85,8 +81,7 @@ public class Atividade {
 	/**
 	 * Adiciona um novo item ao mapa de itens
 	 * 
-	 * @param item,
-	 *            o item que sera adicionado
+	 * @param item, o item que sera adicionado
 	 */
 	public void adicionaItem(String item) {
 		Item it = new Item(item, ordemCadastroItem);
@@ -185,8 +180,7 @@ public class Atividade {
 	 * Pesquisa se o termo informado pelo usuario esta presente nos itens da
 	 * atividade
 	 * 
-	 * @param palavra
-	 *            , a palavra, informada pelo usuario, que sera procurada
+	 * @param palavra , a palavra, informada pelo usuario, que sera procurada
 	 * @return retorna a string com os resultados encontrados
 	 */
 	public List<String> pesquisaItem(String palavra) {
@@ -230,10 +224,8 @@ public class Atividade {
 	/**
 	 * Executa a atividade, realizando um dos itens e incremetando a duracao
 	 * 
-	 * @param item
-	 *            item a ser realizado
-	 * @param duracao
-	 *            duracao a ser incrementada
+	 * @param item    item a ser realizado
+	 * @param duracao duracao a ser incrementada
 	 */
 	public void executaAtividade(int item, int duracao) {
 		Verificador.existeChave(itens, item, "Item nao encontrado.");
@@ -250,8 +242,7 @@ public class Atividade {
 	/**
 	 * Cadastra um resultado na atividade.
 	 * 
-	 * @param resultado
-	 *            resultado a ser cadastrado
+	 * @param resultado resultado a ser cadastrado
 	 * @return o ID do resultado cadastrado
 	 */
 	public int cadastraResultado(String resultado) {
@@ -263,8 +254,7 @@ public class Atividade {
 	/**
 	 * Remove um resultado cadastrado anteriormente
 	 * 
-	 * @param numeroResultado
-	 *            numero do resultado
+	 * @param numeroResultado numero do resultado
 	 * @return true
 	 */
 	public boolean removeResultado(int numeroResultado) {
@@ -289,8 +279,7 @@ public class Atividade {
 	/**
 	 * Armazena o codigo de uma pesquisa em uma lista
 	 * 
-	 * @param codigoPesquisa
-	 *            codigo da pesquisa a ser armazenado
+	 * @param codigoPesquisa codigo da pesquisa a ser armazenado
 	 */
 	public void associaPesquisa(String codigoPesquisa) {
 		this.pesquisasAssociadas.add(codigoPesquisa);
@@ -299,10 +288,14 @@ public class Atividade {
 	/**
 	 * Remove o codigo de uma pesquisa em da lista de pesquisas
 	 * 
-	 * @param codigoPesquisa
-	 *            codigo da pesquisa a ser removida
+	 * @param codigoPesquisa codigo da pesquisa a ser removida
 	 */
 	public void desassociaPesquisa(String codigoPesquisa) {
 		this.pesquisasAssociadas.remove(codigoPesquisa);
+	}
+
+	@Override
+	public int compareTo(Atividade atividade) {
+		return this.codigo.compareTo(atividade.getCodigo());
 	}
 }
