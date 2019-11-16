@@ -504,14 +504,14 @@ public class PesquisaController {
 		Verificador.existeChave(this.mapaPesquisas, codigoPesquisa, "Pesquisa nao encontrada.");
 
 		try {
-
+			
 			// Cria arquivo
-			File file = new File("./" + codigoPesquisa + ".txt");
-
-			/*
-			 * // Se o arquivo nao existir, ele gera if (!file.exists()) {
-			 * file.createNewFile(); }
-			 */
+			File file = new File("./" + "Z" + codigoPesquisa + ".txt");
+			
+			// Se o arquivo nao existe, ele cria
+			if (!file.exists()) {
+				file.createNewFile();
+			}
 
 			// Prepara para escrever no arquivo
 			FileWriter escritorDeArquivo = new FileWriter(file.getAbsoluteFile());

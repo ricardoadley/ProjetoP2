@@ -307,14 +307,14 @@ public class Atividade implements Comparable<Atividade> {
 		Collections.sort(itens);
 		for (int i = 0; i < itens.size(); i++) {
 			if (itens.get(i).isRealizado() == false) {
-				lista += "            - PENDENTE - ITEM" + itens.get(i).toString() + "\n";
+				lista += "            - PENDENTE - ITEM" + itens.get(i).toString() + System.lineSeparator();
 			} else {
-				lista += "            - REALIZADO - ITEM" + itens.get(i).toString() + "\n";
+				lista += "            - REALIZADO - ITEM" + itens.get(i).toString() + System.lineSeparator();
 			}
 
-
 		}
-		return this.descricao + " (" + this.nivelRisco + " - " + this.descricaoRisco + ")\n" + lista;
+		return this.descricao + " (" + this.nivelRisco + " - " + this.descricaoRisco + ")" + System.lineSeparator()
+				+ lista;
 
 	}
 

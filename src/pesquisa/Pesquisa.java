@@ -308,38 +308,39 @@ public class Pesquisa {
 
 		if (this.pesquisadoresAssociados.size() > 0) {
 
-			resumoGeral += "    - Pesquisadores:\n";
+			resumoGeral += "    - Pesquisadores:" + System.lineSeparator();
 
 			ArrayList<Pesquisador> pesquisadoresOrdenados = new ArrayList<Pesquisador>(
 					this.pesquisadoresAssociados.values());
 
 			for (int i = 0; i < pesquisadoresOrdenados.size(); i++) {
-				resumoGeral += "        - " + pesquisadoresOrdenados.get(i).toString() + "\n";
+				resumoGeral += "        - " + pesquisadoresOrdenados.get(i).toString() + System.lineSeparator();
 			}
 		}
 
 		if (this.problemaAssociado != null) {
 
-			resumoGeral += "    - Problema:\n        - " + this.problemaAssociado.toString() + "\n";
+			resumoGeral += "    - Problema:" + System.lineSeparator() + "        - " + this.problemaAssociado.toString()
+					+ System.lineSeparator();
 
 		}
 
 		if (this.objetivosAssociados.size() > 0) {
 
-			resumoGeral += "    - Objetivo:\n";
+			resumoGeral += "    - Objetivo:" + System.lineSeparator();
 
 			ArrayList<Objetivo> objetivosOrdenados = new ArrayList<Objetivo>(this.objetivosAssociados.values());
 			Collections.sort(objetivosOrdenados);
 
 			for (int i = 0; i < objetivosOrdenados.size(); i++) {
-				resumoGeral += "        - " + objetivosOrdenados.get(i).toString() + "\n";
+				resumoGeral += "        - " + objetivosOrdenados.get(i).toString() + System.lineSeparator();
 			}
 
 		}
 
 		if (this.atividadesAssociadas.size() > 0) {
 
-			resumoGeral += "    - Atividades:\n";
+			resumoGeral += "    - Atividades:" + System.lineSeparator();
 
 			ArrayList<Atividade> atividadesOrdenadas = new ArrayList<Atividade>(this.atividadesAssociadas.values());
 			Collections.sort(atividadesOrdenadas);
@@ -350,7 +351,7 @@ public class Pesquisa {
 
 		}
 
-		return "- Pesquisa: " + this.toString() + "\n" + resumoGeral;
+		return "- Pesquisa: " + this.toString() + System.lineSeparator() + resumoGeral;
 
 	}
 
