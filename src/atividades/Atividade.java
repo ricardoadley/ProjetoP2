@@ -1,6 +1,7 @@
 package atividades;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,7 @@ public class Atividade implements Comparable<Atividade> {
 	/**
 	 * A ordem de cadastro dos itens da atividade
 	 */
-	private int ordemCadastroItem = 1;
+	private int ordemCadastroItem;
 	/**
 	 * a descricao da atividade criada
 	 */
@@ -68,6 +69,7 @@ public class Atividade implements Comparable<Atividade> {
 		Verificador.verificaEntrada(descricao, "Campo Descricao nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(nivelRisco, "Campo nivelRisco nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(descricaoRisco, "Campo descricaoRisco nao pode ser nulo ou vazio.");
+		this.ordemCadastroItem = 1;
 		this.descricao = descricao;
 		this.nivelRisco = nivelRisco;
 		this.descricaoRisco = descricaoRisco;
@@ -156,24 +158,6 @@ public class Atividade implements Comparable<Atividade> {
 
 	public void setduracao(int duracao) {
 		this.duracao = duracao;
-	}
-
-	@Override
-	/**
-	 * Retorna a string que representa a pesquisa no formato "DESCRICAO (NIVEL RISCO
-	 * - DESCRICAO RISCO)
-	 */
-	public String toString() {
-		String lista = "";
-		List<Item> itens = new ArrayList<>(this.itens.values());
-		for (Item item : itens) {
-			if (item.isRealizado() == false) {
-				lista += " | PENDENTE - " + item.getDescricao();
-			} else {
-				lista += " |REALIZADO - " + item.getDescricao();
-			}
-		}
-		return descricao + " (" + nivelRisco + " - " + descricaoRisco + ")" + lista;
 	}
 
 	/**
@@ -298,4 +282,40 @@ public class Atividade implements Comparable<Atividade> {
 	public int compareTo(Atividade atividade) {
 		return this.codigo.compareTo(atividade.getCodigo());
 	}
+
+	@Override
+	/**
+	 * Retorna a string que representa a pesquisa no formato "DESCRICAO (NIVEL RISCO
+	 * - DESCRICAO RISCO)
+	 */
+	public String toString() {
+		String lista = "";
+		List<Item> itens = new ArrayList<>(this.itens.values());
+		for (Item item : itens) {
+			if (item.isRealizado() == false) {
+				lista += " | PENDENTE - " + item.getDescricao();
+			} else {
+				lista += " |REALIZADO - " + item.getDescricao();
+			}
+		}
+		return this.descricao + " (" + this.nivelRisco + " - " + this.descricaoRisco + ")" + lista;
+	}
+
+	public String geraResumo() {
+		String lista = "";
+		List<Item> itens = new ArrayList<>(this.itens.values());
+		Collections.sort(itens);
+		for (int i = 0; i < itens.size(); i++) {
+			if (itens.get(i).isRealizado() == false) {
+				lista += "            - PENDENTE - ITEM" + itens.get(i).toString() + "\n";
+			} else {
+				lista += "            - REALIZADO - ITEM" + itens.get(i).toString() + "\n";
+			}
+
+
+		}
+		return this.descricao + " (" + this.nivelRisco + " - " + this.descricaoRisco + ")\n" + lista;
+
+	}
+
 }

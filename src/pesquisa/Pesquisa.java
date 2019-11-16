@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import atividades.Atividade;
 import objetivo.Objetivo;
 import pesquisador.Pesquisador;
 import problema.Problema;
@@ -37,10 +38,9 @@ public class Pesquisa {
 	 * o codigo da pesquisa, e tambem seu identificador
 	 */
 	private String codigo;
-	/**
-	 * Lista da atividades associadas a pesquisa
-	 */
-	private List<String> atividadesAssociadas;
+
+	private Map<String, Atividade> atividadesAssociadas;
+
 	/**
 	 * Problema ao qual a pesquisa esta associada.
 	 */
@@ -71,7 +71,7 @@ public class Pesquisa {
 		this.codigo = codigo;
 		this.status = "Ativa";
 		this.objetivosAssociados = new HashMap<>();
-		this.atividadesAssociadas = new ArrayList<>();
+		this.atividadesAssociadas = new HashMap<>();
 		this.pesquisadoresAssociados = new HashMap<>();
 	}
 
@@ -251,6 +251,109 @@ public class Pesquisa {
 
 	}
 
+	/**
+	 * Armazena o codigo de uma atividade
+	 * 
+	 * @param atividade codigo da atividade a ser armazenado
+	 * @return false caso a associacao nao ocorra, true caso contrario
+	 */
+	public boolean associaAtividade(String codigoAtividade, Atividade atividade) {
+		if (this.atividadesAssociadas.containsKey(codigoAtividade)) {
+			return false;
+		}
+
+		this.atividadesAssociadas.put(codigoAtividade, atividade);
+		return true;
+	}
+
+	/**
+	 * Remove o codigo de uma atividade associada da lista de atividades
+	 * 
+	 * @param codigoAtividade codigo da atividade a ser removido
+	 * @return false caso a desassociacao nao ocorra, true caso contrario
+	 */
+	public boolean desassociaAtividade(String codigoAtividade) {
+		if (!this.atividadesAssociadas.containsKey(codigoAtividade)) {
+			return false;
+		}
+
+		this.atividadesAssociadas.remove(codigoAtividade);
+		return true;
+	}
+
+	public boolean associaPesquisador(String emailPesquisador, Pesquisador pesquisador) {
+
+		if (this.pesquisadoresAssociados.containsKey(emailPesquisador)) {
+			return false;
+		}
+
+		this.pesquisadoresAssociados.put(emailPesquisador, pesquisador);
+		return true;
+	}
+
+	public boolean desassociaPesquisador(String emailPesquisador) {
+
+		if (!this.pesquisadoresAssociados.containsKey(emailPesquisador)) {
+			return false;
+		}
+
+		this.pesquisadoresAssociados.remove(emailPesquisador);
+		return true;
+
+	}
+
+	public String getResumo() {
+
+		String resumoGeral = "";
+
+		if (this.pesquisadoresAssociados.size() > 0) {
+
+			resumoGeral += "    - Pesquisadores:\n";
+
+			ArrayList<Pesquisador> pesquisadoresOrdenados = new ArrayList<Pesquisador>(
+					this.pesquisadoresAssociados.values());
+
+			for (int i = 0; i < pesquisadoresOrdenados.size(); i++) {
+				resumoGeral += "        - " + pesquisadoresOrdenados.get(i).toString() + "\n";
+			}
+		}
+
+		if (this.problemaAssociado != null) {
+
+			resumoGeral += "    - Problema:\n        - " + this.problemaAssociado.toString() + "\n";
+
+		}
+
+		if (this.objetivosAssociados.size() > 0) {
+
+			resumoGeral += "    - Objetivo:\n";
+
+			ArrayList<Objetivo> objetivosOrdenados = new ArrayList<Objetivo>(this.objetivosAssociados.values());
+			Collections.sort(objetivosOrdenados);
+
+			for (int i = 0; i < objetivosOrdenados.size(); i++) {
+				resumoGeral += "        - " + objetivosOrdenados.get(i).toString() + "\n";
+			}
+
+		}
+
+		if (this.atividadesAssociadas.size() > 0) {
+
+			resumoGeral += "    - Atividades:\n";
+
+			ArrayList<Atividade> atividadesOrdenadas = new ArrayList<Atividade>(this.atividadesAssociadas.values());
+			Collections.sort(atividadesOrdenadas);
+
+			for (int i = 0; i < atividadesOrdenadas.size(); i++) {
+				resumoGeral += "        - " + atividadesOrdenadas.get(i).geraResumo();
+			}
+
+		}
+
+		return "- Pesquisa: " + this.toString() + "\n" + resumoGeral;
+
+	}
+
 	@Override
 	/**
 	 * Retorna uma representacao em string da pesquisa no formato CODIGO - DESCRICAO
@@ -285,106 +388,6 @@ public class Pesquisa {
 		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
-	}
-
-	/**
-	 * Armazena o codigo de uma atividade
-	 * 
-	 * @param codigoAtividade codigo da atividade a ser armazenado
-	 * @return false caso a associacao nao ocorra, true caso contrario
-	 */
-	public boolean associaAtividade(String codigoAtividade) {
-		if (this.atividadesAssociadas.contains(codigoAtividade)) {
-			return false;
-		}
-		this.atividadesAssociadas.add(codigoAtividade);
-		return true;
-	}
-
-	/**
-	 * Remove o codigo de uma atividade associada da lista de atividades
-	 * 
-	 * @param codigoAtividade codigo da atividade a ser removido
-	 * @return false caso a desassociacao nao ocorra, true caso contrario
-	 */
-	public boolean desassociaAtividade(String codigoAtividade) {
-		if (!this.atividadesAssociadas.contains(codigoAtividade)) {
-			return false;
-		}
-		this.atividadesAssociadas.remove(codigoAtividade);
-		return true;
-	}
-
-	public boolean associaPesquisador(String emailPesquisador, Pesquisador pesquisador) {
-
-		if (this.pesquisadoresAssociados.containsKey(emailPesquisador)) {
-			return false;
-		}
-
-		this.pesquisadoresAssociados.put(emailPesquisador, pesquisador);
-		return true;
-	}
-
-	public boolean desassociaPesquisador(String emailPesquisador) {
-
-		if (!this.pesquisadoresAssociados.containsKey(emailPesquisador)) {
-			return false;
-		}
-
-		this.pesquisadoresAssociados.remove(emailPesquisador);
-		return true;
-
-	}
-
-	public String getResumo() {
-
-		String resumoGeral = "";
-
-		if (this.pesquisadoresAssociados.size() > 0) {
-
-			resumoGeral += "    - Pesquisadores:\n";
-
-			ArrayList<Pesquisador> pesquisadoresOrdenados = new ArrayList(this.pesquisadoresAssociados.values());
-			Collections.sort(pesquisadoresOrdenados);
-
-			for (int i = 0; i < pesquisadoresOrdenados.size(); i++) {
-				resumoGeral += "        - " + pesquisadoresOrdenados.get(i).toString() + "\n";
-			}
-		}
-
-		if (this.problemaAssociado != null) {
-
-			resumoGeral += "    - Problema:\n        - " + this.problemaAssociado.toString() + "\n";
-
-		}
-
-		if (this.objetivosAssociados.size() > 0) {
-
-			resumoGeral += "    - Objetivo:\n";
-
-			ArrayList<Objetivo> objetivosOrdenados = new ArrayList(this.objetivosAssociados.values());
-			Collections.sort(objetivosOrdenados);
-
-			for (int i = 0; i < objetivosOrdenados.size(); i++) {
-				resumoGeral += "        - " + objetivosOrdenados.get(i).toString() + "\n";
-			}
-
-		}
-
-		if (this.atividadesAssociadas.size() > 0) {
-			
-			resumoGeral += "    - Atividades:\n";
-			
-			Collections.sort(atividadesAssociadas);
-			
-			for (int i = 0; i < atividadesAssociadas.size(); i++) {
-				resumoGeral += "        - " + atividadesAssociadas.get(i).toString() + "\n";
-			}
-			
-		}
-		
-		return "Pesquisa: " + this.toString() + "\n" + resumoGeral;
-
 	}
 
 }

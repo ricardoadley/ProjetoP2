@@ -453,7 +453,8 @@ public class PesquisaController {
 			throw new IllegalArgumentException("Pesquisa desativada.");
 		}
 		this.atividadeController.associaPesquisa(codigoPesquisa, codigoAtividade);
-		return this.mapaPesquisas.get(codigoPesquisa).associaAtividade(codigoAtividade);
+		return this.mapaPesquisas.get(codigoPesquisa).associaAtividade(codigoAtividade,
+				this.atividadeController.capturaAtividadeNoMapa(codigoAtividade));
 	}
 
 	/**
@@ -505,12 +506,12 @@ public class PesquisaController {
 		try {
 
 			// Cria arquivo
-			File file = new File("./easyaccept/" + codigoPesquisa + ".txt");
+			File file = new File("./" + codigoPesquisa + ".txt");
 
-			// Se o arquivo nao existir, ele gera
-			if (!file.exists()) {
-				file.createNewFile();
-			}
+			/*
+			 * // Se o arquivo nao existir, ele gera if (!file.exists()) {
+			 * file.createNewFile(); }
+			 */
 
 			// Prepara para escrever no arquivo
 			FileWriter escritorDeArquivo = new FileWriter(file.getAbsoluteFile());
