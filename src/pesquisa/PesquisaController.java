@@ -453,7 +453,8 @@ public class PesquisaController {
 			throw new IllegalArgumentException("Pesquisa desativada.");
 		}
 		this.atividadeController.associaPesquisa(codigoPesquisa, codigoAtividade);
-		return this.mapaPesquisas.get(codigoPesquisa).associaAtividade(codigoAtividade);
+		return this.mapaPesquisas.get(codigoPesquisa).associaAtividade(codigoAtividade,
+				this.atividadeController.capturaAtividadeNoMapa(codigoAtividade));
 	}
 
 	/**
@@ -503,11 +504,11 @@ public class PesquisaController {
 		Verificador.existeChave(this.mapaPesquisas, codigoPesquisa, "Pesquisa nao encontrada.");
 
 		try {
-
+			
 			// Cria arquivo
-			File file = new File("./easyaccept/" + codigoPesquisa + ".txt");
-
-			// Se o arquivo nao existir, ele gera
+			File file = new File("./" + "Z" + codigoPesquisa + ".txt");
+			
+			// Se o arquivo nao existe, ele cria
 			if (!file.exists()) {
 				file.createNewFile();
 			}

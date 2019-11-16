@@ -7,7 +7,7 @@ import sistema.Verificador;
  * @author Ricardo A. S. Sena
  *
  */
-public class Item {
+public class Item implements Comparable<Item> {
 	/**
 	 * A ordem de cadastro do item na atividade
 	 */
@@ -29,9 +29,9 @@ public class Item {
 	 * @param descricao
 	 * @param ordemCadastro
 	 */
-	public Item(String descricao, int ordemCadastro) { 
-		Verificador.verificaEntrada(descricao,"O campo descricao nao pode ser vazio ou nulo");
-		realizado = false; 
+	public Item(String descricao, int ordemCadastro) {
+		Verificador.verificaEntrada(descricao, "O campo descricao nao pode ser vazio ou nulo");
+		realizado = false;
 		this.descricao = descricao;
 	}
 
@@ -43,6 +43,12 @@ public class Item {
 		return descricao;
 	}
 
+	public String toString() {
+		
+		return "ITEM" + this.ordemCadastro;
+		
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -65,10 +71,6 @@ public class Item {
 		return true;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
 	public boolean isRealizado() {
 		return realizado;
 	}
@@ -80,5 +82,11 @@ public class Item {
 	public boolean getRealizado() {
 		return this.realizado;
 	}
-}
 
+	@Override
+	public int compareTo(Item item) {
+
+		return this.toString().compareTo(item.toString());
+
+	}
+}

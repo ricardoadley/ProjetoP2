@@ -128,7 +128,7 @@ public class ControladorAtividade {
 		if (!existeAtividade(codigo)) {
 			throw new IllegalArgumentException("Atividade nao encontrada");
 		}
-		return capturaAtividadeNoMapa(codigo).contaItensRealizados();
+		return this.atividades.get(codigo).contaItensRealizados();
 	}
 
 	// todo o codigo abaixo se refere a acoes basicas no mapa de atividades
@@ -137,7 +137,7 @@ public class ControladorAtividade {
 		return this.atividades.containsKey(codigo);
 	}
 
-	private Atividade capturaAtividadeNoMapa(String codigo) {
+	public Atividade capturaAtividadeNoMapa(String codigo) {
 		return this.atividades.get(codigo);
 	}
 

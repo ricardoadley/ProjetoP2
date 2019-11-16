@@ -10,7 +10,7 @@ import pesquisa.Pesquisa;
  * @author Vinicius M. V. Varjao
  *
  */
-public class Pesquisador implements Comparable<Pesquisador> {
+public class Pesquisador {
 
 	/**
 	 * O email do pesquisador, o qual vai ser usado para identifica-lo
@@ -161,11 +161,5 @@ public class Pesquisador implements Comparable<Pesquisador> {
 		return true;
 	}
 
-	@Override
-	public int compareTo(Pesquisador pesquisador) {
-
-		return this.email.compareTo(pesquisador.getEmail());
-
-	}
 
 }
