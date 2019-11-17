@@ -63,7 +63,7 @@ public class PesquisadorController {
 		Verificador.existeChaveString(this.mapaPesquisadores, email, "Pesquisador nao encontrado");
 		if (!pesquisadorEhAtivo(email)) {
 			throw new IllegalArgumentException("Pesquisador inativo.");
-		}
+		} 
 		if (atributo.equals("NOME")) {
 			Verificador.verificaEntrada(novoValor, "Campo nome nao pode ser nulo ou vazio.");
 			this.mapaPesquisadores.get(email).setNome(novoValor);
