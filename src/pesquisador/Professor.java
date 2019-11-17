@@ -1,6 +1,6 @@
 package pesquisador;
 
-public class Professor implements Especialidade{
+public class Professor implements Especialidade {
 
 	private String formacao;
 	private String unidade;
@@ -13,24 +13,12 @@ public class Professor implements Especialidade{
 		this.data = data;
 	}
 
-	public String getFormacao() {
-		return formacao;
-	}
-
 	public void setFormacao(String formacao) {
 		this.formacao = formacao;
 	}
 
-	public String getUnidade() {
-		return unidade;
-	}
-
 	public void setUnidade(String unidade) {
 		this.unidade = unidade;
-	}
-
-	public String getData() {
-		return data;
 	}
 
 	public void setData(String data) {
@@ -39,7 +27,6 @@ public class Professor implements Especialidade{
 
 	@Override
 	public void setAtributo(String atributo, String novo) {
-		// TODO Auto-generated method stub
 
 	}
 

@@ -68,6 +68,9 @@ public class BuscadorPalavra {
 
 	}
 
+	/**
+	 * Limpa os resultados anteriores.
+	 */
 	private void limpaResultados() {
 		resultadosDaBusca.clear();
 	}

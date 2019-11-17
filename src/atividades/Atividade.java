@@ -131,24 +131,8 @@ public class Atividade implements Comparable<Atividade> {
 		return descricao;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public String getNivelRisco() {
-		return nivelRisco;
-	}
-
-	public void setNivelRisco(String nivelRisco) {
-		this.nivelRisco = nivelRisco;
-	}
-
 	public String getDescricaoRisco() {
 		return descricaoRisco;
-	}
-
-	public void setDescricaoRisco(String descricaoRisco) {
-		this.descricaoRisco = descricaoRisco;
 	}
 
 	public int getduracao() {
@@ -157,10 +141,6 @@ public class Atividade implements Comparable<Atividade> {
 
 	public String getCodigo() {
 		return codigo;
-	}
-
-	public void setduracao(int duracao) {
-		this.duracao = duracao;
 	}
 
 	/**
@@ -183,31 +163,6 @@ public class Atividade implements Comparable<Atividade> {
 		return resultado;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Atividade other = (Atividade) obj;
-		if (codigo == null) {
-			if (other.codigo != null)
-				return false;
-		} else if (!codigo.equals(other.codigo))
-			return false;
-		return true;
-	}
-
 	/**
 	 * Executa a atividade, realizando um dos itens e incremetando a duracao
 	 * 
@@ -222,6 +177,7 @@ public class Atividade implements Comparable<Atividade> {
 		if (itens.get(item).getRealizado()) {
 			throw new IllegalArgumentException("Item ja executado.");
 		}
+		this.itens.get(item).setDuracao(duracao);
 		this.itens.get(item).setRealizado(true);
 		this.duracao += duracao;
 	}
@@ -281,6 +237,11 @@ public class Atividade implements Comparable<Atividade> {
 		this.pesquisasAssociadas.remove(codigoPesquisa);
 	}
 
+	/**
+	 * Verifica se contem alguma pesquisa associada a Atividade.
+	 * 
+	 * @return true se conter pesquisa associada, false caso contrario
+	 */
 	public boolean contemPesquisasAssociadas() {
 		if (this.pesquisasAssociadas.size() > 0) {
 			return true;
@@ -335,6 +296,12 @@ public class Atividade implements Comparable<Atividade> {
 
 	}
 
+	/**
+	 * Retorna os resultados da Atividade: itens e suas durações, além das
+	 * descrições de Atividade.
+	 * 
+	 * @return os resultados da Atividade
+	 */
 	public String geraResultados() {
 
 		String resultados = "        - " + this.descricao + System.lineSeparator();
@@ -343,8 +310,11 @@ public class Atividade implements Comparable<Atividade> {
 
 		for (int i = 0; i < itens.size(); i++) {
 
-			resultados += "            - " + itens.get(i).toString() + " - " + this.duracao + System.lineSeparator();
+			if (itens.get(i).isRealizado()) {
 
+				resultados += "            - " + itens.get(i).toString() + " - " + itens.get(i).getDuracao()
+						+ System.lineSeparator();
+			}
 		}
 
 		for (Integer intResultado : this.resultados.keySet()) {
@@ -355,6 +325,31 @@ public class Atividade implements Comparable<Atividade> {
 
 		return resultados;
 
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Atividade other = (Atividade) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		return true;
 	}
 
 }

@@ -18,7 +18,7 @@ import java.time.format.ResolverStyle;
  */
 public class Verificador {
 	/**
-	 * constroi o objeto
+	 * Construtor do Verificador.
 	 */
 	public Verificador() {
 	}
@@ -37,26 +37,6 @@ public class Verificador {
 
 		if (entrada.trim().isEmpty()) {
 			throw new IllegalArgumentException(aviso);
-		}
-
-	}
-
-	/**
-	 * Verifica se o valor informado pelo usuario eh um valor numerico valido
-	 * 
-	 * @param entrada, a entrada informada pelo usuario
-	 * @param aviso    , o aviso que deve ser retornado caso a entrada seja invalida
-	 */
-	public static void verificaFormatoNumerico(String entrada, String aviso) {
-
-		try {
-
-			int entradaInteiro = Integer.parseInt(entrada);
-
-		} catch (NumberFormatException nfe) {
-
-			throw new NumberFormatException(aviso);
-
 		}
 
 	}
@@ -140,6 +120,12 @@ public class Verificador {
 		}
 	}
 
+	/**
+	 * Verifica se o semestre e valido
+	 * 
+	 * @param novoValoro novo valor que sera verificado
+	 * @param aviso      o aviso que deseja-se exibir no lancamento da excecao
+	 */
 	public static void verificaSemestre(String novoValor, String aviso) {
 		int semestre = Integer.parseInt(novoValor);
 		if (semestre < 1) {
@@ -147,24 +133,50 @@ public class Verificador {
 		}
 	}
 
+	/**
+	 * Verifica se o IEA e valido, ou seja, se e maior ou igual a 0 e menor ou igual
+	 * a 10.
+	 * 
+	 * @param iea   o valor que representa o IEA
+	 * @param aviso o aviso que deseja-se exibir no lancamento da excecao
+	 */
 	public static void verificaIEA(double iea, String aviso) {
 		if (iea < 0.0 || iea > 10.0) {
 			throw new IllegalArgumentException(aviso);
 		}
 	}
 
+	/**
+	 * Verifica se a data e valida
+	 * 
+	 * @param data  a data
+	 * @param aviso o aviso que deseja-se exibir no lancamento da excecao
+	 */
 	public static void verificaData(String data, String aviso) {
 		if (isDateValid(data) != true) {
 			throw new IllegalArgumentException(aviso);
 		}
 	}
 
+	/**
+	 * Verifica se o tipo e valido. Caso seja diferente de EXTERNO ou ESTUDANTE ou
+	 * PROFESSOR, e lancada uma excecao.
+	 * 
+	 * @param tipo  a string do tipo
+	 * @param aviso o aviso que deseja-se exibir no lancamento da excecao
+	 */
 	public static void verificaTipo(String tipo, String aviso) {
 		if (!tipo.equals("EXTERNO") && !tipo.equals("ESTUDANTE") && !tipo.equals("PROFESSOR")) {
 			throw new IllegalArgumentException(aviso);
 		}
 	}
 
+	/**
+	 * Verifica se a data é válida.
+	 * 
+	 * @param strDate a data
+	 * @return true caso a data seja valida, false caso seja invalida
+	 */
 	private static boolean isDateValid(String strDate) {
 		String dateFormat = "dd/MM/uuuu";
 

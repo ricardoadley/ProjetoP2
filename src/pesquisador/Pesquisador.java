@@ -37,7 +37,7 @@ public class Pesquisador {
 	 * define a possibilidade de manipulacai do mesmo"
 	 */
 	private String atividade;
-	
+
 	/**
 	 * Especialidade do Pesquisador
 	 */
@@ -110,6 +110,10 @@ public class Pesquisador {
 		this.atividade = atividade;
 	}
 
+	/**
+	 * Verifica se o Pesquisador e ou nao ativo
+	 * @return retorna true caso o Pesquisador seja ativo e false caso contrario
+	 */
 	public boolean ehAtivo() {
 		if (this.atividade.equalsIgnoreCase("Ativo")) {
 			return true;
@@ -118,10 +122,19 @@ public class Pesquisador {
 		}
 	}
 
+	/**
+	 * Retorna o objeto do tipo Especialidade que esta atribuida ao Pesquisador.
+	 * @return o objeto do tipo Especialidade que esta atribuida ao Pesquisador
+	 */
 	public Especialidade getEspecialidade() {
 		return especialidade;
 	}
 
+	/**
+	 * Atribui uma Especialidade ao Pesquisador.
+	 * 
+	 * @param especialidade a nova Especialidade do Pesquisador
+	 */
 	public void setEspecialidade(Especialidade especialidade) {
 		this.especialidade = especialidade;
 	}
@@ -164,6 +177,5 @@ public class Pesquisador {
 			return false;
 		return true;
 	}
-
 
 }

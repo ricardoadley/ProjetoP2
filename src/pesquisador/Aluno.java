@@ -11,16 +11,8 @@ public class Aluno implements Especialidade{
 		this.iea = iea;
 	}
 
-	public String getSemestre() {
-		return semestre + "o SEMESTRE";
-	}
-
 	public void setSemestre(int semestre) {
 		this.semestre = semestre;
-	}
-
-	public double getIea() {
-		return iea;
 	}
 
 	public void setIea(double iea) {
