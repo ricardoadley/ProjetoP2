@@ -6,15 +6,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import atividades.ControladorAtividade;
+import objetivo.ObjetivoController;
 import pesquisa.PesquisaController;
 import pesquisador.PesquisadorController;
+import problema.ProblemaController;
 
 class TestesPesquisadorController {
 
 	private PesquisadorController controlador ;
 	@BeforeEach
 	void iniciar() {
-		controlador = new PesquisadorController(new PesquisaController(new ControladorAtividade()));
+		controlador = new PesquisadorController();
 		controlador.cadastraPesquisador("ricardo","pesquisar","toda aqui","ricardo@email.com", "https://fotinhaminha.jpg");
 	}
 	@Test

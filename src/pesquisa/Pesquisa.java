@@ -1,22 +1,24 @@
 package pesquisa;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+import atividades.Atividade;
 import objetivo.Objetivo;
+import pesquisador.Pesquisador;
 import problema.Problema;
 import sistema.Verificador;
 
 /**
  * Classe que representa uma Pesquisa. Toda Pesquisa possui uma descricao, um
- * campo, um status (ativada ou desativada), um codigo pelo qual e identificada
- * unicamente. Alem disso, tambem pode estar ou nao associada a um Problema ou a
- * um ou mais Objetivos.
+ * campo, um status (ativada ou desativada) e um codigo pelo qual e identificada
+ * unicamente. Alem disso, tambem pode estar ou nao associada a um Problema ou
+ * Objetivos.
  * 
- * @author Ana Beatriz da S. Truta, José Matheus do N. Gama
+ * @author Ana Beatriz da Silva Truta, José Matheus do N. Gama
  *
  */
 public class Pesquisa {
@@ -36,18 +38,25 @@ public class Pesquisa {
 	 * o codigo da pesquisa, e tambem seu identificador
 	 */
 	private String codigo;
+
 	/**
-	 * Lista da atividades associadas a pesquisa
+	 * Mapa de Atividades associadas a Pesquisa.
 	 */
-	private List<String> atividadesAssociadas;
+	private Map<String, Atividade> atividadesAssociadas;
+
 	/**
 	 * Problema ao qual a pesquisa esta associada.
 	 */
-	private Problema problema;
+	private Problema problemaAssociado;
 	/**
 	 * Mapa de Objetivos associados a Pesquisa.
 	 */
-	private Map<String, Objetivo> objetivos;
+	private Map<String, Objetivo> objetivosAssociados;
+
+	/**
+	 * Mapa de Pesquisadores associados a Pesquisa.
+	 */
+	private Map<String, Pesquisador> pesquisadoresAssociados;
 
 	/**
 	 * Constroi uma nova pesquisa de acordo com os parametros informados pelo
@@ -64,8 +73,9 @@ public class Pesquisa {
 		this.campo = campo;
 		this.codigo = codigo;
 		this.status = "Ativa";
-		this.objetivos = new HashMap<>();
-		this.atividadesAssociadas = new ArrayList<>();
+		this.objetivosAssociados = new HashMap<>();
+		this.atividadesAssociadas = new HashMap<>();
+		this.pesquisadoresAssociados = new HashMap<>();
 	}
 
 	/**
@@ -137,7 +147,7 @@ public class Pesquisa {
 	 * @param problema o Problema o qual se deseja associar a Pesquisa
 	 */
 	public void setProblema(Problema problema) {
-		this.problema = problema;
+		this.problemaAssociado = problema;
 	}
 
 	/**
@@ -147,7 +157,7 @@ public class Pesquisa {
 	 * @param objetivo   um objeto do tipo Objetivo
 	 */
 	public void adicionaObjetivo(String idObjetivo, Objetivo objetivo) {
-		this.objetivos.put(idObjetivo, objetivo);
+		this.objetivosAssociados.put(idObjetivo, objetivo);
 	}
 
 	/**
@@ -156,7 +166,7 @@ public class Pesquisa {
 	 * @param idObjetivo o ID unico do objetivo
 	 */
 	public void removeObjetivo(String idObjetivo) {
-		this.objetivos.remove(idObjetivo);
+		this.objetivosAssociados.remove(idObjetivo);
 	}
 
 	/**
@@ -166,7 +176,7 @@ public class Pesquisa {
 	 */
 	public boolean contemProblema() {
 
-		if (this.problema == null) {
+		if (this.problemaAssociado == null) {
 			return false;
 		}
 
@@ -182,7 +192,7 @@ public class Pesquisa {
 	 */
 	public boolean contemObjetivo(String idObjetivo) {
 
-		if (this.objetivos.containsKey(idObjetivo)) {
+		if (this.objetivosAssociados.containsKey(idObjetivo)) {
 			return true;
 		}
 
@@ -199,7 +209,7 @@ public class Pesquisa {
 	 *         objetivo
 	 */
 	public boolean contemObjetivos() {
-		if (this.objetivos.size() == 0) {
+		if (this.objetivosAssociados.size() == 0) {
 			return false;
 		}
 
@@ -215,7 +225,7 @@ public class Pesquisa {
 	 */
 	public int getQtdObjetivos() {
 
-		return this.objetivos.size();
+		return this.objetivosAssociados.size();
 
 	}
 
@@ -225,7 +235,7 @@ public class Pesquisa {
 	 * @return o objeto do tipo Problema que esta associado a Pesquisa
 	 */
 	public Problema getProblema() {
-		return this.problema;
+		return this.problemaAssociado;
 	}
 
 	/**
@@ -241,6 +251,130 @@ public class Pesquisa {
 		else {
 			return false;
 		}
+
+	}
+
+	/**
+	 * Armazena o codigo de uma atividade
+	 * 
+	 * @param atividade codigo da atividade a ser armazenado
+	 * @return false caso a associacao nao ocorra, true caso contrario
+	 */
+	public boolean associaAtividade(String codigoAtividade, Atividade atividade) {
+		if (this.atividadesAssociadas.containsKey(codigoAtividade)) {
+			return false;
+		}
+
+		this.atividadesAssociadas.put(codigoAtividade, atividade);
+		return true;
+	}
+
+	/**
+	 * Remove o codigo de uma atividade associada da lista de atividades
+	 * 
+	 * @param codigoAtividade codigo da atividade a ser removido
+	 * @return false caso a desassociacao nao ocorra, true caso contrario
+	 */
+	public boolean desassociaAtividade(String codigoAtividade) {
+		if (!this.atividadesAssociadas.containsKey(codigoAtividade)) {
+			return false;
+		}
+
+		this.atividadesAssociadas.remove(codigoAtividade);
+		return true;
+	}
+
+	/**
+	 * Associa um Pesquisador a Pesquisa
+	 * 
+	 * @param emailPesquisador o identificador unico do Pesquisador
+	 * @param pesquisador      o objeto do tipo Pesquisador
+	 * @return false se o Pesquisador ja esta associado, true se nao
+	 */
+	public boolean associaPesquisador(String emailPesquisador, Pesquisador pesquisador) {
+
+		if (this.pesquisadoresAssociados.containsKey(emailPesquisador)) {
+			return false;
+		}
+
+		this.pesquisadoresAssociados.put(emailPesquisador, pesquisador);
+		return true;
+	}
+
+	/**
+	 * Desassocia um Pesquisador da Pesquisa
+	 * 
+	 * @param emailPesquisador o identificador unico do Pesquisador
+	 * @return false se o Pesquisador nao estiver associado, true se estiver e o
+	 *         remove
+	 */
+	public boolean desassociaPesquisador(String emailPesquisador) {
+
+		if (!this.pesquisadoresAssociados.containsKey(emailPesquisador)) {
+			return false;
+		}
+
+		this.pesquisadoresAssociados.remove(emailPesquisador);
+		return true;
+
+	}
+
+	/**
+	 * Gera um resumo da Pesquisa. Retorna os detalhes de tudo o que esta associado
+	 * a Pesquisa.
+	 * 
+	 * @return os detalhes de tudo o que esta associado a Pesquisa.
+	 */
+	public String getResumo() {
+
+		String resumoGeral = "- Pesquisa: " + this.toString() + System.lineSeparator();
+
+		if (this.pesquisadoresAssociados.size() > 0) {
+
+			resumoGeral += "    - Pesquisadores:" + System.lineSeparator();
+
+			ArrayList<Pesquisador> pesquisadoresOrdenados = new ArrayList<Pesquisador>(
+					this.pesquisadoresAssociados.values());
+
+			for (int i = 0; i < pesquisadoresOrdenados.size(); i++) {
+				resumoGeral += "        - " + pesquisadoresOrdenados.get(i).toString() + System.lineSeparator();
+			}
+		}
+
+		if (this.problemaAssociado != null) {
+
+			resumoGeral += "    - Problema:" + System.lineSeparator() + "        - " + this.problemaAssociado.toString()
+					+ System.lineSeparator();
+
+		}
+
+		if (this.objetivosAssociados.size() > 0) {
+
+			resumoGeral += "    - Objetivo:" + System.lineSeparator();
+
+			ArrayList<Objetivo> objetivosOrdenados = new ArrayList<Objetivo>(this.objetivosAssociados.values());
+			Collections.sort(objetivosOrdenados);
+
+			for (int i = 0; i < objetivosOrdenados.size(); i++) {
+				resumoGeral += "        - " + objetivosOrdenados.get(i).toString() + System.lineSeparator();
+			}
+
+		}
+
+		if (this.atividadesAssociadas.size() > 0) {
+
+			resumoGeral += "    - Atividades:" + System.lineSeparator();
+
+			ArrayList<Atividade> atividadesOrdenadas = new ArrayList<Atividade>(this.atividadesAssociadas.values());
+			Collections.sort(atividadesOrdenadas);
+
+			for (int i = 0; i < atividadesOrdenadas.size(); i++) {
+				resumoGeral += "        - " + atividadesOrdenadas.get(i).geraResumo();
+			}
+
+		}
+
+		return resumoGeral;
 
 	}
 
@@ -277,32 +411,6 @@ public class Pesquisa {
 				return false;
 		} else if (!codigo.equals(other.codigo))
 			return false;
-		return true;
-	}
-
-	/**
-	 * Armazena o codigo de uma atividade
-	 * @param codigoAtividade codigo da atividade a ser armazenado
-	 * @return false caso a associacao nao ocorra, true caso contrario
-	 */
-	public boolean associaAtividade(String codigoAtividade) {
-		if (this.atividadesAssociadas.contains(codigoAtividade)) {
-			return false;
-		}
-		this.atividadesAssociadas.add(codigoAtividade);
-		return true;
-	}
-
-	/**
-	 * Remove o codigo de uma ativadade associada da lista de atividades
-	 * @param codigoAtividade codigo da atividade a ser removido
-	 * @return false caso a desassociacao nao ocorra, true caso contrario
-	 */
-	public boolean desassociaAtividade(String codigoAtividade) {
-		if (!this.atividadesAssociadas.contains(codigoAtividade)) {
-			return false;
-		}
-		this.atividadesAssociadas.remove(codigoAtividade);
 		return true;
 	}
 

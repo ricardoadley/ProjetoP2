@@ -1,7 +1,9 @@
 package sistema;
 
 import atividades.ControladorAtividade;
+import objetivo.ObjetivoController;
 import pesquisador.PesquisadorController;
+import problema.ProblemaController;
 import pesquisa.PesquisaController;
 
 /**
@@ -13,67 +15,71 @@ import pesquisa.PesquisaController;
  */
 public class Facade {
 
-	private ControladorAtividade controlaAtividade;
+	private ControladorAtividade atividadeController;
+	private ObjetivoController objetivoController;
+	private ProblemaController problemaController;
 	private PesquisadorController pesquisadorController;
 	private PesquisaController pesquisaController;
 	private BuscadorPalavra buscador;
 
 	public Facade() {
-		this.controlaAtividade = new ControladorAtividade();
-		this.pesquisaController = new PesquisaController(controlaAtividade);
-		this.pesquisadorController = new PesquisadorController(pesquisaController);
-		this.buscador = new BuscadorPalavra(controlaAtividade,pesquisaController,pesquisadorController);
+		this.atividadeController = new ControladorAtividade();
+		this.pesquisadorController = new PesquisadorController();
+		this.objetivoController = new ObjetivoController();
+		this.problemaController = new ProblemaController();
+		this.pesquisaController = new PesquisaController(objetivoController, problemaController, pesquisadorController, atividadeController);
+		this.buscador = new BuscadorPalavra(atividadeController,pesquisaController,pesquisadorController);
 	}
 
 	// Jose Matheus (US3)
 	public String cadastraProblema(String descricao, String viabilidade) {
-		return this.pesquisaController.cadastraProblema(descricao, viabilidade);
+		return this.problemaController.cadastraProblema(descricao, viabilidade);
 	}
 
 	public void apagarProblema(String codigo) {
-		this.pesquisaController.apagarProblema(codigo);
+		this.problemaController.apagarProblema(codigo);
 	}
 
 	public String exibeProblema(String codigo) {
-		return this.pesquisaController.exibeProblema(codigo);
+		return this.problemaController.exibeProblema(codigo);
 	}
 
 	public void cadastraObjetivo(String tipo, String descricao, String aderencia, String viabilidade) {
-		this.pesquisaController.cadastraObjetivo(tipo, descricao, aderencia, viabilidade);
+		this.objetivoController.cadastraObjetivo(tipo, descricao, aderencia, viabilidade);
 	}
 
 	public void apagarObjetivo(String codigo) {
-		this.pesquisaController.apagarObjetivo(codigo);
+		this.objetivoController.apagarObjetivo(codigo);
 	}
 
 	public String exibeObjetivo(String codigo) {
-		return this.pesquisaController.exibeObjetivo(codigo);
+		return this.objetivoController.exibeObjetivo(codigo);
 	}
 
 	// Ricardo (US4)
 	public String cadastraAtividade(String descricao, String nivelRisco, String descricaoRisco) {
-		return controlaAtividade.cadastraAtividade(descricao, nivelRisco, descricaoRisco);
+		return atividadeController.cadastraAtividade(descricao, nivelRisco, descricaoRisco);
 	}
 
 	public void apagaAtividade(String codigo) {
-		controlaAtividade.apagaAtividade(codigo);
+		atividadeController.apagaAtividade(codigo);
 	}
 
 	public void cadastraItem(String codigo, String item) {
-		controlaAtividade.cadastraItem(codigo, item);
+		atividadeController.cadastraItem(codigo, item);
 	}
 
 	public String exibeAtividade(String codigo) {
-		return controlaAtividade.exibeAtividade(codigo);
+		return atividadeController.exibeAtividade(codigo);
 
 	}
 
 	public int contaItensPendentes(String codigo) {
-		return controlaAtividade.contaItensPendentes(codigo);
+		return atividadeController.contaItensPendentes(codigo);
 	}
 
 	public int contaItensRealizados(String codigo) {
-		return controlaAtividade.contaItensRealizados(codigo);
+		return atividadeController.contaItensRealizados(codigo);
 	}
 
 	// Vinicius (US2)
@@ -101,7 +107,7 @@ public class Facade {
 		return pesquisadorController.pesquisadorEhAtivo(email);
 	}
 
-	// Ana Beatriz Truta (US1)
+	// Beatriz (US1)
 	public String cadastraPesquisa(String descricao, String interesse) {
 		return pesquisaController.cadastraPesquisa(descricao, interesse);
 	}
@@ -174,11 +180,11 @@ public class Facade {
 	}
 
 	public boolean associaPesquisador(String idPesquisa, String emailPesquisador) {
-		return pesquisadorController.associaPesquisador(idPesquisa, emailPesquisador);
+		return pesquisaController.associaPesquisador(idPesquisa, emailPesquisador);
 	}
 
 	public boolean desassociaPesquisador(String idPesquisa, String emailPesquisador) {
-		return pesquisadorController.desassociaPesquisador(idPesquisa, emailPesquisador);
+		return pesquisaController.desassociaPesquisador(idPesquisa, emailPesquisador);
 	}	
 	
 	//Vinicius (US7)
@@ -191,22 +197,33 @@ public class Facade {
 	}
 
 	public void executaAtividade(String codigoAtividade, int item, int duracao) {	
-		this.controlaAtividade.executaAtividade(codigoAtividade, item, duracao);
+		this.atividadeController.executaAtividade(codigoAtividade, item, duracao);
 	}
 
 	public int cadastraResultado(String codigoAtividade, String resultado) {
-		return this.controlaAtividade.cadastraResultado(codigoAtividade, resultado);
+		return this.atividadeController.cadastraResultado(codigoAtividade, resultado);
 	}
 
 	public boolean removeResultado(String codigoAtividade, int numeroResultado) {
-		return this.controlaAtividade.removeResultado(codigoAtividade, numeroResultado);
+		return this.atividadeController.removeResultado(codigoAtividade, numeroResultado);
 	}
 
 	public String listaResultados(String codigoAtividade) {
-		return this.controlaAtividade.listaResultados(codigoAtividade);
+		return this.atividadeController.listaResultados(codigoAtividade);
 	}
 
 	public int getDuracao(String codigoAtividade) {
-		return this.controlaAtividade.getDuracao(codigoAtividade);
+		return this.atividadeController.getDuracao(codigoAtividade);
 	}
+	
+	//Matheus (US11)
+	
+	public void gravarResumo(String codigoPesquisa) {
+		this.pesquisaController.gravarResumo(codigoPesquisa);
+	}
+	
+	public void gravarResultados(String codigoPesquisa) {
+		this.pesquisaController.gravarResultados(codigoPesquisa);
+	}
+	
 }

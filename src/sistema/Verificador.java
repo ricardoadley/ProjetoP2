@@ -13,7 +13,7 @@ import java.time.format.ResolverStyle;
  * Classe responsavel por verificar entradas do usuario e, caso necessario,
  * lancar as excecoes correspondentes.
  * 
- * @author Jose Matheus do Nascimento Gama, Vinicius M. V. Varjao, Ana Beatriz da Silva Truta
+ * @author Jose Matheus do Nascimento Gama, Vinicius M. V. Varjao, Ana Beatriz da S. Truta.
  *
  */
 public class Verificador {
@@ -159,12 +159,13 @@ public class Verificador {
 	 * @param iea, iea a ser analizado.
 	 * @param aviso, mensagem de erro a ser lancada caso o iea esteja errado.
 	 */
+
 	public static void verificaIEA(double iea, String aviso) {
 		if (iea < 0.0 || iea > 10.0) {
 			throw new IllegalArgumentException(aviso);
 		}
 	}
-
+	
 	/**
 	 * Verifica se uma data esta no formato correto.
 	 * 

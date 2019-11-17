@@ -15,7 +15,7 @@ import sistema.Verificador;
  * @author Ricardo A. S. Sena
  *
  */
-public class ControladorAtividade{
+public class ControladorAtividade {
 
 	/*
 	 * Mapa de atividades do tipo <String, Atividade>
@@ -25,12 +25,11 @@ public class ControladorAtividade{
 	 * Codigo unico de cada atividade, o codigo ja eh iniciado com o valor 1
 	 */
 	private int codigo;
-	//private List<String> resultados;
+	// private List<String> resultados;
 
 	/**
 	 * Construtor do objeto ControladorAtividade
 	 */
-
 
 	public ControladorAtividade() {
 		this.atividades = new HashMap<>();
@@ -40,12 +39,9 @@ public class ControladorAtividade{
 	/**
 	 * Cadastra um objeto do tipo Atividade no mapa de atividades
 	 * 
-	 * @param descricao,
-	 *            a descricao da atividade que sera cadastrada
-	 * @param nivelRisco,
-	 *            o nivel de risco da atividade que sera cadastrada
-	 * @param descricaoRisco,
-	 *            a descricao do risco da atividade
+	 * @param descricao,      a descricao da atividade que sera cadastrada
+	 * @param nivelRisco,     o nivel de risco da atividade que sera cadastrada
+	 * @param descricaoRisco, a descricao do risco da atividade
 	 * @return retorna o codigo da atividade cadastrada
 	 */
 	public String cadastraAtividade(String descricao, String nivelRisco, String descricaoRisco) {
@@ -66,8 +62,7 @@ public class ControladorAtividade{
 	/**
 	 * Remove um objeto do tipo atividade do mapa de atividades
 	 * 
-	 * @param codigo
-	 *            , o codigo da atividade que sera removida
+	 * @param codigo , o codigo da atividade que sera removida
 	 */
 	public void apagaAtividade(String codigo) {
 		Verificador.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
@@ -81,10 +76,8 @@ public class ControladorAtividade{
 	/**
 	 * Cadastra um novo item a uma atividade presente no mapa de atividades
 	 * 
-	 * @param codigo,
-	 *            o codigo da atividade que recebera o item
-	 * @param item,
-	 *            o item que sera cadastrado na atividade
+	 * @param codigo, o codigo da atividade que recebera o item
+	 * @param item,   o item que sera cadastrado na atividade
 	 */
 	public void cadastraItem(String codigo, String item) {
 		Verificador.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
@@ -99,8 +92,7 @@ public class ControladorAtividade{
 	/**
 	 * Exibe uma atividade presente no mapa
 	 * 
-	 * @param codigo,
-	 *            o codigo da atividade que sera exibida
+	 * @param codigo, o codigo da atividade que sera exibida
 	 * @return retorna a representacao em string da atividade
 	 */
 	public String exibeAtividade(String codigo) {
@@ -113,8 +105,7 @@ public class ControladorAtividade{
 	/**
 	 * Conta o total de itens com status de pendente em uma atividade
 	 * 
-	 * @param codigo,
-	 *            o codigo da atividade a qual os itens pertencem
+	 * @param codigo, o codigo da atividade a qual os itens pertencem
 	 * @return retorna um inteiro representando a soma de itens com status pendente
 	 */
 	public int contaItensPendentes(String codigo) {
@@ -128,8 +119,7 @@ public class ControladorAtividade{
 	/**
 	 * Conta o total de itens com status de realizado em uma atividade
 	 * 
-	 * @param codigo,
-	 *            o codigo da atividade ao qual os itens pertencem
+	 * @param codigo, o codigo da atividade ao qual os itens pertencem
 	 * @return retorna um inteiro representando a soma dos itens com status
 	 *         realizado
 	 */
@@ -138,7 +128,7 @@ public class ControladorAtividade{
 		if (!existeAtividade(codigo)) {
 			throw new IllegalArgumentException("Atividade nao encontrada");
 		}
-		return capturaAtividadeNoMapa(codigo).contaItensRealizados();
+		return this.atividades.get(codigo).contaItensRealizados();
 	}
 
 	// todo o codigo abaixo se refere a acoes basicas no mapa de atividades
@@ -147,19 +137,17 @@ public class ControladorAtividade{
 		return this.atividades.containsKey(codigo);
 	}
 
-	private Atividade capturaAtividadeNoMapa(String codigo) {
+	public Atividade capturaAtividadeNoMapa(String codigo) {
 		return this.atividades.get(codigo);
 	}
 
 	/**
 	 * Pesquisa,nos dados da entidade Atividade, por um termo informado pelo usuario
 	 * 
-	 * @param palavra,
-	 *            o termo informado pelo usuario
+	 * @param palavra, o termo informado pelo usuario
 	 */
-	public String procuraPalavra(String palavra) {
-		//resultados = null;
-		String retorno = "";
+	public List<String> procuraPalavra(String palavra) {
+		List<String> resultados = new ArrayList<String>();
 		String fraseDescricao = "";
 		String fraseDescricaoRisco = "";
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
@@ -169,25 +157,22 @@ public class ControladorAtividade{
 			fraseDescricao = atividade.getCodigo() + ": " + atividade.getDescricao();
 			fraseDescricaoRisco = atividade.getCodigo() + ": " + atividade.getDescricaoRisco();
 			if (fraseDescricao.toLowerCase().contains(palavra.toLowerCase())) {
-				retorno = retorno + fraseDescricao + " | ";
+				resultados.add(fraseDescricao);
 			}
 			if (fraseDescricaoRisco.toLowerCase().contains(palavra.toLowerCase())) {
-				retorno = retorno + fraseDescricaoRisco + " | ";
+				resultados.add(fraseDescricaoRisco);
 			}
-			retorno = retorno + atividade.pesquisaItem(palavra);
+			resultados.addAll(atividade.pesquisaItem(palavra));
 		}
-		 return retorno;
+		return resultados;
 	}
 
 	/**
 	 * Executa um item de uma atividade
 	 * 
-	 * @param codigoAtividade
-	 *            codigo da atividade que possui o item
-	 * @param item
-	 *            item a ser realizado
-	 * @param duracao
-	 *            duracao a ser incrementada
+	 * @param codigoAtividade codigo da atividade que possui o item
+	 * @param item            item a ser realizado
+	 * @param duracao         duracao a ser incrementada
 	 */
 	public void executaAtividade(String codigoAtividade, int item, int duracao) {
 		Verificador.verificaEntrada(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
@@ -199,10 +184,8 @@ public class ControladorAtividade{
 	/**
 	 * Cadastra o resultado de uma atividade
 	 * 
-	 * @param codigoAtividade
-	 *            codigo da atividade a receber o resultado
-	 * @param resultado
-	 *            resultado a ser cadastrado
+	 * @param codigoAtividade codigo da atividade a receber o resultado
+	 * @param resultado       resultado a ser cadastrado
 	 * @return o codigo do resultado que foi cadastrado
 	 */
 	public int cadastraResultado(String codigoAtividade, String resultado) {
@@ -214,10 +197,8 @@ public class ControladorAtividade{
 	/**
 	 * Remove um resultado cadastrado em uma atividade
 	 * 
-	 * @param codigoAtividade
-	 *            codigo da atividade que possui o resultado
-	 * @param numeroResultado
-	 *            codigo do resultado a ser removido
+	 * @param codigoAtividade codigo da atividade que possui o resultado
+	 * @param numeroResultado codigo do resultado a ser removido
 	 * @return true
 	 */
 	public boolean removeResultado(String codigoAtividade, int numeroResultado) {
@@ -230,8 +211,7 @@ public class ControladorAtividade{
 	/**
 	 * Retorna a representacao em texto dos restulados cadastrados em uma atividade
 	 * 
-	 * @param codigoAtividade
-	 *            codigo da atividade que possui os resultados
+	 * @param codigoAtividade codigo da atividade que possui os resultados
 	 * @return a representacao em texto dos restulados cadastrados da atividade
 	 */
 	public String listaResultados(String codigoAtividade) {
@@ -243,8 +223,7 @@ public class ControladorAtividade{
 	/**
 	 * Retorna a duracao da atividade
 	 * 
-	 * @param codigoAtividade
-	 *            codigo da atividade que possui a duracao
+	 * @param codigoAtividade codigo da atividade que possui a duracao
 	 * @return a duracao da atividade
 	 */
 	public int getDuracao(String codigoAtividade) {
@@ -257,10 +236,8 @@ public class ControladorAtividade{
 	 * Armazena em uma pesquisa o codigo de uma atividade, representando uma
 	 * associacao
 	 * 
-	 * @param codigoPesquisa
-	 *            codigo da pesquisa a receber o codigo da atividade
-	 * @param codigoAtividade
-	 *            codigo atividade a ser recebido pela pesquisa
+	 * @param codigoPesquisa  codigo da pesquisa a receber o codigo da atividade
+	 * @param codigoAtividade codigo atividade a ser recebido pela pesquisa
 	 */
 	public void associaPesquisa(String codigoPesquisa, String codigoAtividade) {
 		this.capturaAtividadeNoMapa(codigoAtividade).associaPesquisa(codigoPesquisa);
@@ -269,10 +246,8 @@ public class ControladorAtividade{
 	/**
 	 * Remove a associal de uma atividade com a pesquisa
 	 * 
-	 * @param codigoPesquisa
-	 *            codigo da pesquisa que possui a atividade
-	 * @param codigoAtividade
-	 *            codigo da atividade a ser removido
+	 * @param codigoPesquisa  codigo da pesquisa que possui a atividade
+	 * @param codigoAtividade codigo da atividade a ser removido
 	 */
 	public void desassociaPesquisa(String codigoPesquisa, String codigoAtividade) {
 		this.capturaAtividadeNoMapa(codigoAtividade).desassociaPesquisa(codigoPesquisa);
