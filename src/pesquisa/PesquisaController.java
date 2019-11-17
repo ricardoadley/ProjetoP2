@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import atividades.ControladorAtividade;
 import objetivo.ObjetivoController;
 import pesquisador.PesquisadorController;
@@ -436,7 +435,7 @@ public class PesquisaController {
 	}
 
 	/**
-	 * Armazena o código de uma atividade associada à uma Pesquisa na mesma.
+	 * Armazena o codigo de uma atividade associada a� uma Pesquisa na mesma.
 	 * 
 	 * @param codigoPesquisa  codigo da pesquisa que vai receber a associacao
 	 * @param codigoAtividade codigo da atividade a ser associada
@@ -512,6 +511,12 @@ public class PesquisaController {
 
 		return this.mapaPesquisas.get(idPesquisa).desassociaPesquisador(emailPesquisador);
 	}
+	public boolean existePesquisa(String codigo) {
+		if(!this.mapaPesquisas.containsKey(codigo)) {
+			throw new IllegalArgumentException("Pesquisa nao encontrada.");
+		}
+		return this.mapaPesquisas.containsKey(codigo);
+	}
 
 	/**
 	 * Grava resumo de uma Pesquisa em um arquivo de texto.
@@ -543,8 +548,8 @@ public class PesquisaController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		}
 
-	}
 
 	/**
 	 * Grava resultados de uma Pesquisa em um arquivo de texto
@@ -556,5 +561,4 @@ public class PesquisaController {
 		Verificador.existeChave(this.mapaPesquisas, codigoPesquisa, "Pesquisa nao encontrada.");
 
 	}
-
 }
