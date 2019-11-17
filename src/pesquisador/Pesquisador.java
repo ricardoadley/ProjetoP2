@@ -10,7 +10,7 @@ import pesquisa.Pesquisa;
  * @author Vinicius M. V. Varjao
  *
  */
-public class Pesquisador {
+public class Pesquisador implements Comparable<Pesquisador> {
 
 	/**
 	 * O email do pesquisador, o qual vai ser usado para identifica-lo
@@ -44,16 +44,22 @@ public class Pesquisador {
 	private Especialidade especialidade;
 
 	/**
+	 * Ordem com que o Pesquisador foi cadastrado.
+	 */
+	private int ordemCadastro;
+
+	/**
 	 * Construtor do objeto Pesquisador, que recebe seus atributos e define a
 	 * atividade como "Ativo" por padrao
 	 * 
-	 * @param nome      o nome do pesquisador
-	 * @param funcao    a funcao do pesquisador
-	 * @param biografia a biografia do pesquisador
-	 * @param email     o email do pesquisador
-	 * @param fotoURL   a URL da foto do pesquisador
+	 * @param nome          o nome do pesquisador
+	 * @param funcao        a funcao do pesquisador
+	 * @param biografia     a biografia do pesquisador
+	 * @param email         o email do pesquisador
+	 * @param fotoURL       a URL da foto do pesquisador
+	 * @param ordemCadastro a ordem com que o pesquisador foi cadastrado
 	 */
-	public Pesquisador(String nome, String funcao, String biografia, String email, String fotoURL) {
+	public Pesquisador(String nome, String funcao, String biografia, String email, String fotoURL, int ordemCadastro) {
 		Verificador.verificaEntrada(nome, "Campo nome nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(funcao, "Campo funcao nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(biografia, "Campo biografia nao pode ser nulo ou vazio.");
@@ -68,6 +74,7 @@ public class Pesquisador {
 		this.fotoURL = fotoURL;
 		this.atividade = "Ativo";
 		this.especialidade = null;
+		this.ordemCadastro = ordemCadastro;
 	}
 
 	public String getFuncao() {
@@ -112,6 +119,7 @@ public class Pesquisador {
 
 	/**
 	 * Verifica se o Pesquisador e ou nao ativo
+	 * 
 	 * @return retorna true caso o Pesquisador seja ativo e false caso contrario
 	 */
 	public boolean ehAtivo() {
@@ -124,6 +132,7 @@ public class Pesquisador {
 
 	/**
 	 * Retorna o objeto do tipo Especialidade que esta atribuida ao Pesquisador.
+	 * 
 	 * @return o objeto do tipo Especialidade que esta atribuida ao Pesquisador
 	 */
 	public Especialidade getEspecialidade() {
@@ -151,6 +160,17 @@ public class Pesquisador {
 	public String toStringEspecialidade() {
 		return this.nome + " (" + this.funcao + ") - " + this.biografia + " - " + this.email + " - " + this.fotoURL
 				+ " - " + getEspecialidade().toString();
+	}
+
+	public int getOrdemCadastro() {
+
+		return this.ordemCadastro;
+
+	}
+
+	@Override
+	public int compareTo(Pesquisador pesquisador) {
+		return ("" + this.ordemCadastro).compareTo("" + pesquisador.getOrdemCadastro());
 	}
 
 	@Override

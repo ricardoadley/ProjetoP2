@@ -529,7 +529,7 @@ public class PesquisaController {
 			FileWriter escritorDeArquivo = new FileWriter(file.getAbsoluteFile());
 			BufferedWriter buffWrite = new BufferedWriter(escritorDeArquivo);
 
-			buffWrite.write(this.mapaPesquisas.get(codigoPesquisa).getResumo());
+			buffWrite.write(this.mapaPesquisas.get(codigoPesquisa).getResumo().trim());
 			buffWrite.close();
 
 		} catch (IOException e) {
@@ -546,7 +546,7 @@ public class PesquisaController {
 	public void gravarResultados(String codigoPesquisa) {
 		Verificador.verificaEntrada(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
 		Verificador.existeChave(this.mapaPesquisas, codigoPesquisa, "Pesquisa nao encontrada.");
-
+		
 		try {
 
 			File file = new File("./src/" + "_" + codigoPesquisa + "-Resultados.txt");
@@ -554,7 +554,7 @@ public class PesquisaController {
 			FileWriter escritorDeArquivo = new FileWriter(file.getAbsoluteFile());
 			BufferedWriter buffWrite = new BufferedWriter(escritorDeArquivo);
 
-			buffWrite.write(this.mapaPesquisas.get(codigoPesquisa).getResultados());
+			buffWrite.write(this.mapaPesquisas.get(codigoPesquisa).getResultados().trim());
 			buffWrite.close();
 
 		} catch (IOException e) {

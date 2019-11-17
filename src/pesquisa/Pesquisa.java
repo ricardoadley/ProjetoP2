@@ -335,6 +335,7 @@ public class Pesquisa {
 
 			ArrayList<Pesquisador> pesquisadoresOrdenados = new ArrayList<Pesquisador>(
 					this.pesquisadoresAssociados.values());
+			Collections.sort(pesquisadoresOrdenados);
 
 			for (int i = 0; i < pesquisadoresOrdenados.size(); i++) {
 				resumoGeral += "        - " + pesquisadoresOrdenados.get(i).toString() + System.lineSeparator();
@@ -360,12 +361,13 @@ public class Pesquisa {
 			}
 
 		}
-
+		
 		if (this.atividadesAssociadas.size() > 0) {
 
 			resumoGeral += "    - Atividades:" + System.lineSeparator();
 
 			ArrayList<Atividade> atividadesOrdenadas = new ArrayList<Atividade>(this.atividadesAssociadas.values());
+			Collections.sort(atividadesOrdenadas);
 
 			for (int i = 0; i < atividadesOrdenadas.size(); i++) {
 				resumoGeral += "        - " + atividadesOrdenadas.get(i).geraResumo();

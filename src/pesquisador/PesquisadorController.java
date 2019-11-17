@@ -23,10 +23,16 @@ public class PesquisadorController {
 	private Map<String, Pesquisador> mapaPesquisadores;
 
 	/**
+	 * Ordem na qual o Pesquisador foi cadastrado.
+	 */
+	public int ordemCadastro;
+
+	/**
 	 * Constroi o controlador
 	 */
 	public PesquisadorController() {
 		this.mapaPesquisadores = new HashMap<>();
+		this.ordemCadastro = 1;
 	}
 
 	/**
@@ -46,8 +52,8 @@ public class PesquisadorController {
 		Verificador.verificaEntrada(fotoURL, "Campo fotoURL nao pode ser nulo ou vazio.");
 		Verificador.verificaEmail(email, "Formato de email invalido.");
 		Verificador.verificaFotoURL(fotoURL, "Formato de foto invalido.");
-		this.mapaPesquisadores.put(email, new Pesquisador(nome, funcao, biografia, email, fotoURL));
-
+		this.mapaPesquisadores.put(email, new Pesquisador(nome, funcao, biografia, email, fotoURL, ordemCadastro));
+		this.ordemCadastro++;
 	}
 
 	/**
