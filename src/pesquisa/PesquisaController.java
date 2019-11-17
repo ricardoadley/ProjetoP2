@@ -1,5 +1,9 @@
 package pesquisa;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -7,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import atividades.ControladorAtividade;
 import objetivo.ObjetivoController;
+import pesquisador.PesquisadorController;
 import problema.ProblemaController;
 import sistema.Verificador;
 
@@ -24,7 +29,7 @@ public class PesquisaController {
 	/**
 	 * identificador unico da pesquisa
 	 */
-	private int idPesquisa = 0;
+	private int idPesquisa;
 
 	/**
 	 * Instancia da classe controladora de Objetivos.
@@ -39,29 +44,35 @@ public class PesquisaController {
 	 * Instancia da classe controladora de Atividades.
 	 */
 	private ControladorAtividade atividadeController;
-	/**
-	 * Instancia da classe verificadora de entradas, a qual lanca as excessoes
-	 * necessarias.
-	 */
-	Verificador verificador = new Verificador();
 
 	/**
-	 * Construtor de Pesquisa
+	 * Instancia da classe controladora de Pesquisadores.
 	 */
-	public PesquisaController(ControladorAtividade controlaAtividade) {
+	private PesquisadorController pesquisadorController;
+
+	/**
+	 * Construtor de PesquisaController.
+	 * 
+	 * @param objetivoController
+	 * @param problemaController
+	 * @param pesquisadorController
+	 * @param atividadeController
+	 */
+	public PesquisaController(ObjetivoController objetivoController, ProblemaController problemaController,
+			PesquisadorController pesquisadorController, ControladorAtividade atividadeController) {
 		this.mapaPesquisas = new HashMap<>();
-		this.atividadeController = controlaAtividade;
-		this.objetivoController = new ObjetivoController();
-		this.problemaController = new ProblemaController();
+		this.idPesquisa = 1;
+		this.atividadeController = atividadeController;
+		this.objetivoController = objetivoController;
+		this.problemaController = problemaController;
+		this.pesquisadorController = pesquisadorController;
 	}
 
 	/**
 	 * Adiciona uma nova pesquisa no mapa de pesquisas
 	 * 
-	 * @param descricao,
-	 *            a descricao da pesquisa
-	 * @param interesse,
-	 *            o campo de interesse da pesquisa
+	 * @param descricao, a descricao da pesquisa
+	 * @param interesse, o campo de interesse da pesquisa
 	 * @return retornar o codigo de cadastro da pesquisa
 	 */
 	public String cadastraPesquisa(String descricao, String interesse) {
@@ -71,7 +82,7 @@ public class PesquisaController {
 		for (int i = 0; i < 3; i++) {
 			codigo += interesse.charAt(i);
 		}
-		codigo = codigo + (idPesquisa + 1);
+		codigo += (idPesquisa);
 		codigo = geraId(codigo.toUpperCase());
 		this.mapaPesquisas.put(codigo, new Pesquisa(descricao, interesse, codigo));
 		return codigo;
@@ -80,12 +91,9 @@ public class PesquisaController {
 	/**
 	 * Altera algum dado especifico de uma pesquisa ja cadastrada
 	 * 
-	 * @param codigo,
-	 *            o codigo da pesquisa que sera alterada
-	 * @param conteudoASerAlterado
-	 *            , o parametro que sera alterado
-	 * @param novoConteudo,
-	 *            o novo valor que o parametro alterado recebera
+	 * @param codigo,              o codigo da pesquisa que sera alterada
+	 * @param conteudoASerAlterado , o parametro que sera alterado
+	 * @param novoConteudo,        o novo valor que o parametro alterado recebera
 	 */
 	public void alteraPesquisa(String codigo, String conteudoASerAlterado, String novoConteudo) {
 		if (!this.mapaPesquisas.containsKey(codigo))
@@ -106,8 +114,7 @@ public class PesquisaController {
 	/**
 	 * Exibe como string uma pesquisa solicitada
 	 * 
-	 * @param codigo
-	 *            , o codigo da pesquisa que sera exibido
+	 * @param codigo , o codigo da pesquisa que sera exibido
 	 * @return a representacao em string da pesquisa
 	 */
 	public String exibePesquisa(String codigo) {
@@ -121,8 +128,7 @@ public class PesquisaController {
 	/**
 	 * Altera o status de uma pesquisa cadastrada para ativado
 	 * 
-	 * @param codigo,
-	 *            o codigo da pesquisa que sera ativada
+	 * @param codigo, o codigo da pesquisa que sera ativada
 	 */
 	public void ativaPesquisa(String codigo) {
 		if (!this.mapaPesquisas.containsKey(codigo))
@@ -135,10 +141,8 @@ public class PesquisaController {
 	/**
 	 * Altera o status de uma pesquisa para encerrado
 	 * 
-	 * @param codigo,
-	 *            o codigo da pesquisa que sera encerrada
-	 * @param motivo,
-	 *            o motivo do encerramento da pesquisa
+	 * @param codigo, o codigo da pesquisa que sera encerrada
+	 * @param motivo, o motivo do encerramento da pesquisa
 	 */
 	public void encerraPesquisa(String codigo, String motivo) {
 		Verificador.verificaEntrada(motivo, "Motivo nao pode ser nulo ou vazio.");
@@ -152,8 +156,7 @@ public class PesquisaController {
 	/**
 	 * Verifica se uma pesquisa esta ativa
 	 * 
-	 * @param codigo,
-	 *            o codigo da pesquisa que sera verificado
+	 * @param codigo, o codigo da pesquisa que sera verificado
 	 * @return retorna true ou false de acordo com o status da pesquisa
 	 */
 	public boolean pesquisaEhAtiva(String codigo) {
@@ -172,8 +175,7 @@ public class PesquisaController {
 	/**
 	 * Verifica se o campo interesse da pesquisa segue os requisitos de criacao
 	 * 
-	 * @param interesse
-	 *            , o campo de interesse da pesquisa
+	 * @param interesse , o campo de interesse da pesquisa
 	 */
 	private void verificaInteresseValido(String interesse) {
 		Verificador.verificaEntrada(interesse, "Formato do campo de interesse invalido.");
@@ -192,90 +194,55 @@ public class PesquisaController {
 	/**
 	 * Gera um id unico para a pesquisa
 	 * 
-	 * @param id,
-	 *            o id da pesquisa
+	 * @param id, o id da pesquisa
 	 * @return retorna o id da pesquisa
 	 */
 	private String geraId(String id) {
-		if (mapaPesquisas.containsKey(id)) {
-			int indice = (int) id.charAt(id.length() - 1);
-			indice++;
-			return id.replace(id.charAt(id.length() - 1), (char) indice);
+
+		int aux = 1;
+
+		for (String pesquisa : this.mapaPesquisas.keySet()) {
+
+			String codigo = mapaPesquisas.get(pesquisa).getCodigo();
+
+			if (codigo.substring(0, codigo.length() - 1).equals(id.substring(0, id.length() - 1))) {
+				aux++;
+			}
+
 		}
-		return id;
+
+		return id.substring(0, id.length() - 1) + aux;
+
 	}
 
 	/**
 	 * Procura, na entidade Pesquisa, por um termo informado pelo usuario
 	 * 
-	 * @param palavra,
-	 *            o termo que o usuario deseja que seja procurado
+	 * @param palavra, o termo que o usuario deseja que seja procurado
 	 * @return uma string contendo todos os resultados da procura
 	 */
 	public List<String> procuraPalavra(String palavra) {
 		// encontradas = null;
 		List<String> resultados = new ArrayList<String>();
-		//String retorno = "";
+		// String retorno = "";
 		String fraseDescricao = "";
 		String fraseCampo = "";
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
 		List<Pesquisa> listaPesquisas = new ArrayList<>(this.mapaPesquisas.values());
-		Collections.sort(listaPesquisas, new ComparadorPesquisa());
+		Collections.sort(listaPesquisas, new PesquisaIDComparator());
 		for (Pesquisa pesquisa : listaPesquisas) {
 			fraseDescricao = pesquisa.getCodigo() + ": " + pesquisa.getDescricao();
 			fraseCampo = pesquisa.getCodigo() + ": " + pesquisa.getCampo();
 			if (fraseDescricao.toLowerCase().contains(palavra)) {
-				//retorno = retorno + fraseDescricao + " | ";
+				// retorno = retorno + fraseDescricao + " | ";
 				resultados.add(fraseDescricao);
 			}
 			if (fraseCampo.toLowerCase().contains(palavra)) {
-				//retorno = retorno + fraseCampo + " | ";
+				// retorno = retorno + fraseCampo + " | ";
 				resultados.add(fraseCampo);
 			}
 		}
 		return resultados;
-	}
-
-	// Metodos referentes as operacoes com OBJETIVOS!
-
-	/**
-	 * Cadastra um objeto do tipo Objetivo no mapa de objetivos em
-	 * objetivoController.
-	 * 
-	 * @param tipo
-	 *            o tipo do objetivo, pode ser geral ou especifico
-	 * @param descricao
-	 *            a descricao do objetivo
-	 * @param aderencia
-	 *            representacao quantitativa do quanto o objetivo esta aderido a um
-	 *            problema
-	 * @param viabilidade
-	 *            representacao quantitativa do quanto o objetivo e viavel
-	 */
-	public String cadastraObjetivo(String tipo, String descricao, String aderencia, String viabilidade) {
-		return this.objetivoController.cadastraObjetivo(tipo, descricao, aderencia, viabilidade);
-	}
-
-	/**
-	 * Remove um Objetivo do mapa de objetivos em objetivoController
-	 * 
-	 * @param codigo
-	 *            o codigo pelo qual o objetivo e identificado unicamente
-	 */
-	public void apagarObjetivo(String codigo) {
-		this.objetivoController.apagarObjetivo(codigo);
-	}
-
-	/**
-	 * Retorna a representacao em String de um Objetivo, no formato "codigo - tipo -
-	 * descricao - valor(aderencia + viabilidade)".
-	 * 
-	 * @param codigo
-	 *            o codigo pelo qual o objetivo e identificado unicamente
-	 * @return a representacao em String de um Objetivo
-	 */
-	public String exibeObjetivo(String codigo) {
-		return this.objetivoController.exibeObjetivo(codigo);
 	}
 
 	/**
@@ -283,19 +250,16 @@ public class PesquisaController {
 	 * vários objetivos, entretanto, cada objetivo só pode estar associado a uma
 	 * única pesquisa.
 	 * 
-	 * @param idPesquisa
-	 *            o identificador unico da Pesquisa
-	 * @param idObjetivo
-	 *            o identificador unico do Objetivo
+	 * @param idPesquisa o identificador unico da Pesquisa
+	 * @param idObjetivo o identificador unico do Objetivo
 	 * @return return a String correspondente ao sucesso ou nao da operacao
 	 */
-	@SuppressWarnings("static-access")
 	public boolean associaObjetivo(String idPesquisa, String idObjetivo) {
 
-		verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
-		verificador.verificaEntrada(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
-		verificador.existeChave(mapaPesquisas, idPesquisa, "Pesquisa nao encontrada.");
-		verificador.verificaEhAtiva(this.mapaPesquisas, idPesquisa, "Pesquisa desativada.");
+		Verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
+		Verificador.existeChave(mapaPesquisas, idPesquisa, "Pesquisa nao encontrada.");
+		Verificador.verificaEhAtiva(this.mapaPesquisas, idPesquisa, "Pesquisa desativada.");
 
 		if (this.mapaPesquisas.get(idPesquisa).contemObjetivo(idObjetivo)) {
 			return false;
@@ -317,19 +281,16 @@ public class PesquisaController {
 	/**
 	 * Retira a associacao entre um Objetivo e uma Pesquisa.
 	 * 
-	 * @param idPesquisa
-	 *            o identificador unico da Pesquisa
-	 * @param idObjetivo
-	 *            o identificador unico do Objetivo
+	 * @param idPesquisa o identificador unico da Pesquisa
+	 * @param idObjetivo o identificador unico do Objetivo
 	 * @return return a String correspondente ao sucesso ou nao da operacao
 	 */
-	@SuppressWarnings("static-access")
 	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
 
-		verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
-		verificador.verificaEntrada(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
-		verificador.existeChave(mapaPesquisas, idPesquisa, "Pesquisa nao encontrada.");
-		verificador.verificaEhAtiva(this.mapaPesquisas, idPesquisa, "Pesquisa desativada.");
+		Verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
+		Verificador.existeChave(mapaPesquisas, idPesquisa, "Pesquisa nao encontrada.");
+		Verificador.verificaEhAtiva(this.mapaPesquisas, idPesquisa, "Pesquisa desativada.");
 
 		if (!this.mapaPesquisas.get(idPesquisa).contemObjetivo(idObjetivo)) {
 			return false;
@@ -342,57 +303,18 @@ public class PesquisaController {
 	/**
 	 * Busca um objetivo que contenha tal palavra passada como parametro.
 	 * 
-	 * @param palavra
-	 *            a palavra a qual se deseja procurar um Objetivo que contenha a
-	 *            mesma
+	 * @param palavra a palavra a qual se deseja procurar um Objetivo que contenha a
+	 *                mesma
 	 */
 	public List<String> procuraPalavraObjetivo(String palavra) {
 		return this.objetivoController.procuraPalavra(palavra);
 	}
 
-	// Metodos referentes as operacoes com PROBLEMAS!
-
-	/**
-	 * Adiciona um objeto do tipo Problema no mapa de problemas em
-	 * problemaController
-	 * 
-	 * @param descricao
-	 *            descricao do problema
-	 * @param viabilidade
-	 *            representacao quantitativa do quanto o problema e viavel
-	 */
-	public String cadastraProblema(String descricao, String viabilidade) {
-		return this.problemaController.cadastraProblema(descricao, viabilidade);
-	}
-
-	/**
-	 * Remove um Problema do mapa de problemas em problemaController
-	 * 
-	 * @param codigo
-	 *            o codigo pelo qual o Problema e identificado unicamente
-	 */
-	public void apagarProblema(String codigo) {
-		this.problemaController.apagarProblema(codigo);
-	}
-
-	/**
-	 * Retorna a representacao em String de um Problema, no formato "codigo -
-	 * descricao - viabilidade".
-	 * 
-	 * @param codigo
-	 *            o codigo pelo qual o Problema e identificado unicamente
-	 * @return a representacao em String de um problema
-	 */
-	public String exibeProblema(String codigo) {
-		return this.problemaController.exibeProblema(codigo);
-	}
-
 	/**
 	 * Procura um Problema que possua a palavra passada como parametro
 	 * 
-	 * @param palavra
-	 *            palavra a palavra a qual se deseja procurar um Problema que
-	 *            contenha a mesma
+	 * @param palavra palavra a palavra a qual se deseja procurar um Problema que
+	 *                contenha a mesma
 	 */
 	public List<String> procuraPalavraProblema(String palavra) {
 		return this.problemaController.procuraPalavra(palavra);
@@ -403,10 +325,8 @@ public class PesquisaController {
 	 * sucesso ou nao da operacao. Uma pesquisa pode estar associada a um único
 	 * problema. Mas o mesmo problema pode estar associado a várias pesquisas.
 	 * 
-	 * @param idPesquisa
-	 *            o identificador unico da pesquisa
-	 * @param idProblema
-	 *            o identificador unico do problema
+	 * @param idPesquisa o identificador unico da pesquisa
+	 * @param idProblema o identificador unico do problema
 	 * @return return a String correspondente ao sucesso ou nao da operacao
 	 */
 	public boolean associaProblema(String idPesquisa, String idProblema) {
@@ -435,18 +355,15 @@ public class PesquisaController {
 	/**
 	 * Retira a associação entre um Problema e uma Pesquisa
 	 * 
-	 * @param idPesquisa
-	 *            o identificador unico da Pesquisa
-	 * @param idProblema
-	 *            o identificador unico do Problema
+	 * @param idPesquisa o identificador unico da Pesquisa
+	 * @param idProblema o identificador unico do Problema
 	 * @return return a String correspondente ao sucesso ou nao da operacao
 	 */
-	@SuppressWarnings("static-access")
 	public boolean desassociaProblema(String idPesquisa) {
 
-		verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
-		verificador.existeChave(this.mapaPesquisas, idPesquisa, "Pesquisa nao encontrada.");
-		verificador.verificaEhAtiva(this.mapaPesquisas, idPesquisa, "Pesquisa desativada.");
+		Verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		Verificador.existeChave(this.mapaPesquisas, idPesquisa, "Pesquisa nao encontrada.");
+		Verificador.verificaEhAtiva(this.mapaPesquisas, idPesquisa, "Pesquisa desativada.");
 
 		if (!this.mapaPesquisas.get(idPesquisa).contemProblema()) {
 			return false;
@@ -460,8 +377,7 @@ public class PesquisaController {
 	/**
 	 * Lista pesquisas de acordo com o tipo de ordenacao desejada.
 	 * 
-	 * @param ordem
-	 *            a ordem com que se deseja listar as pesquisas
+	 * @param ordem a ordem com que se deseja listar as pesquisas
 	 * @return retorna a String correspondente as informacoes de todas as pesquisas
 	 */
 	public String listaPesquisas(String ordem) {
@@ -471,16 +387,16 @@ public class PesquisaController {
 			throw new IllegalArgumentException("Valor invalido da ordem");
 		}
 
-		ArrayList<Pesquisa> valores = new ArrayList<Pesquisa>(this.mapaPesquisas.values());
+		ArrayList<Pesquisa> pesquisas = new ArrayList<Pesquisa>(this.mapaPesquisas.values());
 		String pesquisasOrdenadas = "";
 
 		if (ordem.equalsIgnoreCase("PESQUISA")) {
 
-			Collections.sort(valores, new PesquisaIDComparator());
+			Collections.sort(pesquisas, new PesquisaIDComparator());
 
-			for (int i = 0; i < valores.size(); i++) {
+			for (int i = 0; i < pesquisas.size(); i++) {
 
-				pesquisasOrdenadas += valores.get(i).toString() + " | ";
+				pesquisasOrdenadas += pesquisas.get(i).toString() + " | ";
 
 			}
 
@@ -490,11 +406,11 @@ public class PesquisaController {
 
 		if (ordem.equalsIgnoreCase("PROBLEMA")) {
 
-			Collections.sort(valores, new PesquisaProblemaComparator());
+			Collections.sort(pesquisas, new PesquisaProblemaComparator());
 
-			for (int i = 0; i < valores.size(); i++) {
+			for (int i = 0; i < pesquisas.size(); i++) {
 
-				pesquisasOrdenadas += valores.get(i).toString() + " | ";
+				pesquisasOrdenadas += pesquisas.get(i).toString() + " | ";
 
 			}
 
@@ -504,11 +420,11 @@ public class PesquisaController {
 
 		else {
 
-			Collections.sort(valores, new PesquisaObjetivosComparator());
+			Collections.sort(pesquisas, new PesquisaObjetivosComparator());
 
-			for (int i = 0; i < valores.size(); i++) {
+			for (int i = 0; i < pesquisas.size(); i++) {
 
-				pesquisasOrdenadas += valores.get(i).toString() + " | ";
+				pesquisasOrdenadas += pesquisas.get(i).toString() + " | ";
 
 			}
 
@@ -521,10 +437,8 @@ public class PesquisaController {
 	/**
 	 * Armazena o codigo de uma atividade associada a� uma Pesquisa na mesma.
 	 * 
-	 * @param codigoPesquisa
-	 *            codigo da pesquisa que vai receber a associacao
-	 * @param codigoAtividade
-	 *            codigo da atividade a ser associada
+	 * @param codigoPesquisa  codigo da pesquisa que vai receber a associacao
+	 * @param codigoAtividade codigo da atividade a ser associada
 	 * @return false caso a associacao nao ocorra, true caso contrario
 	 */
 	public boolean associaAtividade(String codigoPesquisa, String codigoAtividade) {
@@ -538,16 +452,15 @@ public class PesquisaController {
 			throw new IllegalArgumentException("Pesquisa desativada.");
 		}
 		this.atividadeController.associaPesquisa(codigoPesquisa, codigoAtividade);
-		return this.mapaPesquisas.get(codigoPesquisa).associaAtividade(codigoAtividade);
+		return this.mapaPesquisas.get(codigoPesquisa).associaAtividade(codigoAtividade,
+				this.atividadeController.capturaAtividadeNoMapa(codigoAtividade));
 	}
 
 	/**
 	 * Remove o codigo de uma ativadade associada da lista de atividades
 	 * 
-	 * @param codigoPesquisa
-	 *            codigo da pesquisa a ter a atividade desassociada
-	 * @param codigoAtividade
-	 *            codigo da atividade a ser removido
+	 * @param codigoPesquisa  codigo da pesquisa a ter a atividade desassociada
+	 * @param codigoAtividade codigo da atividade a ser removido
 	 * @return false caso a desassociacao nao ocorra, true caso contrario
 	 */
 	public boolean desassociaAtividade(String codigoPesquisa, String codigoAtividade) {
@@ -563,24 +476,89 @@ public class PesquisaController {
 		this.atividadeController.desassociaPesquisa(codigoPesquisa, codigoAtividade);
 		return this.mapaPesquisas.get(codigoPesquisa).desassociaAtividade(codigoAtividade);
 	}
-	
 
-	public Pesquisa getPesquisa(String idPesquisa) {
-		return this.mapaPesquisas.get(idPesquisa);
-	}
-
-	public Map<String, Pesquisa> getMapaPesquisas() {
-		return mapaPesquisas;
-	}
 	/**
-	 * verifica se existe uma pesquisa armazenada no mapa de pesquisas
-	 * @param codigo, o codigo da pesquisa que sera verificado
-	 * @return true para caso existe a pesquisa, false para caso nao exista
+	 * Associa Pesquisadores a Pesquisas
+	 * 
+	 * @param idPesquisa       o identificador unico da Pesquisa
+	 * @param emailPesquisador o identificador unico do Pesquisador
+	 * @return true se associado corretamente, false se nao
 	 */
+	public boolean associaPesquisador(String idPesquisa, String emailPesquisador) {
+		Verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(emailPesquisador, "Campo emailPesquisador nao pode ser nulo ou vazio.");
+		Verificador.verificaEmail(emailPesquisador, "Atributo email com formato invalido.");
+		Verificador.existeChave(this.mapaPesquisas, idPesquisa, "Pesquisa nao encontrada.");
+		Verificador.verificaEhAtiva(this.mapaPesquisas, idPesquisa, "Pesquisa desativada.");
+
+		return this.mapaPesquisas.get(idPesquisa).associaPesquisador(emailPesquisador,
+				this.pesquisadorController.getPesquisador(emailPesquisador));
+	}
+
+	/**
+	 * Desassocia um Pesquisador de uma Pesquisa
+	 * 
+	 * @param idPesquisa       o identificador unico da Pesquisa
+	 * @param emailPesquisador o identificador unico do Pesquisador
+	 * @return true se foi desassociado corretamente, false se nao
+	 */
+	public boolean desassociaPesquisador(String idPesquisa, String emailPesquisador) {
+		Verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(emailPesquisador, "Campo emailPesquisador nao pode ser nulo ou vazio.");
+		Verificador.verificaEmail(emailPesquisador, "Atributo email com formato invalido.");
+		Verificador.existeChave(this.mapaPesquisas, idPesquisa, "Pesquisa nao encontrada.");
+		Verificador.verificaEhAtiva(this.mapaPesquisas, idPesquisa, "Pesquisa desativada.");
+
+		return this.mapaPesquisas.get(idPesquisa).desassociaPesquisador(emailPesquisador);
+	}
 	public boolean existePesquisa(String codigo) {
 		if(!this.mapaPesquisas.containsKey(codigo)) {
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
 		}
 		return this.mapaPesquisas.containsKey(codigo);
+	}
+
+	/**
+	 * Grava resumo de uma Pesquisa em um arquivo de texto.
+	 * 
+	 * @param codigoPesquisa o identificador unico da Pesquisa
+	 */
+	public void gravarResumo(String codigoPesquisa) {
+		Verificador.verificaEntrada(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
+		Verificador.existeChave(this.mapaPesquisas, codigoPesquisa, "Pesquisa nao encontrada.");
+
+		try {
+
+			// Cria arquivo
+			File file = new File("./src/" + "_" + codigoPesquisa + ".txt");
+
+			/*
+			 * // Se o arquivo nao existe, ele cria if (!file.exists()) {
+			 * file.createNewFile(); }
+			 */
+
+			// Prepara para escrever no arquivo
+			FileWriter escritorDeArquivo = new FileWriter(file.getAbsoluteFile());
+			BufferedWriter buffWrite = new BufferedWriter(escritorDeArquivo);
+
+			// Escreve e fecha arquivo
+			buffWrite.write(this.mapaPesquisas.get(codigoPesquisa).getResumo());
+			buffWrite.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		}
+
+
+	/**
+	 * Grava resultados de uma Pesquisa em um arquivo de texto
+	 * 
+	 * @param codigoPesquisa o identificador unico da Pesquisa
+	 */
+	public void gravarResultados(String codigoPesquisa) {
+		Verificador.verificaEntrada(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
+		Verificador.existeChave(this.mapaPesquisas, codigoPesquisa, "Pesquisa nao encontrada.");
+
 	}
 }
