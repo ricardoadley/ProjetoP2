@@ -366,7 +366,6 @@ public class Pesquisa {
 			resumoGeral += "    - Atividades:" + System.lineSeparator();
 
 			ArrayList<Atividade> atividadesOrdenadas = new ArrayList<Atividade>(this.atividadesAssociadas.values());
-			Collections.sort(atividadesOrdenadas);
 
 			for (int i = 0; i < atividadesOrdenadas.size(); i++) {
 				resumoGeral += "        - " + atividadesOrdenadas.get(i).geraResumo();
@@ -387,7 +386,6 @@ public class Pesquisa {
 			resultados += "    - Resultados:" + System.lineSeparator();
 
 			ArrayList<Atividade> atividadesOrdenadas = new ArrayList<Atividade>(this.atividadesAssociadas.values());
-			Collections.sort(atividadesOrdenadas);
 
 			for (int i = 0; i < atividadesOrdenadas.size(); i++) {
 				resultados += atividadesOrdenadas.get(i).geraResultados();

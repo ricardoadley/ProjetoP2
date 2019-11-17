@@ -16,13 +16,13 @@
         - Busca e analise de uma razao para a Netflix cancelar BoJack Horseman (ALTO - Nao existe uma razao plausivel, assim o risco e elevado.)
             - PENDENTE - ITEM1
         - Mudancas nas relacoes do instagram, apos a ocultacao do numero de curtidas das postagens. (ALTO - Por envolver uma crise economica brutal, com diversas blogueirinhas perdendo seus empregos, e de uma crise social, com diversas pessoas perdendo o rummo de suas vidas, o risco e extremamente elevado.)
+        - Monitoramento por ninjas de computacao na guerra ninja. (BAIXO - Por se tratar de apenas um monitoramento, o risco nao e elevado.)
         - Ponderacao do por que Imagine dragons e tao bom. (BAIXO - Sem risco, so provar algo obvio.)
             - REALIZADO - ITEM1
             - REALIZADO - ITEM2
             - REALIZADO - ITEM3
             - REALIZADO - ITEM4
             - PENDENTE - ITEM5
-        - Monitoramento por ninjas de computacao na guerra ninja. (BAIXO - Por se tratar de apenas um monitoramento, o risco nao e elevado.)
         - Analise do comportamento dos alunos de computacao com os alunos de arq/urb. (ALTO - Por se tratar de uma analise a partir de denuncias de um comportamento hostil, o risco e extremamente elevado.)
             - REALIZADO - ITEM1
             - PENDENTE - ITEM2
