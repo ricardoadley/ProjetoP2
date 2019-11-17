@@ -44,7 +44,7 @@ public class Atividade implements Comparable<Atividade> {
 	 * 
 	 */
 	private int ultimoResultado;
-	
+
 	/**
 	 * Codigo que identifica unicamente a Atividade
 	 */
@@ -281,6 +281,14 @@ public class Atividade implements Comparable<Atividade> {
 		this.pesquisasAssociadas.remove(codigoPesquisa);
 	}
 
+	public boolean contemPesquisasAssociadas() {
+		if (this.pesquisasAssociadas.size() > 0) {
+			return true;
+		}
+
+		return false;
+	}
+
 	@Override
 	public int compareTo(Atividade atividade) {
 		return this.codigo.compareTo(atividade.getCodigo());
@@ -311,19 +319,41 @@ public class Atividade implements Comparable<Atividade> {
 	 * @return retorna os detalhes de Atividade
 	 */
 	public String geraResumo() {
-		String lista = "";
+		String resumo = "";
 		List<Item> itens = new ArrayList<>(this.itens.values());
 		Collections.sort(itens);
 		for (int i = 0; i < itens.size(); i++) {
 			if (itens.get(i).isRealizado() == false) {
-				lista += "            - PENDENTE - ITEM" + itens.get(i).toString() + System.lineSeparator();
+				resumo += "            - PENDENTE - " + itens.get(i).toString() + System.lineSeparator();
 			} else {
-				lista += "            - REALIZADO - ITEM" + itens.get(i).toString() + System.lineSeparator();
+				resumo += "            - REALIZADO - " + itens.get(i).toString() + System.lineSeparator();
 			}
 
 		}
 		return this.descricao + " (" + this.nivelRisco + " - " + this.descricaoRisco + ")" + System.lineSeparator()
-				+ lista;
+				+ resumo;
+
+	}
+
+	public String geraResultados() {
+
+		String resultados = "        - " + this.descricao + System.lineSeparator();
+		List<Item> itens = new ArrayList<>(this.itens.values());
+		Collections.sort(itens);
+
+		for (int i = 0; i < itens.size(); i++) {
+
+			resultados += "            - " + itens.get(i).toString() + " - " + this.duracao + System.lineSeparator();
+
+		}
+
+		for (Integer intResultado : this.resultados.keySet()) {
+
+			resultados += "            - " + this.resultados.get(intResultado) + System.lineSeparator();
+
+		}
+
+		return resultados;
 
 	}
 

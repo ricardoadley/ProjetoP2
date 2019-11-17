@@ -378,6 +378,27 @@ public class Pesquisa {
 
 	}
 
+	public String getResultados() {
+
+		String resultados = "- Pesquisa: " + this.toString() + System.lineSeparator();
+
+		if (this.atividadesAssociadas.size() > 0) {
+
+			resultados += "    - Resultados:" + System.lineSeparator();
+
+			ArrayList<Atividade> atividadesOrdenadas = new ArrayList<Atividade>(this.atividadesAssociadas.values());
+			Collections.sort(atividadesOrdenadas);
+
+			for (int i = 0; i < atividadesOrdenadas.size(); i++) {
+				resultados += atividadesOrdenadas.get(i).geraResultados();
+			}
+
+		}
+
+		return resultados;
+
+	}
+
 	@Override
 	/**
 	 * Retorna uma representacao em string da pesquisa no formato CODIGO - DESCRICAO

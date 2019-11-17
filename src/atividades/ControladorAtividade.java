@@ -240,6 +240,9 @@ public class ControladorAtividade {
 	 * @param codigoAtividade codigo atividade a ser recebido pela pesquisa
 	 */
 	public void associaPesquisa(String codigoPesquisa, String codigoAtividade) {
+		Verificador.verificaEntrada(codigoPesquisa, "Campo codigoPesquisa nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
+
 		this.capturaAtividadeNoMapa(codigoAtividade).associaPesquisa(codigoPesquisa);
 	}
 
@@ -250,6 +253,8 @@ public class ControladorAtividade {
 	 * @param codigoAtividade codigo da atividade a ser removido
 	 */
 	public void desassociaPesquisa(String codigoPesquisa, String codigoAtividade) {
+		Verificador.verificaEntrada(codigoPesquisa, "Campo codigoPesquisa nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
 		this.capturaAtividadeNoMapa(codigoAtividade).desassociaPesquisa(codigoPesquisa);
 	}
 }

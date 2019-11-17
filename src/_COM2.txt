@@ -7,7 +7,7 @@
         - O4 - GERAL - Aumentar a porcentagem de pessoas que entregam os laboratorios na disciplina de LP2. - 8
     - Atividades:
         - Monitoramento de chats dos alunos de computacao do primeiro periodo. (BAIXO - Por se tratar de apenas um monitoramento, o risco nao e elevado.)
-            - REALIZADO - ITEMITEM0
-            - REALIZADO - ITEMITEM0
-            - REALIZADO - ITEMITEM0
-            - REALIZADO - ITEMITEM0
+            - REALIZADO - ITEM1
+            - REALIZADO - ITEM2
+            - REALIZADO - ITEM3
+            - REALIZADO - ITEM4

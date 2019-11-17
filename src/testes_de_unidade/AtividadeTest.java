@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import atividades.Atividade;
+import pesquisa.Pesquisa;
 
 
 class AtividadeTest {
@@ -14,12 +15,14 @@ class AtividadeTest {
 	private Atividade atividade1;
 	private Atividade atividade2;
 	private Atividade atividade3;
+	private Pesquisa pesquisa1;
 
 	@BeforeEach 
 	public void iniciaAtividades() { 
 		atividade1 = new Atividade("the flash", "BAIXO", "meio descrito", 0, "A1");
 		atividade2 = new Atividade("game of thrones", "MEDIO", "pouco descrito", 1, "A1");
 		atividade3 = new Atividade("supernatural", "ALTO", "MUITO DESCRITO!", 2, "A3");
+		pesquisa1 = new Pesquisa("descobrir como faz teste", "computacao e mt bom", "COM1");
 	}
 
 	@Test
@@ -144,6 +147,20 @@ class AtividadeTest {
 		
 	}
 	
+	@Test
+	void testAssociaPesquisa() {
+		
+		atividade1.associaPesquisa("COM1");
+		assertTrue(atividade1.contemPesquisasAssociadas());
+		
+	}
 	
-	
+	@Test
+	void testDesassociaPesquisa() {
+		
+		atividade1.associaPesquisa("COM1");
+		atividade1.desassociaPesquisa("COM1");
+		assertFalse(atividade1.contemPesquisasAssociadas());
+		
+	}
 }

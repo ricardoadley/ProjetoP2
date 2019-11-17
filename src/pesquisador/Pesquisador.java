@@ -37,6 +37,10 @@ public class Pesquisador {
 	 * define a possibilidade de manipulacai do mesmo"
 	 */
 	private String atividade;
+	
+	/**
+	 * Especialidade do Pesquisador
+	 */
 	private Especialidade especialidade;
 
 	/**

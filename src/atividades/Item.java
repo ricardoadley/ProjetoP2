@@ -32,6 +32,7 @@ public class Item implements Comparable<Item> {
 	public Item(String descricao, int ordemCadastro) {
 		Verificador.verificaEntrada(descricao, "O campo descricao nao pode ser vazio ou nulo");
 		realizado = false;
+		this.ordemCadastro = ordemCadastro;
 		this.descricao = descricao;
 	}
 
@@ -44,11 +45,11 @@ public class Item implements Comparable<Item> {
 	}
 
 	public String toString() {
-		
+
 		return "ITEM" + this.ordemCadastro;
-		
+
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
