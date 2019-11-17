@@ -32,11 +32,16 @@ public class PesquisadorController {
 	/**
 	 * Cadastra um pesquisador no controlador
 	 * 
-	 * @param nome      o nome do pesquisador que sera cadastrado
-	 * @param funcao    a funcao do pesquisador que sera cadastrado
-	 * @param biografia a biografia do pesquisador que sera cadastrado
-	 * @param email     o email do pesquisador que sera cadastrado
-	 * @param fotoURL   a URL da foto do pesquisador que sera cadastrado
+	 * @param nome
+	 *            o nome do pesquisador que sera cadastrado
+	 * @param funcao
+	 *            a funcao do pesquisador que sera cadastrado
+	 * @param biografia
+	 *            a biografia do pesquisador que sera cadastrado
+	 * @param email
+	 *            o email do pesquisador que sera cadastrado
+	 * @param fotoURL
+	 *            a URL da foto do pesquisador que sera cadastrado
 	 */
 	public void cadastraPesquisador(String nome, String funcao, String biografia, String email, String fotoURL) {
 		Verificador.verificaEntrada(nome, "Campo nome nao pode ser nulo ou vazio.");
@@ -53,9 +58,12 @@ public class PesquisadorController {
 	/**
 	 * Altera um determinado atributo de um Pesquisador ja salvo no sistema
 	 * 
-	 * @param email     email identificador do pesquisador a ser alterado
-	 * @param atributo  atributo a ser alterado
-	 * @param novoValor novo valo a ser atribuido ao atribudo a ser alterado
+	 * @param email
+	 *            email identificador do pesquisador a ser alterado
+	 * @param atributo
+	 *            atributo a ser alterado
+	 * @param novoValor
+	 *            novo valo a ser atribuido ao atribudo a ser alterado
 	 */
 	public void alteraPesquisador(String email, String atributo, String novoValor) {
 		Verificador.verificaEmail(email, "Formato de email invalido.");
@@ -63,7 +71,7 @@ public class PesquisadorController {
 		Verificador.existeChaveString(this.mapaPesquisadores, email, "Pesquisador nao encontrado");
 		if (!pesquisadorEhAtivo(email)) {
 			throw new IllegalArgumentException("Pesquisador inativo.");
-		} 
+		}
 		if (atributo.equals("NOME")) {
 			Verificador.verificaEntrada(novoValor, "Campo nome nao pode ser nulo ou vazio.");
 			this.mapaPesquisadores.get(email).setNome(novoValor);
@@ -109,7 +117,8 @@ public class PesquisadorController {
 	 * Retorna a representacao em texto de um Pesquisador ja cadastrado no
 	 * controlador
 	 * 
-	 * @param email email identificador do pesquisador a ser exibido
+	 * @param email
+	 *            email identificador do pesquisador a ser exibido
 	 * @return representacao em texto de um Pesquisador ja cadastrado
 	 */
 	public String exibePesquisador(String email) {
@@ -128,7 +137,8 @@ public class PesquisadorController {
 	/**
 	 * Ativa um pesquisador que esta atualmente inativo
 	 * 
-	 * @param email email identificador do pesquisador a ser ativo
+	 * @param email
+	 *            email identificador do pesquisador a ser ativo
 	 */
 	public void ativaPesquisador(String email) {
 		Verificador.verificaEmail(email, "Formato de email invalido.");
@@ -142,7 +152,8 @@ public class PesquisadorController {
 	/**
 	 * Desativa um pesquisador atualmente ativo
 	 * 
-	 * @param email email identificador do pesquisador a ser desativado
+	 * @param email
+	 *            email identificador do pesquisador a ser desativado
 	 */
 	public void desativaPesquisador(String email) {
 		Verificador.verificaEmail(email, "Formato de email invalido.");
@@ -157,7 +168,8 @@ public class PesquisadorController {
 	 * Verifica se um pesquisador especifico esta ativo e retorna o valor booleano
 	 * referente a verificacao
 	 * 
-	 * @param email email do pesquisador a ser verificado
+	 * @param email
+	 *            email do pesquisador a ser verificado
 	 * @return valor booleano referente a atividade do pesquisador
 	 */
 	public boolean pesquisadorEhAtivo(String email) {
@@ -174,7 +186,8 @@ public class PesquisadorController {
 	 * Procura, nos dados da entidade Pesquisador, por um termo informado pelo
 	 * usuario
 	 * 
-	 * @param palavra, o termo que o usuario deseja pesquisar
+	 * @param palavra,
+	 *            o termo que o usuario deseja pesquisar
 	 * @return retorna uma string com todos os resultados encontrados
 	 */
 	public List<String> procuraPalavra(String palavra) {
@@ -221,6 +234,11 @@ public class PesquisadorController {
 		}
 	}
 
+	/**
+	 * Lista os Pesquisadores de determinado tipo
+	 * @param tipo, o tipo do pesquisador que sera listado
+	 * @return a representação em string dos pesquisadores encontrados
+	 */
 	public String listaPesquisadores(String tipo) {
 		String exibicao = "";
 		Verificador.verificaEntrada(tipo, "Campo tipo nao pode ser nulo ou vazio.");
@@ -237,7 +255,8 @@ public class PesquisadorController {
 	 * Retorna um Objeto do tipo Pesquisador que esta guardado no mapa de
 	 * pesquisadores
 	 * 
-	 * @param emailPesquisador o identificador unico do Pesquisador
+	 * @param emailPesquisador
+	 *            o identificador unico do Pesquisador
 	 * @return retorna um objeto do tipo Pesquisador
 	 */
 	public Pesquisador getPesquisador(String emailPesquisador) {
