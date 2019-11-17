@@ -13,12 +13,12 @@ import java.time.format.ResolverStyle;
  * Classe responsavel por verificar entradas do usuario e, caso necessario,
  * lancar as excecoes correspondentes.
  * 
- * @author Jose Matheus do N. Gama, Vinicius M. V. Varjao, Ana Beatriz da S. Truta
+ * @author Jose Matheus do Nascimento Gama, Vinicius M. V. Varjao, Ana Beatriz da Silva Truta
  *
  */
 public class Verificador {
 	/**
-	 * Constroi o objeto
+	 * constroi o objeto
 	 */
 	public Verificador() {
 	}
@@ -98,6 +98,7 @@ public class Verificador {
 
 	/**
 	 * Verifica se existe uma chave no mapa
+	 * 
 	 * @param mapa,  o mapa em que a chave sera pesquisada
 	 * @param chave, a chave que sera pesquisada
 	 * @param aviso, a mensagem que sera retornada caso a chave nao exista no mapa
@@ -107,6 +108,7 @@ public class Verificador {
 			throw new IllegalArgumentException(aviso);
 		}
 	}
+
 	public static void existeChaveString(Map mapa, String chave, String aviso) {
 		if (!mapa.containsKey(chave)) {
 			throw new IllegalArgumentException(aviso);
@@ -115,27 +117,29 @@ public class Verificador {
 
 	/**
 	 * Verifica se uma pesquisa esta ativada
+	 * 
 	 * @param pesquisas mapa de pesquisas
-	 * @param codigo codigo da pesquisa a ser vrificada
-	 * @param aviso mensagem de erro a ser lanacada
+	 * @param codigo    codigo da pesquisa a ser vrificada
+	 * @param aviso     mensagem de erro a ser lanacada
 	 */
 	public static void verificaEhAtiva(Map<String, Pesquisa> pesquisas, String codigo, String aviso) {
-		if(!pesquisas.get(codigo).isAtivada()) {
+		if (!pesquisas.get(codigo).isAtivada()) {
 			throw new IllegalArgumentException(aviso);
 		}
 	}
-	
+
 	/**
 	 * Verifica se um inteiro e positivo
+	 * 
 	 * @param inteiro inteiro a ser verificado
-	 * @param aviso mensagem de erro a ser lancada
+	 * @param aviso   mensagem de erro a ser lancada
 	 */
 	public static void verificaInteiroPositivo(int inteiro, String aviso) {
 		if (inteiro < 1) {
 			throw new IllegalArgumentException(aviso);
 		}
 	}
-	
+
 	/**
 	 * Verifica se um semestre e correto.
 	 * 
@@ -193,16 +197,15 @@ public class Verificador {
 	 * @return retorna true caso a data esteja correta e false caso ocorra o contrario.
 	 */
 	private static boolean isDateValid(String strDate) {
-	    String dateFormat = "dd/MM/uuuu";
+		String dateFormat = "dd/MM/uuuu";
 
-	    DateTimeFormatter dateTimeFormatter = DateTimeFormatter
-	    .ofPattern(dateFormat)
-	    .withResolverStyle(ResolverStyle.STRICT);
-	    try {
-	        LocalDate date = LocalDate.parse(strDate, dateTimeFormatter);
-	        return true;
-	    } catch (DateTimeParseException e) {
-	       return false;
-	    } 
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(dateFormat)
+				.withResolverStyle(ResolverStyle.STRICT);
+		try {
+			LocalDate date = LocalDate.parse(strDate, dateTimeFormatter);
+			return true;
+		} catch (DateTimeParseException e) {
+			return false;
+		}
 	}
 }

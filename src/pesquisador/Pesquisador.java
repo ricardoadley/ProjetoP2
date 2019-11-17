@@ -4,12 +4,10 @@ import sistema.Verificador;
 import java.util.ArrayList;
 import pesquisa.Pesquisa;
 
-
-
 /**
  * Representacao de um pesquisador
  * 
- * @author Vinicius M. V. Varjao, Ana Beatriz da S. Truta.
+ * @author Vinicius M. V. Varjao, Ana Beatriz da Silva Truta.
  *
  */
 public class Pesquisador {
@@ -33,32 +31,25 @@ public class Pesquisador {
 	/**
 	 * A URL da foto a ser usada pelo pesquisador
 	 */
-	private String fotoURL;	
+	private String fotoURL;
 	/**
-	 * O status de atividade do pesquisador, que pode ser "Ativo" ou "Inativo e define a possibilidade de manipulacao
-	 * do mesmo"
+	 * O status de atividade do pesquisador, que pode ser "Ativo" ou "Inativo e
+	 * define a possibilidade de manipulacai do mesmo"
 	 */
 	private String atividade;
-	/**
-	 * Pesquisa a qual o pesquisador esta associado.
-	 */
-	private Pesquisa pesquisa;
-	/**
-	 * Especialiade que o pesquisador possui.
-	 */
-	private Especialidade especialidade;
-	/**
-	 * 	Lista de pesquisas as quais o pesquisador esta associado.
-	 */
-	private ArrayList<String> pesquisasAssociadas;
 	
+	private Especialidade especialidade;
+
 	/**
-	 * Construtor do objeto Pesquisador, que recebe seus atributos e define a atividade como "Ativo" por padrao
-	 * @param nome o nome do pesquisador
-	 * @param funcao a funcao do pesquisador
+	 * Construtor do objeto Pesquisador, que recebe seus atributos e define a
+	 * atividade como "Ativo" por padrao
+	 * 
+	 * @param nome      o nome do pesquisador
+	 * @param funcao    a funcao do pesquisador
 	 * @param biografia a biografia do pesquisador
-	 * @param email o email do pesquisador
-	 * @param fotoURL a URL da foto do pesquisador
+	 * @param email     o email do pesquisador
+	 * @param fotoURL   a URL da foto do pesquisador
+	 * @param especialidade a especialidade do pesquisador
 	 */
 	public Pesquisador(String nome, String funcao, String biografia, String email, String fotoURL) {
 		Verificador.verificaEntrada(nome, "Campo nome nao pode ser nulo ou vazio.");
@@ -67,30 +58,32 @@ public class Pesquisador {
 		Verificador.verificaEntrada(email, "Campo email nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(fotoURL, "Campo fotoURL nao pode ser nulo ou vazio.");
 		Verificador.verificaEmail(email, "Formato de email invalido.");
-		Verificador.verificaFotoURL(fotoURL, "Formato de foto invalido."); 
+		Verificador.verificaFotoURL(fotoURL, "Formato de foto invalido.");
 		this.nome = nome;
-		this.funcao = funcao; 
+		this.funcao = funcao;
 		this.biografia = biografia;
 		this.email = email;
 		this.fotoURL = fotoURL;
 		this.atividade = "Ativo";
-		this.pesquisasAssociadas = new ArrayList<String>();
 		this.especialidade = null;
 	}
 
 	public String getFuncao() {
 		return funcao;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getBiografia() {
 		return biografia;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -114,13 +107,6 @@ public class Pesquisador {
 	public void setAtividade(String atividade) {
 		this.atividade = atividade;
 	}
-	
-	public boolean contemPesquisa() {
-		if (this.pesquisa == null) {
-			return false;
-		}
-		return true;
-	}
 
 	public boolean ehAtivo() {
 		if (this.atividade.equalsIgnoreCase("Ativo")) {
@@ -129,8 +115,7 @@ public class Pesquisador {
 			return false;
 		}
 	}
-	
-	
+
 	public Especialidade getEspecialidade() {
 		return especialidade;
 	}
@@ -140,13 +125,14 @@ public class Pesquisador {
 	}
 
 	/**
-	 * Retorna a representacao em texto do pesquisador no formato "NOME (FUNCAO) - BIOGRAFIA - EMAIL - FOTO"
+	 * Retorna a representacao em texto do pesquisador no formato "NOME (FUNCAO) -
+	 * BIOGRAFIA - EMAIL - FOTO"
 	 */
 	@Override
 	public String toString() {
 		return this.nome + " (" + this.funcao + ") - " + this.biografia + " - " + this.email + " - " + this.fotoURL;
 	}
-	
+
 	/**
 	 * Retorna o toString de um pesquisador caso o mesmo possua a funcao diferente de externo.
 	 * 
@@ -156,10 +142,10 @@ public class Pesquisador {
 	 * @return, retorna o toString de um pesquisador de acordo com sua especialidade.
 	 */
 	public String toStringEspecialidade() {
-		return this.nome + " (" + this.funcao + ") - " + this.biografia + " - " + this.email + " - " + this.fotoURL + " - " + getEspecialidade().toString();
+		return this.nome + " (" + this.funcao + ") - " + this.biografia + " - " + this.email + " - " + this.fotoURL
+				+ " - " + getEspecialidade().toString();
 	}
 
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -184,34 +170,6 @@ public class Pesquisador {
 			return false;
 		return true;
 	}
-	
-	/**
-	 * Verifica se uma pesquisa ja esta associada a um pesquisador, caso nao esteja, a adiciona.
-	 * 
-	 * @param idPesquisa, identificador da pesquisa que se deseja associar.
-	 * 
-	 * @return, retorna true se a pesquisa foi associada e false caso ocorra o contrario.
-	 */
-	public boolean associaPesquisador(String idPesquisa) {
-		if (this.pesquisasAssociadas.contains(idPesquisa)) {
-			return false;
-		}
-		this.pesquisasAssociadas.add(idPesquisa);
-		return true;
-	}
 
-	/**
-	 * Verifica se uma pesquisa ja esta associada a um pesquisador, caso esteja, a remove.
-	 * 
-	 * @param idPesquisa, identificador da pesquisa que se deseja verificar.
-	 * 
-	 * @return, retorna true se a pesquisa ainda foi desassociada e false caso ocorra o contrario.
-	 */
-	public boolean desassociaPesquisador(String idPesquisa) {
-		if (!this.pesquisasAssociadas.contains(idPesquisa)) {
-			return false;
-		}
-		this.pesquisasAssociadas.remove(idPesquisa);
-		return true;
-	}
+
 }
