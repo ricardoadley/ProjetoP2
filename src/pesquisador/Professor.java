@@ -1,11 +1,33 @@
 package pesquisador;
 
+/**
+ * Representacao da especialidade de um professor.
+ * 
+ * @author Ana Beatriz da S. Truta
+ *
+ */
 public class Professor implements Especialidade{
 
+	/**
+	 * Formacao do professor.
+	 */
 	private String formacao;
+	/**
+	 * Unidade na qual o professor esta alocado
+	 */
 	private String unidade;
+	/**
+	 * Data de contratacao do professor.
+	 */
 	private String data;
 
+	/**
+	 * Construtor do objeto Professor, que recebe seus atributos.
+	 * 
+	 * @param formacao, a formacao do professor.
+	 * @param unidade, a unidade ao qual o professor esta alocado.
+	 * @param data, a data de contratacao do professor.
+	 */
 	public Professor(String formacao, String unidade, String data) {
 		super();
 		this.formacao = formacao;

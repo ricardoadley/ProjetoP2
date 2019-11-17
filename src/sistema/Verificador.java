@@ -13,12 +13,12 @@ import java.time.format.ResolverStyle;
  * Classe responsavel por verificar entradas do usuario e, caso necessario,
  * lancar as excecoes correspondentes.
  * 
- * @author josemng, Vinicius M. V. Varjao.
+ * @author Jose Matheus do N. Gama, Vinicius M. V. Varjao, Ana Beatriz da S. Truta
  *
  */
 public class Verificador {
 	/**
-	 * constroi o objeto
+	 * Constroi o objeto
 	 */
 	public Verificador() {
 	}
@@ -136,6 +136,12 @@ public class Verificador {
 		}
 	}
 	
+	/**
+	 * Verifica se um semestre e correto.
+	 * 
+	 * @param novoValor, o semestre a ser verificado.
+	 * @param aviso, mensagem de erro a ser lancada caso o semestre esteja errado.
+	 */
 	public static void verificaSemestre(String novoValor, String aviso) {
 		int semestre = Integer.parseInt(novoValor);
 		if (semestre < 1) {
@@ -143,24 +149,49 @@ public class Verificador {
 		}
 	}
 
+	/**
+	 * Verifica se o IEA e valido
+	 * 
+	 * @param iea, iea a ser analizado.
+	 * @param aviso, mensagem de erro a ser lancada caso o iea esteja errado.
+	 */
 	public static void verificaIEA(double iea, String aviso) {
 		if (iea < 0.0 || iea > 10.0) {
 			throw new IllegalArgumentException(aviso);
 		}
 	}
 
+	/**
+	 * Verifica se uma data esta no formato correto.
+	 * 
+	 * @param data, a data a ser analizada.
+	 * @param aviso, mensagem de erro a ser lancada caso a data esteja errada.
+	 */
 	public static void verificaData(String data, String aviso) {
 		if (isDateValid(data) != true) {
 			throw new IllegalArgumentException(aviso);
 		}
 	}
 
+	/**
+	 * Verifica se o tipo desejado e correto.
+	 * 
+	 * @param tipo, o tipo a ser analisado.
+	 * @param aviso, mensagem de erro a ser lancada caso o tipo esteja errado.
+	 */
 	public static void verificaTipo(String tipo, String aviso) {
 		if (!tipo.equals("EXTERNO") && !tipo.equals("ESTUDANTE") && !tipo.equals("PROFESSOR")) {
 			throw new IllegalArgumentException(aviso);
 		}
 	}
 
+	/**
+	 * Verifica se a data esta no formato desejado.
+	 * 
+	 * @param strDate, a data a ser analizada.
+	 * 
+	 * @return retorna true caso a data esteja correta e false caso ocorra o contrario.
+	 */
 	private static boolean isDateValid(String strDate) {
 	    String dateFormat = "dd/MM/uuuu";
 

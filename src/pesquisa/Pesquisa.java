@@ -16,7 +16,7 @@ import sistema.Verificador;
  * unicamente. Alem disso, tambem pode estar ou nao associada a um Problema ou a
  * um ou mais Objetivos.
  * 
- * @author Beatriz Truta, José Matheus do N. Gama
+ * @author Ana Beatriz da S. Truta, José Matheus do N. Gama
  *
  */
 public class Pesquisa {

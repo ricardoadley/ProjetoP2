@@ -11,7 +11,7 @@ import pesquisa.PesquisaController;
  * Controlador de objetos do tipo "Pesquisador", usado para armazena-los e
  * manipula-los
  * 
- * @author Vinicius M. V. Varjao
+ * @author Vinicius M. V. Varjao, Ana Beatriz da S. Truta
  * 
  */
 public class PesquisadorController {
@@ -203,10 +203,27 @@ public class PesquisadorController {
 		}
 		return retorno;
 	}
-	private Pesquisador capturaPesquisaNoMapa(String email) {
+	
+	/**
+	 * Busca um pesquisador especifico, por meio dos seu email, dentro do mapa de pesquisadores e o retorna.
+	 * 
+	 * @param email, o email do pesquisador que se deseja buscar.
+	 * @return retorna o pesquisador correspondente ao email informado.
+	 */
+	private Pesquisador capturaPesquisadorNoMapa(String email) {
 		return this.mapaEmailPesquisador.get(email);
 	}
 
+	/**
+	 *Cadastra as informacoes adicionais ao cadastro feito inicialmente que correspondem 
+	 *a especialidade professor, ja inforamda ao se fazer o primeiro cadastro 
+	 *por meio do atributo funcao.
+	 *
+	 * @param email, o email do pesquisador que se deseja adicionar a especialidade	
+	 * @param formacao, a formacao do professor.
+	 * @param unidade, a unidade ao qual o professor esta alocado.
+	 * @param data, a data de contratacao do professor.
+	 */
 	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
 		Verificador.verificaEntrada(email, "Campo email nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(formacao, "Campo formacao nao pode ser nulo ou vazio.");
@@ -223,6 +240,15 @@ public class PesquisadorController {
 		}
 	}
 
+	/**
+	 *Cadastra as informacoes adicionais ao cadastro feito inicialmente que correspondem 
+	 *a especialidade aluno, ja inforamda ao se fazer o primeiro cadastro 
+	 *por meio do atributo funcao.
+	 *
+	 * @param email, email do aluno que se deseja cadatrar a especialidade.
+	 * @param semestre, semestre de ingresso do aluno.
+	 * @param IEA, indice de eficiencia academica do aluno.
+	 */
 	public void cadastraEspecialidadeAluno(String email, int semestre, double IEA) {
 		Verificador.verificaEntrada(email, "Campo email nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(String.valueOf(semestre), "Semestre nao pode ser nulo ou vazio.");
@@ -238,6 +264,13 @@ public class PesquisadorController {
 		}
 	}
 
+	/**
+	 * Lista todas as informacoes dos pesquisadores de acordo com o seu tipo, que pode ser: aluno, professor ou externo.
+	 * 
+	 * @param tipo, tipo de pesquisadores que se deseja listar.
+	 * 
+	 * @return retorna uma String com todas as informacoes dos pesquisadores que pertencem ao tipo indicado.
+	 */
 	public String listaPesquisadores(String tipo) {
 		String exibe = "";
 		Verificador.verificaEntrada(tipo, "Campo tipo nao pode ser nulo ou vazio.");
@@ -250,6 +283,14 @@ public class PesquisadorController {
 		return exibe.substring(0, exibe.length()-3);
 	}
 
+	/**
+	 * Associa um determinado pesquisador a uma pesquisa.
+	 * 
+	 * @param idPesquisa, o identificador da pesquisa, a qual, o pesquisador deseja se associar.
+	 * @param emailPesquisador, email de pesquisador que deseja se associar a pesquisa.
+	 * 
+	 * @return retorna true se a associacao foi concluida com sucesso e false caso aconteca o contrario.
+	 */
 	public boolean associaPesquisador(String idPesquisa, String emailPesquisador) {
 		Verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(emailPesquisador, "Campo emailPesquisador nao pode ser nulo ou vazio.");
@@ -257,9 +298,17 @@ public class PesquisadorController {
 		Verificador.existeChave(pesquisaController.getMapaPesquisas(), idPesquisa, "Pesquisa nao encontrada.");
 		Verificador.verificaEhAtiva(pesquisaController.getMapaPesquisas(), idPesquisa, "Pesquisa desativada.");
 		
-		return this.capturaPesquisaNoMapa(emailPesquisador).associaPesquisador(idPesquisa);
+		return this.capturaPesquisadorNoMapa(emailPesquisador).associaPesquisador(idPesquisa);
 	}
 
+	/**
+	 * Desassocia um determinado pesquisador de uma pesquisa.
+	 * 
+	 * @param idPesquisa, o identificador da pesquisa, a qual, o pesquisador deseja se desassociar.
+	 * @param emailPesquisador, email de pesquisador que deseja se desassociar de uma pesquisa.
+	 * 
+	 * @return retorna true se a desassociacao foi concluida com sucesso e false caso aconteca o contrario.
+	 */
 	public boolean desassociaPesquisador(String idPesquisa, String emailPesquisador) {
 		Verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(emailPesquisador, "Campo emailPesquisador nao pode ser nulo ou vazio.");
@@ -267,7 +316,7 @@ public class PesquisadorController {
 		Verificador.existeChave(pesquisaController.getMapaPesquisas(), idPesquisa, "Pesquisa nao encontrada.");
 		Verificador.verificaEhAtiva(pesquisaController.getMapaPesquisas(), idPesquisa, "Pesquisa desativada.");
 		
-		return this.capturaPesquisaNoMapa(emailPesquisador).desassociaPesquisador(idPesquisa);
+		return this.capturaPesquisadorNoMapa(emailPesquisador).desassociaPesquisador(idPesquisa);
 	}
 		
 } 

@@ -8,7 +8,8 @@ import pesquisa.Pesquisa;
 
 /**
  * Representacao de um pesquisador
- * @author Vinicius M. V. Varjao
+ * 
+ * @author Vinicius M. V. Varjao, Ana Beatriz da S. Truta.
  *
  */
 public class Pesquisador {
@@ -34,12 +35,21 @@ public class Pesquisador {
 	 */
 	private String fotoURL;	
 	/**
-	 * O status de atividade do pesquisador, que pode ser "Ativo" ou "Inativo e define a possibilidade de manipulacai
+	 * O status de atividade do pesquisador, que pode ser "Ativo" ou "Inativo e define a possibilidade de manipulacao
 	 * do mesmo"
 	 */
 	private String atividade;
+	/**
+	 * Pesquisa a qual o pesquisador esta associado.
+	 */
 	private Pesquisa pesquisa;
+	/**
+	 * Especialiade que o pesquisador possui.
+	 */
 	private Especialidade especialidade;
+	/**
+	 * 	Lista de pesquisas as quais o pesquisador esta associado.
+	 */
 	private ArrayList<String> pesquisasAssociadas;
 	
 	/**
@@ -137,6 +147,14 @@ public class Pesquisador {
 		return this.nome + " (" + this.funcao + ") - " + this.biografia + " - " + this.email + " - " + this.fotoURL;
 	}
 	
+	/**
+	 * Retorna o toString de um pesquisador caso o mesmo possua a funcao diferente de externo.
+	 * 
+	 * Retorna a representacao em texto do pesquisador no formato "NOME (FUNCAO) - BIOGRAFIA - EMAIL - FOTO - FORMACAO - UNIDADE - DATA" para professores.
+	 * Retorna a representacao em texto do pesquisador no formato "NOME (FUNCAO) - BIOGRAFIA - EMAIL - FOTO - SEMESTRE - IEA" para alunos.
+	 * 
+	 * @return, retorna o toString de um pesquisador de acordo com sua especialidade.
+	 */
 	public String toStringEspecialidade() {
 		return this.nome + " (" + this.funcao + ") - " + this.biografia + " - " + this.email + " - " + this.fotoURL + " - " + getEspecialidade().toString();
 	}
@@ -167,6 +185,13 @@ public class Pesquisador {
 		return true;
 	}
 	
+	/**
+	 * Verifica se uma pesquisa ja esta associada a um pesquisador, caso nao esteja, a adiciona.
+	 * 
+	 * @param idPesquisa, identificador da pesquisa que se deseja associar.
+	 * 
+	 * @return, retorna true se a pesquisa foi associada e false caso ocorra o contrario.
+	 */
 	public boolean associaPesquisador(String idPesquisa) {
 		if (this.pesquisasAssociadas.contains(idPesquisa)) {
 			return false;
@@ -175,6 +200,13 @@ public class Pesquisador {
 		return true;
 	}
 
+	/**
+	 * Verifica se uma pesquisa ja esta associada a um pesquisador, caso esteja, a remove.
+	 * 
+	 * @param idPesquisa, identificador da pesquisa que se deseja verificar.
+	 * 
+	 * @return, retorna true se a pesquisa ainda foi desassociada e false caso ocorra o contrario.
+	 */
 	public boolean desassociaPesquisador(String idPesquisa) {
 		if (!this.pesquisasAssociadas.contains(idPesquisa)) {
 			return false;

@@ -8,7 +8,7 @@ import pesquisa.PesquisaController;
  * Facade do sistema.
  * 
  * @author Jose Matheus do N.Gama , Ricardo A. S. Sena, Vinicius M. V. Varjao,
- *         Beatriz Truta
+ *         Ana Beatriz da S. Truta
  *
  */
 public class Facade {
@@ -101,7 +101,7 @@ public class Facade {
 		return pesquisadorController.pesquisadorEhAtivo(email);
 	}
 
-	// Beatriz (US1)
+	// Ana Beatriz Truta (US1)
 	public String cadastraPesquisa(String descricao, String interesse) {
 		return pesquisaController.cadastraPesquisa(descricao, interesse);
 	}
