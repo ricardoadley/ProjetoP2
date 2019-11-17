@@ -222,17 +222,24 @@ public class PesquisadorController {
 	}
 
 	public String listaPesquisadores(String tipo) {
-		String exibe = "";
+		String exibicao = "";
 		Verificador.verificaEntrada(tipo, "Campo tipo nao pode ser nulo ou vazio.");
 		Verificador.verificaTipo(tipo, "Tipo " + tipo + " inexistente.");
 		for (Pesquisador p : mapaPesquisadores.values()) {
 			if (p.getFuncao().toUpperCase().equals(tipo)) {
-				exibe += p.toString() + " | ";
+				exibicao += p.toString() + " | ";
 			}
 		}
-		return exibe.substring(0, exibe.length() - 3);
+		return exibicao.substring(0, exibicao.length() - 3);
 	}
 
+	/**
+	 * Retorna um Objeto do tipo Pesquisador que esta guardado no mapa de
+	 * pesquisadores
+	 * 
+	 * @param emailPesquisador o identificador unico do Pesquisador
+	 * @return retorna um objeto do tipo Pesquisador
+	 */
 	public Pesquisador getPesquisador(String emailPesquisador) {
 		return this.mapaPesquisadores.get(emailPesquisador);
 

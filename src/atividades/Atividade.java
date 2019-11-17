@@ -21,19 +21,19 @@ public class Atividade implements Comparable<Atividade> {
 	 */
 	private int ordemCadastroItem;
 	/**
-	 * a descricao da atividade criada
+	 * A descricao da atividade criada
 	 */
 	private String descricao;
 	/**
-	 * o nivel de risco da atividade criada
+	 * O nivel de risco da atividade criada
 	 */
 	private String nivelRisco;
 	/**
-	 * a descricao do risco da atividade
+	 * A descricao do risco da atividade
 	 */
 	private String descricaoRisco;
 	/**
-	 * o periodo de duracao da atividade em dias
+	 * O periodo de duracao da atividade em dias
 	 */
 	private int duracao;
 	/**
@@ -44,11 +44,14 @@ public class Atividade implements Comparable<Atividade> {
 	 * 
 	 */
 	private int ultimoResultado;
-
+	
+	/**
+	 * Codigo que identifica unicamente a Atividade
+	 */
 	private String codigo;
 
 	/**
-	 * mapa dos itens pertencentes a atividade
+	 * Mapa dos itens pertencentes a atividade
 	 */
 	private Map<Integer, Item> itens = new HashMap<Integer, Item>();
 	/**
@@ -301,6 +304,12 @@ public class Atividade implements Comparable<Atividade> {
 		return this.descricao + " (" + this.nivelRisco + " - " + this.descricaoRisco + ")" + lista;
 	}
 
+	/**
+	 * Gera um resumo de Atividade. Retorna descricao, nivel do risco, descricao do
+	 * risco e detalhes dos itens associados
+	 * 
+	 * @return retorna os detalhes de Atividade
+	 */
 	public String geraResumo() {
 		String lista = "";
 		List<Item> itens = new ArrayList<>(this.itens.values());
