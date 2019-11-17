@@ -41,7 +41,7 @@ public class Atividade implements Comparable<Atividade> {
 	 */
 	private Map<Integer, String> resultados;
 	/**
-	 * 
+	 * O ultimo resultado da Atividade
 	 */
 	private int ultimoResultado;
 
@@ -140,7 +140,7 @@ public class Atividade implements Comparable<Atividade> {
 	}
 
 	public String getCodigo() {
-		return codigo;
+		return this.codigo;
 	}
 
 	/**
@@ -252,7 +252,7 @@ public class Atividade implements Comparable<Atividade> {
 
 	@Override
 	public int compareTo(Atividade atividade) {
-		return this.codigo.compareTo(atividade.getCodigo());
+		return this.getCodigo().compareTo(atividade.getCodigo());
 	}
 
 	@Override

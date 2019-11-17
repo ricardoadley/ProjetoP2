@@ -524,7 +524,7 @@ public class PesquisaController {
 
 		try {
 
-			File file = new File("./src/" + "_" + codigoPesquisa + ".txt");
+			File file = new File("./" + "_" + codigoPesquisa + ".txt");
 
 			FileWriter escritorDeArquivo = new FileWriter(file.getAbsoluteFile());
 			BufferedWriter buffWrite = new BufferedWriter(escritorDeArquivo);
@@ -549,7 +549,7 @@ public class PesquisaController {
 		
 		try {
 
-			File file = new File("./src/" + "_" + codigoPesquisa + "-Resultados.txt");
+			File file = new File("./" + "_" + codigoPesquisa + "-Resultados.txt");
 
 			FileWriter escritorDeArquivo = new FileWriter(file.getAbsoluteFile());
 			BufferedWriter buffWrite = new BufferedWriter(escritorDeArquivo);
