@@ -230,7 +230,7 @@ public class PesquisaController {
 		String fraseCampo = "";
 		Verificador.verificaEntrada(palavra, "Campo termo nao pode ser nulo ou vazio.");
 		List<Pesquisa> listaPesquisas = new ArrayList<>(this.mapaPesquisas.values());
-		Collections.sort(listaPesquisas, new ComparadorPesquisa());
+		Collections.sort(listaPesquisas, new PesquisaIDComparator());
 		for (Pesquisa pesquisa : listaPesquisas) {
 			fraseDescricao = pesquisa.getCodigo() + ": " + pesquisa.getDescricao();
 			fraseCampo = pesquisa.getCodigo() + ": " + pesquisa.getCampo();
@@ -388,16 +388,16 @@ public class PesquisaController {
 			throw new IllegalArgumentException("Valor invalido da ordem");
 		}
 
-		ArrayList<Pesquisa> valores = new ArrayList<Pesquisa>(this.mapaPesquisas.values());
+		ArrayList<Pesquisa> pesquisas = new ArrayList<Pesquisa>(this.mapaPesquisas.values());
 		String pesquisasOrdenadas = "";
 
 		if (ordem.equalsIgnoreCase("PESQUISA")) {
 
-			Collections.sort(valores, new PesquisaIDComparator());
+			Collections.sort(pesquisas, new PesquisaIDComparator());
 
-			for (int i = 0; i < valores.size(); i++) {
+			for (int i = 0; i < pesquisas.size(); i++) {
 
-				pesquisasOrdenadas += valores.get(i).toString() + " | ";
+				pesquisasOrdenadas += pesquisas.get(i).toString() + " | ";
 
 			}
 
@@ -407,11 +407,11 @@ public class PesquisaController {
 
 		if (ordem.equalsIgnoreCase("PROBLEMA")) {
 
-			Collections.sort(valores, new PesquisaProblemaComparator());
+			Collections.sort(pesquisas, new PesquisaProblemaComparator());
 
-			for (int i = 0; i < valores.size(); i++) {
+			for (int i = 0; i < pesquisas.size(); i++) {
 
-				pesquisasOrdenadas += valores.get(i).toString() + " | ";
+				pesquisasOrdenadas += pesquisas.get(i).toString() + " | ";
 
 			}
 
@@ -421,11 +421,11 @@ public class PesquisaController {
 
 		else {
 
-			Collections.sort(valores, new PesquisaObjetivosComparator());
+			Collections.sort(pesquisas, new PesquisaObjetivosComparator());
 
-			for (int i = 0; i < valores.size(); i++) {
+			for (int i = 0; i < pesquisas.size(); i++) {
 
-				pesquisasOrdenadas += valores.get(i).toString() + " | ";
+				pesquisasOrdenadas += pesquisas.get(i).toString() + " | ";
 
 			}
 
@@ -478,6 +478,13 @@ public class PesquisaController {
 		return this.mapaPesquisas.get(codigoPesquisa).desassociaAtividade(codigoAtividade);
 	}
 
+	/**
+	 * Associa Pesquisadores a Pesquisas
+	 * 
+	 * @param idPesquisa       o identificador unico da Pesquisa
+	 * @param emailPesquisador o identificador unico do Pesquisador
+	 * @return true se associado corretamente, false se nao
+	 */
 	public boolean associaPesquisador(String idPesquisa, String emailPesquisador) {
 		Verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(emailPesquisador, "Campo emailPesquisador nao pode ser nulo ou vazio.");
@@ -489,6 +496,13 @@ public class PesquisaController {
 				this.pesquisadorController.getPesquisador(emailPesquisador));
 	}
 
+	/**
+	 * Desassocia um Pesquisador de uma Pesquisa
+	 * 
+	 * @param idPesquisa       o identificador unico da Pesquisa
+	 * @param emailPesquisador o identificador unico do Pesquisador
+	 * @return true se foi desassociado corretamente, false se nao
+	 */
 	public boolean desassociaPesquisador(String idPesquisa, String emailPesquisador) {
 		Verificador.verificaEntrada(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(emailPesquisador, "Campo emailPesquisador nao pode ser nulo ou vazio.");
@@ -499,19 +513,24 @@ public class PesquisaController {
 		return this.mapaPesquisas.get(idPesquisa).desassociaPesquisador(emailPesquisador);
 	}
 
+	/**
+	 * Grava resumo de uma Pesquisa em um arquivo de texto.
+	 * 
+	 * @param codigoPesquisa o identificador unico da Pesquisa
+	 */
 	public void gravarResumo(String codigoPesquisa) {
 		Verificador.verificaEntrada(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
 		Verificador.existeChave(this.mapaPesquisas, codigoPesquisa, "Pesquisa nao encontrada.");
 
 		try {
-			
+
 			// Cria arquivo
-			File file = new File("./" + "Z" + codigoPesquisa + ".txt");
-			
-			// Se o arquivo nao existe, ele cria
-			if (!file.exists()) {
-				file.createNewFile();
-			}
+			File file = new File("./src/" + "_" + codigoPesquisa + ".txt");
+
+			/*
+			 * // Se o arquivo nao existe, ele cria if (!file.exists()) {
+			 * file.createNewFile(); }
+			 */
 
 			// Prepara para escrever no arquivo
 			FileWriter escritorDeArquivo = new FileWriter(file.getAbsoluteFile());
@@ -519,7 +538,6 @@ public class PesquisaController {
 
 			// Escreve e fecha arquivo
 			buffWrite.write(this.mapaPesquisas.get(codigoPesquisa).getResumo());
-			buffWrite.flush();
 			buffWrite.close();
 
 		} catch (IOException e) {
@@ -528,6 +546,11 @@ public class PesquisaController {
 
 	}
 
+	/**
+	 * Grava resultados de uma Pesquisa em um arquivo de texto
+	 * 
+	 * @param codigoPesquisa o identificador unico da Pesquisa
+	 */
 	public void gravarResultados(String codigoPesquisa) {
 		Verificador.verificaEntrada(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
 		Verificador.existeChave(this.mapaPesquisas, codigoPesquisa, "Pesquisa nao encontrada.");

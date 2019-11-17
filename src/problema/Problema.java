@@ -54,10 +54,18 @@ public class Problema {
 
 	}
 
+	/**
+	 * Retorna a representacao em String do codigo do Problema
+	 * @return a representacao em String do codigo do Problema
+	 */
 	public String getCodigo() {
 		return codigo;
 	}
 
+	/**
+	 * Retorna a representacao em String da descricao do Problema
+	 * @return a representacao em String da descricao do Problema
+	 */
 	public String getDescricao() {
 		return descricao;
 	}

@@ -39,6 +39,9 @@ public class Pesquisa {
 	 */
 	private String codigo;
 
+	/**
+	 * Mapa de Atividades associadas a Pesquisa.
+	 */
 	private Map<String, Atividade> atividadesAssociadas;
 
 	/**
@@ -281,6 +284,13 @@ public class Pesquisa {
 		return true;
 	}
 
+	/**
+	 * Associa um Pesquisador a Pesquisa
+	 * 
+	 * @param emailPesquisador o identificador unico do Pesquisador
+	 * @param pesquisador      o objeto do tipo Pesquisador
+	 * @return false se o Pesquisador ja esta associado, true se nao
+	 */
 	public boolean associaPesquisador(String emailPesquisador, Pesquisador pesquisador) {
 
 		if (this.pesquisadoresAssociados.containsKey(emailPesquisador)) {
@@ -291,6 +301,13 @@ public class Pesquisa {
 		return true;
 	}
 
+	/**
+	 * Desassocia um Pesquisador da Pesquisa
+	 * 
+	 * @param emailPesquisador o identificador unico do Pesquisador
+	 * @return false se o Pesquisador nao estiver associado, true se estiver e o
+	 *         remove
+	 */
 	public boolean desassociaPesquisador(String emailPesquisador) {
 
 		if (!this.pesquisadoresAssociados.containsKey(emailPesquisador)) {
@@ -302,9 +319,15 @@ public class Pesquisa {
 
 	}
 
+	/**
+	 * Gera um resumo da Pesquisa. Retorna os detalhes de tudo o que esta associado
+	 * a Pesquisa.
+	 * 
+	 * @return os detalhes de tudo o que esta associado a Pesquisa.
+	 */
 	public String getResumo() {
 
-		String resumoGeral = "";
+		String resumoGeral = "- Pesquisa: " + this.toString() + System.lineSeparator();
 
 		if (this.pesquisadoresAssociados.size() > 0) {
 
@@ -351,7 +374,7 @@ public class Pesquisa {
 
 		}
 
-		return "- Pesquisa: " + this.toString() + System.lineSeparator() + resumoGeral;
+		return resumoGeral;
 
 	}
 
