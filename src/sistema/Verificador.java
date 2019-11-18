@@ -137,7 +137,7 @@ public class Verificador {
 	public static void verificaInteiroPositivo(int inteiro, String aviso) {
 		if (inteiro < 1) {
 			throw new IllegalArgumentException(aviso);
-		}
+		} 
 	}
 
 	public static void verificaSemestre(String novoValor, String aviso) {
