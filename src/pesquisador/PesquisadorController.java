@@ -52,7 +52,7 @@ public class PesquisadorController {
 		Verificador.verificaEntrada(fotoURL, "Campo fotoURL nao pode ser nulo ou vazio.");
 		Verificador.verificaEmail(email, "Formato de email invalido.");
 		Verificador.verificaFotoURL(fotoURL, "Formato de foto invalido.");
-		this.mapaPesquisadores.put(email, new Pesquisador(nome, funcao, biografia, email, fotoURL, ordemCadastro));
+		this.mapaPesquisadores.put(email, new Pesquisador(nome, funcao, biografia, email, fotoURL));
 		this.ordemCadastro++;
 	}
 
@@ -128,7 +128,7 @@ public class PesquisadorController {
 		if (mapaPesquisadores.get(email).getEspecialidade() == null) {
 			return this.mapaPesquisadores.get(email).toString();
 		}
-		return this.mapaPesquisadores.get(email).toStringEspecialidade();
+		return this.mapaPesquisadores.get(email).toString();
 	}
 
 	/**

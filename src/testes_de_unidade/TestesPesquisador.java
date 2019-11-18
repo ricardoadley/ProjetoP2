@@ -15,12 +15,10 @@ class TestesPesquisador {
 
 	@BeforeEach
 	void inicia() {
-		p1 = new Pesquisador("ricardo", "pesquisar", "a ta bom", "ricardo@pesquisador.com", "https://fotinhaminha.jpg",
-				1);
-		p2 = new Pesquisador("ricardo", "pesquisar", "a ta bom", "ricardo@pesquisador.com", "https://fotinhaminha.jpg",
-				2);
+		p1 = new Pesquisador("ricardo", "pesquisar", "a ta bom", "ricardo@pesquisador.com", "https://fotinhaminha.jpg");
+		p2 = new Pesquisador("ricardo", "pesquisar", "a ta bom", "ricardo@pesquisador.com", "https://fotinhaminha.jpg");
 		p3 = new Pesquisador("nathan", "tomar cafe", "ele eh jovem ele", "nathan@tomacafe.com",
-				"https://fotinhadele.jpg", 3);
+				"https://fotinhadele.jpg");
 	}
 
 	@Test
@@ -32,61 +30,61 @@ class TestesPesquisador {
 	@Test
 	void testConstroiPesquisadorNomeVazio() {
 		assertThrows(IllegalArgumentException.class, () -> new Pesquisador("", "pesquisar", "a ta bom",
-				"ricardo@pesquisador.com", "https://fotinhaminha.jpg", 1));
+				"ricardo@pesquisador.com", "https://fotinhaminha.jpg"));
 	}
 
 	@Test
 	void testConstroiPesquisadorNomeNull() {
 		assertThrows(NullPointerException.class, () -> new Pesquisador(null, "pesquisar", "a ta bom",
-				"ricardo@pesquisador.com", "https://fotinhaminha.jpg", 1));
+				"ricardo@pesquisador.com", "https://fotinhaminha.jpg"));
 	}
 
 	@Test
 	void testConstroiPesquisadorFuncaoVazio() {
 		assertThrows(IllegalArgumentException.class, () -> new Pesquisador("ricardo", "", "a ta bom",
-				"ricardo@pesquisador.com", "https://fotinhaminha.jpg", 1));
+				"ricardo@pesquisador.com", "https://fotinhaminha.jpg"));
 	}
 
 	@Test
 	void testConstroiPesquisadorFuncaoNull() {
 		assertThrows(NullPointerException.class, () -> new Pesquisador(null, "pesquisar", "a ta bom",
-				"ricardo@pesquisador.com", "https://fotinhaminha.jpg", 1));
+				"ricardo@pesquisador.com", "https://fotinhaminha.jpg"));
 	}
 
 	@Test
 	void testConstroiPesquisadorBiografiaVazio() {
 		assertThrows(IllegalArgumentException.class, () -> new Pesquisador("ricardo", "pesquisar", "",
-				"ricardo@pesquisador.com", "https://fotinhaminha.jpg", 1));
+				"ricardo@pesquisador.com", "https://fotinhaminha.jpg"));
 	}
 
 	@Test
 	void testConstroiPesquisadorBiografiaNull() {
 		assertThrows(NullPointerException.class, () -> new Pesquisador("ricardo", "pesquisar", null,
-				"ricardo@pesquisador.com", "https://fotinhaminha.jpg", 1));
+				"ricardo@pesquisador.com", "https://fotinhaminha.jpg"));
 	}
 
 	@Test
 	void testConstroiPesquisadorEmailVazio() {
 		assertThrows(IllegalArgumentException.class,
-				() -> new Pesquisador("ricardo", "pesquisar", "a ta bom", "", "https://fotinhaminha.jpg", 2));
+				() -> new Pesquisador("ricardo", "pesquisar", "a ta bom", "", "https://fotinhaminha.jpg"));
 	}
 
 	@Test
 	void testConstroiPesquisadorEmailNull() {
 		assertThrows(NullPointerException.class,
-				() -> new Pesquisador("ricardo", "pesquisar", "a ta bom", null, "https://fotinhaminha.jpg", 2));
+				() -> new Pesquisador("ricardo", "pesquisar", "a ta bom", null, "https://fotinhaminha.jpg"));
 	}
 
 	@Test
 	void testConstroiPesquisadorURLfotoVazio() {
 		assertThrows(IllegalArgumentException.class,
-				() -> new Pesquisador("ricardo", "pesquisar", "a ta bom", "ricardo@pesquisador.com", "", 2));
+				() -> new Pesquisador("ricardo", "pesquisar", "a ta bom", "ricardo@pesquisador.com", ""));
 	}
 
 	@Test
 	void testConstroiPesquisadorURLfotoNull() {
 		assertThrows(NullPointerException.class,
-				() -> new Pesquisador("ricardo", "pesquisar", "a ta bom", "ricardo@pesquisador.com", null, 3));
+				() -> new Pesquisador("ricardo", "pesquisar", "a ta bom", "ricardo@pesquisador.com", null));
 	}
 
 	@Test

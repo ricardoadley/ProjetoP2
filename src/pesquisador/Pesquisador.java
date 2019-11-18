@@ -1,8 +1,6 @@
 package pesquisador;
 
 import sistema.Verificador;
-import java.util.ArrayList;
-import pesquisa.Pesquisa;
 
 /**
  * Representacao de um pesquisador
@@ -10,7 +8,7 @@ import pesquisa.Pesquisa;
  * @author Vinicius M. V. Varjao
  *
  */
-public class Pesquisador implements Comparable<Pesquisador> {
+public class Pesquisador {
 
 	/**
 	 * O email do pesquisador, o qual vai ser usado para identifica-lo
@@ -44,11 +42,6 @@ public class Pesquisador implements Comparable<Pesquisador> {
 	private Especialidade especialidade;
 
 	/**
-	 * Ordem com que o Pesquisador foi cadastrado.
-	 */
-	private int ordemCadastro;
-
-	/**
 	 * Construtor do objeto Pesquisador, que recebe seus atributos e define a
 	 * atividade como "Ativo" por padrao
 	 * 
@@ -59,7 +52,7 @@ public class Pesquisador implements Comparable<Pesquisador> {
 	 * @param fotoURL       a URL da foto do pesquisador
 	 * @param ordemCadastro a ordem com que o pesquisador foi cadastrado
 	 */
-	public Pesquisador(String nome, String funcao, String biografia, String email, String fotoURL, int ordemCadastro) {
+	public Pesquisador(String nome, String funcao, String biografia, String email, String fotoURL) {
 		Verificador.verificaEntrada(nome, "Campo nome nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(funcao, "Campo funcao nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(biografia, "Campo biografia nao pode ser nulo ou vazio.");
@@ -74,7 +67,6 @@ public class Pesquisador implements Comparable<Pesquisador> {
 		this.fotoURL = fotoURL;
 		this.atividade = "Ativo";
 		this.especialidade = null;
-		this.ordemCadastro = ordemCadastro;
 	}
 
 	public String getFuncao() {
@@ -154,23 +146,18 @@ public class Pesquisador implements Comparable<Pesquisador> {
 	 */
 	@Override
 	public String toString() {
-		return this.nome + " (" + this.funcao + ") - " + this.biografia + " - " + this.email + " - " + this.fotoURL;
-	}
 
-	public String toStringEspecialidade() {
-		return this.nome + " (" + this.funcao + ") - " + this.biografia + " - " + this.email + " - " + this.fotoURL
-				+ " - " + getEspecialidade().toString();
-	}
+		if (this.especialidade == null) {
 
-	public int getOrdemCadastro() {
+			return this.nome + " (" + this.funcao + ") - " + this.biografia + " - " + this.email + " - " + this.fotoURL;
+		}
 
-		return this.ordemCadastro;
+		else {
 
-	}
+			return this.nome + " (" + this.funcao + ") - " + this.biografia + " - " + this.email + " - " + this.fotoURL
+					+ " - " + getEspecialidade().toString();
 
-	@Override
-	public int compareTo(Pesquisador pesquisador) {
-		return ("" + this.ordemCadastro).compareTo("" + pesquisador.getOrdemCadastro());
+		}
 	}
 
 	@Override
