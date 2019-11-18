@@ -1,8 +1,6 @@
 package pesquisador;
 
 import sistema.Verificador;
-import java.util.ArrayList;
-import pesquisa.Pesquisa;
 
 /**
  * Representacao de um pesquisador
@@ -37,17 +35,22 @@ public class Pesquisador {
 	 * define a possibilidade de manipulacai do mesmo"
 	 */
 	private String atividade;
+
+	/**
+	 * Especialidade do Pesquisador
+	 */
 	private Especialidade especialidade;
 
 	/**
 	 * Construtor do objeto Pesquisador, que recebe seus atributos e define a
 	 * atividade como "Ativo" por padrao
 	 * 
-	 * @param nome      o nome do pesquisador
-	 * @param funcao    a funcao do pesquisador
-	 * @param biografia a biografia do pesquisador
-	 * @param email     o email do pesquisador
-	 * @param fotoURL   a URL da foto do pesquisador
+	 * @param nome          o nome do pesquisador
+	 * @param funcao        a funcao do pesquisador
+	 * @param biografia     a biografia do pesquisador
+	 * @param email         o email do pesquisador
+	 * @param fotoURL       a URL da foto do pesquisador
+	 * @param ordemCadastro a ordem com que o pesquisador foi cadastrado
 	 */
 	public Pesquisador(String nome, String funcao, String biografia, String email, String fotoURL) {
 		Verificador.verificaEntrada(nome, "Campo nome nao pode ser nulo ou vazio.");
@@ -106,6 +109,11 @@ public class Pesquisador {
 		this.atividade = atividade;
 	}
 
+	/**
+	 * Verifica se o Pesquisador e ou nao ativo
+	 * 
+	 * @return retorna true caso o Pesquisador seja ativo e false caso contrario
+	 */
 	public boolean ehAtivo() {
 		if (this.atividade.equalsIgnoreCase("Ativo")) {
 			return true;
@@ -114,10 +122,20 @@ public class Pesquisador {
 		}
 	}
 
+	/**
+	 * Retorna o objeto do tipo Especialidade que esta atribuida ao Pesquisador.
+	 * 
+	 * @return o objeto do tipo Especialidade que esta atribuida ao Pesquisador
+	 */
 	public Especialidade getEspecialidade() {
 		return especialidade;
 	}
 
+	/**
+	 * Atribui uma Especialidade ao Pesquisador.
+	 * 
+	 * @param especialidade a nova Especialidade do Pesquisador
+	 */
 	public void setEspecialidade(Especialidade especialidade) {
 		this.especialidade = especialidade;
 	}
@@ -128,12 +146,18 @@ public class Pesquisador {
 	 */
 	@Override
 	public String toString() {
-		return this.nome + " (" + this.funcao + ") - " + this.biografia + " - " + this.email + " - " + this.fotoURL;
-	}
 
-	public String toStringEspecialidade() {
-		return this.nome + " (" + this.funcao + ") - " + this.biografia + " - " + this.email + " - " + this.fotoURL
-				+ " - " + getEspecialidade().toString();
+		if (this.especialidade == null) {
+
+			return this.nome + " (" + this.funcao + ") - " + this.biografia + " - " + this.email + " - " + this.fotoURL;
+		}
+
+		else {
+
+			return this.nome + " (" + this.funcao + ") - " + this.biografia + " - " + this.email + " - " + this.fotoURL
+					+ " - " + getEspecialidade().toString();
+
+		}
 	}
 
 	@Override
@@ -160,6 +184,5 @@ public class Pesquisador {
 			return false;
 		return true;
 	}
-
 
 }

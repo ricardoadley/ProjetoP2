@@ -56,6 +56,7 @@ public class Problema {
 
 	/**
 	 * Retorna a representacao em String do codigo do Problema
+	 * 
 	 * @return a representacao em String do codigo do Problema
 	 */
 	public String getCodigo() {
@@ -64,12 +65,13 @@ public class Problema {
 
 	/**
 	 * Retorna a representacao em String da descricao do Problema
+	 * 
 	 * @return a representacao em String da descricao do Problema
 	 */
 	public String getDescricao() {
 		return descricao;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

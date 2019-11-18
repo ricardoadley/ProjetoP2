@@ -41,10 +41,10 @@ public class Atividade implements Comparable<Atividade> {
 	 */
 	private Map<Integer, String> resultados;
 	/**
-	 * 
+	 * O ultimo resultado da Atividade
 	 */
 	private int ultimoResultado;
-	
+
 	/**
 	 * Codigo que identifica unicamente a Atividade
 	 */
@@ -131,24 +131,8 @@ public class Atividade implements Comparable<Atividade> {
 		return descricao;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public String getNivelRisco() {
-		return nivelRisco;
-	}
-
-	public void setNivelRisco(String nivelRisco) {
-		this.nivelRisco = nivelRisco;
-	}
-
 	public String getDescricaoRisco() {
 		return descricaoRisco;
-	}
-
-	public void setDescricaoRisco(String descricaoRisco) {
-		this.descricaoRisco = descricaoRisco;
 	}
 
 	public int getduracao() {
@@ -156,11 +140,7 @@ public class Atividade implements Comparable<Atividade> {
 	}
 
 	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setduracao(int duracao) {
-		this.duracao = duracao;
+		return this.codigo;
 	}
 
 	/**
@@ -183,31 +163,6 @@ public class Atividade implements Comparable<Atividade> {
 		return resultado;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Atividade other = (Atividade) obj;
-		if (codigo == null) {
-			if (other.codigo != null)
-				return false;
-		} else if (!codigo.equals(other.codigo))
-			return false;
-		return true;
-	}
-
 	/**
 	 * Executa a atividade, realizando um dos itens e incremetando a duracao
 	 * 
@@ -222,6 +177,7 @@ public class Atividade implements Comparable<Atividade> {
 		if (itens.get(item).getRealizado()) {
 			throw new IllegalArgumentException("Item ja executado.");
 		}
+		this.itens.get(item).setDuracao(duracao);
 		this.itens.get(item).setRealizado(true);
 		this.duracao += duracao;
 	}
@@ -281,9 +237,22 @@ public class Atividade implements Comparable<Atividade> {
 		this.pesquisasAssociadas.remove(codigoPesquisa);
 	}
 
+	/**
+	 * Verifica se contem alguma pesquisa associada a Atividade.
+	 * 
+	 * @return true se conter pesquisa associada, false caso contrario
+	 */
+	public boolean contemPesquisasAssociadas() {
+		if (this.pesquisasAssociadas.size() > 0) {
+			return true;
+		}
+
+		return false;
+	}
+
 	@Override
 	public int compareTo(Atividade atividade) {
-		return this.codigo.compareTo(atividade.getCodigo());
+		return this.getCodigo().compareTo(atividade.getCodigo());
 	}
 
 	@Override
@@ -311,20 +280,76 @@ public class Atividade implements Comparable<Atividade> {
 	 * @return retorna os detalhes de Atividade
 	 */
 	public String geraResumo() {
-		String lista = "";
+		String resumo = "";
 		List<Item> itens = new ArrayList<>(this.itens.values());
 		Collections.sort(itens);
 		for (int i = 0; i < itens.size(); i++) {
 			if (itens.get(i).isRealizado() == false) {
-				lista += "            - PENDENTE - ITEM" + itens.get(i).toString() + System.lineSeparator();
+				resumo += "            - PENDENTE - " + itens.get(i).toString() + System.lineSeparator();
 			} else {
-				lista += "            - REALIZADO - ITEM" + itens.get(i).toString() + System.lineSeparator();
+				resumo += "            - REALIZADO - " + itens.get(i).toString() + System.lineSeparator();
 			}
 
 		}
 		return this.descricao + " (" + this.nivelRisco + " - " + this.descricaoRisco + ")" + System.lineSeparator()
-				+ lista;
+				+ resumo;
 
+	}
+
+	/**
+	 * Retorna os resultados da Atividade: itens e suas durações, além das
+	 * descrições de Atividade.
+	 * 
+	 * @return os resultados da Atividade
+	 */
+	public String geraResultados() {
+
+		String resultados = "        - " + this.descricao + System.lineSeparator();
+		List<Item> itens = new ArrayList<>(this.itens.values());
+		Collections.sort(itens);
+
+		for (int i = 0; i < itens.size(); i++) {
+
+			if (itens.get(i).isRealizado()) {
+
+				resultados += "            - " + itens.get(i).toString() + " - " + itens.get(i).getDuracao()
+						+ System.lineSeparator();
+			}
+		}
+
+		for (Integer intResultado : this.resultados.keySet()) {
+
+			resultados += "            - " + this.resultados.get(intResultado) + System.lineSeparator();
+
+		}
+
+		return resultados;
+
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Atividade other = (Atividade) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		return true;
 	}
 
 }

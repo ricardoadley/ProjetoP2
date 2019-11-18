@@ -39,16 +39,13 @@ public class ProblemaController {
 	/**
 	 * Adiciona um objeto do tipo Problema no mapa de problemas.
 	 * 
-	 * @param descricao
-	 *            descricao do problema
-	 * @param viabilidade
-	 *            representacao quantitativa do quanto o problema e viavel
+	 * @param descricao   descricao do problema
+	 * @param viabilidade representacao quantitativa do quanto o problema e viavel
 	 */
 	public String cadastraProblema(String descricao, String viabilidade) {
 
 		Verificador.verificaEntrada(descricao, "Campo descricao nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(viabilidade, "Campo viabilidade nao pode ser nulo ou vazio.");
-		Verificador.verificaFormatoNumerico(viabilidade, "Valor invalido de viabilidade.");
 
 		int viabilidadeInt = Integer.parseInt(viabilidade);
 		if (viabilidadeInt < 1 || viabilidadeInt > 5) {
@@ -64,8 +61,7 @@ public class ProblemaController {
 	/**
 	 * Remove um Problema do mapa de problemas.
 	 * 
-	 * @param codigo
-	 *            o codigo pelo qual o Problema e identificado unicamente
+	 * @param codigo o codigo pelo qual o Problema e identificado unicamente
 	 */
 	public void apagarProblema(String codigo) {
 
@@ -83,8 +79,7 @@ public class ProblemaController {
 	 * Retorna a representacao em String de um Problema, no formato "codigo -
 	 * descricao - viabilidade".
 	 * 
-	 * @param codigo
-	 *            o codigo pelo qual o Problema e identificado unicamente
+	 * @param codigo o codigo pelo qual o Problema e identificado unicamente
 	 * @return a representacao em String de um problema
 	 */
 	public String exibeProblema(String codigo) {
@@ -101,8 +96,7 @@ public class ProblemaController {
 	/**
 	 * Retorna o Problema que possui o identificador unico passado como parametro
 	 * 
-	 * @param idProblema
-	 *            o identificador unico do Problema o qual se deseja retornar
+	 * @param idProblema o identificador unico do Problema o qual se deseja retornar
 	 * @return o Problema que possui o identificador unico passado como parametro
 	 */
 	public Problema getProblema(String idProblema) {
@@ -112,8 +106,7 @@ public class ProblemaController {
 	/**
 	 * Procura, nos dados da entidade Problema, por um termo informado pelo usuario
 	 * 
-	 * @param palavra,
-	 *            o termo que o usuario deseja pesquisar
+	 * @param palavra, o termo que o usuario deseja pesquisar
 	 * @return retorna uma string com todos os resultados encontrados
 	 */
 	public List<String> procuraPalavra(String palavra) {

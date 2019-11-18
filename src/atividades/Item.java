@@ -13,11 +13,14 @@ public class Item implements Comparable<Item> {
 	 */
 	private int ordemCadastro;
 	/**
-	 * a descricao do item cadastrado na atividade
+	 * A descricao do item cadastrado na atividade
 	 */
 	private String descricao;
+
+	private int duracao;
+
 	/**
-	 * o status do item na atividade sendo false para pendente e true para
+	 * O status do item na atividade sendo false para pendente e true para
 	 * realizado.
 	 */
 	private boolean realizado;
@@ -32,11 +35,9 @@ public class Item implements Comparable<Item> {
 	public Item(String descricao, int ordemCadastro) {
 		Verificador.verificaEntrada(descricao, "O campo descricao nao pode ser vazio ou nulo");
 		realizado = false;
+		this.ordemCadastro = ordemCadastro;
 		this.descricao = descricao;
-	}
-
-	public int getOrdemCadastro() {
-		return this.ordemCadastro;
+		this.duracao = 0;
 	}
 
 	public String getDescricao() {
@@ -44,11 +45,40 @@ public class Item implements Comparable<Item> {
 	}
 
 	public String toString() {
-		
+
 		return "ITEM" + this.ordemCadastro;
-		
+
 	}
-	
+
+	public boolean isRealizado() {
+		return realizado;
+	}
+
+	public void setRealizado(boolean realizado) {
+		this.realizado = realizado;
+	}
+
+	public boolean getRealizado() {
+		return this.realizado;
+	}
+
+	@Override
+	public int compareTo(Item item) {
+
+		return this.toString().compareTo(item.toString());
+
+	}
+
+	public void setDuracao(int duracao) {
+		this.duracao = duracao;
+	}
+
+	public int getDuracao() {
+
+		return this.duracao;
+
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -71,22 +101,4 @@ public class Item implements Comparable<Item> {
 		return true;
 	}
 
-	public boolean isRealizado() {
-		return realizado;
-	}
-
-	public void setRealizado(boolean realizado) {
-		this.realizado = realizado;
-	}
-
-	public boolean getRealizado() {
-		return this.realizado;
-	}
-
-	@Override
-	public int compareTo(Item item) {
-
-		return this.toString().compareTo(item.toString());
-
-	}
 }

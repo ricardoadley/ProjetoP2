@@ -51,8 +51,6 @@ public class ObjetivoController {
 		Verificador.verificaEntrada(descricao, "Campo descricao nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(aderencia, "Campo aderencia nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(viabilidade, "Campo viabilidade nao pode ser nulo ou vazio.");
-		Verificador.verificaFormatoNumerico(viabilidade, "Valor invalido de viabilidade.");
-		Verificador.verificaFormatoNumerico(aderencia, "Valor invalido de aderencia");
 
 		if (!(tipo.equals("GERAL") || tipo.equals("ESPECIFICO"))) {
 			throw new IllegalArgumentException("Valor invalido de tipo.");

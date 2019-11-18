@@ -10,7 +10,7 @@ import sistema.Verificador;
  * @author José Matheus do N. Gama
  *
  */
-public class Objetivo implements Comparable<Objetivo> {
+public class Objetivo {
 
 	/**
 	 * Tipo do objetivo. Pode ser geral, um objetivo mais abrangente e que responde
@@ -115,13 +115,6 @@ public class Objetivo implements Comparable<Objetivo> {
 		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
-	}
-
-	@Override
-	public int compareTo(Objetivo objetivo) {
-
-		return this.codigo.compareTo(objetivo.getCodigo());
-
 	}
 
 }

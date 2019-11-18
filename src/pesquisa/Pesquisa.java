@@ -3,6 +3,7 @@ package pesquisa;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -73,9 +74,9 @@ public class Pesquisa {
 		this.campo = campo;
 		this.codigo = codigo;
 		this.status = "Ativa";
-		this.objetivosAssociados = new HashMap<>();
-		this.atividadesAssociadas = new HashMap<>();
-		this.pesquisadoresAssociados = new HashMap<>();
+		this.objetivosAssociados = new LinkedHashMap<>();
+		this.atividadesAssociadas = new LinkedHashMap<>();
+		this.pesquisadoresAssociados = new LinkedHashMap<>();
 	}
 
 	/**
@@ -333,11 +334,11 @@ public class Pesquisa {
 
 			resumoGeral += "    - Pesquisadores:" + System.lineSeparator();
 
-			ArrayList<Pesquisador> pesquisadoresOrdenados = new ArrayList<Pesquisador>(
-					this.pesquisadoresAssociados.values());
+			for (String pesquisador : this.pesquisadoresAssociados.keySet()) {
 
-			for (int i = 0; i < pesquisadoresOrdenados.size(); i++) {
-				resumoGeral += "        - " + pesquisadoresOrdenados.get(i).toString() + System.lineSeparator();
+				resumoGeral += "        - " + pesquisadoresAssociados.get(pesquisador).toString()
+						+ System.lineSeparator();
+
 			}
 		}
 
@@ -350,13 +351,10 @@ public class Pesquisa {
 
 		if (this.objetivosAssociados.size() > 0) {
 
-			resumoGeral += "    - Objetivo:" + System.lineSeparator();
+			resumoGeral += "    - Objetivos:" + System.lineSeparator();
 
-			ArrayList<Objetivo> objetivosOrdenados = new ArrayList<Objetivo>(this.objetivosAssociados.values());
-			Collections.sort(objetivosOrdenados);
-
-			for (int i = 0; i < objetivosOrdenados.size(); i++) {
-				resumoGeral += "        - " + objetivosOrdenados.get(i).toString() + System.lineSeparator();
+			for (String objetivo : this.objetivosAssociados.keySet()) {
+				resumoGeral += "        - " + objetivosAssociados.get(objetivo).toString() + System.lineSeparator();
 			}
 
 		}
@@ -365,16 +363,31 @@ public class Pesquisa {
 
 			resumoGeral += "    - Atividades:" + System.lineSeparator();
 
-			ArrayList<Atividade> atividadesOrdenadas = new ArrayList<Atividade>(this.atividadesAssociadas.values());
-			Collections.sort(atividadesOrdenadas);
-
-			for (int i = 0; i < atividadesOrdenadas.size(); i++) {
-				resumoGeral += "        - " + atividadesOrdenadas.get(i).geraResumo();
+			for (String atividade : this.atividadesAssociadas.keySet()) {
+				resumoGeral += "        - " + atividadesAssociadas.get(atividade).geraResumo();
 			}
 
 		}
 
 		return resumoGeral;
+
+	}
+
+	public String getResultados() {
+
+		String resultados = "- Pesquisa: " + this.toString() + System.lineSeparator();
+
+		if (this.atividadesAssociadas.size() > 0) {
+
+			resultados += "    - Resultados:" + System.lineSeparator();
+
+			for (String atividade : this.atividadesAssociadas.keySet()) {
+				resultados += atividadesAssociadas.get(atividade).geraResultados();
+			}
+
+		}
+
+		return resultados;
 
 	}
 

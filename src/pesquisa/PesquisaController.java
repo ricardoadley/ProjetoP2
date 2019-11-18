@@ -529,20 +529,12 @@ public class PesquisaController {
 
 		try {
 
-			// Cria arquivo
-			File file = new File("./src/" + "_" + codigoPesquisa + ".txt");
+			File file = new File("./" + codigoPesquisa + ".txt");
 
-			/*
-			 * // Se o arquivo nao existe, ele cria if (!file.exists()) {
-			 * file.createNewFile(); }
-			 */
-
-			// Prepara para escrever no arquivo
 			FileWriter escritorDeArquivo = new FileWriter(file.getAbsoluteFile());
 			BufferedWriter buffWrite = new BufferedWriter(escritorDeArquivo);
 
-			// Escreve e fecha arquivo
-			buffWrite.write(this.mapaPesquisas.get(codigoPesquisa).getResumo());
+			buffWrite.write("\"" + this.mapaPesquisas.get(codigoPesquisa).getResumo().trim() + "\"");
 			buffWrite.close();
 
 		} catch (IOException e) {
@@ -560,5 +552,18 @@ public class PesquisaController {
 		Verificador.verificaEntrada(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
 		Verificador.existeChave(this.mapaPesquisas, codigoPesquisa, "Pesquisa nao encontrada.");
 
+		try {
+
+			File file = new File("./" + codigoPesquisa + "-Resultados.txt");
+
+			FileWriter escritorDeArquivo = new FileWriter(file.getAbsoluteFile());
+			BufferedWriter buffWrite = new BufferedWriter(escritorDeArquivo);
+
+			buffWrite.write("\"" + this.mapaPesquisas.get(codigoPesquisa).getResultados().trim() + "\"");
+			buffWrite.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
