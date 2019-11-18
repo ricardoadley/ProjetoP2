@@ -191,6 +191,7 @@ public class ControladorAtividade {
 	public int cadastraResultado(String codigoAtividade, String resultado) {
 		Verificador.verificaEntrada(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(resultado, "Resultado nao pode ser nulo ou vazio.");
+		Verificador.existeChave(atividades, codigoAtividade, "Atividade nao encontrada");
 		return this.capturaAtividadeNoMapa(codigoAtividade).cadastraResultado(resultado);
 	}
 
@@ -240,9 +241,9 @@ public class ControladorAtividade {
 	 * @param codigoAtividade codigo atividade a ser recebido pela pesquisa
 	 */
 	public void associaPesquisa(String codigoPesquisa, String codigoAtividade) {
-		Verificador.verificaEntrada(codigoPesquisa, "Campo codigoPesquisa nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
-
+		Verificador.verificaEntrada(codigoPesquisa, "Campo codigoPesquisa nao pode ser nulo ou vazio.");
+		Verificador.existeChave(atividades, codigoAtividade, "Atividade nao encontrada");
 		this.capturaAtividadeNoMapa(codigoAtividade).associaPesquisa(codigoPesquisa);
 	}
 
@@ -253,8 +254,9 @@ public class ControladorAtividade {
 	 * @param codigoAtividade codigo da atividade a ser removido
 	 */
 	public void desassociaPesquisa(String codigoPesquisa, String codigoAtividade) {
-		Verificador.verificaEntrada(codigoPesquisa, "Campo codigoPesquisa nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(codigoPesquisa, "Campo codigoPesquisa nao pode ser nulo ou vazio.");
+		Verificador.existeChave(atividades, codigoAtividade, "Atividade nao encontrada");
 		this.capturaAtividadeNoMapa(codigoAtividade).desassociaPesquisa(codigoPesquisa);
 	}
 }
