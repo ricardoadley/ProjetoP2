@@ -4,32 +4,30 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.List;
+import java.util.Map;
+
 
 
 public class SalvaSistema {
+	static ObjectOutputStream objOutput;
+	private static File arq;
+	
+	public SalvaSistema(String caminho) throws IOException {
+		this.arq = new File(caminho);
+		arq.createNewFile();
+	}
 
-    public static void gravarDado(List lista, String arquivo) {
-        File arq = new File(arquivo);
-        try {
-          //arq.delete();
-          arq.createNewFile();
-      
-          ObjectOutputStream objOutput = new ObjectOutputStream(new FileOutputStream(arq));
-          objOutput.writeObject(lista);
-          objOutput.close();
-      
-        } catch(IOException erro) {
-            System.out.printf("Erro: %s", erro.getMessage());
-        }
-	
-	
-//	public void salvarTudo() {
-//		this.atividadeController.salvar();
-//		this.objetivoController.salvar();
-//		this.problemaController.salvar();
-//		this.pesquisadorController.salvar();
-//		this.pesquisaController.salvar();
-//	}
-}
+	public static void gravarDado(Map mapa) {
+		 objOutput = null;
+		try {
+			objOutput = new ObjectOutputStream(new FileOutputStream(arq,true));
+			objOutput.writeObject(mapa);
+			objOutput.close();
+			// arq.delete();
+
+		} catch (IOException erro) {
+			System.out.printf("Erro: %s", erro.getMessage());
+		}
+	}
+
 }

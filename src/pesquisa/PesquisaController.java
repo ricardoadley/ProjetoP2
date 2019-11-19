@@ -13,6 +13,7 @@ import atividades.ControladorAtividade;
 import objetivo.ObjetivoController;
 import pesquisador.PesquisadorController;
 import problema.ProblemaController;
+import sistema.SalvaSistema;
 import sistema.Verificador;
 
 /**
@@ -566,5 +567,8 @@ public class PesquisaController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	public void salvar() {
+		SalvaSistema.gravarDado(this.mapaPesquisas);
 	}
 }
