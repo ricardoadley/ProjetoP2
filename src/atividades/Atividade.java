@@ -60,8 +60,6 @@ public class Atividade implements Comparable<Atividade> {
 	 * Lista com o nome das pesquisas associadas a atividade
 	 */
 	private List<String> pesquisasAssociadas;
-	
-	private Atividade ativ;	
 	private Atividade prox;
 	private Elem<String> elementos;
 
@@ -88,8 +86,7 @@ public class Atividade implements Comparable<Atividade> {
 		this.resultados = new HashMap<>();
 		this.ultimoResultado = 0;
 		this.pesquisasAssociadas = new ArrayList<String>();
-		this.ativ = ativ;
-		this.prox = prox;
+		this.prox = null;
 	}
 
 	/**
@@ -361,6 +358,58 @@ public class Atividade implements Comparable<Atividade> {
 		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
+	}
+
+	public void defineProximaAtividade(Atividade atividade) {
+		if(this.prox != null) {
+			throw new IllegalArgumentException("Atividade ja possui uma subsequente.");
+		}
+		if(ehLoop(atividade, this.codigo)) {
+			throw new IllegalArgumentException("Criacao de loops negada.");
+		}
+		this.prox = atividade;
+	}
+
+	public int contaProximo() {
+		if(this.prox == null) {
+			return 0;
+		}
+		return 1 + this.prox.contaProximo();
+	}
+	
+	public boolean ehLoop(Atividade atividade, String id) {
+		if(atividade.prox == null) {
+			return false;
+		}
+		if(atividade.prox.getCodigo().equals(id)) {
+			return true;
+		}
+		return ehLoop(atividade.prox, id);
+	}
+
+	public void tiraProximaAtividade() {
+		this.prox = null;
+	}
+
+	public String pegaProximo(int enesimaAtividade) {
+		if(enesimaAtividade == 0) {
+			return codigo;
+		}
+		if(this.prox == null) {
+			throw new IllegalArgumentException("Atividade inexistente.");
+		}
+		return this.prox.pegaProximo(enesimaAtividade -1);
+	}
+
+	public String pegaMaiorRiscoAtividades() {
+		if(this.prox == null) {
+			throw new IllegalArgumentException("Nao existe proxima atividade.");
+		}
+		String maior = this.prox.nivelRisco;
+		if(maior.equals("ALTO")) {
+			return this.prox.nivelRisco;
+		}
+		return "";
 	}
 
 }

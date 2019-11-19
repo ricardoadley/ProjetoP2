@@ -240,12 +240,12 @@ public class Facade {
 		return this.atividadeController.contaProximos(idPrecedente);
 	}
 	
-	public String pegaProximo(String idAtividade, String enesimaAtividade) {
+	public String pegaProximo(String idAtividade, int enesimaAtividade) {
 		return this.atividadeController.pegaProximo(idAtividade, enesimaAtividade);
 	}
 	
 	public String pegaMaiorRiscoAtividades(String idAtividade) {
-		return this.busca(atividadeController.pegaMaiorRiscoAtividades(idAtividade));
+		return this.atividadeController.pegaMaiorRiscoAtividades(idAtividade);
 	}
 	
 }

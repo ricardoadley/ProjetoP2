@@ -58,7 +58,6 @@ public class ControladorAtividade {
 		this.atividades.put("A" + codigo, atividade);
 		String retorno = "A" + codigo;
 		this.codigo++;
-		lista.add(atividade);
 		return retorno;
 	}
 
@@ -268,54 +267,34 @@ public class ControladorAtividade {
 		Verificador.verificaEntrada(idSubsquente, "Atividade nao pode ser nulo ou vazio.");
 		Verificador.existeChave(atividades, idPrecedente, "Atividade nao encontrada.");
 		Verificador.existeChave(atividades, idSubsquente, "Atividade nao encontrada.");
-		
-		if (lista.peekFirst() == null) {
-			
+		atividades.get(idPrecedente).defineProximaAtividade(atividades.get(idSubsquente));
 		}
-		if (lista.contains(idPrecedente)) {
-			int pos = lista.indexOf(idPrecedente);
-			if (lista.get(pos+1) != null) {
-				throw new IllegalArgumentException ("Atividade ja possui uma subsequente.");
-			}else {
-				//this.lista.add(pos+1, idSubsquente);
-			}
-		}
-	}
+	
 	
 	public void tiraProximaAtividade(String idPrecedente) {
 		Verificador.verificaEntrada(idPrecedente, "Atividade nao pode ser nulo ou vazio.");
 		Verificador.existeChave(atividades, idPrecedente, "Atividade nao encontrada.");
-		
-		if (lista.contains(idPrecedente)) {
-			int pos = lista.indexOf(idPrecedente);
-			if (lista.get(pos+1) != null) {
-				lista.remove(pos+1);
-			}
-		}
+		atividades.get(idPrecedente).tiraProximaAtividade();
 	}
 	
 	public int contaProximos(String idPrecedente) {
 		Verificador.verificaEntrada(idPrecedente, "Atividade nao pode ser nulo ou vazio.");
 		Verificador.existeChave(atividades, idPrecedente, "Atividade nao encontrada.");
-		
-		int pos = lista.indexOf(idPrecedente);
-		int contador = lista.lastIndexOf(pos);
-		return contador;
+		return atividades.get(idPrecedente).contaProximo();
 	}
 	
-	public String pegaProximo(String idAtividade, String enesimaAtividade) {
+	public String pegaProximo(String idAtividade, int enesimaAtividade) {
 		Verificador.verificaEntrada(idAtividade, "Atividade nao pode ser nulo ou vazio.");
 		Verificador.existeChave(atividades, idAtividade, "Atividade nao encontrada.");
-		Verificador.verificaInteiroPositivo(Integer.parseInt(enesimaAtividade), "EnesimaAtividade nao pode ser negativa ou zero.");
-		
-		return "";
+		Verificador.verificaInteiroPositivo(enesimaAtividade, "EnesimaAtividade nao pode ser negativa ou zero.");
+		return atividades.get(idAtividade).pegaProximo(enesimaAtividade);
 	}
 	
 	public String pegaMaiorRiscoAtividades(String idAtividade) {
 		Verificador.verificaEntrada(idAtividade, "Atividade nao pode ser nulo ou vazio.");
-		Verificador.existeChave(atividades, idAtividade, "Atividade nao encontrada");
-		
-		return "";
+		Verificador.existeChave(atividades, idAtividade, "Atividade nao encontrada.");
+		System.out.println("ola");
+		return atividades.get(idAtividade).pegaMaiorRiscoAtividades();
 	}
 	
 }
