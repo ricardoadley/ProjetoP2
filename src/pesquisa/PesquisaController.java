@@ -536,6 +536,7 @@ public class PesquisaController {
 
 			buffWrite.write(this.mapaPesquisas.get(codigoPesquisa).getResumo().trim());
 			buffWrite.close();
+			
 
 		} catch (IOException e) {
 			e.printStackTrace();

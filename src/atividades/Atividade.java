@@ -1,5 +1,6 @@
 package atividades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -14,8 +15,12 @@ import sistema.Verificador;
  * @author Ricardo A. S. Sena
  *
  */
+public class Atividade implements Comparable<Atividade>, Serializable {
 
-public class Atividade implements Comparable<Atividade> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5554254115400970053L;
 	/**
 	 * A ordem de cadastro dos itens da atividade
 	 */

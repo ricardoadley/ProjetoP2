@@ -1,10 +1,8 @@
 package pesquisa;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+
+import java.io.Serializable;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import atividades.Atividade;
@@ -22,7 +20,11 @@ import sistema.Verificador;
  * @author Beatriz Truta, José Matheus do N. Gama
  *
  */
-public class Pesquisa {
+public class Pesquisa implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1141748543722595937L;
 	/**
 	 * a descricao da pesquisa
 	 */

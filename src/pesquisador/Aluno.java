@@ -1,7 +1,13 @@
 package pesquisador;
 
-public class Aluno implements Especialidade{
+import java.io.Serializable;
 
+public class Aluno implements Especialidade, Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 211413174667739514L;
 	private int semestre;
 	private double iea;
 

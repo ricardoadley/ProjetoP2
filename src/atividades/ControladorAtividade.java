@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import sistema.SalvaSistema;
 import sistema.Verificador;
 
 /**
@@ -39,8 +41,8 @@ public class ControladorAtividade {
 	/**
 	 * Cadastra um objeto do tipo Atividade no mapa de atividades
 	 * 
-	 * @param descricao,      a descricao da atividade que sera cadastrada
-	 * @param nivelRisco,     o nivel de risco da atividade que sera cadastrada
+	 * @param descricao, a descricao da atividade que sera cadastrada
+	 * @param nivelRisco, o nivel de risco da atividade que sera cadastrada
 	 * @param descricaoRisco, a descricao do risco da atividade
 	 * @return retorna o codigo da atividade cadastrada
 	 */
@@ -77,7 +79,7 @@ public class ControladorAtividade {
 	 * Cadastra um novo item a uma atividade presente no mapa de atividades
 	 * 
 	 * @param codigo, o codigo da atividade que recebera o item
-	 * @param item,   o item que sera cadastrado na atividade
+	 * @param item, o item que sera cadastrado na atividade
 	 */
 	public void cadastraItem(String codigo, String item) {
 		Verificador.verificaEntrada(codigo, "Campo codigo nao pode ser nulo ou vazio.");
@@ -258,5 +260,10 @@ public class ControladorAtividade {
 		Verificador.verificaEntrada(codigoPesquisa, "Campo codigoPesquisa nao pode ser nulo ou vazio.");
 		Verificador.existeChave(atividades, codigoAtividade, "Atividade nao encontrada");
 		this.capturaAtividadeNoMapa(codigoAtividade).desassociaPesquisa(codigoPesquisa);
+	}
+
+	public void salvar() {
+		List<Atividade> listaAtividades = new ArrayList<>(this.atividades.values());
+				SalvaSistema.gravarDado(listaAtividades, "./salvakkk.txt");
 	}
 }
