@@ -1,33 +1,48 @@
 package sistema;
 
-import java.io.File;
+
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.Map;
 
-
-
 public class SalvaSistema {
-	static ObjectOutputStream objOutput;
-	private static File arq;
-	
-	public SalvaSistema(String caminho) throws IOException {
-		this.arq = new File(caminho);
-		arq.createNewFile();
+
+	public SalvaSistema() {
+
 	}
 
-	public static void gravarDado(Map mapa) {
-		 objOutput = null;
+	public static void gravarDadosAtividade(Map mapa, String local) {
 		try {
-			objOutput = new ObjectOutputStream(new FileOutputStream(arq,true));
-			objOutput.writeObject(mapa);
-			objOutput.close();
+			FileOutputStream arquivo = new FileOutputStream(".\\saves\\"+ local);
+			ObjectOutputStream stream = new ObjectOutputStream(arquivo);
+			stream.writeObject(mapa);
+			stream.close();
 			// arq.delete();
+			arquivo.close();
 
-		} catch (IOException erro) {
-			System.out.printf("Erro: %s", erro.getMessage());
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 	}
+	// public static void retornaDado() {
+	// try {
+	// FileInputStream restFile = new FileInputStream(arq);
+	// ObjectInputStream stream = new ObjectInputStream(restFile);
+	// // recupera o objeto
+	// mapaPesquisa = stream.readObject();
+	//// mapaPesquisador = stream.readObject();
+	//// mapaProblema = stream.readObject();
+	//// mapaAtividade = stream.readObject();
+	//// mapaObjetivo = stream.readObject();
+	//
+	// stream.close();
+	// restFile.close();
+	// } catch (Exception e) {
+	//
+	// e.printStackTrace();
+	//
+	// }
+	//
+	// }
 
 }

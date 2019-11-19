@@ -568,7 +568,10 @@ public class PesquisaController {
 			e.printStackTrace();
 		}
 	}
-	public void salvar() {
-		SalvaSistema.gravarDado(this.mapaPesquisas);
-	}
+//	public void salvar() {
+//		SalvaSistema.gravarDado(this.mapaPesquisas);
+//	}
+//	public void retorna() {
+//		this.mapaPesquisas = SalvaSistema.retornaDadosPesquisa();
+//	}
 }
