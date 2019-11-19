@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Iterator;
 import java.util.LinkedList;
 import sistema.Verificador;
-import atividades.OrdenaAtividade;
 
 /**
  * Representacao de uma atividade, especificamente de uma pesquisa cadastrada
@@ -62,17 +61,20 @@ public class Atividade implements Comparable<Atividade> {
 	 */
 	private List<String> pesquisasAssociadas;
 	
-	LinkedList<String> lista = new LinkedList<String>();
+	private Atividade ativ;	
+	private Atividade prox;
+	private Elem<String> elementos;
 
 	/**
 	 * Constroi uma nova atividade a partir dos parametros informados pelo usuario
+	 * @param prox 
 	 * 
 	 * @param descricao,      a descricao da atividade
 	 * @param nivelRisco,     o nivel de risco da atividade
 	 * @param descricaoRisco, a descricao do risco da atividade
 	 * @param days,           a duracao em dias da atividade
 	 */
-	public Atividade(String descricao, String nivelRisco, String descricaoRisco, int duracao, String codigo) {
+	public Atividade(String descricao, String nivelRisco, String descricaoRisco, int duracao, String codigo, Atividade ativ, Atividade prox) {
 		// super();
 		Verificador.verificaEntrada(descricao, "Campo Descricao nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(nivelRisco, "Campo nivelRisco nao pode ser nulo ou vazio.");
@@ -86,6 +88,8 @@ public class Atividade implements Comparable<Atividade> {
 		this.resultados = new HashMap<>();
 		this.ultimoResultado = 0;
 		this.pesquisasAssociadas = new ArrayList<String>();
+		this.ativ = ativ;
+		this.prox = prox;
 	}
 
 	/**
@@ -260,11 +264,11 @@ public class Atividade implements Comparable<Atividade> {
 		return this.getCodigo().compareTo(atividade.getCodigo());
 	}
 
-	@Override
 	/**
 	 * Retorna a string que representa a pesquisa no formato "DESCRICAO (NIVEL RISCO
 	 * - DESCRICAO RISCO)
 	 */
+	@Override
 	public String toString() {
 		String lista = "";
 		List<Item> itens = new ArrayList<>(this.itens.values());
@@ -332,36 +336,7 @@ public class Atividade implements Comparable<Atividade> {
 
 	}
 	
-	public void defineProximaAtividade(String idPrecedente, String idSubsquente) {
-		
-		if (lista.peekFirst() == null) {
-			
-		}
-		if (lista.contains(idPrecedente)) {
-			int pos = lista.indexOf(idPrecedente);
-			if (lista.get(pos+1) != null) {
-				throw new IllegalArgumentException ("Atividade ja possui uma subsequente.");
-			}else {
-				this.lista.add(pos+1, idSubsquente);
-			}
-		}
-	}
 	
-	public void tiraProximaAtividade(String idPrecedente) {
-		
-	}
-	
-	public int contaProximos(String idPrecedente) {
-		return 0;
-	}
-	
-	public String pegaProximo(String idPrecendente, int enesimaAtividade) {
-		return "";
-	}
-	
-	public String pegaMaiorRiscoAtividades(String idAtividade) {
-		return "";
-	}
 
 	@Override
 	public int hashCode() {

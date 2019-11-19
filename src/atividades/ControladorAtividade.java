@@ -3,6 +3,7 @@ package atividades;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import sistema.Verificador;
@@ -17,8 +18,7 @@ import sistema.Verificador;
  */
 public class ControladorAtividade {
 
-	/*
-	 * Mapa de atividades do tipo <String, Atividade>
+	/** Mapa de atividades do tipo <String, Atividade>
 	 */
 	private Map<String, Atividade> atividades;
 	/**
@@ -26,6 +26,7 @@ public class ControladorAtividade {
 	 */
 	private int codigo;
 	// private List<String> resultados;
+	LinkedList<Atividade> lista = new LinkedList<Atividade>();
 
 	/**
 	 * Construtor do objeto ControladorAtividade
@@ -34,6 +35,7 @@ public class ControladorAtividade {
 	public ControladorAtividade() {
 		this.atividades = new HashMap<>();
 		this.codigo = 1;
+		
 	}
 
 	/**
@@ -52,10 +54,11 @@ public class ControladorAtividade {
 			throw new IllegalArgumentException("Valor invalido do nivel do risco.");
 		}
 		Verificador.verificaEntrada(descricaoRisco, "Campo descricaoRisco nao pode ser nulo ou vazio.");
-		Atividade atividade = new Atividade(descricao, nivelRisco, descricaoRisco, 0, "A" + codigo);
+		Atividade atividade = new Atividade(descricao, nivelRisco, descricaoRisco, 0, "A" + codigo, null, null);
 		this.atividades.put("A" + codigo, atividade);
 		String retorno = "A" + codigo;
 		this.codigo++;
+		lista.add(atividade);
 		return retorno;
 	}
 
@@ -265,31 +268,54 @@ public class ControladorAtividade {
 		Verificador.verificaEntrada(idSubsquente, "Atividade nao pode ser nulo ou vazio.");
 		Verificador.existeChave(atividades, idPrecedente, "Atividade nao encontrada.");
 		Verificador.existeChave(atividades, idSubsquente, "Atividade nao encontrada.");
-		this.defineProximaAtividade(idPrecedente, idSubsquente);
+		
+		if (lista.peekFirst() == null) {
+			
+		}
+		if (lista.contains(idPrecedente)) {
+			int pos = lista.indexOf(idPrecedente);
+			if (lista.get(pos+1) != null) {
+				throw new IllegalArgumentException ("Atividade ja possui uma subsequente.");
+			}else {
+				//this.lista.add(pos+1, idSubsquente);
+			}
+		}
 	}
 	
 	public void tiraProximaAtividade(String idPrecedente) {
 		Verificador.verificaEntrada(idPrecedente, "Atividade nao pode ser nulo ou vazio.");
 		Verificador.existeChave(atividades, idPrecedente, "Atividade nao encontrada.");
-		this.tiraProximaAtividade(idPrecedente);
+		
+		if (lista.contains(idPrecedente)) {
+			int pos = lista.indexOf(idPrecedente);
+			if (lista.get(pos+1) != null) {
+				lista.remove(pos+1);
+			}
+		}
 	}
 	
 	public int contaProximos(String idPrecedente) {
 		Verificador.verificaEntrada(idPrecedente, "Atividade nao pode ser nulo ou vazio.");
 		Verificador.existeChave(atividades, idPrecedente, "Atividade nao encontrada.");
-		return this.contaProximos(idPrecedente);
+		
+		int pos = lista.indexOf(idPrecedente);
+		int contador = lista.lastIndexOf(pos);
+		return contador;
 	}
 	
 	public String pegaProximo(String idAtividade, String enesimaAtividade) {
 		Verificador.verificaEntrada(idAtividade, "Atividade nao pode ser nulo ou vazio.");
 		Verificador.existeChave(atividades, idAtividade, "Atividade nao encontrada.");
 		Verificador.verificaInteiroPositivo(Integer.parseInt(enesimaAtividade), "EnesimaAtividade nao pode ser negativa ou zero.");
-		return this.pegaProximo(idAtividade, enesimaAtividade);
+		
+		return "";
 	}
 	
 	public String pegaMaiorRiscoAtividades(String idAtividade) {
 		Verificador.verificaEntrada(idAtividade, "Atividade nao pode ser nulo ou vazio.");
 		Verificador.existeChave(atividades, idAtividade, "Atividade nao encontrada");
-		return this.pegaMaiorRiscoAtividades(idAtividade);
+		
+		return "";
 	}
+	
 }
