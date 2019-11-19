@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import sistema.SalvaSistema;
 import sistema.Verificador;
 import pesquisa.PesquisaController;
 
@@ -269,5 +271,10 @@ public class PesquisadorController {
 		return this.mapaPesquisadores.get(emailPesquisador);
 
 	}
-
+//	public void salvar() {
+//		SalvaSistema.gravarDado(this.mapaPesquisadores);
+//	}
+//	public void retorna() {
+//		this.mapaPesquisadores = SalvaSistema.retornaDadosPesquisador();
+//	}
 }

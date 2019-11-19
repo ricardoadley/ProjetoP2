@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import sistema.SalvaSistema;
 import sistema.Verificador;
 
 /**
@@ -139,5 +140,10 @@ public class ObjetivoController {
 		}
 		return resultados;
 	}
-
+//	public void salvar() {
+//		SalvaSistema.gravarDado(this.objetivos);
+//	}
+//	public void retorna() {
+//		this.objetivos = SalvaSistema.retornaDadosObjetivo();
+//	}
 }

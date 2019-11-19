@@ -1,35 +1,48 @@
 package sistema;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.util.List;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.util.Map;
 
 public class SalvaSistema {
 
-    public static void gravarDado(List lista, String arquivo) {
-        File arq = new File(arquivo);
-        try {
-          //arq.delete();
-          arq.createNewFile();
-      
-          ObjectOutputStream objOutput = new ObjectOutputStream(new FileOutputStream(arq));
-          objOutput.writeObject(lista);
-          objOutput.close();
-      
-        } catch(IOException erro) {
-            System.out.printf("Erro: %s", erro.getMessage());
-        }
-	
-	
-//	public void salvarTudo() {
-//		this.atividadeController.salvar();
-//		this.objetivoController.salvar();
-//		this.problemaController.salvar();
-//		this.pesquisadorController.salvar();
-//		this.pesquisaController.salvar();
-//	}
-}
+	public SalvaSistema() {
+
+	}
+
+	public static void gravarDadosAtividade(Map mapa, String local) {
+		try {
+			FileOutputStream arquivo = new FileOutputStream(".\\saves\\"+ local);
+			ObjectOutputStream stream = new ObjectOutputStream(arquivo);
+			stream.writeObject(mapa);
+			stream.close();
+			// arq.delete();
+			arquivo.close();
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	// public static void retornaDado() {
+	// try {
+	// FileInputStream restFile = new FileInputStream(arq);
+	// ObjectInputStream stream = new ObjectInputStream(restFile);
+	// // recupera o objeto
+	// mapaPesquisa = stream.readObject();
+	//// mapaPesquisador = stream.readObject();
+	//// mapaProblema = stream.readObject();
+	//// mapaAtividade = stream.readObject();
+	//// mapaObjetivo = stream.readObject();
+	//
+	// stream.close();
+	// restFile.close();
+	// } catch (Exception e) {
+	//
+	// e.printStackTrace();
+	//
+	// }
+	//
+	// }
+
 }

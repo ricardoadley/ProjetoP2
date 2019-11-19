@@ -263,7 +263,9 @@ public class ControladorAtividade {
 	}
 
 	public void salvar() {
-		List<Atividade> listaAtividades = new ArrayList<>(this.atividades.values());
-				SalvaSistema.gravarDado(listaAtividades, "./salvakkk.txt");
+		SalvaSistema.gravarDadosAtividade(this.atividades,"./dadosAtividade.txt");
 	}
+//	public void retorna() {
+//		this.atividades = SalvaSistema.retornaDadosAtividade();
+//	}
 }
