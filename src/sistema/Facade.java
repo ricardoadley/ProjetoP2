@@ -226,4 +226,8 @@ public class Facade {
 		this.pesquisaController.gravarResultados(codigoPesquisa);
 	}
 	
+	public void  salvar() {
+		atividadeController.salvar();
+	}
+	
 }
