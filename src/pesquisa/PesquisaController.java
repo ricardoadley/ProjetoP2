@@ -435,7 +435,7 @@ public class PesquisaController {
 	}
 
 	/**
-	 * Armazena o codigo de uma atividade associada a  uma Pesquisa na mesma.
+	 * Armazena o codigo de uma atividade associada aï¿½ uma Pesquisa na mesma.
 	 * 
 	 * @param codigoPesquisa  codigo da pesquisa que vai receber a associacao
 	 * @param codigoAtividade codigo da atividade a ser associada
@@ -529,12 +529,12 @@ public class PesquisaController {
 
 		try {
 
-			File file = new File("./" + codigoPesquisa + ".txt");
+			File file = new File("./_" + codigoPesquisa + ".txt");
 
 			FileWriter escritorDeArquivo = new FileWriter(file.getAbsoluteFile());
 			BufferedWriter buffWrite = new BufferedWriter(escritorDeArquivo);
 
-			buffWrite.write("\"" + this.mapaPesquisas.get(codigoPesquisa).getResumo().trim() + "\"");
+			buffWrite.write(this.mapaPesquisas.get(codigoPesquisa).getResumo().trim());
 			buffWrite.close();
 
 		} catch (IOException e) {
