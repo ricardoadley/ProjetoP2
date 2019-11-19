@@ -5,7 +5,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Iterator;
+import java.util.LinkedList;
 import sistema.Verificador;
+import atividades.OrdenaAtividade;
 
 /**
  * Representacao de uma atividade, especificamente de uma pesquisa cadastrada
@@ -58,6 +61,8 @@ public class Atividade implements Comparable<Atividade> {
 	 * Lista com o nome das pesquisas associadas a atividade
 	 */
 	private List<String> pesquisasAssociadas;
+	
+	LinkedList<String> lista = new LinkedList<String>();
 
 	/**
 	 * Constroi uma nova atividade a partir dos parametros informados pelo usuario
@@ -325,6 +330,37 @@ public class Atividade implements Comparable<Atividade> {
 
 		return resultados;
 
+	}
+	
+	public void defineProximaAtividade(String idPrecedente, String idSubsquente) {
+		
+		if (lista.peekFirst() == null) {
+			
+		}
+		if (lista.contains(idPrecedente)) {
+			int pos = lista.indexOf(idPrecedente);
+			if (lista.get(pos+1) != null) {
+				throw new IllegalArgumentException ("Atividade ja possui uma subsequente.");
+			}else {
+				this.lista.add(pos+1, idSubsquente);
+			}
+		}
+	}
+	
+	public void tiraProximaAtividade(String idPrecedente) {
+		
+	}
+	
+	public int contaProximos(String idPrecedente) {
+		return 0;
+	}
+	
+	public String pegaProximo(String idPrecendente, int enesimaAtividade) {
+		return "";
+	}
+	
+	public String pegaMaiorRiscoAtividades(String idAtividade) {
+		return "";
 	}
 
 	@Override

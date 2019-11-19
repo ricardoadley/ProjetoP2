@@ -10,7 +10,7 @@ import pesquisa.PesquisaController;
  * Facade do sistema.
  * 
  * @author Jose Matheus do N.Gama , Ricardo A. S. Sena, Vinicius M. V. Varjao,
- *         Beatriz Truta
+ *         Ana Beatriz Truta
  *
  */
 public class Facade {
@@ -224,6 +224,28 @@ public class Facade {
 	
 	public void gravarResultados(String codigoPesquisa) {
 		this.pesquisaController.gravarResultados(codigoPesquisa);
+	}
+	
+	// Ana Beatriz Truta (US9)
+	
+	public void defineProximaAtividade(String idPrecedente, String idSubsquente) {
+		this.atividadeController.defineProximaAtividade(idPrecedente, idSubsquente);
+	}
+	
+	public void tiraProximaAtividade(String idPrecedente) {
+		this.atividadeController.tiraProximaAtividade(idPrecedente);
+	}
+	
+	public int contaProximos(String idPrecedente) {
+		return this.atividadeController.contaProximos(idPrecedente);
+	}
+	
+	public String pegaProximo(String idAtividade, String enesimaAtividade) {
+		return this.atividadeController.pegaProximo(idAtividade, enesimaAtividade);
+	}
+	
+	public String pegaMaiorRiscoAtividades(String idAtividade) {
+		return this.busca(atividadeController.pegaMaiorRiscoAtividades(idAtividade));
 	}
 	
 }

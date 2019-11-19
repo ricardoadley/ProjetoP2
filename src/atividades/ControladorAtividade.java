@@ -259,4 +259,37 @@ public class ControladorAtividade {
 		Verificador.existeChave(atividades, codigoAtividade, "Atividade nao encontrada");
 		this.capturaAtividadeNoMapa(codigoAtividade).desassociaPesquisa(codigoPesquisa);
 	}
+	
+	public void defineProximaAtividade(String idPrecedente, String idSubsquente) {
+		Verificador.verificaEntrada(idPrecedente, "Atividade nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(idSubsquente, "Atividade nao pode ser nulo ou vazio.");
+		Verificador.existeChave(atividades, idPrecedente, "Atividade nao encontrada.");
+		Verificador.existeChave(atividades, idSubsquente, "Atividade nao encontrada.");
+		this.defineProximaAtividade(idPrecedente, idSubsquente);
+	}
+	
+	public void tiraProximaAtividade(String idPrecedente) {
+		Verificador.verificaEntrada(idPrecedente, "Atividade nao pode ser nulo ou vazio.");
+		Verificador.existeChave(atividades, idPrecedente, "Atividade nao encontrada.");
+		this.tiraProximaAtividade(idPrecedente);
+	}
+	
+	public int contaProximos(String idPrecedente) {
+		Verificador.verificaEntrada(idPrecedente, "Atividade nao pode ser nulo ou vazio.");
+		Verificador.existeChave(atividades, idPrecedente, "Atividade nao encontrada.");
+		return this.contaProximos(idPrecedente);
+	}
+	
+	public String pegaProximo(String idAtividade, String enesimaAtividade) {
+		Verificador.verificaEntrada(idAtividade, "Atividade nao pode ser nulo ou vazio.");
+		Verificador.existeChave(atividades, idAtividade, "Atividade nao encontrada.");
+		Verificador.verificaInteiroPositivo(Integer.parseInt(enesimaAtividade), "EnesimaAtividade nao pode ser negativa ou zero.");
+		return this.pegaProximo(idAtividade, enesimaAtividade);
+	}
+	
+	public String pegaMaiorRiscoAtividades(String idAtividade) {
+		Verificador.verificaEntrada(idAtividade, "Atividade nao pode ser nulo ou vazio.");
+		Verificador.existeChave(atividades, idAtividade, "Atividade nao encontrada");
+		return this.pegaMaiorRiscoAtividades(idAtividade);
+	}
 }
