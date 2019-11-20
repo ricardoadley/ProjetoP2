@@ -148,6 +148,10 @@ public class Atividade implements Comparable<Atividade>, Serializable {
 		return this.codigo;
 	}
 
+	public String getNivelRisco() {
+		return nivelRisco;
+	}
+
 	/**
 	 * Pesquisa se o termo informado pelo usuario esta presente nos itens da
 	 * atividade
@@ -179,7 +183,7 @@ public class Atividade implements Comparable<Atividade>, Serializable {
 		if (pesquisasAssociadas.isEmpty()) {
 			throw new IllegalArgumentException("Atividade sem associacoes com pesquisas.");
 		}
-		if (itens.get(item).getRealizado()) {
+		if (itens.get(item).isRealizado()) {
 			throw new IllegalArgumentException("Item ja executado.");
 		}
 		this.itens.get(item).setDuracao(duracao);
