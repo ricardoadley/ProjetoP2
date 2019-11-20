@@ -2,13 +2,9 @@ package testes_de_unidade;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import atividades.ControladorAtividade;
 
 class ControladorAtividadeTest {

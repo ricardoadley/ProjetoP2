@@ -541,7 +541,7 @@ public class PesquisaController {
 			FileWriter escritorDeArquivo = new FileWriter(file.getAbsoluteFile());
 			BufferedWriter buffWrite = new BufferedWriter(escritorDeArquivo);
 
-			buffWrite.write("\"" + this.mapaPesquisas.get(codigoPesquisa).getResumo().trim() + "\"");
+			buffWrite.write(this.mapaPesquisas.get(codigoPesquisa).getResumo().trim());
 			buffWrite.close();
 
 		} catch (IOException e) {
@@ -565,7 +565,7 @@ public class PesquisaController {
 			FileWriter escritorDeArquivo = new FileWriter(file.getAbsoluteFile());
 			BufferedWriter buffWrite = new BufferedWriter(escritorDeArquivo);
 
-			buffWrite.write("\"" + this.mapaPesquisas.get(codigoPesquisa).getResultados().trim() + "\"");
+			buffWrite.write(this.mapaPesquisas.get(codigoPesquisa).getResultados().trim());
 			buffWrite.close();
 
 		} catch (IOException e) {
