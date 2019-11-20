@@ -517,8 +517,9 @@ public class PesquisaController {
 
 		return this.mapaPesquisas.get(idPesquisa).desassociaPesquisador(emailPesquisador);
 	}
+
 	public boolean existePesquisa(String codigo) {
-		if(!this.mapaPesquisas.containsKey(codigo)) {
+		if (!this.mapaPesquisas.containsKey(codigo)) {
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
 		}
 		return this.mapaPesquisas.containsKey(codigo);
@@ -540,15 +541,13 @@ public class PesquisaController {
 			FileWriter escritorDeArquivo = new FileWriter(file.getAbsoluteFile());
 			BufferedWriter buffWrite = new BufferedWriter(escritorDeArquivo);
 
-			buffWrite.write(this.mapaPesquisas.get(codigoPesquisa).getResumo().trim());
+			buffWrite.write("\"" + this.mapaPesquisas.get(codigoPesquisa).getResumo().trim() + "\"");
 			buffWrite.close();
-			
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		}
-
+	}
 
 	/**
 	 * Grava resultados de uma Pesquisa em um arquivo de texto
@@ -573,21 +572,25 @@ public class PesquisaController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Altera a estrategia de sugestao de proxima atividade
+	 * 
 	 * @param estrategia nova estrategia a ser adotada
 	 */
 	public void configuraEstrategia(String estrategia) {
 		Verificador.verificaEntrada(estrategia, "Estrategia nao pode ser nula ou vazia.");
-		if (!estrategia.equals("MAIS_ANTIGA") && !estrategia.equals("MAIOR_RISCO") && !estrategia.equals("MAIOR_DURACAO") && !estrategia.equals("MENOS_PENDENCIAS")) {
+		if (!estrategia.equals("MAIS_ANTIGA") && !estrategia.equals("MAIOR_RISCO")
+				&& !estrategia.equals("MAIOR_DURACAO") && !estrategia.equals("MENOS_PENDENCIAS")) {
 			throw new IllegalArgumentException("Valor invalido da estrategia");
-		} 
+		}
 		this.estrategia = estrategia;
 	}
 
 	/**
-	 * Sugere uma atividade de uma pesquisa para ser realizada baseado na estrategia de sugestao atual
+	 * Sugere uma atividade de uma pesquisa para ser realizada baseado na estrategia
+	 * de sugestao atual
+	 * 
 	 * @param codigoPesquisa identificador da pesquisa
 	 * @return codigo da atividade sugerida
 	 */
@@ -600,10 +603,11 @@ public class PesquisaController {
 		}
 		return this.mapaPesquisas.get(codigoPesquisa).proximaAtividade(estrategia);
 	}
-	
+
 	public void salvar() {
-		SalvaSistema.gravarDados(this.mapaPesquisas,"dadosPesquisa.dat");
+		SalvaSistema.gravarDados(this.mapaPesquisas, "dadosPesquisa.dat");
 	}
+
 	public void retorna() {
 		this.mapaPesquisas = SalvaSistema.retornaDadoPesquisa();
 	}

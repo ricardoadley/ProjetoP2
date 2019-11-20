@@ -23,13 +23,15 @@ public class Facade {
 	private PesquisadorController pesquisadorController;
 	private PesquisaController pesquisaController;
 	private BuscadorPalavra buscador;
+
 	public Facade() throws IOException {
 		this.atividadeController = new ControladorAtividade();
 		this.pesquisadorController = new PesquisadorController();
 		this.objetivoController = new ObjetivoController();
 		this.problemaController = new ProblemaController();
-		this.pesquisaController = new PesquisaController(objetivoController, problemaController, pesquisadorController, atividadeController);
-		this.buscador = new BuscadorPalavra(atividadeController,pesquisaController,pesquisadorController);
+		this.pesquisaController = new PesquisaController(objetivoController, problemaController, pesquisadorController,
+				atividadeController);
+		this.buscador = new BuscadorPalavra(atividadeController, pesquisaController, pesquisadorController);
 	}
 
 	// Jose Matheus (US3)
@@ -136,13 +138,15 @@ public class Facade {
 	public String listaPesquisas(String ordem) {
 		return pesquisaController.listaPesquisas(ordem);
 	}
+
 	public String busca(String termo) {
 		return buscador.retornaEncontradas(termo);
 	}
 
 	public String busca(String termo, int numeroResultado) {
-		return buscador.retornaEncontradasNumeroResultado(termo,numeroResultado);
+		return buscador.retornaEncontradasNumeroResultado(termo, numeroResultado);
 	}
+
 	public int contaResultadosBusca(String termo) {
 		return buscador.retornaQuantidadeDeResultados(termo);
 
@@ -165,12 +169,12 @@ public class Facade {
 	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
 		return this.pesquisaController.desassociaObjetivo(idPesquisa, idObjetivo);
 	}
-	
-	//Ana Beatriz Truta (US6)
+
+	// Ana Beatriz Truta (US6)
 
 	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
 		pesquisadorController.cadastraEspecialidadeProfessor(email, formacao, unidade, data);
-		}
+	}
 
 	public void cadastraEspecialidadeAluno(String email, int semestre, double IEA) {
 		pesquisadorController.cadastraEspecialidadeAluno(email, semestre, IEA);
@@ -186,9 +190,9 @@ public class Facade {
 
 	public boolean desassociaPesquisador(String idPesquisa, String emailPesquisador) {
 		return pesquisaController.desassociaPesquisador(idPesquisa, emailPesquisador);
-	}	
-	
-	//Vinicius (US7)
+	}
+
+	// Vinicius (US7)
 	public boolean associaAtividade(String codigoPesquisa, String codigoAtividade) {
 		return this.pesquisaController.associaAtividade(codigoPesquisa, codigoAtividade);
 	}
@@ -197,7 +201,7 @@ public class Facade {
 		return this.pesquisaController.desassociaAtividade(codigoPesquisa, codigoAtividade);
 	}
 
-	public void executaAtividade(String codigoAtividade, int item, int duracao) {	
+	public void executaAtividade(String codigoAtividade, int item, int duracao) {
 		this.atividadeController.executaAtividade(codigoAtividade, item, duracao);
 	}
 
@@ -216,8 +220,8 @@ public class Facade {
 	public int getDuracao(String codigoAtividade) {
 		return this.atividadeController.getDuracao(codigoAtividade);
 	}
-	
-	//Vinicius (US10)
+
+	// Vinicius (US10)
 
 	public void configuraEstrategia(String estrategia) {
 		this.pesquisaController.configuraEstrategia(estrategia);
@@ -226,24 +230,25 @@ public class Facade {
 	public String proximaAtividade(String codigoPesquisa) {
 		return this.pesquisaController.proximaAtividade(codigoPesquisa);
 	}
-	
-	//Matheus (US11)
-	
+
+	// Matheus (US11)
+
 	public void gravarResumo(String codigoPesquisa) {
 		this.pesquisaController.gravarResumo(codigoPesquisa);
 	}
-	
+
 	public void gravarResultados(String codigoPesquisa) {
 		this.pesquisaController.gravarResultados(codigoPesquisa);
 	}
-	
-	public void  salvar() {
+
+	public void salvar() {
 		pesquisaController.salvar();
 		pesquisadorController.salvar();
 		problemaController.salvar();
 		atividadeController.salvar();
 		objetivoController.salvar();
 	}
+
 	public void carregar() {
 //		SalvaSistema.retornaDado();
 		pesquisaController.retorna();
@@ -252,5 +257,5 @@ public class Facade {
 		atividadeController.retorna();
 		objetivoController.retorna();
 	}
-	
+
 }
