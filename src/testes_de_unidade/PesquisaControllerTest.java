@@ -2,11 +2,12 @@ package testes_de_unidade;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import atividades.ControladorAtividade;
-import objetivo.Objetivo;
 import objetivo.ObjetivoController;
 import pesquisa.PesquisaController;
 import pesquisador.PesquisadorController;
@@ -302,6 +303,26 @@ class PesquisaControllerTest {
 		assertEquals("COM3", pesquisaController.cadastraPesquisa("Jogos digitais e uma tortura",
 				"Computacao e razoavelmente legal"));
 
+	}
+
+	@Test
+	void testProcuraPalavraTermoVazio() {
+		assertThrows(IllegalArgumentException.class, () -> pesquisaController.procuraPalavra(""));
+	}
+
+	@Test
+	void testProcuraPalavraTermoNull() {
+		assertThrows(NullPointerException.class, () -> pesquisaController.procuraPalavra(null));
+	}
+
+	@Test
+	void testProcuraPalavraPerfeito() {
+		pesquisaController.cadastraPesquisa("pesquisar os novos eps de boruto", "anime,manga");
+		pesquisaController.cadastraPesquisa("animes que eu assisto no domingo", "boruto,pokemon,naruto");
+		ArrayList<String> retorno = new ArrayList<String>();
+		retorno.add("BOR1: boruto,pokemon,naruto");
+		retorno.add("ANI1: pesquisar os novos eps de boruto");
+		assertEquals(true, retorno.equals(pesquisaController.procuraPalavra("boruto")));
 	}
 
 }
