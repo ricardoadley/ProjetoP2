@@ -359,6 +359,11 @@ public class Atividade implements Comparable<Atividade> {
 		return true;
 	}
 
+	/**
+	 * Define qual a proxima atividade que a atividade atual ira apontar, nao podendo apontar para mais de uma atividade.
+	 * 
+	 * @param atividade atividade que sera colocada como proxima.
+	 */
 	public void defineProximaAtividade(Atividade atividade) {
 		if(this.prox != null) {
 			throw new IllegalArgumentException("Atividade ja possui uma subsequente.");
@@ -369,6 +374,11 @@ public class Atividade implements Comparable<Atividade> {
 		this.prox = atividade;
 	}
 
+	/**
+	 * Conta a quantidade de proximos que a atividade possui.
+	 * 
+	 * @return a quantidade de proximas atividades.
+	 */
 	public int contaProximo() {
 		if(this.prox == null) {
 			return 0;
@@ -376,10 +386,20 @@ public class Atividade implements Comparable<Atividade> {
 		return 1 + this.prox.contaProximo();
 	}
 
+	/**
+	 * Retira a atividade a qual a atividade atual aponta. Deixando assim, a atividade atual sem proximo.
+	 */
 	public void tiraProximaAtividade() {
 		this.prox = null;
 	}
 
+	/**
+	 * Pega uma determinda atividade a uma n distancia da atual.
+	 * 
+	 * @param enesimaAtividade distancia entre as atividades.
+	 * 
+	 * @return retorna o codigo da atividade encontrada e caso isso nao ocorra lanca um erro.
+	 */
 	public String pegaProximo(int enesimaAtividade) {
 		if(enesimaAtividade == 0) {
 			return codigo;
@@ -395,12 +415,20 @@ public class Atividade implements Comparable<Atividade> {
 		if(this.prox == null) {
 			throw new IllegalArgumentException("Nao existe proxima atividade.");
 		}
-		if (this.prox.nivelRisco.equals("ALTO") && this.prox.prox.nivelRisco.equals("ALTO")) {
-			return this.prox.prox.getCodigo();
+		if(numRisco(this.prox.nivelRisco) == 3) {
+			return this.prox.codigo;
 		}
-		return this.prox.getCodigo();
+		return this.prox.pegaMaiorRiscoAtividades();
 	}
 	
+	/**
+	 * Verifica se ao colocar a atividade como proximo nao ira formar um loop.
+	 * 
+	 * @param atividade atividade que sera colocada como proximo.
+	 * @param id codigo da atividade atual
+	 * 
+	 * @return retorna true caso haja loop e false caso contrario.
+	 */
 	public boolean ehLoop(Atividade atividade, String id) {
 		if(atividade.prox == null) {
 			return false;
@@ -409,6 +437,22 @@ public class Atividade implements Comparable<Atividade> {
 			return true;
 		}
 		return ehLoop(atividade.prox, id);
+	}
+	
+	/**
+	 * 
+	 * @param risco
+	 * @return
+	 */
+	public int numRisco(String risco) {
+		if (risco.equals("ALTO")) {
+			return 3;
+		} else if (risco.equals("MEDIO")) {
+			return 2;
+		} else if (risco.equals("BAIXO")) {
+			return 1;
+		} 
+		return 0;
 	}
 }	
 	//System.out.println(this.prox.codigo + " " + this.prox.nivelRisco + " " + this.prox);

@@ -1,10 +1,28 @@
 package pesquisador;
 
+/**
+ * Classe que define as caracteristicas de um pesquisador que possui "ALUNO" como funcao.
+ * 
+ * @author Ana Beatriz da S. Truta
+ *
+ */
 public class Aluno implements Especialidade{
 
+	/**
+	 * Semestre de ingresso do aluno.
+	 */
 	private int semestre;
+	/**
+	 * Indice de Eficiencia do Aluno do aluno
+	 */
 	private double iea;
 
+	/**
+	 * Contrutor da classe Aluno.
+	 * 
+	 * @param semestre semestre de ingresso do aluno. 
+	 * @param iea do aluno.
+	 */
 	public Aluno(int semestre, double iea) {
 		super();
 		this.semestre = semestre;

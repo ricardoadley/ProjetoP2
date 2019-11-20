@@ -11,7 +11,7 @@ import pesquisa.PesquisaController;
  * Controlador de objetos do tipo "Pesquisador", usado para armazena-los e
  * manipula-los
  * 
- * @author Vinicius M. V. Varjao
+ * @author Vinicius M. V. Varjao, Ana Beatriz da S. Truta.
  * 
  */
 public class PesquisadorController {
@@ -209,6 +209,14 @@ public class PesquisadorController {
 		return resultados;
 	}
 
+	/**
+	 * Cadastra as informacoes adicionais referentes a professor.
+	 * 
+	 * @param email email do pesquisador que se deseja alterar.
+	 * @param formacao formacao do professor.
+	 * @param unidade unidade na qual o prpofessor esta alocado.
+	 * @param data data de contratacao do professor.
+	 */
 	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
 		Verificador.verificaEntrada(email, "Campo email nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(formacao, "Campo formacao nao pode ser nulo ou vazio.");
@@ -225,6 +233,13 @@ public class PesquisadorController {
 		}
 	}
 
+	/**
+	 * Cadastra as informacoes adicionais referentes a aluno.
+	 * 
+	 * @param email email do pesquisador que se deseja alterar.
+	 * @param semestre semestre de ingresso do aluno.
+	 * @param IEA iea do aluno.
+	 */
 	public void cadastraEspecialidadeAluno(String email, int semestre, double IEA) {
 		Verificador.verificaEntrada(email, "Campo email nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(String.valueOf(semestre), "Semestre nao pode ser nulo ou vazio.");
@@ -243,7 +258,7 @@ public class PesquisadorController {
 	/**
 	 * Lista os Pesquisadores de determinado tipo
 	 * @param tipo, o tipo do pesquisador que sera listado
-	 * @return a representação em string dos pesquisadores encontrados
+	 * @return a representaï¿½ï¿½o em string dos pesquisadores encontrados
 	 */
 	public String listaPesquisadores(String tipo) {
 		String exibicao = "";

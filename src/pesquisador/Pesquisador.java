@@ -5,7 +5,7 @@ import sistema.Verificador;
 /**
  * Representacao de um pesquisador
  * 
- * @author Vinicius M. V. Varjao
+ * @author Vinicius M. V. Varjao, Ana Beatriz da S. Truta.
  *
  */
 public class Pesquisador {
