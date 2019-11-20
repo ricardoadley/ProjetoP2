@@ -271,10 +271,10 @@ public class PesquisadorController {
 		return this.mapaPesquisadores.get(emailPesquisador);
 
 	}
-//	public void salvar() {
-//		SalvaSistema.gravarDado(this.mapaPesquisadores);
-//	}
-//	public void retorna() {
-//		this.mapaPesquisadores = SalvaSistema.retornaDadosPesquisador();
-//	}
+	public void salvar() {
+		SalvaSistema.gravarDados(this.mapaPesquisadores,"dadosPesquisadores.dat");
+	}
+	public void retorna() {
+		this.mapaPesquisadores = SalvaSistema.retornaDadoPesquisador();
+	}
 }

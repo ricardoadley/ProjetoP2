@@ -125,10 +125,10 @@ public class ProblemaController {
 		return resultados;
 	}
 
-//	public void salvar() {
-//		SalvaSistema.gravarDado(this.problemas);
-//	}
-//	public void retorna() {
-//		this.problemas = SalvaSistema.retornaDadosProblema();
-//	}
+	public void salvar() {
+		SalvaSistema.gravarDados(this.problemas,"dadosProblemas.dat");
+	}
+	public void retorna() {
+		this.problemas = SalvaSistema.retornaDadoProblema();
+	}
 }

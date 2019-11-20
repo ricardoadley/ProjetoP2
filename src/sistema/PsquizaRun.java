@@ -5,7 +5,7 @@ import easyaccept.EasyAccept;
 public class PsquizaRun {
 
 	public static void main(String[] args) {
-		args = new String[] { "sistema.Facade", "easyaccept/use_case_12SALVAR.txt" };
+		args = new String[] { "sistema.Facade", "easyaccept/use_case_12CARREGAR.txt" };
 		/**
 		 * "easyaccept/use_case_1.txt", "easyaccept/use_case_2.txt",
 		 * "easyaccept/use_case_3.txt", "easyaccept/use_case_4.txt",
