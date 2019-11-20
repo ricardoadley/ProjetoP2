@@ -3,7 +3,6 @@ package atividades;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import sistema.Verificador;
@@ -26,7 +25,6 @@ public class ControladorAtividade {
 	 */
 	private int codigo;
 	// private List<String> resultados;
-	LinkedList<Atividade> lista = new LinkedList<Atividade>();
 
 	/**
 	 * Construtor do objeto ControladorAtividade
@@ -315,10 +313,16 @@ public class ControladorAtividade {
 		return atividades.get(idAtividade).pegaProximo(enesimaAtividade);
 	}
 	
+	/**
+	 * Pega a atividade com maior risco em uma sequencia a partir de uma atividade x.
+	 * 
+	 * @param idAtividade id da atividade que servira como ponto de partida.
+	 * 
+	 * @return retorna o codigo da atividade com maior risco.
+	 */
 	public String pegaMaiorRiscoAtividades(String idAtividade) {
 		Verificador.verificaEntrada(idAtividade, "Atividade nao pode ser nulo ou vazio.");
 		Verificador.existeChave(atividades, idAtividade, "Atividade nao encontrada.");
-		//System.out.println("Atividade é: " + idAtividade);
 		return atividades.get(idAtividade).pegaMaiorRiscoAtividades();
 	}
 	

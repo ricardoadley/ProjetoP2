@@ -5,15 +5,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Iterator;
-import java.util.LinkedList;
 import sistema.Verificador;
 
 /**
  * Representacao de uma atividade, especificamente de uma pesquisa cadastrada
  * por um usuario no sistema
  * 
- * @author Ricardo A. S. Sena
+ * @author Ricardo A. S. Sena, Ana Beatriz da S. Truta.
  *
  */
 
@@ -60,6 +58,9 @@ public class Atividade implements Comparable<Atividade> {
 	 * Lista com o nome das pesquisas associadas a atividade
 	 */
 	private List<String> pesquisasAssociadas;
+	/**
+	 * 	
+	 */
 	private Atividade prox;
 	
 	/**
