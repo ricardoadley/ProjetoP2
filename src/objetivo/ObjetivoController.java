@@ -140,10 +140,10 @@ public class ObjetivoController {
 		}
 		return resultados;
 	}
-//	public void salvar() {
-//		SalvaSistema.gravarDado(this.objetivos);
-//	}
-//	public void retorna() {
-//		this.objetivos = SalvaSistema.retornaDadosObjetivo();
-//	}
+	public void salvar() {
+		SalvaSistema.gravarDados(this.objetivos,"dadosObjetivo.dat");
+	}
+	public void retorna() {
+		this.objetivos = SalvaSistema.retornaDadoObjetivo();
+	}
 }
