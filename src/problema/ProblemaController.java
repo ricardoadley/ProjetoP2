@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import sistema.SalvaSistema;
 import sistema.Verificador;
 
 /**
@@ -124,4 +125,10 @@ public class ProblemaController {
 		return resultados;
 	}
 
+	public void salvar() {
+		SalvaSistema.gravarDados(this.problemas,"dadosProblemas.dat");
+	}
+	public void retorna() {
+		this.problemas = SalvaSistema.retornaDadoProblema();
+	}
 }

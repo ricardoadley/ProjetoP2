@@ -13,6 +13,7 @@ import atividades.ControladorAtividade;
 import objetivo.ObjetivoController;
 import pesquisador.PesquisadorController;
 import problema.ProblemaController;
+import sistema.SalvaSistema;
 import sistema.Verificador;
 
 /**
@@ -598,5 +599,12 @@ public class PesquisaController {
 			throw new IllegalArgumentException("Pesquisa sem atividades com pendencias.");
 		}
 		return this.mapaPesquisas.get(codigoPesquisa).proximaAtividade(estrategia);
+	}
+	
+	public void salvar() {
+		SalvaSistema.gravarDados(this.mapaPesquisas,"dadosPesquisa.dat");
+	}
+	public void retorna() {
+		this.mapaPesquisas = SalvaSistema.retornaDadoPesquisa();
 	}
 }
