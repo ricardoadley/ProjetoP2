@@ -410,15 +410,37 @@ public class Atividade implements Comparable<Atividade> {
 		return this.prox.pegaProximo(enesimaAtividade -1);
 	}
 
+	private Atividade pegaAtividadeMaiorRisco() {
+		if(this.prox == null) {
+			return this;
+		}
+		Atividade atv = this.prox.pegaAtividadeMaiorRisco();
+		String risco = atv.nivelRisco;
+		if(risco.equals("ALTO")) {
+			return atv;
+		} else {
+			if(this.nivelRisco.equals("ALTO"))
+				return this;
+			else if(this.nivelRisco.equals(risco))
+				return atv;
+			else if(this.nivelRisco.equals("MEDIO"))
+				return this;
+			else
+				return atv;
+		}
+	}
+	
+	/**
+	 * Pega a atividade com maior risco.
+	 * 
+	 * @return codigo da atividade com maior risco.
+	 */
 	public String pegaMaiorRiscoAtividades() {
-		
 		if(this.prox == null) {
 			throw new IllegalArgumentException("Nao existe proxima atividade.");
+		} else {
+			return this.prox.pegaAtividadeMaiorRisco().codigo;
 		}
-		if(numRisco(this.prox.nivelRisco) == 3) {
-			return this.prox.codigo;
-		}
-		return this.prox.pegaMaiorRiscoAtividades();
 	}
 	
 	/**
@@ -438,35 +460,4 @@ public class Atividade implements Comparable<Atividade> {
 		}
 		return ehLoop(atividade.prox, id);
 	}
-	
-	/**
-	 * 
-	 * @param risco
-	 * @return
-	 */
-	public int numRisco(String risco) {
-		if (risco.equals("ALTO")) {
-			return 3;
-		} else if (risco.equals("MEDIO")) {
-			return 2;
-		} else if (risco.equals("BAIXO")) {
-			return 1;
-		} 
-		return 0;
-	}
 }	
-	//System.out.println(this.prox.codigo + " " + this.prox.nivelRisco + " " + this.prox);
-			//System.out.println("Maior: " + maior);
-			//System.out.println("Atividade: " + idAtividade);
-			//System.out.println("Próximo: " + this.prox.getCodigo());
-
-	//public String pegaMaiorRiscoAtividades() {
-	//	if(this.prox == null) {
-	//		throw new IllegalArgumentException("Nao existe proxima atividade.");
-	//	}
-	//	String maior = this.prox.nivelRisco;
-	//	if(maior.equals("ALTO")) {
-	//		return this.prox.nivelRisco;
-	//	}
-	//	return atividade;
-	//}
