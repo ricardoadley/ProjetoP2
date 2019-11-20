@@ -1,9 +1,13 @@
 package sistema;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.Map;
 
 import atividades.Atividade;
@@ -115,5 +119,29 @@ public class SalvaSistema {
 
 		}
 		return null;
+	}
+
+	public static void gravaValorID(int valor, String caminho) {
+		try {
+			FileWriter arquivo = new FileWriter(".\\saves\\" + caminho);
+			PrintWriter gravaArq = new PrintWriter(arquivo);
+			gravaArq.print(valor);
+			gravaArq.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static int retornaValorIDObjetivo() {
+		int numerinho = 0;
+		try {
+			FileReader arq = new FileReader(".\\saves\\IDObjetivo.dat");
+			BufferedReader lerArq = new BufferedReader(arq);
+			numerinho = Integer.parseInt(lerArq.readLine());
+			lerArq.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return numerinho;
 	}
 }

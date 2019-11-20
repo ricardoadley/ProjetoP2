@@ -142,8 +142,10 @@ public class ObjetivoController {
 	}
 	public void salvar() {
 		SalvaSistema.gravarDados(this.objetivos,"dadosObjetivo.dat");
+		SalvaSistema.gravaValorID(this.code,"IDObjetivo.dat");
 	}
 	public void retorna() {
 		this.objetivos = SalvaSistema.retornaDadoObjetivo();
+		this.code = SalvaSistema.retornaValorIDObjetivo();
 	}
 }
