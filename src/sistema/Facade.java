@@ -216,6 +216,16 @@ public class Facade {
 		return this.atividadeController.getDuracao(codigoAtividade);
 	}
 	
+	//Vinicius (US10)
+
+	public void configuraEstrategia(String estrategia) {
+		this.pesquisaController.configuraEstrategia(estrategia);
+	}
+
+	public String proximaAtividade(String codigoPesquisa) {
+		return this.pesquisaController.proximaAtividade(codigoPesquisa);
+	}
+	
 	//Matheus (US11)
 	
 	public void gravarResumo(String codigoPesquisa) {

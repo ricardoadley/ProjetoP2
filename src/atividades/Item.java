@@ -58,10 +58,6 @@ public class Item implements Comparable<Item> {
 		this.realizado = realizado;
 	}
 
-	public boolean getRealizado() {
-		return this.realizado;
-	}
-
 	@Override
 	public int compareTo(Item item) {
 
