@@ -61,8 +61,7 @@ public class Atividade implements Comparable<Atividade> {
 	 */
 	private List<String> pesquisasAssociadas;
 	private Atividade prox;
-	private Elem<String> elementos;
-
+	
 	/**
 	 * Constroi uma nova atividade a partir dos parametros informados pelo usuario
 	 * @param prox 
@@ -376,16 +375,6 @@ public class Atividade implements Comparable<Atividade> {
 		}
 		return 1 + this.prox.contaProximo();
 	}
-	
-	public boolean ehLoop(Atividade atividade, String id) {
-		if(atividade.prox == null) {
-			return false;
-		}
-		if(atividade.prox.getCodigo().equals(id)) {
-			return true;
-		}
-		return ehLoop(atividade.prox, id);
-	}
 
 	public void tiraProximaAtividade() {
 		this.prox = null;
@@ -402,14 +391,38 @@ public class Atividade implements Comparable<Atividade> {
 	}
 
 	public String pegaMaiorRiscoAtividades() {
+		
 		if(this.prox == null) {
 			throw new IllegalArgumentException("Nao existe proxima atividade.");
 		}
-		String maior = this.prox.nivelRisco;
-		if(maior.equals("ALTO")) {
-			return this.prox.nivelRisco;
+		if (this.prox.nivelRisco.equals("ALTO") && this.prox.prox.nivelRisco.equals("ALTO")) {
+			return this.prox.prox.getCodigo();
 		}
-		return "";
+		return this.prox.getCodigo();
 	}
+	
+	public boolean ehLoop(Atividade atividade, String id) {
+		if(atividade.prox == null) {
+			return false;
+		}
+		if(atividade.prox.getCodigo().equals(id)) {
+			return true;
+		}
+		return ehLoop(atividade.prox, id);
+	}
+}	
+	//System.out.println(this.prox.codigo + " " + this.prox.nivelRisco + " " + this.prox);
+			//System.out.println("Maior: " + maior);
+			//System.out.println("Atividade: " + idAtividade);
+			//System.out.println("Próximo: " + this.prox.getCodigo());
 
-}
+	//public String pegaMaiorRiscoAtividades() {
+	//	if(this.prox == null) {
+	//		throw new IllegalArgumentException("Nao existe proxima atividade.");
+	//	}
+	//	String maior = this.prox.nivelRisco;
+	//	if(maior.equals("ALTO")) {
+	//		return this.prox.nivelRisco;
+	//	}
+	//	return atividade;
+	//}

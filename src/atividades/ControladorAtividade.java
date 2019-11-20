@@ -293,8 +293,10 @@ public class ControladorAtividade {
 	public String pegaMaiorRiscoAtividades(String idAtividade) {
 		Verificador.verificaEntrada(idAtividade, "Atividade nao pode ser nulo ou vazio.");
 		Verificador.existeChave(atividades, idAtividade, "Atividade nao encontrada.");
-		System.out.println("ola");
+		//System.out.println("Atividade é: " + idAtividade);
 		return atividades.get(idAtividade).pegaMaiorRiscoAtividades();
 	}
+	
+	
 	
 }
