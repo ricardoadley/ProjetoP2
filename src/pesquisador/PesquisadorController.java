@@ -7,7 +7,7 @@ import java.util.Map;
 
 import sistema.SalvaSistema;
 import sistema.Verificador;
-import pesquisa.PesquisaController;
+
 
 /**
  * Controlador de objetos do tipo "Pesquisador", usado para armazena-los e

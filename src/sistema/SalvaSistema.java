@@ -48,6 +48,7 @@ public class SalvaSistema {
 		}
 		return null;
 	}
+
 	public static Map<String, Objetivo> retornaDadoObjetivo() {
 		try {
 			FileInputStream arquivo = new FileInputStream(".\\saves\\dadosObjetivo.dat");
@@ -64,6 +65,7 @@ public class SalvaSistema {
 		}
 		return null;
 	}
+
 	public static Map<String, Pesquisa> retornaDadoPesquisa() {
 		try {
 			FileInputStream arquivo = new FileInputStream(".\\saves\\dadosPesquisa.dat");
@@ -80,6 +82,7 @@ public class SalvaSistema {
 		}
 		return null;
 	}
+
 	public static Map<String, Pesquisador> retornaDadoPesquisador() {
 		try {
 			FileInputStream arquivo = new FileInputStream(".\\saves\\dadosPesquisadores.dat");
@@ -96,6 +99,7 @@ public class SalvaSistema {
 		}
 		return null;
 	}
+
 	public static Map<String, Problema> retornaDadoProblema() {
 		try {
 			FileInputStream arquivo = new FileInputStream(".\\saves\\dadosProblemas.dat");
