@@ -144,4 +144,28 @@ public class SalvaSistema {
 		}
 		return numerinho;
 	}
+	public static int retornaValorIDAtividade() {
+		int numerinho = 0;
+		try {
+			FileReader arq = new FileReader(".\\saves\\IDAtividade.dat");
+			BufferedReader lerArq = new BufferedReader(arq);
+			numerinho = Integer.parseInt(lerArq.readLine());
+			lerArq.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return numerinho;
+	}
+	public static int retornaValorIDProblema() {
+		int numerinho = 0;
+		try {
+			FileReader arq = new FileReader(".\\saves\\IDProblema.dat");
+			BufferedReader lerArq = new BufferedReader(arq);
+			numerinho = Integer.parseInt(lerArq.readLine());
+			lerArq.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return numerinho;
+	}
 }

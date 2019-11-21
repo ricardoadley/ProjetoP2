@@ -264,8 +264,10 @@ public class ControladorAtividade {
 
 	public void salvar() {
 		SalvaSistema.gravarDados(this.atividades,"dadosAtividade.dat");
+		SalvaSistema.gravaValorID(this.codigo,"IDAtividade.dat");
 	}
 	public void retorna() {
 		this.atividades = SalvaSistema.retornaDadoAtividades();
+		this.codigo = SalvaSistema.retornaValorIDAtividade();
 	}
 }
