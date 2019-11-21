@@ -97,10 +97,9 @@ public class PesquisaController {
 	/**
 	 * Altera algum dado especifico de uma pesquisa ja cadastrada
 	 * 
-	 * @param                      codigo, o codigo da pesquisa que sera alterada
+	 * @param codigo,              o codigo da pesquisa que sera alterada
 	 * @param conteudoASerAlterado , o parametro que sera alterado
-	 * @param                      novoConteudo, o novo valor que o parametro
-	 *                             alterado recebera
+	 * @param novoConteudo,        o novo valor que o parametro alterado recebera
 	 */
 	public void alteraPesquisa(String codigo, String conteudoASerAlterado, String novoConteudo) {
 		if (!this.mapaPesquisas.containsKey(codigo))
@@ -254,8 +253,8 @@ public class PesquisaController {
 
 	/**
 	 * Associa um Objetivo a uma Pesquisa. Uma pesquisa pode estar associada a
-	 * vários objetivos, entretanto, cada objetivo só pode estar associado a uma
-	 * única pesquisa.
+	 * vï¿½rios objetivos, entretanto, cada objetivo sï¿½ pode estar associado a uma
+	 * ï¿½nica pesquisa.
 	 * 
 	 * @param idPesquisa o identificador unico da Pesquisa
 	 * @param idObjetivo o identificador unico do Objetivo
@@ -329,8 +328,8 @@ public class PesquisaController {
 
 	/**
 	 * Associa um Problema a uma Pesquisa e retorna a String correspondente ao
-	 * sucesso ou nao da operacao. Uma pesquisa pode estar associada a um único
-	 * problema. Mas o mesmo problema pode estar associado a várias pesquisas.
+	 * sucesso ou nao da operacao. Uma pesquisa pode estar associada a um ï¿½nico
+	 * problema. Mas o mesmo problema pode estar associado a vï¿½rias pesquisas.
 	 * 
 	 * @param idPesquisa o identificador unico da pesquisa
 	 * @param idProblema o identificador unico do problema
@@ -360,7 +359,7 @@ public class PesquisaController {
 	}
 
 	/**
-	 * Retira a associação entre um Problema e uma Pesquisa
+	 * Retira a associaï¿½ï¿½o entre um Problema e uma Pesquisa
 	 * 
 	 * @param idPesquisa o identificador unico da Pesquisa
 	 * @param idProblema o identificador unico do Problema
@@ -543,6 +542,7 @@ public class PesquisaController {
 			BufferedWriter buffWrite = new BufferedWriter(escritorDeArquivo);
 
 			buffWrite.write(this.mapaPesquisas.get(codigoPesquisa).getResumo().trim());
+			buffWrite.flush();
 			buffWrite.close();
 
 		} catch (IOException e) {
@@ -567,6 +567,7 @@ public class PesquisaController {
 			BufferedWriter buffWrite = new BufferedWriter(escritorDeArquivo);
 
 			buffWrite.write(this.mapaPesquisas.get(codigoPesquisa).getResultados().trim());
+			buffWrite.flush();
 			buffWrite.close();
 
 		} catch (IOException e) {
@@ -604,13 +605,15 @@ public class PesquisaController {
 		}
 		return this.mapaPesquisas.get(codigoPesquisa).proximaAtividade(estrategia);
 	}
+
 	/**
-	 * Executa a gravacao da situacao atual do mapa de dados
-	 * da entidade pesquisa no arquivo
+	 * Executa a gravacao da situacao atual do mapa de dados da entidade pesquisa no
+	 * arquivo
 	 */
 	public void salvar() {
 		SalvaSistema.gravarDados(this.mapaPesquisas, "dadosPesquisa.dat");
 	}
+
 	/**
 	 * recupera os dados salvos da entidade pesquisa
 	 */
