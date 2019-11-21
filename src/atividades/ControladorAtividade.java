@@ -261,7 +261,72 @@ public class ControladorAtividade {
 		Verificador.existeChave(atividades, codigoAtividade, "Atividade nao encontrada");
 		this.capturaAtividadeNoMapa(codigoAtividade).desassociaPesquisa(codigoPesquisa);
 	}
-
+	
+	/**
+	 * Define uma atividade como proxima da outra.
+	 * 
+	 * @param idPrecedente id da atividade que ira ter proximo.
+	 * @param idSubsquente id da atividade que sera colada como proximo.
+	 */
+	public void defineProximaAtividade(String idPrecedente, String idSubsquente) {
+		Verificador.verificaEntrada(idPrecedente, "Atividade nao pode ser nulo ou vazio.");
+		Verificador.verificaEntrada(idSubsquente, "Atividade nao pode ser nulo ou vazio.");
+		Verificador.existeChave(atividades, idPrecedente, "Atividade nao encontrada.");
+		Verificador.existeChave(atividades, idSubsquente, "Atividade nao encontrada.");
+		atividades.get(idPrecedente).defineProximaAtividade(atividades.get(idSubsquente));
+		}
+	
+	/**
+	 * Retira a proxima de uma determinada atividade.
+	 * 
+	 * @param idPrecedente id da atividade a qual, sera retirado o proximo.
+	 */
+	public void tiraProximaAtividade(String idPrecedente) {
+		Verificador.verificaEntrada(idPrecedente, "Atividade nao pode ser nulo ou vazio.");
+		Verificador.existeChave(atividades, idPrecedente, "Atividade nao encontrada.");
+		atividades.get(idPrecedente).tiraProximaAtividade();
+	}
+	
+	/**
+	 * Conta as proximas atividades a partir de uma atividade.
+	 * 
+	 * @param idPrecedente id da atividade que servira como ponto de partida para contagem dos proximos.
+	 * 
+	 * @return retorna o numero de proximas atividades.
+	 */
+	public int contaProximos(String idPrecedente) {
+		Verificador.verificaEntrada(idPrecedente, "Atividade nao pode ser nulo ou vazio.");
+		Verificador.existeChave(atividades, idPrecedente, "Atividade nao encontrada.");
+		return atividades.get(idPrecedente).contaProximo();
+	}
+	
+	/**
+	 * Pega as proximas n atividades a partir de uma dada atividade.
+	 * 
+	 * @param idAtividade id da atividade qeu servira como ponto de partida.
+	 * @param enesimaAtividade numero n de casas de distancia desejada entre as atividades.
+	 * 
+	 * @return retorna o codigo da atividade encontrada ou erro caso nao exista atividades na posicao final.
+	 */
+	public String pegaProximo(String idAtividade, int enesimaAtividade) {
+		Verificador.verificaEntrada(idAtividade, "Atividade nao pode ser nulo ou vazio.");
+		Verificador.existeChave(atividades, idAtividade, "Atividade nao encontrada.");
+		Verificador.verificaInteiroPositivo(enesimaAtividade, "EnesimaAtividade nao pode ser negativa ou zero.");
+		return atividades.get(idAtividade).pegaProximo(enesimaAtividade);
+	}
+	
+	/**
+	 * Pega a atividade com maior risco em uma sequencia a partir de uma atividade x.
+	 * 
+	 * @param idAtividade id da atividade que servira como ponto de partida.
+	 * 
+	 * @return retorna o codigo da atividade com maior risco.
+	 */
+	public String pegaMaiorRiscoAtividades(String idAtividade) {
+		Verificador.verificaEntrada(idAtividade, "Atividade nao pode ser nulo ou vazio.");
+		Verificador.existeChave(atividades, idAtividade, "Atividade nao encontrada.");
+		return atividades.get(idAtividade).pegaMaiorRiscoAtividades();
+	}
 	public void salvar() {
 		SalvaSistema.gravarDados(this.atividades,"dadosAtividade.dat");
 	}

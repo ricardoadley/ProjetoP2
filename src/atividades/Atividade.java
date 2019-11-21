@@ -12,7 +12,7 @@ import sistema.Verificador;
  * Representacao de uma atividade, especificamente de uma pesquisa cadastrada
  * por um usuario no sistema
  * 
- * @author Ricardo A. S. Sena
+ * @author Ricardo A. S. Sena, Ana Beatriz da S. Truta.
  *
  */
 public class Atividade implements Comparable<Atividade>, Serializable {
@@ -63,14 +63,19 @@ public class Atividade implements Comparable<Atividade>, Serializable {
 	 * Lista com o nome das pesquisas associadas a atividade
 	 */
 	private List<String> pesquisasAssociadas;
+	private Atividade prox;
 
 	/**
 	 * Constroi uma nova atividade a partir dos parametros informados pelo usuario
 	 * 
-	 * @param descricao,      a descricao da atividade
-	 * @param nivelRisco,     o nivel de risco da atividade
-	 * @param descricaoRisco, a descricao do risco da atividade
-	 * @param days,           a duracao em dias da atividade
+	 * @param descricao,
+	 *            a descricao da atividade
+	 * @param nivelRisco,
+	 *            o nivel de risco da atividade
+	 * @param descricaoRisco,
+	 *            a descricao do risco da atividade
+	 * @param days,
+	 *            a duracao em dias da atividade
 	 */
 	public Atividade(String descricao, String nivelRisco, String descricaoRisco, int duracao, String codigo) {
 		// super();
@@ -86,12 +91,14 @@ public class Atividade implements Comparable<Atividade>, Serializable {
 		this.resultados = new HashMap<>();
 		this.ultimoResultado = 0;
 		this.pesquisasAssociadas = new ArrayList<String>();
+		this.prox = null;
 	}
 
 	/**
 	 * Adiciona um novo item ao mapa de itens
 	 * 
-	 * @param item, o item que sera adicionado
+	 * @param item,
+	 *            o item que sera adicionado
 	 */
 	public void adicionaItem(String item) {
 		Item it = new Item(item, ordemCadastroItem);
@@ -156,7 +163,8 @@ public class Atividade implements Comparable<Atividade>, Serializable {
 	 * Pesquisa se o termo informado pelo usuario esta presente nos itens da
 	 * atividade
 	 * 
-	 * @param palavra , a palavra, informada pelo usuario, que sera procurada
+	 * @param palavra
+	 *            , a palavra, informada pelo usuario, que sera procurada
 	 * @return retorna a string com os resultados encontrados
 	 */
 	public List<String> pesquisaItem(String palavra) {
@@ -175,8 +183,10 @@ public class Atividade implements Comparable<Atividade>, Serializable {
 	/**
 	 * Executa a atividade, realizando um dos itens e incremetando a duracao
 	 * 
-	 * @param item    item a ser realizado
-	 * @param duracao duracao a ser incrementada
+	 * @param item
+	 *            item a ser realizado
+	 * @param duracao
+	 *            duracao a ser incrementada
 	 */
 	public void executaAtividade(int item, int duracao) {
 		Verificador.existeChave(itens, item, "Item nao encontrado.");
@@ -194,7 +204,8 @@ public class Atividade implements Comparable<Atividade>, Serializable {
 	/**
 	 * Cadastra um resultado na atividade.
 	 * 
-	 * @param resultado resultado a ser cadastrado
+	 * @param resultado
+	 *            resultado a ser cadastrado
 	 * @return o ID do resultado cadastrado
 	 */
 	public int cadastraResultado(String resultado) {
@@ -206,7 +217,8 @@ public class Atividade implements Comparable<Atividade>, Serializable {
 	/**
 	 * Remove um resultado cadastrado anteriormente
 	 * 
-	 * @param numeroResultado numero do resultado
+	 * @param numeroResultado
+	 *            numero do resultado
 	 * @return true
 	 */
 	public boolean removeResultado(int numeroResultado) {
@@ -231,7 +243,8 @@ public class Atividade implements Comparable<Atividade>, Serializable {
 	/**
 	 * Armazena o codigo de uma pesquisa em uma lista
 	 * 
-	 * @param codigoPesquisa codigo da pesquisa a ser armazenado
+	 * @param codigoPesquisa
+	 *            codigo da pesquisa a ser armazenado
 	 */
 	public void associaPesquisa(String codigoPesquisa) {
 		this.pesquisasAssociadas.add(codigoPesquisa);
@@ -240,7 +253,8 @@ public class Atividade implements Comparable<Atividade>, Serializable {
 	/**
 	 * Remove o codigo de uma pesquisa em da lista de pesquisas
 	 * 
-	 * @param codigoPesquisa codigo da pesquisa a ser removida
+	 * @param codigoPesquisa
+	 *            codigo da pesquisa a ser removida
 	 */
 	public void desassociaPesquisa(String codigoPesquisa) {
 		this.pesquisasAssociadas.remove(codigoPesquisa);
@@ -306,8 +320,8 @@ public class Atividade implements Comparable<Atividade>, Serializable {
 	}
 
 	/**
-	 * Retorna os resultados da Atividade: itens e suas duraÃ§Ãµes, alÃ©m das
-	 * descriÃ§Ãµes de Atividade.
+	 * Retorna os resultados da Atividade: itens e suas durações, além das
+	 * descrições de Atividade.
 	 * 
 	 * @return os resultados da Atividade
 	 */
@@ -359,6 +373,115 @@ public class Atividade implements Comparable<Atividade>, Serializable {
 		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
+	}
+
+	/**
+	 * Define qual a proxima atividade que a atividade atual ira apontar, nao
+	 * podendo apontar para mais de uma atividade.
+	 * 
+	 * @param atividade
+	 *            atividade que sera colocada como proxima.
+	 */
+	public void defineProximaAtividade(Atividade atividade) {
+		if (this.prox != null) {
+			throw new IllegalArgumentException("Atividade ja possui uma subsequente.");
+		}
+		if (ehLoop(atividade, this.codigo)) {
+			throw new IllegalArgumentException("Criacao de loops negada.");
+		}
+		this.prox = atividade;
+	}
+
+	/**
+	 * Conta a quantidade de proximos que a atividade possui.
+	 * 
+	 * @return a quantidade de proximas atividades.
+	 */
+	public int contaProximo() {
+		if (this.prox == null) {
+			return 0;
+		}
+		return 1 + this.prox.contaProximo();
+	}
+
+	/**
+	 * Retira a atividade a qual a atividade atual aponta. Deixando assim, a
+	 * atividade atual sem proximo.
+	 */
+	public void tiraProximaAtividade() {
+		this.prox = null;
+	}
+
+	/**
+	 * Pega uma determinda atividade a uma n distancia da atual.
+	 * 
+	 * @param enesimaAtividade
+	 *            distancia entre as atividades.
+	 * 
+	 * @return retorna o codigo da atividade encontrada e caso isso nao ocorra lanca
+	 *         um erro.
+	 */
+	public String pegaProximo(int enesimaAtividade) {
+		if (enesimaAtividade == 0) {
+			return codigo;
+		}
+		if (this.prox == null) {
+			throw new IllegalArgumentException("Atividade inexistente.");
+		}
+		return this.prox.pegaProximo(enesimaAtividade - 1);
+	}
+
+	private Atividade pegaAtividadeMaiorRisco() {
+		if (this.prox == null) {
+			return this;
+		}
+		Atividade atv = this.prox.pegaAtividadeMaiorRisco();
+		String risco = atv.getNivelRisco();
+		if (risco.equals("ALTO")) {
+			return atv;
+		} else {
+			if (this.nivelRisco.equals("ALTO"))
+				return this;
+			else if (this.nivelRisco.equals(risco))
+				return atv;
+			else if (this.nivelRisco.equals("MEDIO"))
+				return this;
+			else
+				return atv;
+		}
+	}
+
+	/**
+	 * Pega a atividade com maior risco.
+	 * 
+	 * @return codigo da atividade com maior risco.
+	 */
+	public String pegaMaiorRiscoAtividades() {
+		if (this.prox == null) {
+			throw new IllegalArgumentException("Nao existe proxima atividade.");
+		} else {
+			return this.prox.pegaAtividadeMaiorRisco().getCodigo();
+		}
+	}
+
+	/**
+	 * Verifica se ao colocar a atividade como proximo nao ira formar um loop.
+	 * 
+	 * @param atividade
+	 *            atividade que sera colocada como proximo.
+	 * @param id
+	 *            codigo da atividade atual
+	 * 
+	 * @return retorna true caso haja loop e false caso contrario.
+	 */
+	public boolean ehLoop(Atividade atividade, String id) {
+		if (atividade.prox == null) {
+			return false;
+		}
+		if (atividade.prox.getCodigo().equals(id)) {
+			return true;
+		}
+		return ehLoop(atividade.prox, id);
 	}
 
 }

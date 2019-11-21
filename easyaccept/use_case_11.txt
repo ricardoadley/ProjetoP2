@@ -3,8 +3,6 @@
 #Criando P5 e O7
 #Associando COM3 e eliane@computacao.ufcg.edu.br, borutofathers@1997, livia@computacao.ufcg.edu.br.
 #Associando COM3 e P5 e O7.
-
-
 expect true associaPesquisador idPesquisa="COM1" emailPesquisador="eliane@computacao.ufcg.edu.br"
 expect true associaPesquisador idPesquisa="COM3" emailPesquisador="eliane@computacao.ufcg.edu.br"
 expect true associaPesquisador idPesquisa="COM3" emailPesquisador="borutofathers@1997"
@@ -13,20 +11,17 @@ cadastraProblema descricao="A problematica do aluno de cc encarregado de criar t
 cadastraObjetivo tipo="ESPECIFICO" descricao="Minimizar a quantidade de testes ruins." aderencia=1 viabilidade=1
 expect true associaProblema idPesquisa="COM3" idProblema="P5"
 expect true associaObjetivo idPesquisa="COM3" idObjetivo="O7"
-
-
 expectError "Pesquisa nao pode ser nula ou vazia." gravarResumo codigoPesquisa=""
 expectError "Pesquisa nao encontrada." gravarResumo codigoPesquisa="ENE1"
 gravarResumo codigoPesquisa="COM1"
 gravarResumo codigoPesquisa="COM2"
 gravarResumo codigoPesquisa="COM3"
-
-
 expectError "Pesquisa nao pode ser nula ou vazia." gravarResultados codigoPesquisa=""
 expectError "Pesquisa nao encontrada." gravarResultados codigoPesquisa="ENE1"
 gravarResultados codigoPesquisa="COM1"
 gravarResultados codigoPesquisa="COM2"
 gravarResultados codigoPesquisa="COM3"
+
 
 
 equalfiles ./easyaccept/_COM1.txt ./_COM1.txt 

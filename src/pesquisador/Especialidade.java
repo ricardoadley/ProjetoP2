@@ -1,5 +1,11 @@
 package pesquisador;
 
+/**
+ * Interface da Especialidade do aluno.
+ * 
+ * @author Ana Beatriz da S. Truta
+ *
+ */
 public interface Especialidade {
 
 	@Override

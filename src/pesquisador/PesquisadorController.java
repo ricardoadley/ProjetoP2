@@ -245,7 +245,7 @@ public class PesquisadorController {
 	/**
 	 * Lista os Pesquisadores de determinado tipo
 	 * @param tipo, o tipo do pesquisador que sera listado
-	 * @return a representação em string dos pesquisadores encontrados
+	 * @return a representacao em string dos pesquisadores encontrados
 	 */
 	public String listaPesquisadores(String tipo) {
 		String exibicao = "";
