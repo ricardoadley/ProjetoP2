@@ -127,8 +127,10 @@ public class ProblemaController {
 
 	public void salvar() {
 		SalvaSistema.gravarDados(this.problemas,"dadosProblemas.dat");
+		SalvaSistema.gravaValorID(this.code,"IDProblema.dat");
 	}
 	public void retorna() {
 		this.problemas = SalvaSistema.retornaDadoProblema();
+		this.code = SalvaSistema.retornaValorIDProblema();
 	}
 }
