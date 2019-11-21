@@ -16,12 +16,29 @@ import pesquisa.Pesquisa;
 import pesquisador.Pesquisador;
 import problema.Problema;
 
+/**
+ * Responsavel por executar a criacao dos arquivos de dados junto com a gravacao
+ * e recuperacao dos dados do sistema
+ * 
+ * @author Ricardo A. S. Sena
+ *
+ */
 public class SalvaSistema {
-
+	/**
+	 * construtor da classe
+	 */
 	public SalvaSistema() {
 
 	}
 
+	/**
+	 * Executa a criacao e gravacao dos dados da entidade
+	 * 
+	 * @param mapa,
+	 *            o mapa da entidade que sera gravado
+	 * @param local,
+	 *            o local (arquivo) em que sera gravado o mapa
+	 */
 	public static void gravarDados(Map mapa, String local) {
 		try {
 			FileOutputStream arquivo = new FileOutputStream(".\\saves\\" + local);
@@ -36,6 +53,11 @@ public class SalvaSistema {
 		}
 	}
 
+	/**
+	 * Retorna os dados da entidade atividade registrados no arquivo
+	 * 
+	 * @return o mapa contendo os dados registrados
+	 */
 	public static Map<String, Atividade> retornaDadoAtividades() {
 		try {
 			FileInputStream arquivo = new FileInputStream(".\\saves\\dadosAtividade.dat");
@@ -53,6 +75,11 @@ public class SalvaSistema {
 		return null;
 	}
 
+	/**
+	 * Retorna os dados da entidade objetivo registrados no arquivo
+	 * 
+	 * @return o mapa contendo os dados registrados
+	 */
 	public static Map<String, Objetivo> retornaDadoObjetivo() {
 		try {
 			FileInputStream arquivo = new FileInputStream(".\\saves\\dadosObjetivo.dat");
@@ -70,6 +97,11 @@ public class SalvaSistema {
 		return null;
 	}
 
+	/**
+	 * Retorna os dados da entidade pesquisa registrados no arquivo
+	 * 
+	 * @return o mapa contendo os dados registrados
+	 */
 	public static Map<String, Pesquisa> retornaDadoPesquisa() {
 		try {
 			FileInputStream arquivo = new FileInputStream(".\\saves\\dadosPesquisa.dat");
@@ -87,6 +119,11 @@ public class SalvaSistema {
 		return null;
 	}
 
+	/**
+	 * Retorna os dados da entidade pesquisador registrados no arquivo
+	 * 
+	 * @return o mapa contendo os dados registrados
+	 */
 	public static Map<String, Pesquisador> retornaDadoPesquisador() {
 		try {
 			FileInputStream arquivo = new FileInputStream(".\\saves\\dadosPesquisadores.dat");
@@ -104,6 +141,11 @@ public class SalvaSistema {
 		return null;
 	}
 
+	/**
+	 * Retorna os dados da entidade problema registrados no arquivo
+	 * 
+	 * @return o mapa contendo os dados registrados
+	 */
 	public static Map<String, Problema> retornaDadoProblema() {
 		try {
 			FileInputStream arquivo = new FileInputStream(".\\saves\\dadosProblemas.dat");
@@ -121,6 +163,14 @@ public class SalvaSistema {
 		return null;
 	}
 
+	/**
+	 * Registra em um arquivo o valor do id dos objetos criados na classe
+	 * 
+	 * @param valor
+	 *            , a quantidade de objetos cadastrados
+	 * @param caminho,
+	 *            o local (arquivo) em que os dados seram registrados
+	 */
 	public static void gravaValorID(int valor, String caminho) {
 		try {
 			FileWriter arquivo = new FileWriter(".\\saves\\" + caminho);
@@ -132,6 +182,12 @@ public class SalvaSistema {
 		}
 	}
 
+	/**
+	 * retorna a quantidade e ids registrados da entidade objetivo que foram
+	 * previamente salvos
+	 * 
+	 * @return um inteiro representando a quantidade de ids registrados
+	 */
 	public static int retornaValorIDObjetivo() {
 		int numerinho = 0;
 		try {
@@ -144,6 +200,13 @@ public class SalvaSistema {
 		}
 		return numerinho;
 	}
+
+	/**
+	 * retorna a quantidade e ids registrados da entidade atividade que foram
+	 * previamente salvos
+	 * 
+	 * @return um inteiro representando a quantidade de ids registrados
+	 */
 	public static int retornaValorIDAtividade() {
 		int numerinho = 0;
 		try {
@@ -156,6 +219,13 @@ public class SalvaSistema {
 		}
 		return numerinho;
 	}
+
+	/**
+	 * retorna a quantidade e ids registrados da entidade problema que foram
+	 * previamente salvos
+	 * 
+	 * @return um inteiro representando a quantidade de ids registrados
+	 */
 	public static int retornaValorIDProblema() {
 		int numerinho = 0;
 		try {

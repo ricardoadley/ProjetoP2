@@ -124,11 +124,18 @@ public class ProblemaController {
 		}
 		return resultados;
 	}
-
+	/**
+	 * Executa a gravacao da situacao atual do mapa de dados
+	 * da entidade problema no arquivo e junto a isso salva 
+	 * o id atual em que os problemas estao sendo gravados
+	 */
 	public void salvar() {
 		SalvaSistema.gravarDados(this.problemas,"dadosProblemas.dat");
 		SalvaSistema.gravaValorID(this.code,"IDProblema.dat");
 	}
+	/**
+	 * recupera os dados salvos da entidade problema
+	 */
 	public void retorna() {
 		this.problemas = SalvaSistema.retornaDadoProblema();
 		this.code = SalvaSistema.retornaValorIDProblema();

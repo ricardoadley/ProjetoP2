@@ -604,11 +604,16 @@ public class PesquisaController {
 		}
 		return this.mapaPesquisas.get(codigoPesquisa).proximaAtividade(estrategia);
 	}
-
+	/**
+	 * Executa a gravacao da situacao atual do mapa de dados
+	 * da entidade pesquisa no arquivo
+	 */
 	public void salvar() {
 		SalvaSistema.gravarDados(this.mapaPesquisas, "dadosPesquisa.dat");
 	}
-
+	/**
+	 * recupera os dados salvos da entidade pesquisa
+	 */
 	public void retorna() {
 		this.mapaPesquisas = SalvaSistema.retornaDadoPesquisa();
 	}

@@ -271,9 +271,16 @@ public class PesquisadorController {
 		return this.mapaPesquisadores.get(emailPesquisador);
 
 	}
+	/**
+	 * Executa a gravacao da situacao atual do mapa de dados
+	 * da entidade pesquisador no arquivo
+	 */
 	public void salvar() {
 		SalvaSistema.gravarDados(this.mapaPesquisadores,"dadosPesquisadores.dat");
 	}
+	/**
+	 * recupera os dados salvos da entidade pesquisa
+	 */
 	public void retorna() {
 		this.mapaPesquisadores = SalvaSistema.retornaDadoPesquisador();
 	}

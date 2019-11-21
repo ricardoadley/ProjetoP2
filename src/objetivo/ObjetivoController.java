@@ -140,10 +140,18 @@ public class ObjetivoController {
 		}
 		return resultados;
 	}
+	/**
+	 * Executa a gravacao da situacao atual do mapa de dados
+	 * da entidade Objetivo no arquivo e junto a isso salva 
+	 * o id atual em que os objetivos estao sendo gravados
+	 */
 	public void salvar() {
 		SalvaSistema.gravarDados(this.objetivos,"dadosObjetivo.dat");
 		SalvaSistema.gravaValorID(this.code,"IDObjetivo.dat");
 	}
+	/**
+	 * recupera os dados salvos da entidade problema
+	 */
 	public void retorna() {
 		this.objetivos = SalvaSistema.retornaDadoObjetivo();
 		this.code = SalvaSistema.retornaValorIDObjetivo();
