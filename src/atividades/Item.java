@@ -11,7 +11,7 @@ import sistema.Verificador;
  */
 public class Item implements Comparable<Item>, Serializable {
 	/**
-	 * 
+	 * versao de serializacao da classe
 	 */
 	private static final long serialVersionUID = -4230151211128137677L;
 	/**

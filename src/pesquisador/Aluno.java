@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 public class Aluno implements Especialidade, Serializable {
 	/**
-	 * 
+	 * versao de serializacao da classe
 	 */
 	private static final long serialVersionUID = 211413174667739514L;
 	/**

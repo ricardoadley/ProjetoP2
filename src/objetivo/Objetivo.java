@@ -9,13 +9,13 @@ import sistema.Verificador;
  * ESPECIFICO), descricao, aderencia (inteiro de 1 a 5), viabilidade (inteiro de
  * 1 a 5) e um codigo pelo qual e identificado unicamente.
  * 
- * @author José Matheus do N. Gama
+ * @author Jose Matheus do N. Gama
  *
  */
 public class Objetivo implements Serializable {
 
 	/**
-	 * 
+	 * versao de serializacao da classe
 	 */
 	private static final long serialVersionUID = 2787121198791897001L;
 

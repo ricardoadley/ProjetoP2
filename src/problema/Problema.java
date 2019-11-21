@@ -15,7 +15,7 @@ import sistema.Verificador;
 public class Problema implements Serializable{
 
 	/**
-	 * 
+	 * versao de serializacao da classe
 	 */
 	private static final long serialVersionUID = -5459760839598827374L;
 

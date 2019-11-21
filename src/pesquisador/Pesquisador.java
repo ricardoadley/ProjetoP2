@@ -13,7 +13,7 @@ import sistema.Verificador;
 public class Pesquisador implements Serializable{
 
 	/**
-	 * 
+	 * versao de serializacao da classe
 	 */
 	private static final long serialVersionUID = -3242708889607214885L;
 	/**
