@@ -18,7 +18,7 @@ import sistema.Verificador;
 public class Atividade implements Comparable<Atividade>, Serializable {
 
 	/**
-	 * 
+	 * versao de serializacao da classe
 	 */
 	private static final long serialVersionUID = -5554254115400970053L;
 	/**

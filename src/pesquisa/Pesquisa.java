@@ -17,12 +17,12 @@ import sistema.Verificador;
  * unicamente. Alem disso, tambem pode estar ou nao associada a um Problema ou
  * Objetivos.
  * 
- * @author Beatriz Truta, José Matheus do N. Gama
+ * @author Beatriz Truta, Jose Matheus do N. Gama
  *
  */
 public class Pesquisa implements Serializable{
 	/**
-	 * 
+	 * versao de serializacao da classe
 	 */
 	private static final long serialVersionUID = -1141748543722595937L;
 	/**
