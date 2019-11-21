@@ -327,10 +327,18 @@ public class ControladorAtividade {
 		Verificador.existeChave(atividades, idAtividade, "Atividade nao encontrada.");
 		return atividades.get(idAtividade).pegaMaiorRiscoAtividades();
 	}
+	/**
+	 * Executa a gravacao da situacao atual do mapa de dados
+	 * da entidade Atividade no arquivo e junto a isso salva 
+	 * o id atual em que as atividades estao sendo gravados
+	 */
 	public void salvar() {
 		SalvaSistema.gravarDados(this.atividades,"dadosAtividade.dat");
 		SalvaSistema.gravaValorID(this.codigo,"IDAtividade.dat");
 	}
+	/**
+	 * recupera os dados salvos da entidade problema
+	 */
 	public void retorna() {
 		this.atividades = SalvaSistema.retornaDadoAtividades();
 		this.codigo = SalvaSistema.retornaValorIDAtividade();
