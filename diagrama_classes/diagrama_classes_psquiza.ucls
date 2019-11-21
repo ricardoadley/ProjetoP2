@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.3" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="objetivo.ObjetivoController" project="ProjetoP2" 
+    file="/ProjetoP2/src/objetivo/ObjetivoController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="223" width="265" x="502" y="1584"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="objetivo.ComparadorObjetivo" project="ProjetoP2" 
+    file="/ProjetoP2/src/objetivo/ComparadorObjetivo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="169" x="575" y="2135"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="pesquisa.Pesquisa" project="ProjetoP2" 
+    file="/ProjetoP2/src/pesquisa/Pesquisa.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="655" width="266" x="1488" y="2434"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="4" language="java" name="pesquisador.Especialidade" project="ProjetoP2" 
+    file="/ProjetoP2/src/pesquisador/Especialidade.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="115" width="166" x="162" y="3960"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="5" language="java" name="pesquisador.Pesquisador" project="ProjetoP2" 
+    file="/ProjetoP2/src/pesquisador/Pesquisador.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="493" width="267" x="542" y="3129"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="atividades.ControladorAtividade" project="ProjetoP2" 
+    file="/ProjetoP2/src/atividades/ControladorAtividade.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="511" width="239" x="870" y="1584"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="atividades.ComparadorAtividade" project="ProjetoP2" 
+    file="/ProjetoP2/src/atividades/ComparadorAtividade.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="179" x="1169" y="2135"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="pesquisa.PesquisaProblemaComparator" project="ProjetoP2" 
+    file="/ProjetoP2/src/pesquisa/PesquisaProblemaComparator.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="201" x="1149" y="1584"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="pesquisa.PesquisaController" project="ProjetoP2" 
+    file="/ProjetoP2/src/pesquisa/PesquisaController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="601" width="514" x="1149" y="943"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="pesquisa.PesquisaObjetivosComparator" project="ProjetoP2" 
+    file="/ProjetoP2/src/pesquisa/PesquisaObjetivosComparator.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="200" x="1390" y="1584"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="atividades.Item" project="ProjetoP2" file="/ProjetoP2/src/atividades/Item.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="331" width="265" x="1141" y="3960"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="pesquisa.PesquisaIDComparator" project="ProjetoP2" 
+    file="/ProjetoP2/src/pesquisa/PesquisaIDComparator.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="179" x="1630" y="1584"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="sistema.Facade" project="ProjetoP2" file="/ProjetoP2/src/sistema/Facade.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1069" width="329" x="979" y="-393"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="sistema.PsquizaRun" project="ProjetoP2" 
+    file="/ProjetoP2/src/sistema/PsquizaRun.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="113" x="104" y="-393"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="sistema.Verificador" project="ProjetoP2" 
+    file="/ProjetoP2/src/sistema/Verificador.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="295" width="294" x="1427" y="4331"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="pesquisador.Professor" project="ProjetoP2" 
+    file="/ProjetoP2/src/pesquisador/Professor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="259" width="267" x="-145" y="2135"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="atividades.Atividade" project="ProjetoP2" 
+    file="/ProjetoP2/src/atividades/Atividade.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="781" width="266" x="1151" y="3129"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="pesquisador.Aluno" project="ProjetoP2" 
+    file="/ProjetoP2/src/pesquisador/Aluno.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="223" width="256" x="162" y="2135"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="problema.Problema" project="ProjetoP2" 
+    file="/ProjetoP2/src/problema/Problema.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="241" width="267" x="1893" y="3129"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="sistema.SalvaSistema" project="ProjetoP2" 
+    file="/ProjetoP2/src/sistema/SalvaSistema.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="259" width="280" x="849" y="2135"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="sistema.BuscadorPalavra" project="ProjetoP2" 
+    file="/ProjetoP2/src/sistema/BuscadorPalavra.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="187" width="416" x="542" y="716"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="problema.ProblemaController" project="ProjetoP2" 
+    file="/ProjetoP2/src/problema/ProblemaController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="223" width="211" x="1933" y="1584"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="atividades.OrdenaAtividade" project="ProjetoP2" 
+    file="/ProjetoP2/src/atividades/OrdenaAtividade.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="115" width="171" x="507" y="-393"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="objetivo.Objetivo" project="ProjetoP2" 
+    file="/ProjetoP2/src/objetivo/Objetivo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="277" width="262" x="849" y="3129"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="pesquisador.PesquisadorController" project="ProjetoP2" 
+    file="/ProjetoP2/src/pesquisador/PesquisadorController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="331" width="329" x="133" y="1584"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="problema.ComparadorProblema" project="ProjetoP2" 
+    file="/ProjetoP2/src/problema/ComparadorProblema.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="185" x="1933" y="2135"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <dependency id="27">    
+    <bendpoint x="1881" y="1584"/>    
+    <bendpoint x="1881" y="2135"/>    
+    <bendpoint x="1881" y="2434"/>    
+    <bendpoint x="1862" y="3129"/>    
+    <bendpoint x="1862" y="3960"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <dependency id="28">    
+    <bendpoint x="858" y="2434"/>    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="24"/>  
+  </dependency>  
+  <dependency id="29">    
+    <bendpoint x="818" y="1584"/>    
+    <bendpoint x="818" y="2135"/>    
+    <bendpoint x="837" y="2434"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="24"/>  
+  </dependency>  
+  <association id="30">    
+    <bendpoint x="715" y="943"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="31" name="controleAtividade"/>      
+      <multiplicity id="32" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="33">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="34" name="atividadesAssociadas"/>      
+      <multiplicity id="35" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="36">    
+    <bendpoint x="988" y="716"/>    
+    <bendpoint x="988" y="943"/>    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="37" name="atividadeController"/>      
+      <multiplicity id="38" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="39">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <association id="40">    
+    <bendpoint x="795" y="2135"/>    
+    <bendpoint x="795" y="2434"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="41" name="objetivos"/>      
+      <multiplicity id="42" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="43">    
+    <bendpoint x="774" y="2434"/>    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="24"/>  
+  </dependency>  
+  <dependency id="44">    
+    <bendpoint x="1169" y="2434"/>    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <dependency id="45">    
+    <bendpoint x="1457" y="2135"/>    
+    <bendpoint x="1457" y="2434"/>    
+    <bendpoint x="1457" y="3129"/>    
+    <bendpoint x="1457" y="3960"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <dependency id="46">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <dependency id="47">    
+    <bendpoint x="1902" y="1584"/>    
+    <bendpoint x="1902" y="2135"/>    
+    <bendpoint x="1902" y="2434"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="48">    
+    <bendpoint x="1009" y="2434"/>    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <association id="49">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="50" name="prox"/>      
+      <multiplicity id="51" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="52">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="53" name="buscador"/>      
+      <multiplicity id="54" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="55">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="56">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
+  <dependency id="57">    
+    <bendpoint x="448" y="2135"/>    
+    <bendpoint x="448" y="2434"/>    
+    <bendpoint x="448" y="3129"/>    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <dependency id="58">    
+    <bendpoint x="1399" y="2434"/>    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <association id="59">    
+    <bendpoint x="1693" y="716"/>    
+    <bendpoint x="1693" y="943"/>    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="60" name="problemaController"/>      
+      <multiplicity id="61" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="62">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="63">    
+    <bendpoint x="1568" y="2135"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="64">    
+    <bendpoint x="839" y="1584"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <association id="65">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="66" name="pesquisadorController"/>      
+      <multiplicity id="67" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="68">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="69" name="problemaController"/>      
+      <multiplicity id="70" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="71">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="16"/>  
+  </dependency>  
+  <dependency id="72">    
+    <bendpoint x="2190" y="2135"/>    
+    <bendpoint x="2190" y="2434"/>    
+    <bendpoint x="2190" y="3129"/>    
+    <bendpoint x="2190" y="3960"/>    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <association id="73">    
+    <bendpoint x="1839" y="1584"/>    
+    <bendpoint x="1839" y="2135"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="74" name="mapaPesquisas"/>      
+      <multiplicity id="75" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="76">    
+    <bendpoint x="1378" y="2135"/>    
+    <bendpoint x="1378" y="2434"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="77" name="atividades"/>      
+      <multiplicity id="78" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="79">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="80" name="controlePesquisa"/>      
+      <multiplicity id="81" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="82">    
+    <bendpoint x="469" y="716"/>    
+    <bendpoint x="469" y="943"/>    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="83" name="pesquisadorController"/>      
+      <multiplicity id="84" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="85">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="26"/>  
+  </dependency>  
+  <association id="86">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="87" name="proximo"/>      
+      <multiplicity id="88" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="89">    
+    <bendpoint x="18" y="2434"/>    
+    <bendpoint x="18" y="3129"/>    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <association id="90">    
+    <bendpoint x="490" y="2135"/>    
+    <bendpoint x="532" y="2434"/>    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="91" name="mapaPesquisadores"/>      
+      <multiplicity id="92" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="93">    
+    <bendpoint x="2148" y="2135"/>    
+    <bendpoint x="2148" y="2434"/>    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="94" name="problemas"/>      
+      <multiplicity id="95" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="96">    
+    <bendpoint x="511" y="716"/>    
+    <bendpoint x="511" y="943"/>    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="97" name="objetivoController"/>      
+      <multiplicity id="98" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="99">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <dependency id="100">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="101">    
+    <bendpoint x="1860" y="1584"/>    
+    <bendpoint x="1860" y="2135"/>    
+    <bendpoint x="1860" y="2434"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <association id="102">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="103" name="pesquisadoresAssociados"/>      
+      <multiplicity id="104" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="105">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <association id="106">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="107" name="objetivoController"/>      
+      <multiplicity id="108" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="109">    
+    <bendpoint x="171" y="2434"/>    
+    <bendpoint x="171" y="3129"/>    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <dependency id="110">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="111">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <dependency id="112">    
+    <bendpoint x="1110" y="3960"/>    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <dependency id="113">    
+    <bendpoint x="1478" y="2135"/>    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <association id="114">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="115" name="problemaAssociado"/>      
+      <multiplicity id="116" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="117">    
+    <bendpoint x="1499" y="2135"/>    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="118">    
+    <bendpoint x="994" y="3960"/>    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <dependency id="119">    
+    <bendpoint x="1923" y="2434"/>    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="120">    
+    <bendpoint x="511" y="2135"/>    
+    <bendpoint x="511" y="2434"/>    
+    <bendpoint x="511" y="3129"/>    
+    <bendpoint x="511" y="3960"/>    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <dependency id="121">    
+    <bendpoint x="797" y="1584"/>    
+    <bendpoint x="774" y="2135"/>    
+    <bendpoint x="753" y="2434"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="122">    
+    <bendpoint x="1436" y="3960"/>    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <dependency id="123">    
+    <bendpoint x="1883" y="3960"/>    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <association id="124">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="125" name="itens"/>      
+      <multiplicity id="126" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="127">    
+    <bendpoint x="1478" y="3129"/>    
+    <bendpoint x="1478" y="3960"/>    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <dependency id="128">    
+    <bendpoint x="816" y="2434"/>    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <association id="129">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="130" name="objetivosAssociados"/>      
+      <multiplicity id="131" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="132">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="133" name="especialidade"/>      
+      <multiplicity id="134" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="135">    
+    <bendpoint x="1073" y="716"/>    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="136" name="pesquisaController"/>      
+      <multiplicity id="137" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="138">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="139" name="atividadeController"/>      
+      <multiplicity id="140" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="141">    
+    <bendpoint x="490" y="943"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="142" name="controlePesquisador"/>      
+      <multiplicity id="143" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="144">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <dependency id="145">    
+    <bendpoint x="469" y="2135"/>    
+    <bendpoint x="469" y="2434"/>    
+    <bendpoint x="469" y="3129"/>    
+    <bendpoint x="469" y="3960"/>    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <dependency id="146">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
