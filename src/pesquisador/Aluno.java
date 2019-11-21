@@ -1,12 +1,6 @@
 package pesquisador;
 
 import java.io.Serializable;
-/**
- * Classe que define as caracteristicas de um pesquisador que possui "ALUNO" como funcao.
- * 
- * @author Ana Beatriz da S. Truta
- *
- */
 
 public class Aluno implements Especialidade, Serializable{
 
@@ -14,9 +8,6 @@ public class Aluno implements Especialidade, Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 211413174667739514L;
-	/**
-	 * Semestre de ingresso do aluno.
-	 */
 	private int semestre;
 	/**
 	 * Indice de Eficiencia do Aluno do aluno
@@ -26,8 +17,8 @@ public class Aluno implements Especialidade, Serializable{
 	/**
 	 * Contrutor da classe Aluno.
 	 * 
-	 * @param semestre semestre de ingresso do aluno. 
-	 * @param iea do aluno.
+	 * @param semestre semestre de ingresso do aluno.
+	 * @param iea      do aluno.
 	 */
 	public Aluno(int semestre, double iea) {
 		super();
@@ -45,7 +36,7 @@ public class Aluno implements Especialidade, Serializable{
 
 	@Override
 	public void setAtributo(String atributo, String novo) {
-		
+
 	}
 
 	@Override
@@ -56,6 +47,5 @@ public class Aluno implements Especialidade, Serializable{
 	@Override
 	public String getEspecialidade() {
 		return "Aluno";
-	}	
-
+	}
 }

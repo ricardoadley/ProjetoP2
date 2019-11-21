@@ -1,21 +1,13 @@
 package pesquisador;
 
 import java.io.Serializable;
-/**
- * Classe responsavel pelas caracteristicas do pesquisador que sua funcao eh "Professor".
- * 
- * @author Ana Beatriz da S. Truta
- *
- */
+
 public class Professor implements Especialidade, Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5228101515900261669L;
-	/**
-	 * Formacao do professor.
-	 */
 	private String formacao;
 	/**
 	 * Unidade na qual o professor esta alocado.

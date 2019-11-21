@@ -469,7 +469,7 @@ public class Pesquisa implements Serializable{
 		}
 		return proxima;
 	}
-	
+
 	@Override
 	/**
 	 * Retorna uma representacao em string da pesquisa no formato CODIGO - DESCRICAO

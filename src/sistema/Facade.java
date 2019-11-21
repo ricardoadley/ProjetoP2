@@ -1,6 +1,7 @@
 package sistema;
 
 import java.io.IOException;
+
 import atividades.ControladorAtividade;
 import objetivo.ObjetivoController;
 import pesquisador.PesquisadorController;
@@ -22,7 +23,6 @@ public class Facade {
 	private PesquisadorController pesquisadorController;
 	private PesquisaController pesquisaController;
 	private BuscadorPalavra buscador;
-
 	public Facade() throws IOException {
 		this.atividadeController = new ControladorAtividade();
 		this.pesquisadorController = new PesquisadorController();

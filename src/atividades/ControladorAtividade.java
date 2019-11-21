@@ -262,13 +262,6 @@ public class ControladorAtividade {
 		this.capturaAtividadeNoMapa(codigoAtividade).desassociaPesquisa(codigoPesquisa);
 	}
 	
-	public void salvar() {
-		SalvaSistema.gravarDados(this.atividades,"dadosAtividade.dat");
-	}
-	public void retorna() {
-		this.atividades = SalvaSistema.retornaDadoAtividades();
-	}
-	
 	/**
 	 * Define uma atividade como proxima da outra.
 	 * 
@@ -333,5 +326,12 @@ public class ControladorAtividade {
 		Verificador.verificaEntrada(idAtividade, "Atividade nao pode ser nulo ou vazio.");
 		Verificador.existeChave(atividades, idAtividade, "Atividade nao encontrada.");
 		return atividades.get(idAtividade).pegaMaiorRiscoAtividades();
+	}
+
+	public void salvar() {
+		SalvaSistema.gravarDados(this.atividades,"dadosAtividade.dat");
+	}
+	public void retorna() {
+		this.atividades = SalvaSistema.retornaDadoAtividades();
 	}
 }

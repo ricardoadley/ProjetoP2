@@ -16,6 +16,7 @@ import sistema.Verificador;
  *
  */
 public class Atividade implements Comparable<Atividade>, Serializable {
+
 	/**
 	 * 
 	 */
