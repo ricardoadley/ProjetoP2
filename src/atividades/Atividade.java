@@ -12,7 +12,7 @@ import sistema.Verificador;
  * Representacao de uma atividade, especificamente de uma pesquisa cadastrada
  * por um usuario no sistema
  * 
- * @author Ricardo A. S. Sena
+ * @author Ricardo A. S. Sena, Ana Beatriz da S. Truta.
  *
  */
 public class Atividade implements Comparable<Atividade>, Serializable {
@@ -62,6 +62,9 @@ public class Atividade implements Comparable<Atividade>, Serializable {
 	 * Lista com o nome das pesquisas associadas a atividade
 	 */
 	private List<String> pesquisasAssociadas;
+	/**
+	 * 	
+	 */
 	private Atividade prox;
 	
 	/**
@@ -362,6 +365,11 @@ public class Atividade implements Comparable<Atividade>, Serializable {
 		return true;
 	}
 
+	/**
+	 * Define qual a proxima atividade que a atividade atual ira apontar, nao podendo apontar para mais de uma atividade.
+	 * 
+	 * @param atividade atividade que sera colocada como proxima.
+	 */
 	public void defineProximaAtividade(Atividade atividade) {
 		if(this.prox != null) {
 			throw new IllegalArgumentException("Atividade ja possui uma subsequente.");
@@ -372,6 +380,11 @@ public class Atividade implements Comparable<Atividade>, Serializable {
 		this.prox = atividade;
 	}
 
+	/**
+	 * Conta a quantidade de proximos que a atividade possui.
+	 * 
+	 * @return a quantidade de proximas atividades.
+	 */
 	public int contaProximo() {
 		if(this.prox == null) {
 			return 0;
@@ -379,10 +392,20 @@ public class Atividade implements Comparable<Atividade>, Serializable {
 		return 1 + this.prox.contaProximo();
 	}
 
+	/**
+	 * Retira a atividade a qual a atividade atual aponta. Deixando assim, a atividade atual sem proximo.
+	 */
 	public void tiraProximaAtividade() {
 		this.prox = null;
 	}
 
+	/**
+	 * Pega uma determinda atividade a uma n distancia da atual.
+	 * 
+	 * @param enesimaAtividade distancia entre as atividades.
+	 * 
+	 * @return retorna o codigo da atividade encontrada e caso isso nao ocorra lanca um erro.
+	 */
 	public String pegaProximo(int enesimaAtividade) {
 		if(enesimaAtividade == 0) {
 			return codigo;
@@ -393,17 +416,47 @@ public class Atividade implements Comparable<Atividade>, Serializable {
 		return this.prox.pegaProximo(enesimaAtividade -1);
 	}
 
-	public String pegaMaiorRiscoAtividades() {
-		
+	private Atividade pegaAtividadeMaiorRisco() {
 		if(this.prox == null) {
-			throw new IllegalArgumentException("Nao existe proxima atividade.");
+			return this;
 		}
-		if (this.prox.nivelRisco.equals("ALTO") && this.prox.prox.nivelRisco.equals("ALTO")) {
-			return this.prox.prox.getCodigo();
+		Atividade atv = this.prox.pegaAtividadeMaiorRisco();
+		String risco = atv.nivelRisco;
+		if(risco.equals("ALTO")) {
+			return atv;
+		} else {
+			if(this.nivelRisco.equals("ALTO"))
+				return this;
+			else if(this.nivelRisco.equals(risco))
+				return atv;
+			else if(this.nivelRisco.equals("MEDIO"))
+				return this;
+			else
+				return atv;
 		}
-		return this.prox.getCodigo();
 	}
 	
+	/**
+	 * Pega a atividade com maior risco.
+	 * 
+	 * @return codigo da atividade com maior risco.
+	 */
+	public String pegaMaiorRiscoAtividades() {
+		if(this.prox == null) {
+			throw new IllegalArgumentException("Nao existe proxima atividade.");
+		} else {
+			return this.prox.pegaAtividadeMaiorRisco().codigo;
+		}
+	}
+	
+	/**
+	 * Verifica se ao colocar a atividade como proximo nao ira formar um loop.
+	 * 
+	 * @param atividade atividade que sera colocada como proximo.
+	 * @param id codigo da atividade atual
+	 * 
+	 * @return retorna true caso haja loop e false caso contrario.
+	 */
 	public boolean ehLoop(Atividade atividade, String id) {
 		if(atividade.prox == null) {
 			return false;
@@ -414,18 +467,3 @@ public class Atividade implements Comparable<Atividade>, Serializable {
 		return ehLoop(atividade.prox, id);
 	}
 }	
-	//System.out.println(this.prox.codigo + " " + this.prox.nivelRisco + " " + this.prox);
-			//System.out.println("Maior: " + maior);
-			//System.out.println("Atividade: " + idAtividade);
-			//System.out.println("Próximo: " + this.prox.getCodigo());
-
-	//public String pegaMaiorRiscoAtividades() {
-	//	if(this.prox == null) {
-	//		throw new IllegalArgumentException("Nao existe proxima atividade.");
-	//	}
-	//	String maior = this.prox.nivelRisco;
-	//	if(maior.equals("ALTO")) {
-	//		return this.prox.nivelRisco;
-	//	}
-	//	return atividade;
-	//}

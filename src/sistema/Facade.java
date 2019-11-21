@@ -1,7 +1,6 @@
 package sistema;
 
 import java.io.IOException;
-
 import atividades.ControladorAtividade;
 import objetivo.ObjetivoController;
 import pesquisador.PesquisadorController;
@@ -138,7 +137,7 @@ public class Facade {
 	public String listaPesquisas(String ordem) {
 		return pesquisaController.listaPesquisas(ordem);
 	}
-
+	
 	public String busca(String termo) {
 		return buscador.retornaEncontradas(termo);
 	}

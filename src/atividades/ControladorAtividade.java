@@ -3,7 +3,6 @@ package atividades;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +28,6 @@ public class ControladorAtividade {
 	 */
 	private int codigo;
 	// private List<String> resultados;
-	LinkedList<Atividade> lista = new LinkedList<Atividade>();
 
 	/**
 	 * Construtor do objeto ControladorAtividade

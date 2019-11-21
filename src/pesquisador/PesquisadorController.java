@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import sistema.SalvaSistema;
 import sistema.Verificador;
 
@@ -13,7 +12,7 @@ import sistema.Verificador;
  * Controlador de objetos do tipo "Pesquisador", usado para armazena-los e
  * manipula-los
  * 
- * @author Vinicius M. V. Varjao
+ * @author Vinicius M. V. Varjao, Ana Beatriz da S. Truta.
  * 
  */
 public class PesquisadorController {
@@ -211,6 +210,14 @@ public class PesquisadorController {
 		return resultados;
 	}
 
+	/**
+	 * Cadastra as informacoes adicionais referentes a professor.
+	 * 
+	 * @param email email do pesquisador que se deseja alterar.
+	 * @param formacao formacao do professor.
+	 * @param unidade unidade na qual o prpofessor esta alocado.
+	 * @param data data de contratacao do professor.
+	 */
 	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
 		Verificador.verificaEntrada(email, "Campo email nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(formacao, "Campo formacao nao pode ser nulo ou vazio.");
@@ -227,6 +234,13 @@ public class PesquisadorController {
 		}
 	}
 
+	/**
+	 * Cadastra as informacoes adicionais referentes a aluno.
+	 * 
+	 * @param email email do pesquisador que se deseja alterar.
+	 * @param semestre semestre de ingresso do aluno.
+	 * @param IEA iea do aluno.
+	 */
 	public void cadastraEspecialidadeAluno(String email, int semestre, double IEA) {
 		Verificador.verificaEntrada(email, "Campo email nao pode ser nulo ou vazio.");
 		Verificador.verificaEntrada(String.valueOf(semestre), "Semestre nao pode ser nulo ou vazio.");
