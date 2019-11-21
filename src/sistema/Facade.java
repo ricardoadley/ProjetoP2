@@ -218,7 +218,7 @@ public class Facade {
 
 	public int getDuracao(String codigoAtividade) {
 		return this.atividadeController.getDuracao(codigoAtividade);
-	}
+	}	
 	
 	// Ana Beatriz Truta (US9)
 
@@ -241,8 +241,8 @@ public class Facade {
 	public String pegaMaiorRiscoAtividades(String idAtividade) {
 		return this.atividadeController.pegaMaiorRiscoAtividades(idAtividade);
 	}
-
-	// Vinicius (US10)
+	
+	//Vinicius (US10)
 
 	public void configuraEstrategia(String estrategia) {
 		this.pesquisaController.configuraEstrategia(estrategia);
@@ -261,15 +261,14 @@ public class Facade {
 	public void gravarResultados(String codigoPesquisa) {
 		this.pesquisaController.gravarResultados(codigoPesquisa);
 	}
-
-	public void salvar() {
+	
+	public void  salvar() {
 		pesquisaController.salvar();
 		pesquisadorController.salvar();
 		problemaController.salvar();
 		atividadeController.salvar();
 		objetivoController.salvar();
 	}
-
 	public void carregar() {
 //		SalvaSistema.retornaDado();
 		pesquisaController.retorna();
@@ -278,5 +277,5 @@ public class Facade {
 		atividadeController.retorna();
 		objetivoController.retorna();
 	}
-
+	
 }
