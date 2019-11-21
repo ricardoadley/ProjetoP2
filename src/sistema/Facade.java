@@ -257,5 +257,23 @@ public class Facade {
 		atividadeController.retorna();
 		objetivoController.retorna();
 	}
+	public void defineProximaAtividade(String idPrecedente, String idSubsquente) {
+		this.atividadeController.defineProximaAtividade(idPrecedente, idSubsquente);
+	}
 
+	public void tiraProximaAtividade(String idPrecedente) {
+		this.atividadeController.tiraProximaAtividade(idPrecedente);
+	}
+
+	public int contaProximos(String idPrecedente) {
+		return this.atividadeController.contaProximos(idPrecedente);
+	}
+
+	public String pegaProximo(String idAtividade, int enesimaAtividade) {
+		return this.atividadeController.pegaProximo(idAtividade, enesimaAtividade);
+	}
+
+	public String pegaMaiorRiscoAtividades(String idAtividade) {
+		return this.atividadeController.pegaMaiorRiscoAtividades(idAtividade);
+	}
 }
