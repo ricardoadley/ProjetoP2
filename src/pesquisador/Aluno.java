@@ -2,12 +2,22 @@ package pesquisador;
 
 import java.io.Serializable;
 
+/**
+ * Classe que define as caracteristicas de um pesquisador que possui "ALUNO"
+ * como funcao.
+ * 
+ * @author Ana Beatriz da S. Truta
+ *
+ */
 public class Aluno implements Especialidade, Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 211413174667739514L;
+	/**
+	 * Semestre de ingresso do aluno.
+	 */
 	private int semestre;
 	/**
 	 * Indice de Eficiencia do Aluno do aluno
