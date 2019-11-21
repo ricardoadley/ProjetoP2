@@ -50,6 +50,9 @@ public class Item implements Comparable<Item>, Serializable {
 		return descricao;
 	}
 
+	/**
+	 * Retorna a representacao em String do Item no formato: "ITEM + ordemCadastro"
+	 */
 	public String toString() {
 
 		return "ITEM" + this.ordemCadastro;

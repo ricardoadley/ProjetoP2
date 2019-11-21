@@ -1,6 +1,5 @@
 package pesquisa;
 
-
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -20,7 +19,7 @@ import sistema.Verificador;
  * @author Beatriz Truta, Jose Matheus do N. Gama
  *
  */
-public class Pesquisa implements Serializable{
+public class Pesquisa implements Serializable {
 	/**
 	 * versao de serializacao da classe
 	 */
@@ -375,6 +374,11 @@ public class Pesquisa implements Serializable{
 
 	}
 
+	/**
+	 * Retorna os resultados das atividades associadas a Pesquisa
+	 * 
+	 * @return os resultados das atividades associadas a Pesquisa
+	 */
 	public String getResultados() {
 
 		String resultados = "- Pesquisa: " + this.toString() + System.lineSeparator();
@@ -392,9 +396,10 @@ public class Pesquisa implements Serializable{
 		return resultados;
 
 	}
-	
+
 	/**
 	 * Conta quantos itens com pendencias a pesquisa tem
+	 * 
 	 * @return quantidade de itens pendentes
 	 */
 	public int contaPendencias() {
@@ -404,68 +409,71 @@ public class Pesquisa implements Serializable{
 		}
 		return pendencias;
 	}
-	
+
 	/**
-	 * Sugere uma proxima atividade a ser realizada com base na estrategia de sugestao adotada
+	 * Sugere uma proxima atividade a ser realizada com base na estrategia de
+	 * sugestao adotada
+	 * 
 	 * @param estrategia estrategia de sugestao
 	 * @return codigo da atividade sugerida
 	 */
 	public String proximaAtividade(String estrategia) {
 		String proxima = "";
-		switch(estrategia) {
-			case "MAIS_ANTIGA":
-				for (Atividade atividade : this.atividadesAssociadas.values()) {
-					if (atividade.contaItensPendentes() > 0) {
+		switch (estrategia) {
+		case "MAIS_ANTIGA":
+			for (Atividade atividade : this.atividadesAssociadas.values()) {
+				if (atividade.contaItensPendentes() > 0) {
+					proxima = atividade.getCodigo();
+					break;
+				}
+			}
+			break;
+
+		case "MENOS_PENDENCIAS":
+			int pendencias = 1000000000;
+			for (Atividade atividade : this.atividadesAssociadas.values()) {
+				if (atividade.contaItensPendentes() < pendencias && atividade.contaItensPendentes() > 0) {
+					pendencias = atividade.contaItensPendentes();
+					proxima = atividade.getCodigo();
+
+				}
+			}
+			break;
+
+		case "MAIOR_RISCO":
+			String nivelRisco = "BAIXO";
+			int numAtividade = 0;
+			for (Atividade atividade : this.atividadesAssociadas.values()) {
+				if (nivelRisco.equals("ALTO")) {
+					break;
+				}
+				if (atividade.contaItensPendentes() > 0) {
+					if (numAtividade == 0) {
+						nivelRisco = atividade.getNivelRisco();
 						proxima = atividade.getCodigo();
-						break;
+						numAtividade++;
 					}
-				}
-				break;
-
-			case "MENOS_PENDENCIAS":
-				int pendencias = 1000000000;
-				for(Atividade atividade : this.atividadesAssociadas.values()) {
-					if (atividade.contaItensPendentes() < pendencias && atividade.contaItensPendentes() > 0) {
-						pendencias = atividade.contaItensPendentes();
+					if (nivelRisco.equals("BAIXO") && (atividade.getNivelRisco().equals("MEDIO")
+							|| atividade.getNivelRisco().equals("ALTO"))) {
+						nivelRisco = atividade.getNivelRisco();
 						proxima = atividade.getCodigo();
-
-					}
-				}
-				break;
-
-			case "MAIOR_RISCO":
-				String nivelRisco = "BAIXO";
-				int numAtividade = 0;
-				for (Atividade atividade : this.atividadesAssociadas.values()) {
-					if (nivelRisco.equals("ALTO")) {
-						break;
-					}
-					if (atividade.contaItensPendentes() > 0) {
-						if (numAtividade == 0) {
-							nivelRisco = atividade.getNivelRisco();
-							proxima = atividade.getCodigo();
-							numAtividade ++;
-						} 
-						if (nivelRisco.equals("BAIXO") && (atividade.getNivelRisco().equals("MEDIO") || atividade.getNivelRisco().equals("ALTO"))) {
-							nivelRisco = atividade.getNivelRisco();
-							proxima = atividade.getCodigo();
-						} else if (nivelRisco.equals("MEDIO") && atividade.getNivelRisco().equals("ALTO")) {
-							nivelRisco = atividade.getNivelRisco();
-							proxima = atividade.getCodigo();
-						} 
-					}
-				}
-				break;
-
-			case "MAIOR_DURACAO":
-				int duracao = 0;
-				for (Atividade atividade : this.atividadesAssociadas.values()) {
-					if (atividade.getduracao() > duracao) {
-						duracao = atividade.getduracao();
+					} else if (nivelRisco.equals("MEDIO") && atividade.getNivelRisco().equals("ALTO")) {
+						nivelRisco = atividade.getNivelRisco();
 						proxima = atividade.getCodigo();
 					}
 				}
-				break;
+			}
+			break;
+
+		case "MAIOR_DURACAO":
+			int duracao = 0;
+			for (Atividade atividade : this.atividadesAssociadas.values()) {
+				if (atividade.getduracao() > duracao) {
+					duracao = atividade.getduracao();
+					proxima = atividade.getCodigo();
+				}
+			}
+			break;
 		}
 		return proxima;
 	}

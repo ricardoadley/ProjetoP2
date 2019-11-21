@@ -250,13 +250,13 @@ public class Facade {
 	}
 
 	public void carregar() {
-//		SalvaSistema.retornaDado();
 		pesquisaController.retorna();
 		pesquisadorController.retorna();
 		problemaController.retorna();
 		atividadeController.retorna();
 		objetivoController.retorna();
 	}
+
 	public void defineProximaAtividade(String idPrecedente, String idSubsquente) {
 		this.atividadeController.defineProximaAtividade(idPrecedente, idSubsquente);
 	}

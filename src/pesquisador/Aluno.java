@@ -26,10 +26,8 @@ public class Aluno implements Especialidade, Serializable {
 	/**
 	 * Contrutor da classe Aluno.
 	 * 
-	 * @param semestre
-	 *            semestre de ingresso do aluno.
-	 * @param iea
-	 *            do aluno.
+	 * @param semestre semestre de ingresso do aluno.
+	 * @param iea      do aluno.
 	 */
 	public Aluno(int semestre, double iea) {
 		super();
@@ -50,6 +48,10 @@ public class Aluno implements Especialidade, Serializable {
 
 	}
 
+	/**
+	 * Retorna a representação em String do Aluno no formato "semestre + o SEMESTRE
+	 * + iea"
+	 */
 	@Override
 	public String toString() {
 		return semestre + "o SEMESTRE - " + iea;

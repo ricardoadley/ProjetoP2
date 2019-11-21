@@ -10,7 +10,7 @@ import sistema.Verificador;
  * @author Vinicius M. V. Varjao
  *
  */
-public class Pesquisador implements Serializable{
+public class Pesquisador implements Serializable {
 
 	/**
 	 * versao de serializacao da classe

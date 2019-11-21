@@ -1,6 +1,7 @@
 package pesquisador;
 
 import java.io.Serializable;
+
 /**
  * Classe que define as caracteristicas de um pesquisador que possui "PROFESSOR"
  * como funcao.
@@ -26,11 +27,13 @@ public class Professor implements Especialidade, Serializable {
 	 * a data de ingresso do professor
 	 */
 	private String data;
+
 	/**
 	 * construtor da entidade professor
+	 * 
 	 * @param formacao, a formacao do professor
-	 * @param unidade, a unidade a qual o professor pertence
-	 * @param data, a data de ingresso do professor
+	 * @param unidade,  a unidade a qual o professor pertence
+	 * @param data,     a data de ingresso do professor
 	 */
 	public Professor(String formacao, String unidade, String data) {
 		super();
@@ -58,8 +61,8 @@ public class Professor implements Especialidade, Serializable {
 
 	@Override
 	/**
-	 * retorna a representacao em string do professor no formato
-	 * FORMACAO - UNIDADE - DATA
+	 * retorna a representacao em string do professor no formato FORMACAO - UNIDADE
+	 * - DATA
 	 */
 	public String toString() {
 		return formacao + " - " + unidade + " - " + data;
