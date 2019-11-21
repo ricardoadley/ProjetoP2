@@ -2,6 +2,8 @@ package testes_de_unidade;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,39 +12,49 @@ import objetivo.ObjetivoController;
 class TestesObjetivoController {
 
 	private ObjetivoController controlador;
+
 	@BeforeEach
 	void iniciar() {
 		controlador = new ObjetivoController();
-	} 
-	
+	}
+
 	@Test
 	void testCadastraObjetivoPerfeito() {
-		assertEquals("O1",controlador.cadastraObjetivo("GERAL","descrito", "3", "4"));
+		assertEquals("O1", controlador.cadastraObjetivo("GERAL", "descrito", "3", "4"));
 	}
+
 	@Test
 	void testCadastraObjetivoTipoVazio() {
-		assertThrows(IllegalArgumentException.class, () -> controlador.cadastraObjetivo("","descrita toda","3", "2"));
+		assertThrows(IllegalArgumentException.class, () -> controlador.cadastraObjetivo("", "descrita toda", "3", "2"));
 	}
+
 	@Test
 	void testCadastraObjetivoTipoNull() {
-		assertThrows(NullPointerException.class, () -> controlador.cadastraObjetivo(null, "descrita toda","3", "2"));
+		assertThrows(NullPointerException.class, () -> controlador.cadastraObjetivo(null, "descrita toda", "3", "2"));
 	}
+
 	@Test
 	void testCadastraObjetivoDescricaoVazio() {
-		assertThrows(IllegalArgumentException.class, () -> controlador.cadastraObjetivo("GERAL","", "4", "4"));
+		assertThrows(IllegalArgumentException.class, () -> controlador.cadastraObjetivo("GERAL", "", "4", "4"));
 	}
+
 	@Test
 	void testCadastraObjetivoDescricaoNull() {
-		assertThrows(NullPointerException.class, () -> controlador.cadastraObjetivo("GERAL",null,"5", "4"));
+		assertThrows(NullPointerException.class, () -> controlador.cadastraObjetivo("GERAL", null, "5", "4"));
 	}
+
 	@Test
 	void testCadastraObjetivoAderenciaVazio() {
-		assertThrows(IllegalArgumentException.class, () -> controlador.cadastraObjetivo("GERAL","descreve vai","","3"));
+		assertThrows(IllegalArgumentException.class,
+				() -> controlador.cadastraObjetivo("GERAL", "descreve vai", "", "3"));
 	}
+
 	@Test
-	void testCadastraObjetivoAderenciaNull(){
-		assertThrows(NullPointerException.class, () -> controlador.cadastraObjetivo("GERAL","descreve a descricao",null,"4"));
+	void testCadastraObjetivoAderenciaNull() {
+		assertThrows(NullPointerException.class,
+				() -> controlador.cadastraObjetivo("GERAL", "descreve a descricao", null, "4"));
 	}
+
 	@Test
 	void testCadastraOjetivoViabilidadeVazio() {
 		assertThrows(IllegalArgumentException.class, () -> controlador.cadastraObjetivo("GERAL","descreveu","4",""));
@@ -57,7 +69,8 @@ class TestesObjetivoController {
 	}
 	@Test
 	void testCadastraObjetivoValorInvalidoAderencia() {
-		assertThrows(NumberFormatException.class, () -> controlador.cadastraObjetivo("GERAL","descreve aqui","J","3"));
+		assertThrows(NumberFormatException.class,
+				() -> controlador.cadastraObjetivo("GERAL", "descreve aqui", "J", "3"));
 	}
 	@Test
 	void testCadastraObjetivoValorInvalidoTipo() {
@@ -65,11 +78,11 @@ class TestesObjetivoController {
 	}
 	@Test
 	void testCadastraObjetivoAderenciaMaiorQueCinco() {
-		assertThrows(IllegalArgumentException.class, () -> controlador.cadastraObjetivo("GERAL","descrito","6","4"));
+		assertThrows(IllegalArgumentException.class, () -> controlador.cadastraObjetivo("GERAL", "descrito", "6", "4"));
 	}
 	@Test
 	void testCadastraObjetivoAderenciaMenorQueUm() {
-		assertThrows(IllegalArgumentException.class, () -> controlador.cadastraObjetivo("GERAL","descrito","0","4"));
+		assertThrows(IllegalArgumentException.class, () -> controlador.cadastraObjetivo("GERAL", "descrito", "0", "4"));
 	}
 	@Test
 	void testCadastraObjetivoViabilidadeMaiorQueCinco() {

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import sistema.SalvaSistema;
 import sistema.Verificador;
-import pesquisa.PesquisaController;
+
 
 /**
  * Controlador de objetos do tipo "Pesquisador", usado para armazena-los e
@@ -243,7 +245,7 @@ public class PesquisadorController {
 	/**
 	 * Lista os Pesquisadores de determinado tipo
 	 * @param tipo, o tipo do pesquisador que sera listado
-	 * @return a representação em string dos pesquisadores encontrados
+	 * @return a representaï¿½ï¿½o em string dos pesquisadores encontrados
 	 */
 	public String listaPesquisadores(String tipo) {
 		String exibicao = "";
@@ -270,4 +272,10 @@ public class PesquisadorController {
 
 	}
 
+	public void salvar() {
+		SalvaSistema.gravarDados(this.mapaPesquisadores,"dadosPesquisadores.dat");
+	}
+	public void retorna() {
+		this.mapaPesquisadores = SalvaSistema.retornaDadoPesquisador();
+	}
 }

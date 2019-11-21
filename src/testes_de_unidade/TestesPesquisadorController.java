@@ -2,14 +2,12 @@ package testes_de_unidade;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import atividades.ControladorAtividade;
-import objetivo.ObjetivoController;
-import pesquisa.PesquisaController;
 import pesquisador.PesquisadorController;
-import problema.ProblemaController;
 
 class TestesPesquisadorController {
 
@@ -487,5 +485,28 @@ class TestesPesquisadorController {
 		assertEquals(
 				"boruto (ESTUDANTE) - eh filho do naruto - borutinho@email.com - https://fotodoboruto.jpg | shikamaru (ESTUDANTE) - ele eh muito inteligente ele - shikamaru@email.com - https://fotodoshikamaru.jpg",
 				controlador.listaPesquisadores("ESTUDANTE"));
+	}
+
+	@Test
+	void testProcuraPalavraTermoVazio() {
+		assertThrows(IllegalArgumentException.class, () -> controlador.procuraPalavra(""));
+	}
+
+	@Test
+	void testProcuraPalavraTermoNull() {
+		assertThrows(NullPointerException.class, () -> controlador.procuraPalavra(null));
+	}
+
+	@Test
+	void testProcuraPalavraPerfeito() {
+		controlador.cadastraPesquisador("Boruto Uzumaki", "ESTUDANTE", "filho mais velho do naruto",
+				"borutinho@email.com", "https://fotoboruto.jpg");
+		controlador.cadastraPesquisador("Naruto Uzumaki", "PROFESSOR",
+				"eu sou naruto e tenho pos graduacao em jutso erotico", "nautodaraposa@email.com",
+				"https://fotonaruto.jpg");
+		ArrayList<String> retorno = new ArrayList<String>();
+		retorno.add("nautodaraposa@email.com: eu sou naruto e tenho pos graduacao em jutso erotico");
+		retorno.add("borutinho@email.com: filho mais velho do naruto");
+		assertEquals(true, retorno.equals(controlador.procuraPalavra("naruto")));
 	}
 }

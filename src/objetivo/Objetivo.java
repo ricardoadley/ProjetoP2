@@ -1,5 +1,7 @@
 package objetivo;
 
+import java.io.Serializable;
+
 import sistema.Verificador;
 
 /**
@@ -10,7 +12,12 @@ import sistema.Verificador;
  * @author José Matheus do N. Gama
  *
  */
-public class Objetivo {
+public class Objetivo implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2787121198791897001L;
 
 	/**
 	 * Tipo do objetivo. Pode ser geral, um objetivo mais abrangente e que responde

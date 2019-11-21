@@ -1,5 +1,7 @@
 package pesquisador;
 
+import java.io.Serializable;
+
 import sistema.Verificador;
 
 /**
@@ -8,8 +10,12 @@ import sistema.Verificador;
  * @author Vinicius M. V. Varjao
  *
  */
-public class Pesquisador {
+public class Pesquisador implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3242708889607214885L;
 	/**
 	 * O email do pesquisador, o qual vai ser usado para identifica-lo
 	 */

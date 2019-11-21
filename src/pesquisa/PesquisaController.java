@@ -13,6 +13,7 @@ import atividades.ControladorAtividade;
 import objetivo.ObjetivoController;
 import pesquisador.PesquisadorController;
 import problema.ProblemaController;
+import sistema.SalvaSistema;
 import sistema.Verificador;
 
 /**
@@ -30,6 +31,10 @@ public class PesquisaController {
 	 * identificador unico da pesquisa
 	 */
 	private int idPesquisa;
+	/**
+	 * Atual estrategia de sugestao de proxima atividade
+	 */
+	private String estrategia;
 
 	/**
 	 * Instancia da classe controladora de Objetivos.
@@ -62,6 +67,7 @@ public class PesquisaController {
 			PesquisadorController pesquisadorController, ControladorAtividade atividadeController) {
 		this.mapaPesquisas = new HashMap<>();
 		this.idPesquisa = 1;
+		this.estrategia = "MAIS_ANTIGA";
 		this.atividadeController = atividadeController;
 		this.objetivoController = objetivoController;
 		this.problemaController = problemaController;
@@ -435,7 +441,7 @@ public class PesquisaController {
 	}
 
 	/**
-	 * Armazena o codigo de uma atividade associada a  uma Pesquisa na mesma.
+	 * Armazena o codigo de uma atividade associada a uma Pesquisa na mesma.
 	 * 
 	 * @param codigoPesquisa  codigo da pesquisa que vai receber a associacao
 	 * @param codigoAtividade codigo da atividade a ser associada
@@ -511,8 +517,9 @@ public class PesquisaController {
 
 		return this.mapaPesquisas.get(idPesquisa).desassociaPesquisador(emailPesquisador);
 	}
+
 	public boolean existePesquisa(String codigo) {
-		if(!this.mapaPesquisas.containsKey(codigo)) {
+		if (!this.mapaPesquisas.containsKey(codigo)) {
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
 		}
 		return this.mapaPesquisas.containsKey(codigo);
@@ -529,7 +536,7 @@ public class PesquisaController {
 
 		try {
 
-			File file = new File("./" + codigoPesquisa + ".txt");
+			File file = new File("./_" + codigoPesquisa + ".txt");
 
 			FileWriter escritorDeArquivo = new FileWriter(file.getAbsoluteFile());
 			BufferedWriter buffWrite = new BufferedWriter(escritorDeArquivo);
@@ -540,8 +547,7 @@ public class PesquisaController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		}
-
+	}
 
 	/**
 	 * Grava resultados de uma Pesquisa em um arquivo de texto
@@ -565,5 +571,44 @@ public class PesquisaController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Altera a estrategia de sugestao de proxima atividade
+	 * 
+	 * @param estrategia nova estrategia a ser adotada
+	 */
+	public void configuraEstrategia(String estrategia) {
+		Verificador.verificaEntrada(estrategia, "Estrategia nao pode ser nula ou vazia.");
+		if (!estrategia.equals("MAIS_ANTIGA") && !estrategia.equals("MAIOR_RISCO")
+				&& !estrategia.equals("MAIOR_DURACAO") && !estrategia.equals("MENOS_PENDENCIAS")) {
+			throw new IllegalArgumentException("Valor invalido da estrategia");
+		}
+		this.estrategia = estrategia;
+	}
+
+	/**
+	 * Sugere uma atividade de uma pesquisa para ser realizada baseado na estrategia
+	 * de sugestao atual
+	 * 
+	 * @param codigoPesquisa identificador da pesquisa
+	 * @return codigo da atividade sugerida
+	 */
+	public String proximaAtividade(String codigoPesquisa) {
+		Verificador.verificaEntrada(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
+		Verificador.existeChave(this.mapaPesquisas, codigoPesquisa, "Pesquisa nao encontrada.");
+		Verificador.verificaEhAtiva(this.mapaPesquisas, codigoPesquisa, "Pesquisa desativada.");
+		if (this.mapaPesquisas.get(codigoPesquisa).contaPendencias() == 0) {
+			throw new IllegalArgumentException("Pesquisa sem atividades com pendencias.");
+		}
+		return this.mapaPesquisas.get(codigoPesquisa).proximaAtividade(estrategia);
+	}
+
+	public void salvar() {
+		SalvaSistema.gravarDados(this.mapaPesquisas, "dadosPesquisa.dat");
+	}
+
+	public void retorna() {
+		this.mapaPesquisas = SalvaSistema.retornaDadoPesquisa();
 	}
 }

@@ -1,5 +1,7 @@
 package atividades;
 
+import java.io.Serializable;
+
 import sistema.Verificador;
 
 /**
@@ -7,7 +9,11 @@ import sistema.Verificador;
  * @author Ricardo A. S. Sena
  *
  */
-public class Item implements Comparable<Item> {
+public class Item implements Comparable<Item>, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4230151211128137677L;
 	/**
 	 * A ordem de cadastro do item na atividade
 	 */
@@ -56,10 +62,6 @@ public class Item implements Comparable<Item> {
 
 	public void setRealizado(boolean realizado) {
 		this.realizado = realizado;
-	}
-
-	public boolean getRealizado() {
-		return this.realizado;
 	}
 
 	@Override

@@ -1,12 +1,11 @@
 package atividades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Iterator;
-import java.util.LinkedList;
 import sistema.Verificador;
 
 /**
@@ -16,8 +15,11 @@ import sistema.Verificador;
  * @author Ricardo A. S. Sena
  *
  */
-
-public class Atividade implements Comparable<Atividade> {
+public class Atividade implements Comparable<Atividade>, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5554254115400970053L;
 	/**
 	 * A ordem de cadastro dos itens da atividade
 	 */
@@ -65,7 +67,6 @@ public class Atividade implements Comparable<Atividade> {
 	/**
 	 * Constroi uma nova atividade a partir dos parametros informados pelo usuario
 	 * @param prox 
-	 * 
 	 * @param descricao,      a descricao da atividade
 	 * @param nivelRisco,     o nivel de risco da atividade
 	 * @param descricaoRisco, a descricao do risco da atividade
@@ -148,6 +149,10 @@ public class Atividade implements Comparable<Atividade> {
 		return this.codigo;
 	}
 
+	public String getNivelRisco() {
+		return nivelRisco;
+	}
+
 	/**
 	 * Pesquisa se o termo informado pelo usuario esta presente nos itens da
 	 * atividade
@@ -179,7 +184,7 @@ public class Atividade implements Comparable<Atividade> {
 		if (pesquisasAssociadas.isEmpty()) {
 			throw new IllegalArgumentException("Atividade sem associacoes com pesquisas.");
 		}
-		if (itens.get(item).getRealizado()) {
+		if (itens.get(item).isRealizado()) {
 			throw new IllegalArgumentException("Item ja executado.");
 		}
 		this.itens.get(item).setDuracao(duracao);
@@ -260,11 +265,11 @@ public class Atividade implements Comparable<Atividade> {
 		return this.getCodigo().compareTo(atividade.getCodigo());
 	}
 
+	@Override
 	/**
 	 * Retorna a string que representa a pesquisa no formato "DESCRICAO (NIVEL RISCO
 	 * - DESCRICAO RISCO)
 	 */
-	@Override
 	public String toString() {
 		String lista = "";
 		List<Item> itens = new ArrayList<>(this.itens.values());
@@ -331,8 +336,6 @@ public class Atividade implements Comparable<Atividade> {
 		return resultados;
 
 	}
-	
-	
 
 	@Override
 	public int hashCode() {

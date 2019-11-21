@@ -1,5 +1,7 @@
 package problema;
 
+import java.io.Serializable;
+
 import sistema.Verificador;
 
 /**
@@ -10,7 +12,12 @@ import sistema.Verificador;
  * @author Jose Matheus do N. Gama
  *
  */
-public class Problema {
+public class Problema implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5459760839598827374L;
 
 	/**
 	 * Descricao do problema.

@@ -1,10 +1,8 @@
 package pesquisa;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+
+import java.io.Serializable;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import atividades.Atividade;
@@ -22,7 +20,11 @@ import sistema.Verificador;
  * @author Beatriz Truta, José Matheus do N. Gama
  *
  */
-public class Pesquisa {
+public class Pesquisa implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1141748543722595937L;
 	/**
 	 * a descricao da pesquisa
 	 */
@@ -390,7 +392,84 @@ public class Pesquisa {
 		return resultados;
 
 	}
+	
+	/**
+	 * Conta quantos itens com pendencias a pesquisa tem
+	 * @return quantidade de itens pendentes
+	 */
+	public int contaPendencias() {
+		int pendencias = 0;
+		for (Atividade atividade : this.atividadesAssociadas.values()) {
+			pendencias += atividade.contaItensPendentes();
+		}
+		return pendencias;
+	}
+	
+	/**
+	 * Sugere uma proxima atividade a ser realizada com base na estrategia de sugestao adotada
+	 * @param estrategia estrategia de sugestao
+	 * @return codigo da atividade sugerida
+	 */
+	public String proximaAtividade(String estrategia) {
+		String proxima = "";
+		switch(estrategia) {
+			case "MAIS_ANTIGA":
+				for (Atividade atividade : this.atividadesAssociadas.values()) {
+					if (atividade.contaItensPendentes() > 0) {
+						proxima = atividade.getCodigo();
+						break;
+					}
+				}
+				break;
 
+			case "MENOS_PENDENCIAS":
+				int pendencias = 1000000000;
+				for(Atividade atividade : this.atividadesAssociadas.values()) {
+					if (atividade.contaItensPendentes() < pendencias && atividade.contaItensPendentes() > 0) {
+						pendencias = atividade.contaItensPendentes();
+						proxima = atividade.getCodigo();
+
+					}
+				}
+				break;
+
+			case "MAIOR_RISCO":
+				String nivelRisco = "BAIXO";
+				int numAtividade = 0;
+				for (Atividade atividade : this.atividadesAssociadas.values()) {
+					if (nivelRisco.equals("ALTO")) {
+						break;
+					}
+					if (atividade.contaItensPendentes() > 0) {
+						if (numAtividade == 0) {
+							nivelRisco = atividade.getNivelRisco();
+							proxima = atividade.getCodigo();
+							numAtividade ++;
+						} 
+						if (nivelRisco.equals("BAIXO") && (atividade.getNivelRisco().equals("MEDIO") || atividade.getNivelRisco().equals("ALTO"))) {
+							nivelRisco = atividade.getNivelRisco();
+							proxima = atividade.getCodigo();
+						} else if (nivelRisco.equals("MEDIO") && atividade.getNivelRisco().equals("ALTO")) {
+							nivelRisco = atividade.getNivelRisco();
+							proxima = atividade.getCodigo();
+						} 
+					}
+				}
+				break;
+
+			case "MAIOR_DURACAO":
+				int duracao = 0;
+				for (Atividade atividade : this.atividadesAssociadas.values()) {
+					if (atividade.getduracao() > duracao) {
+						duracao = atividade.getduracao();
+						proxima = atividade.getCodigo();
+					}
+				}
+				break;
+		}
+		return proxima;
+	}
+	
 	@Override
 	/**
 	 * Retorna uma representacao em string da pesquisa no formato CODIGO - DESCRICAO
